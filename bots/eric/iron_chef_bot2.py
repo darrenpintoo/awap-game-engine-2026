@@ -225,63 +225,151 @@ class BotPlayer:
     # ============================================
 
     def generate_jobs(self, controller: RobotController) -> List[Job]:
+        """Generate all available jobs based on world state and bot holdings."""
         jobs = []
         turn = controller.get_turn()
+        bots = controller.get_team_bot_ids()
         
-        # 1. EMERGENCY (Priority 100)
+        # 1. EMERGENCY (Priority 100+) - Save food about to burn
         for loc, info in self.cooking_info.items():
-            if info.cooked_stage == 1: # Cooked! Grab it.
+            if info.cooked_stage == 1:  # Cooked! Grab it now.
                 jobs.append(Job(JobType.TAKE_FROM_PAN, target=loc, priority=100))
             elif info.cooked_stage == 0 and info.turns_to_burned < 5:
-                jobs.append(Job(JobType.TAKE_FROM_PAN, target=loc, priority=105)) # PANIC
+                jobs.append(Job(JobType.TAKE_FROM_PAN, target=loc, priority=105))  # PANIC
 
-        # 2. SABOTAGE (Phase 2 Specific)
-        # Only active if we have switched to enemy map
+        # 2. SABOTAGE (Phase 2 - only when on enemy map)
         switch_info = controller.get_switch_info()
         if switch_info['my_team_switched']:
-            # Steal Plates (Crippling)
             for st in self.sink_tables:
                 jobs.append(Job(JobType.STEAL_PLATE, target=st, priority=95))
-            # Steal Pans (Annoying)
             for ck in self.cookers:
                 jobs.append(Job(JobType.STEAL_PAN, target=ck, priority=90))
-            # If we are saboteurs, we ignore orders. Return early?
-            # No, keep calculating just in case we brought food with us.
 
-        # 3. MAINTENANCE
-        # Check clean plates
-        clean_plates = 0
-        for st in self.sink_tables:
-            t = controller.get_tile(controller.get_team(), *st)
-            if t: clean_plates += getattr(t, 'num_clean_plates', 0)
+        # 3. SUBMIT - If any bot holding a complete plate, submit it!
+        for bot_id in bots:
+            bot = controller.get_bot_state(bot_id)
+            if bot:
+                holding = bot.get('holding')
+                if holding and holding.get('type') == 'Plate':
+                    foods = holding.get('food', [])
+                    if len(foods) >= 1:  # Has at least some food
+                        jobs.append(Job(JobType.SUBMIT, priority=90))
+
+        # 4. CONTEXT-AWARE JOBS based on bot holdings
+        for bot_id in bots:
+            bot = controller.get_bot_state(bot_id)
+            if not bot:
+                continue
+            holding = bot.get('holding')
             
-        dirty_exists = any(getattr(controller.get_tile(controller.get_team(), *s), 'num_dirty_plates', 0) > 0 for s in self.sinks)
-        
+            if holding:
+                h_type = holding.get('type')
+                
+                if h_type == 'Food':
+                    # Holding raw food - need to place on counter or chop or add to plate
+                    food_name = holding.get('food_name', '').upper()
+                    is_chopped = holding.get('is_chopped', False)
+                    cooked_stage = holding.get('cooked_stage', 0)
+                    
+                    if food_name in ['MEAT', 'ONIONS'] and not is_chopped:
+                        # Needs chopping - place on counter first
+                        jobs.append(Job(JobType.PLACE_ON_COUNTER, priority=75))
+                    elif food_name in ['MEAT'] and is_chopped and cooked_stage == 0:
+                        # Chopped meat needs cooking
+                        jobs.append(Job(JobType.START_COOK, priority=75))
+                    elif cooked_stage == 1 or food_name in ['NOODLES', 'EGG', 'SAUCE']:
+                        # Cooked or ready-to-plate food - add to plate
+                        jobs.append(Job(JobType.ADD_TO_PLATE, priority=80))
+                    else:
+                        # Default: place on counter
+                        jobs.append(Job(JobType.PLACE_ON_COUNTER, priority=60))
+                
+                elif h_type == 'Pan':
+                    # Holding pan - place on cooker
+                    for ck in self.cookers:
+                        tile = controller.get_tile(controller.get_team(), *ck)
+                        if tile and getattr(tile, 'item', None) is None:
+                            jobs.append(Job(JobType.PLACE_ON_COUNTER, target=ck, priority=70))
+                            break
+                
+                elif h_type == 'Plate':
+                    # Already handled above (submit)
+                    pass
+            
+            else:
+                # Empty hands - can pickup or buy
+                pass
+
+        # 5. CHOP - If there's food on counter that needs chopping
+        for cx, cy in self.counters:
+            tile = controller.get_tile(controller.get_team(), cx, cy)
+            if tile:
+                item = getattr(tile, 'item', None)
+                if isinstance(item, Food):
+                    name = getattr(item, 'food_name', '').upper()
+                    if name in ['MEAT', 'ONIONS'] and not getattr(item, 'is_chopped', False):
+                        jobs.append(Job(JobType.CHOP, target=(cx, cy), priority=70))
+
+        # 6. PICKUP CHOPPED FOOD - Pick up chopped food from counter
+        for cx, cy in self.counters:
+            tile = controller.get_tile(controller.get_team(), cx, cy)
+            if tile:
+                item = getattr(tile, 'item', None)
+                if isinstance(item, Food):
+                    if getattr(item, 'is_chopped', False):
+                        name = getattr(item, 'food_name', '').upper()
+                        if name == 'MEAT':
+                            # Chopped meat - need to put in pan
+                            jobs.append(Job(JobType.START_COOK, priority=72))
+
+        # 7. PICKUP PLATE - If there's a plate with food ready to submit
+        for cx, cy in self.counters:
+            tile = controller.get_tile(controller.get_team(), cx, cy)
+            if tile:
+                item = getattr(tile, 'item', None)
+                if isinstance(item, Plate):
+                    foods = getattr(item, 'food', [])
+                    if len(foods) >= 2:  # Reasonable amount of food
+                        jobs.append(Job(JobType.PICKUP_PLATE, target=(cx, cy), priority=85))
+
+        # 8. TAKE CLEAN PLATE - Get plate from sink table
+        if self.sink_tables:
+            for st in self.sink_tables:
+                tile = controller.get_tile(controller.get_team(), *st)
+                if tile and getattr(tile, 'num_clean_plates', 0) > 0:
+                    jobs.append(Job(JobType.TAKE_CLEAN_PLATE, target=st, priority=55))
+
+        # 9. MAINTENANCE - Wash dishes if needed
+        clean_plates = sum(
+            getattr(controller.get_tile(controller.get_team(), *st), 'num_clean_plates', 0)
+            for st in self.sink_tables
+        )
+        dirty_exists = any(
+            getattr(controller.get_tile(controller.get_team(), *s), 'num_dirty_plates', 0) > 0
+            for s in self.sinks
+        )
         if clean_plates < 2 and dirty_exists:
             for s in self.sinks:
                 jobs.append(Job(JobType.WASH, target=s, priority=60))
 
-        # 4. ORDER FULFILLMENT
-        # Simple heuristic: Just greedy generate needs for active orders
+        # 10. BUY INGREDIENTS for orders
         for order in self.active_orders:
             reqs = order['required']
             prio = 50 + (order['reward'] // 100)
-            
-            # Simple check: Do we need ingredients?
-            # In a real impl, you'd check if you ALREADY bought them to avoid over-buying.
-            # Here we rely on the Assign_Tasks cost penalty to stop bots holding meat from buying more meat.
             for r in reqs:
                 ft = self._name_to_foodtype(r)
                 if ft:
                     jobs.append(Job(JobType.BUY_INGREDIENT, item=ft, priority=prio))
-        
-        # 5. EQUIPMENT
-        # Always want Pans on Cookers
-        jobs.append(Job(JobType.BUY_PAN, priority=40))
-        # Always want Plates available
-        jobs.append(Job(JobType.BUY_PLATE, priority=40))
 
-        # 6. IDLE FALLBACK
+        # 11. EQUIPMENT - Ensure pans on cookers
+        has_pan = any(
+            isinstance(getattr(controller.get_tile(controller.get_team(), *ck), 'item', None), Pan)
+            for ck in self.cookers
+        )
+        if not has_pan:
+            jobs.append(Job(JobType.BUY_PAN, priority=65))
+
+        # 12. IDLE FALLBACK
         jobs.append(Job(JobType.IDLE, priority=0))
         
         return jobs
@@ -408,52 +496,150 @@ class BotPlayer:
     def execute(self, controller, bot_id, job):
         """Translates Job -> API Calls."""
         bot = controller.get_bot_state(bot_id)
+        if not bot:
+            return
         pos = (bot['x'], bot['y'])
+        holding = bot.get('holding')
         turn = controller.get_turn()
         
-        # MOVEMENT
-        target = job.target
-        # Resolve target for generic jobs
-        if job.job_type == JobType.BUY_INGREDIENT:
-            target = self.find_nearest(pos, self.shops)
+        # Handle IDLE
+        if job.job_type == JobType.IDLE:
+            return
         
-        if target:
-            # Check adjacency
-            if self.get_distance(pos, target) <= 1:
-                # INTERACT
-                self._perform_action(controller, bot_id, job, target)
-            else:
-                # MOVE
-                dx, dy = self.get_move(controller, bot_id, target, turn)
+        # RESOLVE TARGET for jobs without explicit target
+        target = job.target
+        if job.job_type in [JobType.BUY_INGREDIENT, JobType.BUY_PAN, JobType.BUY_PLATE]:
+            target = self.find_nearest(pos, self.shops)
+        elif job.job_type == JobType.SUBMIT:
+            target = self.find_nearest(pos, self.submits)
+        elif job.job_type == JobType.PLACE_ON_COUNTER:
+            target = self._find_empty_counter(controller, pos)
+        elif job.job_type == JobType.CHOP:
+            # Find counter with choppable food
+            target = self._find_counter_with_choppable(controller, pos)
+        elif job.job_type == JobType.START_COOK:
+            target = self._find_cooker_with_empty_pan(controller, pos)
+        elif job.job_type == JobType.TAKE_CLEAN_PLATE:
+            target = self.find_nearest(pos, self.sink_tables)
+        elif job.job_type == JobType.ADD_TO_PLATE:
+            # Find counter with plate
+            target = self._find_counter_with_plate(controller, pos)
+        elif job.job_type == JobType.PICKUP_PLATE:
+            target = self._find_counter_with_plate(controller, pos)
+        
+        if not target:
+            return  # No valid target
+        
+        # Check adjacency (Chebyshev <= 1)
+        is_adjacent = max(abs(pos[0]-target[0]), abs(pos[1]-target[1])) <= 1
+        
+        if is_adjacent:
+            # INTERACT
+            self._perform_action(controller, bot_id, job, target, holding)
+        else:
+            # MOVE
+            dx, dy = self.get_move(controller, bot_id, target, turn)
+            if dx != 0 or dy != 0:
                 controller.move(bot_id, dx, dy)
 
-    def _perform_action(self, controller, bot_id, job, target):
+    def _perform_action(self, controller, bot_id, job, target, holding):
         tx, ty = target
         jt = job.job_type
         
         if jt == JobType.BUY_INGREDIENT:
-            controller.buy(bot_id, job.item, tx, ty)
+            if not holding:  # Safety check
+                controller.buy(bot_id, job.item, tx, ty)
         elif jt == JobType.BUY_PAN:
-            controller.buy(bot_id, ShopCosts.PAN, tx, ty)
+            if not holding:
+                controller.buy(bot_id, ShopCosts.PAN, tx, ty)
         elif jt == JobType.BUY_PLATE:
-            controller.buy(bot_id, ShopCosts.PLATE, tx, ty)
+            if not holding:
+                controller.buy(bot_id, ShopCosts.PLATE, tx, ty)
+        elif jt == JobType.PLACE_ON_COUNTER:
+            if holding:
+                controller.place(bot_id, tx, ty)
+        elif jt == JobType.CHOP:
+            controller.chop(bot_id, tx, ty)
+        elif jt == JobType.START_COOK:
+            if holding:
+                controller.place(bot_id, tx, ty)  # Place food in pan
         elif jt == JobType.TAKE_FROM_PAN:
-            controller.take_from_pan(bot_id, tx, ty)
+            if not holding:
+                controller.take_from_pan(bot_id, tx, ty)
+        elif jt == JobType.TAKE_CLEAN_PLATE:
+            if not holding:
+                controller.take_clean_plate(bot_id, tx, ty)
+        elif jt == JobType.ADD_TO_PLATE:
+            if holding:
+                controller.add_food_to_plate(bot_id, tx, ty)
+        elif jt == JobType.PICKUP_PLATE:
+            if not holding:
+                controller.pickup(bot_id, tx, ty)
+        elif jt == JobType.SUBMIT:
+            if holding and holding.get('type') == 'Plate':
+                controller.submit(bot_id, tx, ty)
         elif jt == JobType.WASH:
             controller.wash_sink(bot_id, tx, ty)
         elif jt == JobType.STEAL_PLATE:
-            bot = controller.get_bot_state(bot_id)
-            if bot.get('holding'): controller.trash(bot_id, tx, ty) # Trash it if holding
-            else: controller.take_clean_plate(bot_id, tx, ty)
+            if holding:
+                # Find actual TRASH tile
+                trash = self.find_nearest((tx, ty), self.trashes)
+                if trash:
+                    controller.trash(bot_id, trash[0], trash[1])
+            else:
+                controller.take_clean_plate(bot_id, tx, ty)
         elif jt == JobType.STEAL_PAN:
-            controller.pickup(bot_id, tx, ty)
+            if not holding:
+                controller.pickup(bot_id, tx, ty)
 
     # ============================================
-    # HELPER MAPPINGS
+    # HELPER METHODS
     # ============================================
+    
+    def _find_empty_counter(self, controller, near):
+        """Find nearest empty counter."""
+        for cx, cy in sorted(self.counters, key=lambda c: self.get_adjacent_distance(near, c)):
+            tile = controller.get_tile(controller.get_team(), cx, cy)
+            if tile and getattr(tile, 'item', None) is None:
+                return (cx, cy)
+        return None
+    
+    def _find_counter_with_choppable(self, controller, near):
+        """Find counter with unchoped meat/onions."""
+        for cx, cy in sorted(self.counters, key=lambda c: self.get_adjacent_distance(near, c)):
+            tile = controller.get_tile(controller.get_team(), cx, cy)
+            if tile:
+                item = getattr(tile, 'item', None)
+                if isinstance(item, Food):
+                    if not getattr(item, 'is_chopped', False):
+                        name = getattr(item, 'food_name', '').upper()
+                        if name in ['MEAT', 'ONIONS']:
+                            return (cx, cy)
+        return None
+    
+    def _find_cooker_with_empty_pan(self, controller, near):
+        """Find cooker with pan that has no food."""
+        for kx, ky in sorted(self.cookers, key=lambda c: self.get_adjacent_distance(near, c)):
+            tile = controller.get_tile(controller.get_team(), kx, ky)
+            if tile:
+                item = getattr(tile, 'item', None)
+                if isinstance(item, Pan) and item.food is None:
+                    return (kx, ky)
+        return None
+    
+    def _find_counter_with_plate(self, controller, near):
+        """Find counter with a plate."""
+        for cx, cy in sorted(self.counters, key=lambda c: self.get_adjacent_distance(near, c)):
+            tile = controller.get_tile(controller.get_team(), cx, cy)
+            if tile:
+                item = getattr(tile, 'item', None)
+                if isinstance(item, Plate):
+                    return (cx, cy)
+        return None
+    
     def _name_to_foodtype(self, name):
         name = name.upper()
-        if name == "ONION": return FoodType.ONIONS # Fix plural mismatch common in docs
+        if name == "ONION": return FoodType.ONIONS
         if name == "ONIONS": return FoodType.ONIONS
         if name == "MEAT": return FoodType.MEAT
         if name == "EGG": return FoodType.EGG
