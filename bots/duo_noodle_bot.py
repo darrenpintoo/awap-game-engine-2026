@@ -64,7 +64,7 @@ class BotPlayer:
         return best_pos
 
     def play_turn(self, controller: RobotController):
-        my_bots = controller.get_team_bot_ids()
+        my_bots = controller.get_team_bot_ids(controller.get_team())
         if not my_bots: return
     
         self.my_bot_id = my_bots[0]
@@ -106,7 +106,7 @@ class BotPlayer:
                 if not shop_pos: return
                 sx, sy = shop_pos
                 if self.move_towards(controller, bot_id, sx, sy):
-                    if controller.get_team_money() >= ShopCosts.PAN.buy_cost:
+                    if controller.get_team_money(controller.get_team()) >= ShopCosts.PAN.buy_cost:
                         controller.buy(bot_id, ShopCosts.PAN, sx, sy)
 
         #state 2: buy meat
@@ -114,7 +114,7 @@ class BotPlayer:
             shop_pos = self.find_nearest_tile(controller, bx, by, "SHOP")
             sx, sy = shop_pos
             if self.move_towards(controller, bot_id, sx, sy):
-                if controller.get_team_money() >= FoodType.MEAT.buy_cost:
+                if controller.get_team_money(controller.get_team()) >= FoodType.MEAT.buy_cost:
                     if controller.buy(bot_id, FoodType.MEAT, sx, sy):
                         self.state = 3
 
@@ -152,7 +152,7 @@ class BotPlayer:
             shop_pos = self.find_nearest_tile(controller, bx, by, "SHOP")
             sx, sy = shop_pos
             if self.move_towards(controller, bot_id, sx, sy):
-                if controller.get_team_money() >= ShopCosts.PLATE.buy_cost:
+                if controller.get_team_money(controller.get_team()) >= ShopCosts.PLATE.buy_cost:
                     if controller.buy(bot_id, ShopCosts.PLATE, sx, sy):
                         self.state = 9
 
@@ -167,7 +167,7 @@ class BotPlayer:
             shop_pos = self.find_nearest_tile(controller, bx, by, "SHOP")
             sx, sy = shop_pos
             if self.move_towards(controller, bot_id, sx, sy):
-                if controller.get_team_money() >= FoodType.NOODLES.buy_cost:
+                if controller.get_team_money(controller.get_team()) >= FoodType.NOODLES.buy_cost:
                     if controller.buy(bot_id, FoodType.NOODLES, sx, sy):
                         self.state = 11
 
