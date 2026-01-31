@@ -151,7 +151,7 @@ class BotPlayer:
         if self.initialized:
             return
         
-        m = controller.get_map()
+        m = controller.get_map(controller.get_team())
         
         # Parse map tiles
         for x in range(m.width):
@@ -318,7 +318,7 @@ class BotPlayer:
                     )
         
         # Update orders
-        self.active_orders = [o for o in controller.get_orders() if o.get('is_active', False)]
+        self.active_orders = [o for o in controller.get_orders(controller.get_team()) if o.get('is_active', False)]
         
         # Update phase
         turn = controller.get_turn()
@@ -420,7 +420,7 @@ class BotPlayer:
     
     def assign_tasks(self, controller: RobotController, jobs: List[Job]) -> Dict[int, Job]:
         """Assign jobs to bots using Hungarian Algorithm"""
-        bot_ids = controller.get_team_bot_ids()
+        bot_ids = controller.get_team_bot_ids(controller.get_team())
         n_bots = len(bot_ids)
         n_jobs = len(jobs)
         
@@ -699,7 +699,7 @@ class BotPlayer:
     
     def run_build_phase(self, controller: RobotController):
         """Build phase: efficient order fulfillment"""
-        bot_ids = controller.get_team_bot_ids()
+        bot_ids = controller.get_team_bot_ids(controller.get_team())
         if not bot_ids:
             return
         

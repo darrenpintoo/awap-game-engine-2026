@@ -189,13 +189,13 @@ class BotPlayer:
                         self.bot_states[bot_id] = 2
             else:
                 if self._move_toward(controller, bot_id, sx, sy):
-                    if controller.get_team_money() >= ShopCosts.PAN.buy_cost:
+                    if controller.get_team_money(controller.get_team()) >= ShopCosts.PAN.buy_cost:
                         controller.buy(bot_id, ShopCosts.PAN, sx, sy)
 
         # State 2: Buy meat
         elif state == 2:
             if self._move_toward(controller, bot_id, sx, sy):
-                if controller.get_team_money() >= FoodType.MEAT.buy_cost:
+                if controller.get_team_money(controller.get_team()) >= FoodType.MEAT.buy_cost:
                     if controller.buy(bot_id, FoodType.MEAT, sx, sy):
                         self.bot_states[bot_id] = 3
 
@@ -230,7 +230,7 @@ class BotPlayer:
         # State 8: Buy plate
         elif state == 8:
             if self._move_toward(controller, bot_id, sx, sy):
-                if controller.get_team_money() >= ShopCosts.PLATE.buy_cost:
+                if controller.get_team_money(controller.get_team()) >= ShopCosts.PLATE.buy_cost:
                     if controller.buy(bot_id, ShopCosts.PLATE, sx, sy):
                         self.bot_states[bot_id] = 9
 
@@ -245,7 +245,7 @@ class BotPlayer:
         # State 10: Buy noodles
         elif state == 10:
             if self._move_toward(controller, bot_id, sx, sy):
-                if controller.get_team_money() >= FoodType.NOODLES.buy_cost:
+                if controller.get_team_money(controller.get_team()) >= FoodType.NOODLES.buy_cost:
                     if controller.buy(bot_id, FoodType.NOODLES, sx, sy):
                         self.bot_states[bot_id] = 11
 
@@ -304,7 +304,7 @@ class BotPlayer:
 
     def play_turn(self, controller: RobotController):
         """Main entry point"""
-        my_bots = controller.get_team_bot_ids()
+        my_bots = controller.get_team_bot_ids(controller.get_team())
         if not my_bots:
             return
         

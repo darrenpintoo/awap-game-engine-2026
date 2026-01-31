@@ -1,0 +1,865 @@
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pygame/pkgdata.py:25: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import resource_stream, resource_exists
+[PlannerBot] Init complete: 4 counters, 4 cookers
+[PlannerBot] Bot 2 BUYING new PLATE
+[PlannerBot] Bot 3 BUYING new PLATE
+[PlannerBot] Bot 3 BOUGHT PLATE
+[PlannerBot] Bot 3 assigned NEW task Task(BUY @ (14, 1), item=MEAT(RAW)) for MEAT
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[RC for BLUE WARN]: buy() failed: bot 3 must not carry anything when buying
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[GAME OVER] money scores: RED=$409, BLUE=$273
+[RESULT] RED WINS by $136!

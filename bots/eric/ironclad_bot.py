@@ -97,7 +97,7 @@ class BotPlayer:
         if self.initialized:
             return
         
-        m = controller.get_map()
+        m = controller.get_map(controller.get_team())
         
         for x in range(m.width):
             for y in range(m.height):
@@ -163,7 +163,7 @@ class BotPlayer:
         
         queue = deque([(start, [])])
         visited = {start}
-        m = controller.get_map()
+        m = controller.get_map(controller.get_team())
         
         while queue:
             (cx, cy), path = queue.popleft()
@@ -647,7 +647,8 @@ class BotPlayer:
             self.reserved_nodes.clear()
             
             # Get bot IDs
-            bot_ids = controller.get_team_bot_ids()
+            team = controller.get_team()
+            bot_ids = controller.get_team_bot_ids(team)
             if not bot_ids:
                 return
             

@@ -616,4 +616,3 @@ class BotPlayer:
                     if controller.can_move(bot_id, dx, dy):
                         controller.move(bot_id, dx, dy)
                         break
-

@@ -1,0 +1,879 @@
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pygame/pkgdata.py:25: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import resource_stream, resource_exists
+[INIT] Map parsed: 146 walkable, 4 cookers, 4 shops
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[ERROR] Turn failed: RobotController.get_map() missing 1 required positional argument: 'team'
+[RC for RED WARN]: submit() failed: no matching order for bot 0
+[GAME OVER] money scores: RED=$409, BLUE=$275
+[RESULT] RED WINS by $134!
