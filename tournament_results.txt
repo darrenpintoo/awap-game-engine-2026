@@ -1,0 +1,53 @@
+TOURNAMENT RESULTS
+Date: Sat Jan 31 14:47:06 EST 2026
+
+Matchup: Planner (bots/dpinto/planner_bot.py) vs Synergy (bots/dpinto/synergy_bot.py) on maps/haresh/map1.txt
+[GAME OVER] money scores: RED=$643, BLUE=$10326
+[RESULT] BLUE WINS by $9683!
+--------------------------------
+Matchup: Planner (bots/dpinto/planner_bot.py) vs Synergy (bots/dpinto/synergy_bot.py) on maps/dpinto/multi_order.txt
+[GAME OVER] money scores: RED=$624, BLUE=$367
+[RESULT] RED WINS by $257!
+--------------------------------
+Matchup: Planner (bots/dpinto/planner_bot.py) vs Synergy (bots/dpinto/synergy_bot.py) on maps/dpinto/rush_orders.txt
+[GAME OVER] money scores: RED=$614, BLUE=$294
+[RESULT] RED WINS by $320!
+--------------------------------
+Matchup: Planner (bots/dpinto/planner_bot.py) vs Synergy (bots/dpinto/synergy_bot.py) on maps/dpinto/stress_test.txt
+[GAME OVER] money scores: RED=$587, BLUE=$267
+[RESULT] RED WINS by $320!
+--------------------------------
+Matchup: Planner (bots/dpinto/planner_bot.py) vs Synergy (bots/dpinto/synergy_bot.py) on maps/dpinto/easy_ramp.txt
+[GAME OVER] money scores: RED=$628, BLUE=$510
+[RESULT] RED WINS by $118!
+--------------------------------
+Matchup: Planner (bots/dpinto/planner_bot.py) vs DuoNoodle (bots/eric/duo_noodle_bot.py) on maps/haresh/map1.txt
+[GAME] BLUE failed, RED wins
+--------------------------------
+Matchup: Planner (bots/dpinto/planner_bot.py) vs DuoNoodle (bots/eric/duo_noodle_bot.py) on maps/dpinto/multi_order.txt
+[GAME] BLUE failed, RED wins
+--------------------------------
+Matchup: Planner (bots/dpinto/planner_bot.py) vs DuoNoodle (bots/eric/duo_noodle_bot.py) on maps/dpinto/rush_orders.txt
+[GAME] BLUE failed, RED wins
+--------------------------------
+Matchup: Planner (bots/dpinto/planner_bot.py) vs DuoNoodle (bots/eric/duo_noodle_bot.py) on maps/dpinto/stress_test.txt
+[GAME] BLUE failed, RED wins
+--------------------------------
+Matchup: Planner (bots/dpinto/planner_bot.py) vs DuoNoodle (bots/eric/duo_noodle_bot.py) on maps/dpinto/easy_ramp.txt
+[GAME] BLUE failed, RED wins
+--------------------------------
+Matchup: Synergy (bots/dpinto/synergy_bot.py) vs DuoNoodle (bots/eric/duo_noodle_bot.py) on maps/haresh/map1.txt
+[GAME] BLUE failed, RED wins
+--------------------------------
+Matchup: Synergy (bots/dpinto/synergy_bot.py) vs DuoNoodle (bots/eric/duo_noodle_bot.py) on maps/dpinto/multi_order.txt
+[GAME] BLUE failed, RED wins
+--------------------------------
+Matchup: Synergy (bots/dpinto/synergy_bot.py) vs DuoNoodle (bots/eric/duo_noodle_bot.py) on maps/dpinto/rush_orders.txt
+[GAME] BLUE failed, RED wins
+--------------------------------
+Matchup: Synergy (bots/dpinto/synergy_bot.py) vs DuoNoodle (bots/eric/duo_noodle_bot.py) on maps/dpinto/stress_test.txt
+[GAME] BLUE failed, RED wins
+--------------------------------
+Matchup: Synergy (bots/dpinto/synergy_bot.py) vs DuoNoodle (bots/eric/duo_noodle_bot.py) on maps/dpinto/easy_ramp.txt
+[GAME] BLUE failed, RED wins
+--------------------------------

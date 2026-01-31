@@ -153,6 +153,17 @@ class Game:
             player = self.blue_player
             controller = self.blue_controller
 
+        # Optimization: bypass threading if timeout is disabled (<= 0)
+        # This removes thread creation overhead for faster simulation
+        if self.per_turn_timeout_s <= 0:
+            try:
+                player.play_turn(controller)
+                return True
+            except BaseException as e:
+                print(f"[TURN RUNNER] {team.name} crashed: {e}")
+                traceback.print_exc()
+                return False
+
         ok = True
         exc: Optional[BaseException] = None
 
@@ -181,7 +192,9 @@ class Game:
         return True
 
     def record_turn(self):
-        self.replay.append(self.game_state.to_dict()) #for the replay rile
+        # Optimization: Only serialize state if we are actually saving the replay
+        if self.replay_path is not None:
+            self.replay.append(self.game_state.to_dict()) #for the replay rile
 
     def render(self) -> bool:
         '''render ONLY IF we want to render'''

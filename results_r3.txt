@@ -1,0 +1,16 @@
+=== ROUND 3 RESULTS ===
+Matchup: Synergy vs DuoNoodle on maps/haresh/map1.txt
+[GAME] BLUE failed, RED wins
+----------------
+Matchup: Synergy vs DuoNoodle on maps/dpinto/multi_order.txt
+[GAME] BLUE failed, RED wins
+----------------
+Matchup: Synergy vs DuoNoodle on maps/dpinto/rush_orders.txt
+[GAME] BLUE failed, RED wins
+----------------
+Matchup: Synergy vs DuoNoodle on maps/dpinto/stress_test.txt
+[GAME] BLUE failed, RED wins
+----------------
+Matchup: Synergy vs DuoNoodle on maps/dpinto/easy_ramp.txt
+[GAME] BLUE failed, RED wins
+----------------
