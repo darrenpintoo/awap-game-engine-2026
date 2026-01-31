@@ -1,0 +1,23 @@
+##########
+#b.C.$..b#
+#..K.U...#
+#..S.T.R.#
+##########
+
+SWITCH: turn=250 duration=100
+
+ORDERS:
+start=0   duration=40  required=NOODLES           reward=50  penalty=10
+start=30  duration=40  required=MEAT              reward=100 penalty=25
+start=60  duration=40  required=NOODLES           reward=50  penalty=10
+start=90  duration=40  required=EGG               reward=70  penalty=15
+start=120 duration=40  required=NOODLES,MEAT      reward=150 penalty=40
+start=160 duration=40  required=ONIONS            reward=60  penalty=15
+start=200 duration=40  required=NOODLES           reward=50  penalty=10
+start=240 duration=40  required=MEAT              reward=100 penalty=25
+start=280 duration=40  required=EGG               reward=70  penalty=15
+start=320 duration=40  required=NOODLES           reward=50  penalty=10
+start=360 duration=40  required=MEAT,EGG          reward=170 penalty=45
+start=400 duration=40  required=NOODLES           reward=50  penalty=10
+start=440 duration=40  required=SAUCE             reward=30  penalty=5
+start=470 duration=25  required=NOODLES           reward=50  penalty=10
