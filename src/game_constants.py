@@ -1,6 +1,7 @@
 '''game_constants.py'''
 
 from enum import Enum
+from dataclasses import dataclass
 
 
 '''
@@ -60,6 +61,7 @@ class ShopCosts(Enum):
   PAN = ("PAN", 4)
 
 
+@dataclass(frozen=True)
 class GameConstants:
   TOTAL_TURNS = 500 #this is default without engine specification
 
