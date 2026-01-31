@@ -1,0 +1,187 @@
+[INIT] Map parsed: 49 walkable, 1 cookers, 1 shops
+[PlannerBot] Init complete: 1 counters, 1 cookers
+[PlannerBot] Bot 1 BOUGHT NOODLES
+[PlannerBot] Bot 0 BOUGHT MEAT
+[PlannerBot] Bot 0 PLACED for CHOP
+[PlannerBot] Bot 0 CHOPPED
+[PlannerBot] Bot 0 ASSIGNED TaskType.PICKUP @ (4, 4)
+[PlannerBot] Bot 0 PICKED UP item
+[PlannerBot] Bot 0 STARTED COOKING
+[PlannerBot] Bot 1 PLACED NOODLES(RAW)
+[PlannerBot] Bot 0 BOUGHT PLATE
+[PlannerBot]   Bot 0 has PLATE
+[PlannerBot] Bot 0 PLACED PLATE
+[PlannerBot] Bot 0 ASSIGNED TaskType.FETCH_COOKED @ (4, 3)
+[PlannerBot] Bot 0 TOOK FROM PAN
+[PlannerBot] Bot 0 PLATED FOOD
+[RC for BLUE WARN]: move() failed: illegal move bot 2 from (7,1) by (1,1)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[GAME OVER] money scores: RED=$275, BLUE=$10156
+[RESULT] BLUE WINS by $9881!

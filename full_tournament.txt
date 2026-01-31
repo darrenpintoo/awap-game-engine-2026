@@ -1,0 +1,98 @@
+=== FULL TOURNAMENT RESULTS ===
+Date: Sat Jan 31 14:56:00 EST 2026
+Match: Planner (bots/dpinto/planner_bot.py) vs IronChef1 (bots/eric/iron_chef_bot.py) on maps/eric/map3_sprint.txt
+[GAME OVER] money scores: RED=$403, BLUE=$405
+[RESULT] BLUE WINS by $2!
+----------------
+Match: Planner (bots/dpinto/planner_bot.py) vs IronChef2 (bots/eric/iron_chef_bot2.py) on maps/eric/map3_sprint.txt
+[GAME OVER] money scores: RED=$403, BLUE=$325
+[RESULT] RED WINS by $78!
+----------------
+Match: Synergy (bots/dpinto/synergy_bot.py) vs IronChef1 (bots/eric/iron_chef_bot.py) on maps/eric/map3_sprint.txt
+[GAME OVER] money scores: RED=$203, BLUE=$405
+[RESULT] BLUE WINS by $202!
+----------------
+Match: Planner (bots/dpinto/planner_bot.py) vs IronChef1 (bots/eric/iron_chef_bot.py) on maps/eric/map5_grind.txt
+[GAME OVER] money scores: RED=$121, BLUE=$1774
+[RESULT] BLUE WINS by $1653!
+----------------
+Match: Planner (bots/dpinto/planner_bot.py) vs IronChef2 (bots/eric/iron_chef_bot2.py) on maps/eric/map5_grind.txt
+[GAME OVER] money scores: RED=$121, BLUE=$5
+[RESULT] RED WINS by $116!
+----------------
+Match: Synergy (bots/dpinto/synergy_bot.py) vs IronChef1 (bots/eric/iron_chef_bot.py) on maps/eric/map5_grind.txt
+[GAME OVER] money scores: RED=$-77, BLUE=$1774
+[RESULT] BLUE WINS by $1851!
+----------------
+Match: Planner (bots/dpinto/planner_bot.py) vs IronChef1 (bots/eric/iron_chef_bot.py) on maps/eric/map2.txt
+[GAME OVER] money scores: RED=$273, BLUE=$409
+[RESULT] BLUE WINS by $136!
+----------------
+Match: Planner (bots/dpinto/planner_bot.py) vs IronChef2 (bots/eric/iron_chef_bot2.py) on maps/eric/map2.txt
+[GAME OVER] money scores: RED=$273, BLUE=$115
+[RESULT] RED WINS by $158!
+----------------
+Match: Synergy (bots/dpinto/synergy_bot.py) vs IronChef1 (bots/eric/iron_chef_bot.py) on maps/eric/map2.txt
+[GAME OVER] money scores: RED=$73, BLUE=$409
+[RESULT] BLUE WINS by $336!
+----------------
+Match: Planner (bots/dpinto/planner_bot.py) vs IronChef1 (bots/eric/iron_chef_bot.py) on maps/eric/map6_overload.txt
+[GAME OVER] money scores: RED=$-1739, BLUE=$-1333
+[RESULT] BLUE WINS by $406!
+----------------
+Match: Planner (bots/dpinto/planner_bot.py) vs IronChef2 (bots/eric/iron_chef_bot2.py) on maps/eric/map6_overload.txt
+[GAME OVER] money scores: RED=$-1739, BLUE=$-1855
+[RESULT] RED WINS by $116!
+----------------
+Match: Synergy (bots/dpinto/synergy_bot.py) vs IronChef1 (bots/eric/iron_chef_bot.py) on maps/eric/map6_overload.txt
+[GAME OVER] money scores: RED=$-1597, BLUE=$-1333
+[RESULT] BLUE WINS by $264!
+----------------
+Match: Planner (bots/dpinto/planner_bot.py) vs IronChef1 (bots/eric/iron_chef_bot.py) on maps/eric/map4_chaos.txt
+[GAME OVER] money scores: RED=$-124, BLUE=$134
+[RESULT] BLUE WINS by $258!
+----------------
+Match: Planner (bots/dpinto/planner_bot.py) vs IronChef2 (bots/eric/iron_chef_bot2.py) on maps/eric/map4_chaos.txt
+[GAME OVER] money scores: RED=$-124, BLUE=$-320
+[RESULT] RED WINS by $196!
+----------------
+Match: Synergy (bots/dpinto/synergy_bot.py) vs IronChef1 (bots/eric/iron_chef_bot.py) on maps/eric/map4_chaos.txt
+[GAME OVER] money scores: RED=$-284, BLUE=$134
+[RESULT] BLUE WINS by $418!
+----------------
+Match: Planner (bots/dpinto/planner_bot.py) vs IronChef1 (bots/eric/iron_chef_bot.py) on maps/haresh/map_challenge.txt
+[GAME OVER] money scores: RED=$643, BLUE=$10406
+[RESULT] BLUE WINS by $9763!
+----------------
+Match: Planner (bots/dpinto/planner_bot.py) vs IronChef2 (bots/eric/iron_chef_bot2.py) on maps/haresh/map_challenge.txt
+[GAME OVER] money scores: RED=$643, BLUE=$527
+[RESULT] RED WINS by $116!
+----------------
+Match: Synergy (bots/dpinto/synergy_bot.py) vs IronChef1 (bots/eric/iron_chef_bot.py) on maps/haresh/map_challenge.txt
+[GAME OVER] money scores: RED=$10284, BLUE=$10406
+[RESULT] BLUE WINS by $122!
+----------------
+Match: Planner (bots/dpinto/planner_bot.py) vs IronChef1 (bots/eric/iron_chef_bot.py) on maps/haresh/map1.txt
+[GAME OVER] money scores: RED=$643, BLUE=$10406
+[RESULT] BLUE WINS by $9763!
+----------------
+Match: Planner (bots/dpinto/planner_bot.py) vs IronChef2 (bots/eric/iron_chef_bot2.py) on maps/haresh/map1.txt
+[GAME OVER] money scores: RED=$643, BLUE=$527
+[RESULT] RED WINS by $116!
+----------------
+Match: Synergy (bots/dpinto/synergy_bot.py) vs IronChef1 (bots/eric/iron_chef_bot.py) on maps/haresh/map1.txt
+[GAME OVER] money scores: RED=$10326, BLUE=$10406
+[RESULT] BLUE WINS by $80!
+----------------
+Match: Planner (bots/dpinto/planner_bot.py) vs IronChef1 (bots/eric/iron_chef_bot.py) on maps/haresh/map_compact.txt
+[GAME OVER] money scores: RED=$643, BLUE=$10406
+[RESULT] BLUE WINS by $9763!
+----------------
+Match: Planner (bots/dpinto/planner_bot.py) vs IronChef2 (bots/eric/iron_chef_bot2.py) on maps/haresh/map_compact.txt
+[GAME OVER] money scores: RED=$643, BLUE=$527
+[RESULT] RED WINS by $116!
+----------------
+Match: Synergy (bots/dpinto/synergy_bot.py) vs IronChef1 (bots/eric/iron_chef_bot.py) on maps/haresh/map_compact.txt
+[GAME OVER] money scores: RED=$445, BLUE=$10406
+[RESULT] BLUE WINS by $9961!
+----------------

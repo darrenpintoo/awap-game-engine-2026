@@ -1,0 +1,530 @@
+[INIT] Map parsed: 49 walkable, 1 cookers, 1 shops
+[PlannerBot] Init complete: 1 counters, 1 cookers
+[PlannerBot] Bot 0 BUYING raw MEAT
+[PlannerBot] Bot 1 BUYING raw NOODLES
+[PlannerBot] Bot 1 BOUGHT NOODLES
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 BOUGHT MEAT
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: move() failed: illegal move bot 2 from (7,1) by (-1,1)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: move() failed: illegal move bot 2 from (7,1) by (-1,1)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[GAME OVER] money scores: RED=$277, BLUE=$10156
+[RESULT] BLUE WINS by $9879!

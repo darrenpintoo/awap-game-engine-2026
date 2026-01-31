@@ -269,9 +269,9 @@ class BotPlayer:
         
         for kx, ky in self.cookers:
             tile = controller.get_tile(controller.get_team(), kx, ky)
-            if tile:
-                pan = getattr(tile, 'item', None)
-                if isinstance(pan, Pan) and pan.food is None:
+            if tile and isinstance(getattr(tile, 'item', None), Pan):
+                pan = tile.item
+                if pan.food is None:
                     dist = self.get_distance_to_adjacent(near, (kx, ky))
                     if dist < best_dist:
                         best_dist = dist
@@ -537,7 +537,7 @@ class BotPlayer:
         queue = deque([(start, [])])
         visited = {start}
         
-        m = controller.get_map()
+        m = controller.get_map(controller.get_team())
         
         while queue:
             (cx, cy), path = queue.popleft()

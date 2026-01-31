@@ -1,53 +1,62 @@
-TOURNAMENT RESULTS
-Date: Sat Jan 31 14:47:06 EST 2026
+============================================================
+ROUND ROBIN TOURNAMENT
+============================================================
+Bots: 5
+Maps: 8
+Total matches: 10
+============================================================
 
-Matchup: Planner (bots/dpinto/planner_bot.py) vs Synergy (bots/dpinto/synergy_bot.py) on maps/haresh/map1.txt
-[GAME OVER] money scores: RED=$643, BLUE=$10326
-[RESULT] BLUE WINS by $9683!
---------------------------------
-Matchup: Planner (bots/dpinto/planner_bot.py) vs Synergy (bots/dpinto/synergy_bot.py) on maps/dpinto/multi_order.txt
-[GAME OVER] money scores: RED=$624, BLUE=$367
-[RESULT] RED WINS by $257!
---------------------------------
-Matchup: Planner (bots/dpinto/planner_bot.py) vs Synergy (bots/dpinto/synergy_bot.py) on maps/dpinto/rush_orders.txt
-[GAME OVER] money scores: RED=$614, BLUE=$294
-[RESULT] RED WINS by $320!
---------------------------------
-Matchup: Planner (bots/dpinto/planner_bot.py) vs Synergy (bots/dpinto/synergy_bot.py) on maps/dpinto/stress_test.txt
-[GAME OVER] money scores: RED=$587, BLUE=$267
-[RESULT] RED WINS by $320!
---------------------------------
-Matchup: Planner (bots/dpinto/planner_bot.py) vs Synergy (bots/dpinto/synergy_bot.py) on maps/dpinto/easy_ramp.txt
-[GAME OVER] money scores: RED=$628, BLUE=$510
-[RESULT] RED WINS by $118!
---------------------------------
-Matchup: Planner (bots/dpinto/planner_bot.py) vs DuoNoodle (bots/eric/duo_noodle_bot.py) on maps/haresh/map1.txt
-[GAME] BLUE failed, RED wins
---------------------------------
-Matchup: Planner (bots/dpinto/planner_bot.py) vs DuoNoodle (bots/eric/duo_noodle_bot.py) on maps/dpinto/multi_order.txt
-[GAME] BLUE failed, RED wins
---------------------------------
-Matchup: Planner (bots/dpinto/planner_bot.py) vs DuoNoodle (bots/eric/duo_noodle_bot.py) on maps/dpinto/rush_orders.txt
-[GAME] BLUE failed, RED wins
---------------------------------
-Matchup: Planner (bots/dpinto/planner_bot.py) vs DuoNoodle (bots/eric/duo_noodle_bot.py) on maps/dpinto/stress_test.txt
-[GAME] BLUE failed, RED wins
---------------------------------
-Matchup: Planner (bots/dpinto/planner_bot.py) vs DuoNoodle (bots/eric/duo_noodle_bot.py) on maps/dpinto/easy_ramp.txt
-[GAME] BLUE failed, RED wins
---------------------------------
-Matchup: Synergy (bots/dpinto/synergy_bot.py) vs DuoNoodle (bots/eric/duo_noodle_bot.py) on maps/haresh/map1.txt
-[GAME] BLUE failed, RED wins
---------------------------------
-Matchup: Synergy (bots/dpinto/synergy_bot.py) vs DuoNoodle (bots/eric/duo_noodle_bot.py) on maps/dpinto/multi_order.txt
-[GAME] BLUE failed, RED wins
---------------------------------
-Matchup: Synergy (bots/dpinto/synergy_bot.py) vs DuoNoodle (bots/eric/duo_noodle_bot.py) on maps/dpinto/rush_orders.txt
-[GAME] BLUE failed, RED wins
---------------------------------
-Matchup: Synergy (bots/dpinto/synergy_bot.py) vs DuoNoodle (bots/eric/duo_noodle_bot.py) on maps/dpinto/stress_test.txt
-[GAME] BLUE failed, RED wins
---------------------------------
-Matchup: Synergy (bots/dpinto/synergy_bot.py) vs DuoNoodle (bots/eric/duo_noodle_bot.py) on maps/dpinto/easy_ramp.txt
-[GAME] BLUE failed, RED wins
---------------------------------
+--- Map: map2.txt ---
+  planner_bot vs duo_noodle_bot... RED WINS $278 vs $118
+  planner_bot vs iron_chef_bot... RED WINS $278 vs $246
+  planner_bot vs ironclad_bot... RED WINS $278 vs $196
+  planner_bot vs optimal_bot... ERROR
+  duo_noodle_bot vs iron_chef_bot... BLUE WINS $246 vs $118
+  duo_noodle_bot vs ironclad_bot... BLUE WINS $196 vs $118
+  duo_noodle_bot vs optimal_bot... ERROR
+  iron_chef_bot vs ironclad_bot... RED WINS $246 vs $196
+  iron_chef_bot vs optimal_bot... ERROR
+  ironclad_bot vs optimal_bot... ERROR
+
+--- Map: map3_sprint.txt ---
+  planner_bot vs duo_noodle_bot... TIE $250
+  planner_bot vs iron_chef_bot... TIE $250
+  planner_bot vs ironclad_bot... TIE $250
+  planner_bot vs optimal_bot... ERROR
+  duo_noodle_bot vs iron_chef_bot... TIE $250
+  duo_noodle_bot vs ironclad_bot... TIE $250
+  duo_noodle_bot vs optimal_bot... ERROR
+  iron_chef_bot vs ironclad_bot... TIE $250
+  iron_chef_bot vs optimal_bot... ERROR
+  ironclad_bot vs optimal_bot... ERROR
+
+--- Map: map4_chaos.txt ---
+  planner_bot vs duo_noodle_bot... RED WINS $40 vs $-32
+  planner_bot vs iron_chef_bot... RED WINS $40 vs $-32
+  planner_bot vs ironclad_bot... BLUE WINS $111 vs $40
+  planner_bot vs optimal_bot... ERROR
+  duo_noodle_bot vs iron_chef_bot... TIE $-32
+  duo_noodle_bot vs ironclad_bot... BLUE WINS $111 vs $-32
+  duo_noodle_bot vs optimal_bot... TIE $-32
+  iron_chef_bot vs ironclad_bot... BLUE WINS $111 vs $-32
+  iron_chef_bot vs optimal_bot... TIE $-32
+  ironclad_bot vs optimal_bot... RED WINS $111 vs $-32
+
+--- Map: map5_grind.txt ---
+  planner_bot vs duo_noodle_bot... BLUE WINS $762 vs $78
+  planner_bot vs iron_chef_bot... BLUE WINS $762 vs $78
+  planner_bot vs ironclad_bot... BLUE WINS $118 vs $78
+  planner_bot vs optimal_bot... BLUE WINS $762 vs $78
+  duo_noodle_bot vs iron_chef_bot... TIE $762
+  duo_noodle_bot vs ironclad_bot... RED WINS $762 vs $118
+  duo_noodle_bot vs optimal_bot... TIE $762
+  iron_chef_bot vs ironclad_bot... RED WINS $762 vs $118
+  iron_chef_bot vs optimal_bot... TIE $762
+  ironclad_bot vs optimal_bot... BLUE WINS $762 vs $118
+
+--- Map: map6_overload.txt ---
+  planner_bot vs duo_noodle_bot... BLUE WINS $-268 vs $-592
+  planner_bot vs iron_chef_bot... BLUE WINS $-268 vs $-592
+  planner_bot vs ironclad_bot... RED WINS $-592 vs $-752
+  planner_bot vs optimal_bot... RED WINS $-592 vs $-614
+  duo_noodle_bot vs iron_chef_bot... 
