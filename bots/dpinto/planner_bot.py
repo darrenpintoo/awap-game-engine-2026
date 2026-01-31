@@ -43,6 +43,8 @@ class Ingredient:
         return f"{self.name}({self.state.name})"
 
     def __eq__(self, other):
+        if not isinstance(other, Ingredient):
+            return False
         return self.name == other.name and self.state == other.state
 
     def __hash__(self):
@@ -170,8 +172,8 @@ class AStar:
             
             curr_time = start_time + g
             
-            # Check target reached
-            dist = abs(cx - target[0]) + abs(cy - target[1])
+            # Check target reached (Chebyshev distance)
+            dist = max(abs(cx - target[0]), abs(cy - target[1]))
             if dist <= stop_dist:
                 return path
 
@@ -310,30 +312,49 @@ class TaskAllocator:
             tx, ty = task.target_loc
             tile = controller.get_tile(controller.get_team(), tx, ty)
             
+            # bot state
+            st = controller.get_bot_state(bot_id)
+            held = st.get('holding')
+
             if task.type == TaskType.PICKUP:
                 if not tile or not tile.item: valid = False
             elif task.type == TaskType.CHOP:
-                if not tile or not tile.item: valid = False
+                # Valid if tile has item OR bot is holding the item to be chopped
+                if (not tile or not tile.item) and not held: valid = False
             elif task.type == TaskType.COOK:
-                if not tile or not isinstance(tile.item, Pan) or not tile.item.food: valid = False
+                # Valid if tile has pan OR bot is holding food to cook
+                if not tile or not isinstance(tile.item, Pan): valid = False
+                elif not tile.item.food and not held: valid = False
             elif task.type == TaskType.PLATE:
                 if not tile or not isinstance(tile.item, Plate): valid = False
+            elif task.type == TaskType.FETCH_COOKED:
+                if not tile or not isinstance(tile.item, Pan) or not tile.item.food: valid = False
+            elif task.type == TaskType.DELIVER:
+                if not held or held.get('type') != 'Plate': valid = False
             
             if not valid:
                 log(f"Bot {bot_id} CLEARING INVALID task {task.type}")
                 self.bp.bot_assignments[bot_id] = None
 
-    def assign_tasks(self, controller, bots):
-        available_bots = [b for b in bots if self.bp.bot_assignments.get(b) is None]
-        if not available_bots: return
-        
+    def find_free_cooker(self, controller):
+        for cx, cy in self.bp.cookers:
+            tile = controller.get_tile(controller.get_team(), cx, cy)
+            if isinstance(tile, TileType) or not tile: continue
+            if not tile.item: # Empty cooker
+                return (cx, cy)
+            elif isinstance(tile.item, Pan) and not tile.item.food: # Empty pan
+                return (cx, cy)
+        return None
+
+    def assign_tasks(self, controller: RobotController, bots: List[int]):
         if not self.bp.order_manager.active_goals: return
         top_goal = self.bp.order_manager.active_goals[0]
-        
-        # Current world state
+
+        # Get world state
         world_items = self.get_available_items(controller)
+        available_bots = [bid for bid in bots if not self.bp.bot_assignments.get(bid)]
         
-        # Helper to find closest item
+        # Helper to find specific item in world
         def find_item_loc(ing, bot_pos):
             locs = world_items.get(str(ing), [])
             if not locs: return None
@@ -359,349 +380,189 @@ class TaskAllocator:
         assembly_loc = self.bp.counters[0] if self.bp.counters else None
         if not assembly_loc: return
         
-        # 0. Validate existing tasks
         self._validate_tasks(controller, bots, world_items)
 
-        # Needs Analysis
-        plate_contents = []
-        has_plate = False
+        # 1. Plate Analysis
+        all_plates = []
         tile = controller.get_tile(controller.get_team(), assembly_loc[0], assembly_loc[1])
         if tile and tile.item and isinstance(tile.item, Plate):
-            has_plate = True
-            for f in tile.item.food:
-                plate_contents.append(f.food_name)
+            all_plates.append(([f.food_name for f in tile.item.food], assembly_loc, None))
+            
+        for bid in bots:
+            st = controller.get_bot_state(bid)
+            holding = st.get('holding')
+            if holding and holding.get('type') == 'Plate':
+                contents = [f['food_name'] for f in holding.get('food', [])]
+                all_plates.append((contents, (st['x'], st['y']), bid))
         
+        best_plate = None
+        if all_plates:
+            best_plate = max(all_plates, key=lambda p: (len([f for f in p[0] if any(r.name == f for r in top_goal.requirements)]), -len(p[0])))
+        
+        plate_contents = best_plate[0] if best_plate else []
+        has_plate = best_plate is not None
+        best_plate_held_by = best_plate[2] if best_plate else None
         missing_reqs = [r for r in top_goal.requirements if r.name not in plate_contents]
 
-        # Ingredient State Check
-        all_ingredients_ready = True
-        ingredients_to_process = []
+        # 2. Preparation Check (Advanced)
+        # We need this to decide when to buy the plate
+        all_choppable_ready = True
         for req in top_goal.requirements:
-            ingredient_name = req.name
-            needs_cooking = ingredient_name in ["MEAT", "EGG", "ONIONS"]
-            cooked_key = f"{ingredient_name}(COOKED)"
-            cooking_key = f"{ingredient_name}(COOKING)"
-            chopped_key = f"{ingredient_name}(CHOPPED)"
-            raw_key = f"{ingredient_name}(RAW)"
-
-            if needs_cooking:
-                if cooked_key in world_items: pass
-                elif cooking_key in world_items: pass
-                elif chopped_key in world_items:
-                    all_ingredients_ready = False
-                    ingredients_to_process.append((ingredient_name, "CHOPPED"))
-                elif raw_key in world_items:
-                    all_ingredients_ready = False
-                    ingredients_to_process.append((ingredient_name, "RAW"))
-                else:
-                    held_by_someone = False
+            if req.name in plate_contents: continue
+            if req.name in ["MEAT", "ONIONS"]:
+                found = False
+                # Is it chopped or cooked or cooking?
+                for k in [f"{req.name}(COOKED)", f"{req.name}(COOKING)", f"{req.name}(CHOPPED)"]:
+                    if k in world_items: found = True; break
+                if not found:
+                    # Check if someone holds it chopped or better
                     for bid in bots:
                         h = check_holding(bid)
-                        if isinstance(h, Ingredient) and h.name == ingredient_name:
-                            held_by_someone = True
-                            if h.state not in [ItemState.CHOPPED, ItemState.COOKED]:
-                                all_ingredients_ready = False
-                            break
-                    if not held_by_someone:
-                        all_ingredients_ready = False
-                        ingredients_to_process.append((ingredient_name, "NONE"))
-            else:
-                if ingredient_name not in plate_contents:
-                    if raw_key not in world_items:
-                        held_by_someone = False
-                        for bid in bots:
-                            h = check_holding(bid)
-                            if h and (isinstance(h, Ingredient) and h.name == ingredient_name):
-                                held_by_someone = True
-                                break
-                        if not held_by_someone:
-                            all_ingredients_ready = False
-                            ingredients_to_process.append((ingredient_name, "NONE"))
+                        if isinstance(h, Ingredient) and h.name == req.name and h.state != ItemState.RAW:
+                            found = True; break
+                if not found: all_choppable_ready = False; break
 
-        # --- ASSEMBLY COUNTER MANAGEMENT ---
+        # 3. Blocker Handling
         occupied_by_food = False
-        tile_item = None
-        if tile and tile.item:
-            if isinstance(tile.item, Food):
-                occupied_by_food = True
-                tile_item = tile.item
-            elif not isinstance(tile.item, Plate):
-                occupied_by_food = True
-        
-        # --- SUBMISSION DETECTION ---
-        # If the plate matches the top goal, assign a DELIVER task
-        if has_plate and not missing_reqs:
-            # Check if any bot is assigned to deliver or already holding it
-            assigned_deliver = False
-            for t in self.bp.bot_assignments.values():
-                if t and t.type == TaskType.DELIVER:
-                    assigned_deliver = True
-                    break
-            
-            if not assigned_deliver:
-                # Find best bot to deliver (prioritize one already holding plate, else nearest)
-                best_bot = None
-                for bid in available_bots:
-                    if check_holding(bid) == "PLATE":
-                        best_bot = bid
-                        break
-                
-                if best_bot is None and available_bots:
-                    # Just pick the first available for now
-                    best_bot = available_bots[0]
-                
-                if best_bot is not None:
-                    if check_holding(best_bot) == "PLATE":
-                        # We have it, deliver it
-                        target = self.bp.submit_locs[0] if self.bp.submit_locs else assembly_loc
-                        self.bp.bot_assignments[best_bot] = Task(TaskType.DELIVER, target, item="PLATE")
-                        log(f"Bot {best_bot} DELIVERING full plate")
-                    else:
-                        # Need to pick it up first
-                        self.bp.bot_assignments[best_bot] = Task(TaskType.PICKUP, assembly_loc)
-                        log(f"Bot {best_bot} FETCHING full plate for delivery")
-                    
-                    available_bots.remove(best_bot)
-        
-        # If specifically ready for a plate, assign clear-counter if needed
-        is_ready_for_plate = not has_plate and all_ingredients_ready and available_bots
-        if is_ready_for_plate and occupied_by_food:
-            clearing = False
-            for bid, t in self.bp.bot_assignments.items():
-                if t and t.type == TaskType.PICKUP and t.target_loc == assembly_loc:
-                    clearing = True
-                    break
-            
-            if not clearing:
-                bot_id = available_bots[0] 
-                self.bp.bot_assignments[bot_id] = Task(TaskType.PICKUP, assembly_loc)
-                log(f"Bot {bot_id} CLEARING blocker from assembly counter")
-                available_bots.remove(bot_id)
+        if tile and tile.item and isinstance(tile.item, Food): occupied_by_food = True
 
-        # Greedy assignment
-        for bot_id in available_bots:
+        # 4. Delivery
+        if has_plate and not missing_reqs:
+            assigned_deliver = any(t and t.type == TaskType.DELIVER for t in self.bp.bot_assignments.values())
+            if not assigned_deliver:
+                if best_plate_held_by is not None:
+                    target = self.bp.submit_locs[0] if self.bp.submit_locs else assembly_loc
+                    self.bp.bot_assignments[best_plate_held_by] = Task(TaskType.DELIVER, target, item="PLATE")
+                elif available_bots:
+                    bid = available_bots.pop(0)
+                    self.bp.bot_assignments[bid] = Task(TaskType.PICKUP, assembly_loc)
+
+        # 5. Greedy Assign
+        for bot_id in available_bots[:]:
             held = check_holding(bot_id)
             if held:
-                # 1.1 Priority: If assigned to DELIVER, don't change it
-                current_task = self.bp.bot_assignments.get(bot_id)
-                if current_task and current_task.type == TaskType.DELIVER:
-                    continue
-
+                # If holding plate, deliver or place on counter
                 if str(held) == "PLATE":
-                    # If this plate is full (no missing reqs), keep delivering it
-                    if not missing_reqs:
+                    log(f"  Bot {bot_id} has PLATE")
+                    if not missing_reqs and best_plate_held_by == bot_id:
                         target = self.bp.submit_locs[0] if self.bp.submit_locs else assembly_loc
                         self.bp.bot_assignments[bot_id] = Task(TaskType.DELIVER, target, item="PLATE")
-                        log(f"Bot {bot_id} holding FULL PLATE, task: DELIVER")
-                        continue
-
-                    # Otherwise, place it on assembly if needed
-                    # but only if it's not already there
-                    self.bp.bot_assignments[bot_id] = Task(TaskType.MOVE_ITEM, assembly_loc, item="PLATE")
-                    log(f"Bot {bot_id} holding PLATE, task: PLACE on assembly")
-                    continue
-                
-                # --- PAN HANDLING ---
-                if isinstance(held, str) and held == "PAN":
-                    # Just ignore for now
-                    continue
-                    
-                if isinstance(held, Ingredient):
-                    # We have an ingredient. What to do with it?
-                    # Check Recipe Graph forward
-                    # Forward planning: held -> next_state
-                    
-                    # Special case: If cooked, PLATE IT
-                    if held.state == ItemState.COOKED:
-                        self.bp.bot_assignments[bot_id] = Task(TaskType.PLATE, assembly_loc, item=held)
-                        log(f"Bot {bot_id} has COOKED {held.name}, task: PLATE")
-                        continue
-                        
-                    # If chopped, COOK IT (if needed)
-                    if held.state == ItemState.CHOPPED:
-                        # Check if this ingredient needs cooking
-                        # TODO: Check RecipeGraph. For now hardcode: MEAT/EGG/ONIONS need cook
-                        if held.name in ["MEAT", "EGG", "ONIONS"]:
-                             # Find empty cooker
-                             cooker = self.bp.cookers[0] # ToDo: Find empty
-                             self.bp.bot_assignments[bot_id] = Task(TaskType.COOK, cooker, item=held)
-                             log(f"Bot {bot_id} has CHOPPED {held.name}, task: COOK")
-                             continue
-                        else:
-                             # Just plate it? (e.g. Chopped Salad?)
-                             pass
-                             
-                    # If raw, CHOP IT (if needed)
-                    if held.state == ItemState.RAW:
-                        # Check if needs chop
-                        if held.name in ["MEAT", "ONIONS"]:
-                            # Find counter to chop
-                            # If Staging Counter exists use it
-                            target = self.bp.counters[1] if len(self.bp.counters)>1 else self.bp.counters[0]
-                            # Put it down first? execute_task handles CHOP logic?
-                            # No, CHOP action implies being at counter.
-                            # But we need to PLACE then CHOP.
-                            # Actually, controller.chop() works on item on counter.
-                            # So we need 2 tasks: PLACE -> CHOP.
-                            # Let's assign PLACE first.
-                            self.bp.bot_assignments[bot_id] = Task(TaskType.MOVE_ITEM, target, item=held)
-                            # Wait, execute_task for MOVE_ITEM needs implementation
-                            # Let's simpler: Just use CHOP task which implies Place+Chop sequence?
-                            # For now: PLACE
-                            # Actually, let's implement CHOP as "Go to counter, Place, Chop"
-                            # But execute_task is one-step.
-                            
-                            # Hack: Assign CHOP task. execute_task will see holding, Place, then next turn Chop.
-                            # We need execute_task to handle this.
-                            self.bp.bot_assignments[bot_id] = Task(TaskType.CHOP, target, item=held)
-                            log(f"Bot {bot_id} has RAW {held.name}, task: CHOP")
-                            continue
-                            
-                        elif held.name in ["NOODLES", "SAUCE"]:
-                            # Only plate if plate exists on assembly
-                            if has_plate:
-                                self.bp.bot_assignments[bot_id] = Task(TaskType.PLATE, assembly_loc, item=held)
-                                log(f"Bot {bot_id} has RAW {held.name}, task: PLATE directly")
-                            else:
-                                # No plate yet - only place on counter if we have multiple counters
-                                # On single-counter maps, keep holding it so we don't block the plate
-                                if len(self.bp.counters) > 1:
-                                    target_counter = None
-                                    for cx, cy in self.bp.counters:
-                                        if (cx, cy) != assembly_loc:
-                                            tile_check = controller.get_tile(controller.get_team(), cx, cy)
-                                            if tile_check and not tile_check.item:
-                                                target_counter = (cx, cy)
-                                                break
-                                    
-                                    if target_counter:
-                                        self.bp.bot_assignments[bot_id] = Task(TaskType.MOVE_ITEM, target_counter, item=held)
-                                        log(f"Bot {bot_id} PLACING {held.name} on counter (no plate yet)")
-                                    else:
-                                        log(f"Bot {bot_id} HOLDING {held.name} (all counters full)")
-                                else:
-                                    log(f"Bot {bot_id} HOLDING {held.name} (single counter map - don't block plate)")
-                            continue
-                             
-                        elif held.name == "EGG":
-                            # Egg goes straight to cook
-                            cooker = self.bp.cookers[0]
-                            self.bp.bot_assignments[bot_id] = Task(TaskType.COOK, cooker, item=held)
-                            log(f"Bot {bot_id} has RAW EGG, task: COOK")
-                            continue
-
-            # 2. If idle (not holding anything), check what work remains
-            
-            # DECISION: Only buy/place plate if all ingredients that need cooking ARE in world (cooked or cooking)
-            if not has_plate and all_ingredients_ready:
-                # NOW it's safe to buy plate - ingredients won't need the counter
-                found_plate = "PLATE" in [str(check_holding(b)) for b in bots]
-                if not found_plate:
-                    # Budget check for plate
-                    team_money = controller.get_team_money(controller.get_team())
-                    plate_cost = ShopCosts.PLATE.buy_cost
-                    
-                    if team_money >= plate_cost:
-                        shop = self.bp.shops[0]
-                        self.bp.bot_assignments[bot_id] = Task(TaskType.BUY, shop, item="PLATE")
-                        log(f"Bot {bot_id} BUYING PLATE (all ingredients ready)")
-                        continue
                     else:
-                        log(f"Bot {bot_id} CAN'T AFFORD PLATE (${team_money} < ${plate_cost})")
-            
-            # Process ingredients that need work
-            # Sort missing_reqs: cookable ingredients FIRST (they need counter for chopping)
-            # This prevents blocking the counter with simple ingredients like NOODLES
-            cookable_names = ["MEAT", "EGG", "ONIONS"]
-            sorted_missing = sorted(missing_reqs, key=lambda r: 0 if r.name in cookable_names else 1)
-            
-            if sorted_missing:
-                # Try each ingredient in priority order until we find work
-                for target_req in sorted_missing:
-                    ingredient_name = target_req.name
-                    
-                    # Check if this ingredient is COOKING (in pan, not ready yet)
-                    cooking_key = f"{ingredient_name}(COOKING)"
-                    if cooking_key in world_items:
-                        # This ingredient is being processed, skip to next
-                        continue
-                    
-                    # Supply chain logic
-                    found_task = None
-                    
-                    # 1. Check for COOKED (ready to plate)
-                    cooked_key = f"{ingredient_name}(COOKED)"
-                    if cooked_key in world_items:
-                        # Only pick up if we have a plate to put it on
-                        if has_plate:
-                            loc = world_items[cooked_key][0]
-                            found_task = Task(TaskType.FETCH_COOKED, loc)
-                            log(f"Bot {bot_id} FETCHING cooked {ingredient_name}")
-                    
-                    # 2. Check for CHOPPED (needs cooking)
-                    if not found_task:
-                        chopped_key = f"{ingredient_name}(CHOPPED)"
-                        if chopped_key in world_items:
-                            loc = world_items[chopped_key][0]
-                            # Go pickup and cook it
-                            found_task = Task(TaskType.PICKUP, loc)  # Generic pickup
-                            log(f"Bot {bot_id} PICKING UP chopped {ingredient_name} to cook")
-                    
-                    # 3. Check for RAW on counter (needs chopping or pickup)
-                    if not found_task:
-                        raw_key = f"{ingredient_name}(RAW)"
-                        if raw_key in world_items:
-                            loc = world_items[raw_key][0]
-                            # Only CHOP if ingredient is choppable
-                            if ingredient_name in ["MEAT", "ONIONS"]:
-                                found_task = Task(TaskType.CHOP, loc, item=Ingredient(ingredient_name, ItemState.RAW))
-                                log(f"Bot {bot_id} CHOPPING raw {ingredient_name}")
-                            else:
-                                # NOODLES/SAUCE/EGG - pick up directly to add to plate or cook
-                                found_task = Task(TaskType.PICKUP, loc)  # Generic pickup
-                                log(f"Bot {bot_id} PICKING UP raw {ingredient_name}")
-                    
-                    # 4. Buy new raw ingredient (only if not already in world/cooking/holding)
-                    if not found_task:
-                        # Coordination check: is someone else ALREADY handling this ingredient?
-                        is_being_handled = False
-                        
-                        # Check world
-                        if cooking_key in world_items or cooked_key in world_items:
-                            is_being_handled = True
-                        
-                        # Check check holdings
-                        if not is_being_handled:
-                            for bid in bots:
-                                h = check_holding(bid)
-                                if isinstance(h, Ingredient) and h.name == ingredient_name:
-                                    is_being_handled = True
+                        # Proactive Plating: If holding plate, pick up ready ingredients from world
+                        plate_task = None
+                        st = controller.get_bot_state(bot_id)
+                        for req in missing_reqs:
+                            for state in ["COOKED", "RAW"]:
+                                if state == "RAW" and req.name not in ["NOODLES", "SAUCE"]: continue
+                                loc = find_item_loc(f"{req.name}({state})", (st['x'], st['y']))
+                                if loc:
+                                    plate_task = Task(TaskType.PLATE, loc, item=req)
                                     break
+                            if plate_task: break
                         
-                        # Check assignments
-                        if not is_being_handled:
-                            for t in self.bp.bot_assignments.values():
-                                if t and t.item:
-                                    if (isinstance(t.item, Ingredient) and t.item.name == ingredient_name) or \
-                                       (isinstance(t.item, str) and t.item == ingredient_name):
-                                        is_being_handled = True
-                                        break
-                        
-                        if not is_being_handled:
-                            # Budget check
-                            team_money = controller.get_team_money(controller.get_team())
-                            cost = getattr(FoodType, ingredient_name).buy_cost if hasattr(FoodType, ingredient_name) else 80
-                            
-                            if team_money >= cost:
-                                shop = self.bp.shops[0]
-                                found_task = Task(TaskType.BUY, shop, item=Ingredient(ingredient_name, ItemState.RAW))
-                                log(f"Bot {bot_id} BUYING raw {ingredient_name}")
+                        if plate_task:
+                            self.bp.bot_assignments[bot_id] = plate_task
+                        else:
+                            # Not full, place on assembly counter if empty
+                            if not tile.item or tile.item == held:
+                                self.bp.bot_assignments[bot_id] = Task(TaskType.MOVE_ITEM, assembly_loc, item="PLATE")
                             else:
-                                log(f"Bot {bot_id} CAN'T AFFORD {ingredient_name}")
+                                # Search for ANY counter
+                                for c in self.bp.counters:
+                                    tc = controller.get_tile(controller.get_team(), c[0], c[1])
+                                    if not tc.item:
+                                        self.bp.bot_assignments[bot_id] = Task(TaskType.MOVE_ITEM, c, item="PLATE")
+                                        break
+                    if bot_id in self.bp.bot_assignments:
+                        available_bots.remove(bot_id)
+                        continue
+                
+                # If holding ingredient, process it
+                if isinstance(held, Ingredient):
+                    if held.state == ItemState.COOKED or held.name in ["NOODLES", "SAUCE"]:
+                        if has_plate and best_plate_held_by is None:
+                            self.bp.bot_assignments[bot_id] = Task(TaskType.PLATE, assembly_loc, item=held)
+                            available_bots.remove(bot_id)
+                            log(f"Bot {bot_id} ASSIGNED PLATE @ {assembly_loc}")
+                            continue
+                    elif held.state == ItemState.RAW and held.name in ["MEAT", "ONIONS"]:
+                        # CHOP
+                        target = None
+                        # ONLY use counters for chopping!
+                        for c in self.bp.counters:
+                            if c == assembly_loc and (has_plate or occupied_by_food): continue
+                            tc = controller.get_tile(controller.get_team(), c[0], c[1])
+                            if tc and tc.item is None: target = c; break
+                        
+                        if not target:
+                            target = assembly_loc
+                        
+                        self.bp.bot_assignments[bot_id] = Task(TaskType.CHOP, target, item=held)
+                        available_bots.remove(bot_id)
+                        continue
+                    elif (held.state == ItemState.CHOPPED) or (held.name == "EGG" and held.state == ItemState.RAW):
+                        # COOK
+                        cooker = self.find_free_cooker(controller)
+                        if cooker:
+                            self.bp.bot_assignments[bot_id] = Task(TaskType.COOK, cooker, item=held)
+                            available_bots.remove(bot_id)
+                            continue
+
+            # Idle bot work
+            if sorted_missing := sorted(missing_reqs, key=lambda r: 0 if r.name in ["MEAT", "EGG", "ONIONS"] else 1):
+                for req in sorted_missing:
+                    # Coordination check: Is this ingredient ALREADY being handled?
+                    is_handled = False
+                    for bid in bots:
+                        h = check_holding(bid)
+                        if isinstance(h, Ingredient) and h.name == req.name: is_handled = True; break
+                        t = self.bp.bot_assignments.get(bid)
+                        if t and t.item and isinstance(t.item, Ingredient) and t.item.name == req.name: is_handled = True; break
                     
-                    if found_task:
-                        self.bp.bot_assignments[bot_id] = found_task
-                        break  # Found work, stop looking
+                    if is_handled: continue
+
+                    # Supply chain logic
+                    st = controller.get_bot_state(bot_id)
+                    bot_pos = (st['x'], st['y'])
+                    for state, ttype in [("COOKED", TaskType.FETCH_COOKED), ("CHOPPED", TaskType.PICKUP), ("RAW", TaskType.CHOP)]:
+                        loc = find_item_loc(f"{req.name}({state})", bot_pos)
+                        if loc:
+                            self.bp.bot_assignments[bot_id] = Task(ttype, loc, item=req)
+                            log(f"Bot {bot_id} ASSIGNED {ttype} @ {loc}")
+                            break
+                    if bot_id in self.bp.bot_assignments: break
+                    
+                    # BUY
+                    cost = getattr(FoodType, req.name).buy_cost if hasattr(FoodType, req.name) else 80
+                    if controller.get_team_money(controller.get_team()) >= cost:
+                        shop_loc = self.bp.shops.get(req.name, self.bp.shops.get("GENERAL"))
+                        if shop_loc:
+                            self.bp.bot_assignments[bot_id] = Task(TaskType.BUY, shop_loc, item=req)
+                    if bot_id in self.bp.bot_assignments: break
+            
+            # Buy Plate - deadlock avoidance
+            # On single-counter maps, don't buy plate until CHOP is done
+            if not has_plate and all_choppable_ready and not self.bp.bot_assignments.get(bot_id):
+                # If holding something, we MUST drop it to buy a plate
+                if held:
+                    # Drop on ANY free counter/placeable
+                    drop_loc = None
+                    for loc in self.bp.all_placeable:
+                        tc = controller.get_tile(controller.get_team(), loc[0], loc[1])
+                        if tc and tc.item is None:
+                            drop_loc = loc; break
+                    
+                    if drop_loc:
+                        self.bp.bot_assignments[bot_id] = Task(TaskType.MOVE_ITEM, drop_loc, item=held)
+                else:
+                    # Check if anyone is already buying a plate
+                    if not any(t and t.type == TaskType.BUY and t.item == "PLATE" for t in self.bp.bot_assignments.values()):
+                        shop_loc = self.bp.shops.get("PLATE", self.bp.shops.get("GENERAL"))
+                        if shop_loc:
+                            self.bp.bot_assignments[bot_id] = Task(TaskType.BUY, shop_loc, item="PLATE")
+
+            if bot_id in self.bp.bot_assignments: available_bots.remove(bot_id)
+        
 
 
 # --- 5. Main Bot Logic ---
@@ -727,17 +588,45 @@ class BotPlayer:
         self.bot_assignments: Dict[int, Optional[Task]] = {}
         
     def _init_map(self, controller):
+        # Scan map for key features
+        self.counters = []
+        self.cookers = []
+        self.sinks = [] # Re-initialize here to ensure it's populated
+        self.submit_locs = []
+        self.shops = {} # name -> (x,y)
+        self.trash_locs = [] # Re-initialize here
+        self.all_placeable = []
+        
         m = controller.get_map(controller.get_team())
         for x in range(m.width):
             for y in range(m.height):
-                t = m.tiles[x][y].tile_name
+                tile = m.tiles[x][y]
                 p = (x, y)
-                if t == "COUNTER": self.counters.append(p)
-                elif t == "COOKER": self.cookers.append(p)
-                elif t == "SINK": self.sinks.append(p)
-                elif t == "SUBMIT": self.submit_locs.append(p)
-                elif t == "SHOP": self.shops.append(p)
-                elif t == "TRASH": self.trash_locs.append(p)
+                if tile.tile_name == "COUNTER":
+                    self.counters.append(p)
+                elif tile.tile_name == "COOKER":
+                    self.cookers.append(p)
+                elif tile.tile_name == "SINK":
+                    self.sinks.append(p)
+                elif tile.tile_name == "SUBMIT":
+                    self.submit_locs.append(p)
+                elif tile.tile_name == "SHOP":
+                    self.shops["GENERAL"] = p
+                    # Safely handle specific shop items if they exist
+                    if hasattr(tile, 'item_name'):
+                        self.shops[tile.item_name] = p
+                elif tile.tile_name == "TRASH":
+                    self.trash_locs.append(p)
+                
+                # Check is_placeable
+                if getattr(tile, 'is_placeable', False) or tile.tile_name in ["COUNTER", "BOX", "SINK", "COOKER", "TRASH", "SUBMIT"]:
+                    self.all_placeable.append(p)
+        
+        # Sort counters by proximity to center or something? 
+        # For now, just keep them as they are.
+        if not self.counters and self.all_placeable:
+            # If no "COUNTER" but other placeable, use those as counters
+            self.counters = [self.all_placeable[0]]
         
         self.initialized = True
         log(f"Init complete: {len(self.counters)} counters, {len(self.cookers)} cookers")
@@ -757,32 +646,22 @@ class BotPlayer:
             success = False
             
             if task.type == TaskType.BUY:
-                # Need to lookup item enum
-                # task.item is Ingredient or str
                 name = task.item.name if isinstance(task.item, Ingredient) else str(task.item)
-                
-                # Check Food types
                 if hasattr(FoodType, name):
                     success = controller.buy(bot_id, getattr(FoodType, name), task.target_loc[0], task.target_loc[1])
-                # Check Shop items
                 elif hasattr(ShopCosts, name):
                     success = controller.buy(bot_id, getattr(ShopCosts, name), task.target_loc[0], task.target_loc[1])
-                
                 if success: log(f"Bot {bot_id} BOUGHT {name}")
 
             elif task.type == TaskType.CHOP:
                 if state['holding']:
-                     # Must place first
                      success = controller.place(bot_id, task.target_loc[0], task.target_loc[1])
                      if success: log(f"Bot {bot_id} PLACED for CHOP")
-                     # Task not done yet! Return so we chop next turn.
                      return 
-                     
                 success = controller.chop(bot_id, task.target_loc[0], task.target_loc[1])
                 if success: log(f"Bot {bot_id} CHOPPED")
 
             elif task.type == TaskType.COOK:
-                # Start cooking (Holding food -> Place & Cook at same time)
                 success = controller.start_cook(bot_id, task.target_loc[0], task.target_loc[1])
                 if success: log(f"Bot {bot_id} STARTED COOKING")
 
@@ -795,28 +674,24 @@ class BotPlayer:
                 if success: log(f"Bot {bot_id} PLATED FOOD")
 
             elif task.type == TaskType.PICKUP:
-                # Pickup from map
                 success = controller.pickup(bot_id, task.target_loc[0], task.target_loc[1])
                 if success: log(f"Bot {bot_id} PICKED UP item")
 
             elif task.type == TaskType.MOVE_ITEM:
-                # Place held item on target location
                 success = controller.place(bot_id, task.target_loc[0], task.target_loc[1])
-                if success: 
-                    log(f"Bot {bot_id} PLACED {task.item}")
-                else:
-                    # Place failed (likely counter occupied) - clear task so we get reassigned
-                    log(f"Bot {bot_id} FAILED to place {task.item}, clearing task")
-                    self.bot_assignments[bot_id] = None
-                    return
+                if success: log(f"Bot {bot_id} PLACED {task.item}")
 
             elif task.type == TaskType.DELIVER:
                 success = controller.submit(bot_id, task.target_loc[0], task.target_loc[1])
                 if success: log(f"Bot {bot_id} SUBMITTED ORDER")
             
-            # If successful, clear assignment (task done)
-            if success:
+            # If interaction attempted but failed, we might need to clear task or wait
+            if not success:
+                log(f"Bot {bot_id} FAILED action {task.type} @ {task.target_loc}, clearing task")
                 self.bot_assignments[bot_id] = None
+                return
+            else:
+                self.bot_assignments[bot_id] = None # Task done
                 return
 
         # Move to target
