@@ -1,62 +1,193 @@
 ============================================================
 ROUND ROBIN TOURNAMENT
 ============================================================
-Bots: 5
-Maps: 8
-Total matches: 10
+Bots: 6
+Maps: 10
+Total matches: 150
 ============================================================
 
 --- Map: map2.txt ---
-  planner_bot vs duo_noodle_bot... RED WINS $278 vs $118
+  planner_bot vs Apex_Chef... ERROR
+  planner_bot vs StrategicKitchen... RED WINS $278 vs $200
+  planner_bot vs TrueUltimateChefBot... RED WINS $278 vs $118
+  planner_bot vs UltimateChefBot... RED WINS $278 vs $246
   planner_bot vs iron_chef_bot... RED WINS $278 vs $246
-  planner_bot vs ironclad_bot... RED WINS $278 vs $196
-  planner_bot vs optimal_bot... ERROR
-  duo_noodle_bot vs iron_chef_bot... BLUE WINS $246 vs $118
-  duo_noodle_bot vs ironclad_bot... BLUE WINS $196 vs $118
-  duo_noodle_bot vs optimal_bot... ERROR
-  iron_chef_bot vs ironclad_bot... RED WINS $246 vs $196
-  iron_chef_bot vs optimal_bot... ERROR
-  ironclad_bot vs optimal_bot... ERROR
+  Apex_Chef vs StrategicKitchen... ERROR
+  Apex_Chef vs TrueUltimateChefBot... ERROR
+  Apex_Chef vs UltimateChefBot... ERROR
+  Apex_Chef vs iron_chef_bot... ERROR
+  StrategicKitchen vs TrueUltimateChefBot... RED WINS $200 vs $118
+  StrategicKitchen vs UltimateChefBot... BLUE WINS $246 vs $200
+  StrategicKitchen vs iron_chef_bot... BLUE WINS $246 vs $200
+  TrueUltimateChefBot vs UltimateChefBot... BLUE WINS $246 vs $118
+  TrueUltimateChefBot vs iron_chef_bot... BLUE WINS $246 vs $118
+  UltimateChefBot vs iron_chef_bot... TIE $246
 
 --- Map: map3_sprint.txt ---
-  planner_bot vs duo_noodle_bot... TIE $250
+  planner_bot vs Apex_Chef... ERROR
+  planner_bot vs StrategicKitchen... RED WINS $250 vs $210
+  planner_bot vs TrueUltimateChefBot... TIE $250
+  planner_bot vs UltimateChefBot... TIE $250
   planner_bot vs iron_chef_bot... TIE $250
-  planner_bot vs ironclad_bot... TIE $250
-  planner_bot vs optimal_bot... ERROR
-  duo_noodle_bot vs iron_chef_bot... TIE $250
-  duo_noodle_bot vs ironclad_bot... TIE $250
-  duo_noodle_bot vs optimal_bot... ERROR
-  iron_chef_bot vs ironclad_bot... TIE $250
-  iron_chef_bot vs optimal_bot... ERROR
-  ironclad_bot vs optimal_bot... ERROR
+  Apex_Chef vs StrategicKitchen... ERROR
+  Apex_Chef vs TrueUltimateChefBot... ERROR
+  Apex_Chef vs UltimateChefBot... ERROR
+  Apex_Chef vs iron_chef_bot... ERROR
+  StrategicKitchen vs TrueUltimateChefBot... BLUE WINS $250 vs $210
+  StrategicKitchen vs UltimateChefBot... BLUE WINS $250 vs $210
+  StrategicKitchen vs iron_chef_bot... BLUE WINS $250 vs $210
+  TrueUltimateChefBot vs UltimateChefBot... TIE $250
+  TrueUltimateChefBot vs iron_chef_bot... TIE $250
+  UltimateChefBot vs iron_chef_bot... TIE $250
 
 --- Map: map4_chaos.txt ---
-  planner_bot vs duo_noodle_bot... RED WINS $40 vs $-32
+  planner_bot vs Apex_Chef... RED WINS $40 vs $-80
+  planner_bot vs StrategicKitchen... RED WINS $40 vs $-80
+  planner_bot vs TrueUltimateChefBot... RED WINS $40 vs $-32
+  planner_bot vs UltimateChefBot... RED WINS $40 vs $-32
   planner_bot vs iron_chef_bot... RED WINS $40 vs $-32
-  planner_bot vs ironclad_bot... BLUE WINS $111 vs $40
-  planner_bot vs optimal_bot... ERROR
-  duo_noodle_bot vs iron_chef_bot... TIE $-32
-  duo_noodle_bot vs ironclad_bot... BLUE WINS $111 vs $-32
-  duo_noodle_bot vs optimal_bot... TIE $-32
-  iron_chef_bot vs ironclad_bot... BLUE WINS $111 vs $-32
-  iron_chef_bot vs optimal_bot... TIE $-32
-  ironclad_bot vs optimal_bot... RED WINS $111 vs $-32
+  Apex_Chef vs StrategicKitchen... TIE $-80
+  Apex_Chef vs TrueUltimateChefBot... BLUE WINS $-32 vs $-80
+  Apex_Chef vs UltimateChefBot... BLUE WINS $-32 vs $-80
+  Apex_Chef vs iron_chef_bot... BLUE WINS $-32 vs $-80
+  StrategicKitchen vs TrueUltimateChefBot... BLUE WINS $-32 vs $-80
+  StrategicKitchen vs UltimateChefBot... BLUE WINS $-32 vs $-80
+  StrategicKitchen vs iron_chef_bot... BLUE WINS $-32 vs $-80
+  TrueUltimateChefBot vs UltimateChefBot... TIE $-32
+  TrueUltimateChefBot vs iron_chef_bot... TIE $-32
+  UltimateChefBot vs iron_chef_bot... TIE $-32
 
 --- Map: map5_grind.txt ---
-  planner_bot vs duo_noodle_bot... BLUE WINS $762 vs $78
+  planner_bot vs Apex_Chef... BLUE WINS $80 vs $78
+  planner_bot vs StrategicKitchen... BLUE WINS $80 vs $78
+  planner_bot vs TrueUltimateChefBot... TIE $78
+  planner_bot vs UltimateChefBot... BLUE WINS $762 vs $78
   planner_bot vs iron_chef_bot... BLUE WINS $762 vs $78
-  planner_bot vs ironclad_bot... BLUE WINS $118 vs $78
-  planner_bot vs optimal_bot... BLUE WINS $762 vs $78
-  duo_noodle_bot vs iron_chef_bot... TIE $762
-  duo_noodle_bot vs ironclad_bot... RED WINS $762 vs $118
-  duo_noodle_bot vs optimal_bot... TIE $762
-  iron_chef_bot vs ironclad_bot... RED WINS $762 vs $118
-  iron_chef_bot vs optimal_bot... TIE $762
-  ironclad_bot vs optimal_bot... BLUE WINS $762 vs $118
+  Apex_Chef vs StrategicKitchen... TIE $80
+  Apex_Chef vs TrueUltimateChefBot... RED WINS $80 vs $78
+  Apex_Chef vs UltimateChefBot... BLUE WINS $762 vs $80
+  Apex_Chef vs iron_chef_bot... BLUE WINS $762 vs $80
+  StrategicKitchen vs TrueUltimateChefBot... RED WINS $80 vs $78
+  StrategicKitchen vs UltimateChefBot... BLUE WINS $762 vs $80
+  StrategicKitchen vs iron_chef_bot... BLUE WINS $762 vs $80
+  TrueUltimateChefBot vs UltimateChefBot... BLUE WINS $762 vs $78
+  TrueUltimateChefBot vs iron_chef_bot... BLUE WINS $762 vs $78
+  UltimateChefBot vs iron_chef_bot... TIE $762
 
 --- Map: map6_overload.txt ---
-  planner_bot vs duo_noodle_bot... BLUE WINS $-268 vs $-592
-  planner_bot vs iron_chef_bot... BLUE WINS $-268 vs $-592
-  planner_bot vs ironclad_bot... RED WINS $-592 vs $-752
-  planner_bot vs optimal_bot... RED WINS $-592 vs $-614
-  duo_noodle_bot vs iron_chef_bot... 
+  planner_bot vs Apex_Chef... RED WINS $-592 vs $-790
+  planner_bot vs StrategicKitchen... RED WINS $-592 vs $-790
+  planner_bot vs TrueUltimateChefBot... RED WINS $-592 vs $-792
+  planner_bot vs UltimateChefBot... BLUE WINS $-268 vs $-592
+  planner_bot vs iron_chef_bot... BLUE WINS $-266 vs $-592
+  Apex_Chef vs StrategicKitchen... TIE $-790
+  Apex_Chef vs TrueUltimateChefBot... RED WINS $-790 vs $-792
+  Apex_Chef vs UltimateChefBot... BLUE WINS $-268 vs $-790
+  Apex_Chef vs iron_chef_bot... BLUE WINS $-268 vs $-790
+  StrategicKitchen vs TrueUltimateChefBot... RED WINS $-790 vs $-792
+  StrategicKitchen vs UltimateChefBot... BLUE WINS $-268 vs $-790
+  StrategicKitchen vs iron_chef_bot... BLUE WINS $-268 vs $-790
+  TrueUltimateChefBot vs UltimateChefBot... BLUE WINS $-268 vs $-792
+  TrueUltimateChefBot vs iron_chef_bot... BLUE WINS $-268 vs $-792
+  UltimateChefBot vs iron_chef_bot... TIE $-268
+
+--- Map: map1.txt ---
+  planner_bot vs Apex_Chef... BLUE WINS $230 vs $228
+  planner_bot vs StrategicKitchen... BLUE WINS $230 vs $228
+  planner_bot vs TrueUltimateChefBot... BLUE WINS $270 vs $228
+  planner_bot vs UltimateChefBot... BLUE WINS $10106 vs $228
+  planner_bot vs iron_chef_bot... BLUE WINS $10106 vs $228
+  Apex_Chef vs StrategicKitchen... TIE $230
+  Apex_Chef vs TrueUltimateChefBot... BLUE WINS $270 vs $230
+  Apex_Chef vs UltimateChefBot... BLUE WINS $10106 vs $230
+  Apex_Chef vs iron_chef_bot... BLUE WINS $10106 vs $230
+  StrategicKitchen vs TrueUltimateChefBot... BLUE WINS $270 vs $230
+  StrategicKitchen vs UltimateChefBot... BLUE WINS $10106 vs $230
+  StrategicKitchen vs iron_chef_bot... BLUE WINS $10106 vs $230
+  TrueUltimateChefBot vs UltimateChefBot... BLUE WINS $10106 vs $270
+  TrueUltimateChefBot vs iron_chef_bot... BLUE WINS $10106 vs $270
+  UltimateChefBot vs iron_chef_bot... TIE $10106
+
+--- Map: map_challenge.txt ---
+  planner_bot vs Apex_Chef... TIE $230
+  planner_bot vs StrategicKitchen... TIE $230
+  planner_bot vs TrueUltimateChefBot... RED WINS $230 vs $228
+  planner_bot vs UltimateChefBot... BLUE WINS $10106 vs $230
+  planner_bot vs iron_chef_bot... BLUE WINS $10106 vs $230
+  Apex_Chef vs StrategicKitchen... TIE $230
+  Apex_Chef vs TrueUltimateChefBot... RED WINS $230 vs $228
+  Apex_Chef vs UltimateChefBot... BLUE WINS $10106 vs $230
+  Apex_Chef vs iron_chef_bot... BLUE WINS $10106 vs $230
+  StrategicKitchen vs TrueUltimateChefBot... RED WINS $230 vs $228
+  StrategicKitchen vs UltimateChefBot... BLUE WINS $10106 vs $230
+  StrategicKitchen vs iron_chef_bot... BLUE WINS $10106 vs $230
+  TrueUltimateChefBot vs UltimateChefBot... BLUE WINS $10106 vs $228
+  TrueUltimateChefBot vs iron_chef_bot... BLUE WINS $10106 vs $228
+  UltimateChefBot vs iron_chef_bot... TIE $10106
+
+--- Map: map_compact.txt ---
+  planner_bot vs Apex_Chef... BLUE WINS $230 vs $228
+  planner_bot vs StrategicKitchen... BLUE WINS $230 vs $228
+  planner_bot vs TrueUltimateChefBot... TIE $228
+  planner_bot vs UltimateChefBot... BLUE WINS $10106 vs $228
+  planner_bot vs iron_chef_bot... BLUE WINS $10106 vs $228
+  Apex_Chef vs StrategicKitchen... TIE $230
+  Apex_Chef vs TrueUltimateChefBot... RED WINS $230 vs $228
+  Apex_Chef vs UltimateChefBot... BLUE WINS $10106 vs $230
+  Apex_Chef vs iron_chef_bot... BLUE WINS $10106 vs $230
+  StrategicKitchen vs TrueUltimateChefBot... RED WINS $230 vs $228
+  StrategicKitchen vs UltimateChefBot... BLUE WINS $10106 vs $230
+  StrategicKitchen vs iron_chef_bot... BLUE WINS $10106 vs $230
+  TrueUltimateChefBot vs UltimateChefBot... BLUE WINS $10106 vs $228
+  TrueUltimateChefBot vs iron_chef_bot... BLUE WINS $10106 vs $228
+  UltimateChefBot vs iron_chef_bot... TIE $10106
+
+--- Map: mega_warehouse.txt ---
+  planner_bot vs Apex_Chef... ERROR
+  planner_bot vs StrategicKitchen... RED WINS $150 vs $50
+  planner_bot vs TrueUltimateChefBot... RED WINS $150 vs $80
+  planner_bot vs UltimateChefBot... RED WINS $150 vs $78
+  planner_bot vs iron_chef_bot... RED WINS $150 vs $78
+  Apex_Chef vs StrategicKitchen... ERROR
+  Apex_Chef vs TrueUltimateChefBot... ERROR
+  Apex_Chef vs UltimateChefBot... ERROR
+  Apex_Chef vs iron_chef_bot... ERROR
+  StrategicKitchen vs TrueUltimateChefBot... BLUE WINS $80 vs $50
+  StrategicKitchen vs UltimateChefBot... BLUE WINS $78 vs $50
+  StrategicKitchen vs iron_chef_bot... BLUE WINS $78 vs $50
+  TrueUltimateChefBot vs UltimateChefBot... RED WINS $80 vs $78
+  TrueUltimateChefBot vs iron_chef_bot... RED WINS $80 vs $78
+  UltimateChefBot vs iron_chef_bot... TIE $78
+
+--- Map: mega_maze.txt ---
+  planner_bot vs Apex_Chef... ERROR
+  planner_bot vs StrategicKitchen... BLUE WINS $320 vs $220
+  planner_bot vs TrueUltimateChefBot... BLUE WINS $240 vs $220
+  planner_bot vs UltimateChefBot... BLUE WINS $238 vs $220
+  planner_bot vs iron_chef_bot... BLUE WINS $238 vs $220
+  Apex_Chef vs StrategicKitchen... ERROR
+  Apex_Chef vs TrueUltimateChefBot... ERROR
+  Apex_Chef vs UltimateChefBot... ERROR
+  Apex_Chef vs iron_chef_bot... ERROR
+  StrategicKitchen vs TrueUltimateChefBot... RED WINS $320 vs $240
+  StrategicKitchen vs UltimateChefBot... RED WINS $320 vs $238
+  StrategicKitchen vs iron_chef_bot... RED WINS $320 vs $238
+  TrueUltimateChefBot vs UltimateChefBot... RED WINS $240 vs $238
+  TrueUltimateChefBot vs iron_chef_bot... RED WINS $240 vs $238
+  UltimateChefBot vs iron_chef_bot... TIE $238
+
+============================================================
+FINAL STANDINGS
+============================================================
+Bot                     W    L    T    WR%     Total$
+--------------------------------------------------
+iron_chef_bot          27    6   13  58.7% $   157150
+UltimateChefBot        27    6   13  58.7% $   157148
+planner_bot            18   21    7  39.1% $     4652
+TrueUltimateChefBot    12   27    7  26.1% $     2652
+StrategicKitchen       12   27    7  26.1% $     2620
+Apex_Chef               7   16    7  23.3% $     -500
+
+============================================================
+WINNER: iron_chef_bot with 27 wins!
+============================================================

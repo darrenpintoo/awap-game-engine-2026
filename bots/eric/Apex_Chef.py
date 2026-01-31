@@ -124,7 +124,7 @@ class BotPlayer:
     # -------------------------------------------------------------------------
     def initialize(self, controller: RobotController):
         if self.initialized: return
-        m = controller.get_map()
+        m = controller.get_map(controller.get_team())
         
         # Parse Map
         for x in range(m.width):
@@ -172,7 +172,7 @@ class BotPlayer:
     # STATE ANALYSIS
     # -------------------------------------------------------------------------
     def update_state(self, controller: RobotController):
-        self.active_orders = [o for o in controller.get_orders() if o.get('is_active')]
+        self.active_orders = [o for o in controller.get_orders(controller.get_team()) if o.get('is_active')]
         
         self.cooking_info.clear()
         for kx, ky in self.cookers:
@@ -186,7 +186,7 @@ class BotPlayer:
 
         # Supply Audit
         self.global_supply.clear()
-        for bid in controller.get_team_bot_ids():
+        for bid in controller.get_team_bot_ids(controller.get_team()):
             h = controller.get_bot_state(bid).get('holding')
             if h and h.get('type') == 'Food':
                 self.global_supply[h['food_name']] += 1
@@ -202,7 +202,7 @@ class BotPlayer:
     # -------------------------------------------------------------------------
     def generate_jobs(self, controller) -> List[Job]:
         jobs = []
-        bots = controller.get_team_bot_ids()
+        bots = controller.get_team_bot_ids(controller.get_team())
         
         # 1. EMERGENCY (Save Burnt Food)
         for loc, info in self.cooking_info.items():
@@ -304,7 +304,7 @@ class BotPlayer:
     # HIVE MIND: TASK ASSIGNMENT
     # -------------------------------------------------------------------------
     def assign_tasks(self, controller, jobs):
-        bots = controller.get_team_bot_ids()
+        bots = controller.get_team_bot_ids(controller.get_team())
         if not bots or not jobs: return {}
         
         cost_matrix = np.full((len(bots), len(jobs)), float(COST_IMPOSSIBLE))

@@ -253,9 +253,12 @@ class OrderManager:
             if rem_time < 20: continue # Skip if expiring soon
             
             goal = Goal(order['order_id'], reqs, order['reward'], rem_time)
+            # Heuristic score: Reward / Time remaining
+            # Prioritize high reward, urgent orders
+            time_factor = max(1, goal.time_left)
+            goal.score = (goal.reward ** 2) / time_factor
             
-            # Simple heuristic: Reward / Items needed
-            goal.score = goal.reward / (len(reqs) * 50) 
+            
             self.active_goals.append(goal)
             
         self.active_goals.sort(key=lambda x: x.score, reverse=True)
@@ -322,11 +325,17 @@ class TaskAllocator:
                 # Valid if tile has item OR bot is holding the item to be chopped
                 if (not tile or not tile.item) and not held: valid = False
             elif task.type == TaskType.COOK:
-                # Valid if tile has pan OR bot is holding food to cook
+                # Valid if tile has pan AND pan is empty AND bot is holding food
                 if not tile or not isinstance(tile.item, Pan): valid = False
-                elif not tile.item.food and not held: valid = False
+                elif tile.item.food: valid = False # Pan is occupied
+                elif not held or held.get('type') != 'Food': valid = False # Must hold FOOD
             elif task.type == TaskType.PLATE:
-                if not tile or not isinstance(tile.item, Plate): valid = False
+                # If holding plate, we are plating FROM the world (target=Food)
+                if held and held.get('type') == 'Plate':
+                    if not tile or not isinstance(tile.item, (Ingredient, Food)): valid = False
+                # If holding food, we are plating ONTO a plate (target=Plate)
+                else: 
+                     if not tile or not isinstance(tile.item, Plate): valid = False
             elif task.type == TaskType.FETCH_COOKED:
                 if not tile or not isinstance(tile.item, Pan) or not tile.item.food: valid = False
             elif task.type == TaskType.DELIVER:
@@ -456,7 +465,12 @@ class TaskAllocator:
                                 if state == "RAW" and req.name not in ["NOODLES", "SAUCE"]: continue
                                 loc = find_item_loc(f"{req.name}({state})", (st['x'], st['y']))
                                 if loc:
-                                    plate_task = Task(TaskType.PLATE, loc, item=req)
+                                    # If restricted item (Cooked in Pan), we cannot plate it while holding plate.
+                                    # We must drop plate first. So ignore it here.
+                                    if loc in self.bp.cookers:
+                                         pass 
+                                    else:
+                                         plate_task = Task(TaskType.PLATE, loc, item=req)
                                     break
                             if plate_task: break
                         
@@ -501,10 +515,17 @@ class TaskAllocator:
                         available_bots.remove(bot_id)
                         continue
                     elif (held.state == ItemState.CHOPPED) or (held.name == "EGG" and held.state == ItemState.RAW):
-                        # COOK
+                        # COOK (Only for Meat/Egg)
                         cooker = self.find_free_cooker(controller)
                         if cooker:
-                            self.bp.bot_assignments[bot_id] = Task(TaskType.COOK, cooker, item=held)
+                            # Check if item allows start_cook (Meat/Egg)
+                            # Onions are not "start_cook" compatible in game_constants, so just Place them
+                            if held.name in ["MEAT", "EGG"]:
+                                self.bp.bot_assignments[bot_id] = Task(TaskType.COOK, cooker, item=held)
+                            else:
+                                # For Onions etc, just Place (MOVE_ITEM)
+                                self.bp.bot_assignments[bot_id] = Task(TaskType.MOVE_ITEM, cooker, item=held)
+                            
                             available_bots.remove(bot_id)
                             continue
 
@@ -527,8 +548,12 @@ class TaskAllocator:
                     for state, ttype in [("COOKED", TaskType.FETCH_COOKED), ("CHOPPED", TaskType.PICKUP), ("RAW", TaskType.CHOP)]:
                         loc = find_item_loc(f"{req.name}({state})", bot_pos)
                         if loc:
-                            self.bp.bot_assignments[bot_id] = Task(ttype, loc, item=req)
-                            log(f"Bot {bot_id} ASSIGNED {ttype} @ {loc}")
+                            # Robustness: FETCH_COOKED only for Cookers. PICKUP for everything else.
+                            final_type = ttype
+                            if state == "COOKED" and loc not in self.bp.cookers:
+                                final_type = TaskType.PICKUP
+                            
+                            self.bp.bot_assignments[bot_id] = Task(final_type, loc, item=req)
                             break
                     if bot_id in self.bp.bot_assignments: break
                     
@@ -664,6 +689,9 @@ class BotPlayer:
             elif task.type == TaskType.COOK:
                 success = controller.start_cook(bot_id, task.target_loc[0], task.target_loc[1])
                 if success: log(f"Bot {bot_id} STARTED COOKING")
+                else: 
+                     log(f"Bot {bot_id} FAILED action {task}, clearing task")
+                     self.bot_assignments[bot_id] = None
 
             elif task.type == TaskType.FETCH_COOKED:
                 success = controller.take_from_pan(bot_id, task.target_loc[0], task.target_loc[1])
