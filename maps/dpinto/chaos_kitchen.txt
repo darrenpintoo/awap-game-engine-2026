@@ -1,0 +1,62 @@
+########################################
+#b........C.C.C.C........C.C.C.C......b#
+#.........K.K.K.K........K.K.K.K.......#
+#.........S.S.S.S........S.S.S.S.......#
+#......................................#
+#.....$.............................$..#
+#......................................#
+#....U.................................#
+#....T.................................#
+#....R.................................#
+#....B.................................#
+#......................................#
+#......................................#
+#......................................#
+#......................................#
+#......................................#
+#......................................#
+#......................................#
+#......................................#
+#...........#############..............#
+#...........#...........#..............#
+#...........#...........#..............#
+#...........#...........#..............#
+#...........#...........#..............#
+#...........#############..............#
+#......................................#
+#......................................#
+#......................................#
+#......................................#
+#......................................#
+#......................................#
+#....B.................................#
+#....R.................................#
+#....T.................................#
+#....U.................................#
+#.....$.............................$..#
+#b........C.C.C.C........C.C.C.C......b#
+########################################
+
+SWITCH: turn=300 duration=150
+
+ORDERS:
+start=0   duration=40  required=NOODLES           reward=80   penalty=25
+start=0   duration=45  required=MEAT              reward=150  penalty=45
+start=5   duration=50  required=NOODLES,MEAT      reward=250  penalty=75
+start=10  duration=40  required=EGG               reward=90   penalty=30
+start=15  duration=45  required=ONIONS            reward=70   penalty=20
+start=20  duration=50  required=MEAT,ONIONS       reward=200  penalty=60
+start=25  duration=55  required=NOODLES,MEAT,EGG  reward=400  penalty=120
+start=60  duration=40  required=NOODLES,ONIONS    reward=180  penalty=55
+start=65  duration=45  required=MEAT,EGG          reward=280  penalty=85
+start=75  duration=40  required=EGG               reward=100  penalty=35
+start=80  duration=45  required=MEAT              reward=170  penalty=50
+start=120 duration=35  required=NOODLES,MEAT      reward=300  penalty=100
+start=140 duration=40  required=NOODLES,MEAT,EGG  reward=450  penalty=140
+start=150 duration=35  required=MEAT              reward=190  penalty=60
+start=200 duration=30  required=NOODLES           reward=120  penalty=45
+start=210 duration=35  required=NOODLES,MEAT      reward=350  penalty=110
+start=250 duration=40  required=NOODLES,MEAT,EGG  reward=500  penalty=160
+start=400 duration=25  required=NOODLES,MEAT      reward=400  penalty=130
+start=420 duration=30  required=NOODLES,MEAT,EGG  reward=550  penalty=180
+start=450 duration=30  required=NOODLES,MEAT      reward=480  penalty=150
