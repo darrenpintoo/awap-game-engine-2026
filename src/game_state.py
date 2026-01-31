@@ -36,6 +36,7 @@ class Order:
     penalty: int
     claimed_by: Optional[int] = None
     completed_turn: Optional[int] = None
+    penalized: bool = False 
 
     def is_expired(self, turn: int) -> bool:
         return turn > self.expires_turn
@@ -314,24 +315,21 @@ class GameState:
                     tile.using = False
 
     def expire_orders(self) -> None:
-        '''If an order expires without being completed then penalize that TEAM'''
+        '''
+        If an order expires without being completed then penalize that TEAM.
+        Keeps all orders in the history, only marks them as penalized.
+        '''
         for team in [Team.RED, Team.BLUE]:
-            still_active: List[Order] = []
-
+            
+            # We iterate through the existing list without creating a filtered copy
             for o in self.orders.get(team, []):
 
-                if o.completed_turn is not None:
-                    still_active.append(o)
-
-                elif o.is_expired(self.turn):
-                    #penalize if it has expiered
-                    self.add_team_money(team, -o.penalty)
-
-                else:
-                    still_active.append(o)
-
-            self.orders[team] = still_active
-
+                # Check if order is expired, not completed, and hasn't been penalized yet
+                if o.completed_turn is None and o.is_expired(self.turn):
+                    if not o.penalized:
+                        self.add_team_money(team, -o.penalty)
+                        o.penalized = True
+            
 
     # -------------
     # Orders
