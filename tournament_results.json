@@ -1,0 +1,1224 @@
+{
+  "bots": [
+    "planner_bot",
+    "Apex_Chef",
+    "StrategicKitchen",
+    "TrueUltimateChefBot",
+    "UltimateChefBot",
+    "iron_chef_bot"
+  ],
+  "maps": [
+    "map2.txt",
+    "map3_sprint.txt",
+    "map4_chaos.txt",
+    "map5_grind.txt",
+    "map6_overload.txt",
+    "map1.txt",
+    "map_challenge.txt",
+    "map_compact.txt",
+    "mega_warehouse.txt",
+    "mega_maze.txt"
+  ],
+  "matches": [
+    {
+      "map": "map2.txt",
+      "red": "planner_bot",
+      "blue": "Apex_Chef",
+      "red_score": 0,
+      "blue_score": 0,
+      "winner": "ERROR"
+    },
+    {
+      "map": "map2.txt",
+      "red": "planner_bot",
+      "blue": "StrategicKitchen",
+      "red_score": 278,
+      "blue_score": 200,
+      "winner": "RED"
+    },
+    {
+      "map": "map2.txt",
+      "red": "planner_bot",
+      "blue": "TrueUltimateChefBot",
+      "red_score": 278,
+      "blue_score": 118,
+      "winner": "RED"
+    },
+    {
+      "map": "map2.txt",
+      "red": "planner_bot",
+      "blue": "UltimateChefBot",
+      "red_score": 278,
+      "blue_score": 246,
+      "winner": "RED"
+    },
+    {
+      "map": "map2.txt",
+      "red": "planner_bot",
+      "blue": "iron_chef_bot",
+      "red_score": 278,
+      "blue_score": 246,
+      "winner": "RED"
+    },
+    {
+      "map": "map2.txt",
+      "red": "Apex_Chef",
+      "blue": "StrategicKitchen",
+      "red_score": 0,
+      "blue_score": 0,
+      "winner": "ERROR"
+    },
+    {
+      "map": "map2.txt",
+      "red": "Apex_Chef",
+      "blue": "TrueUltimateChefBot",
+      "red_score": 0,
+      "blue_score": 0,
+      "winner": "ERROR"
+    },
+    {
+      "map": "map2.txt",
+      "red": "Apex_Chef",
+      "blue": "UltimateChefBot",
+      "red_score": 0,
+      "blue_score": 0,
+      "winner": "ERROR"
+    },
+    {
+      "map": "map2.txt",
+      "red": "Apex_Chef",
+      "blue": "iron_chef_bot",
+      "red_score": 0,
+      "blue_score": 0,
+      "winner": "ERROR"
+    },
+    {
+      "map": "map2.txt",
+      "red": "StrategicKitchen",
+      "blue": "TrueUltimateChefBot",
+      "red_score": 200,
+      "blue_score": 118,
+      "winner": "RED"
+    },
+    {
+      "map": "map2.txt",
+      "red": "StrategicKitchen",
+      "blue": "UltimateChefBot",
+      "red_score": 200,
+      "blue_score": 246,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map2.txt",
+      "red": "StrategicKitchen",
+      "blue": "iron_chef_bot",
+      "red_score": 200,
+      "blue_score": 246,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map2.txt",
+      "red": "TrueUltimateChefBot",
+      "blue": "UltimateChefBot",
+      "red_score": 118,
+      "blue_score": 246,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map2.txt",
+      "red": "TrueUltimateChefBot",
+      "blue": "iron_chef_bot",
+      "red_score": 118,
+      "blue_score": 246,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map2.txt",
+      "red": "UltimateChefBot",
+      "blue": "iron_chef_bot",
+      "red_score": 246,
+      "blue_score": 246,
+      "winner": "TIE"
+    },
+    {
+      "map": "map3_sprint.txt",
+      "red": "planner_bot",
+      "blue": "Apex_Chef",
+      "red_score": 0,
+      "blue_score": 0,
+      "winner": "ERROR"
+    },
+    {
+      "map": "map3_sprint.txt",
+      "red": "planner_bot",
+      "blue": "StrategicKitchen",
+      "red_score": 250,
+      "blue_score": 210,
+      "winner": "RED"
+    },
+    {
+      "map": "map3_sprint.txt",
+      "red": "planner_bot",
+      "blue": "TrueUltimateChefBot",
+      "red_score": 250,
+      "blue_score": 250,
+      "winner": "TIE"
+    },
+    {
+      "map": "map3_sprint.txt",
+      "red": "planner_bot",
+      "blue": "UltimateChefBot",
+      "red_score": 250,
+      "blue_score": 250,
+      "winner": "TIE"
+    },
+    {
+      "map": "map3_sprint.txt",
+      "red": "planner_bot",
+      "blue": "iron_chef_bot",
+      "red_score": 250,
+      "blue_score": 250,
+      "winner": "TIE"
+    },
+    {
+      "map": "map3_sprint.txt",
+      "red": "Apex_Chef",
+      "blue": "StrategicKitchen",
+      "red_score": 0,
+      "blue_score": 0,
+      "winner": "ERROR"
+    },
+    {
+      "map": "map3_sprint.txt",
+      "red": "Apex_Chef",
+      "blue": "TrueUltimateChefBot",
+      "red_score": 0,
+      "blue_score": 0,
+      "winner": "ERROR"
+    },
+    {
+      "map": "map3_sprint.txt",
+      "red": "Apex_Chef",
+      "blue": "UltimateChefBot",
+      "red_score": 0,
+      "blue_score": 0,
+      "winner": "ERROR"
+    },
+    {
+      "map": "map3_sprint.txt",
+      "red": "Apex_Chef",
+      "blue": "iron_chef_bot",
+      "red_score": 0,
+      "blue_score": 0,
+      "winner": "ERROR"
+    },
+    {
+      "map": "map3_sprint.txt",
+      "red": "StrategicKitchen",
+      "blue": "TrueUltimateChefBot",
+      "red_score": 210,
+      "blue_score": 250,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map3_sprint.txt",
+      "red": "StrategicKitchen",
+      "blue": "UltimateChefBot",
+      "red_score": 210,
+      "blue_score": 250,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map3_sprint.txt",
+      "red": "StrategicKitchen",
+      "blue": "iron_chef_bot",
+      "red_score": 210,
+      "blue_score": 250,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map3_sprint.txt",
+      "red": "TrueUltimateChefBot",
+      "blue": "UltimateChefBot",
+      "red_score": 250,
+      "blue_score": 250,
+      "winner": "TIE"
+    },
+    {
+      "map": "map3_sprint.txt",
+      "red": "TrueUltimateChefBot",
+      "blue": "iron_chef_bot",
+      "red_score": 250,
+      "blue_score": 250,
+      "winner": "TIE"
+    },
+    {
+      "map": "map3_sprint.txt",
+      "red": "UltimateChefBot",
+      "blue": "iron_chef_bot",
+      "red_score": 250,
+      "blue_score": 250,
+      "winner": "TIE"
+    },
+    {
+      "map": "map4_chaos.txt",
+      "red": "planner_bot",
+      "blue": "Apex_Chef",
+      "red_score": 40,
+      "blue_score": -80,
+      "winner": "RED"
+    },
+    {
+      "map": "map4_chaos.txt",
+      "red": "planner_bot",
+      "blue": "StrategicKitchen",
+      "red_score": 40,
+      "blue_score": -80,
+      "winner": "RED"
+    },
+    {
+      "map": "map4_chaos.txt",
+      "red": "planner_bot",
+      "blue": "TrueUltimateChefBot",
+      "red_score": 40,
+      "blue_score": -32,
+      "winner": "RED"
+    },
+    {
+      "map": "map4_chaos.txt",
+      "red": "planner_bot",
+      "blue": "UltimateChefBot",
+      "red_score": 40,
+      "blue_score": -32,
+      "winner": "RED"
+    },
+    {
+      "map": "map4_chaos.txt",
+      "red": "planner_bot",
+      "blue": "iron_chef_bot",
+      "red_score": 40,
+      "blue_score": -32,
+      "winner": "RED"
+    },
+    {
+      "map": "map4_chaos.txt",
+      "red": "Apex_Chef",
+      "blue": "StrategicKitchen",
+      "red_score": -80,
+      "blue_score": -80,
+      "winner": "TIE"
+    },
+    {
+      "map": "map4_chaos.txt",
+      "red": "Apex_Chef",
+      "blue": "TrueUltimateChefBot",
+      "red_score": -80,
+      "blue_score": -32,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map4_chaos.txt",
+      "red": "Apex_Chef",
+      "blue": "UltimateChefBot",
+      "red_score": -80,
+      "blue_score": -32,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map4_chaos.txt",
+      "red": "Apex_Chef",
+      "blue": "iron_chef_bot",
+      "red_score": -80,
+      "blue_score": -32,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map4_chaos.txt",
+      "red": "StrategicKitchen",
+      "blue": "TrueUltimateChefBot",
+      "red_score": -80,
+      "blue_score": -32,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map4_chaos.txt",
+      "red": "StrategicKitchen",
+      "blue": "UltimateChefBot",
+      "red_score": -80,
+      "blue_score": -32,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map4_chaos.txt",
+      "red": "StrategicKitchen",
+      "blue": "iron_chef_bot",
+      "red_score": -80,
+      "blue_score": -32,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map4_chaos.txt",
+      "red": "TrueUltimateChefBot",
+      "blue": "UltimateChefBot",
+      "red_score": -32,
+      "blue_score": -32,
+      "winner": "TIE"
+    },
+    {
+      "map": "map4_chaos.txt",
+      "red": "TrueUltimateChefBot",
+      "blue": "iron_chef_bot",
+      "red_score": -32,
+      "blue_score": -32,
+      "winner": "TIE"
+    },
+    {
+      "map": "map4_chaos.txt",
+      "red": "UltimateChefBot",
+      "blue": "iron_chef_bot",
+      "red_score": -32,
+      "blue_score": -32,
+      "winner": "TIE"
+    },
+    {
+      "map": "map5_grind.txt",
+      "red": "planner_bot",
+      "blue": "Apex_Chef",
+      "red_score": 78,
+      "blue_score": 80,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map5_grind.txt",
+      "red": "planner_bot",
+      "blue": "StrategicKitchen",
+      "red_score": 78,
+      "blue_score": 80,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map5_grind.txt",
+      "red": "planner_bot",
+      "blue": "TrueUltimateChefBot",
+      "red_score": 78,
+      "blue_score": 78,
+      "winner": "TIE"
+    },
+    {
+      "map": "map5_grind.txt",
+      "red": "planner_bot",
+      "blue": "UltimateChefBot",
+      "red_score": 78,
+      "blue_score": 762,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map5_grind.txt",
+      "red": "planner_bot",
+      "blue": "iron_chef_bot",
+      "red_score": 78,
+      "blue_score": 762,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map5_grind.txt",
+      "red": "Apex_Chef",
+      "blue": "StrategicKitchen",
+      "red_score": 80,
+      "blue_score": 80,
+      "winner": "TIE"
+    },
+    {
+      "map": "map5_grind.txt",
+      "red": "Apex_Chef",
+      "blue": "TrueUltimateChefBot",
+      "red_score": 80,
+      "blue_score": 78,
+      "winner": "RED"
+    },
+    {
+      "map": "map5_grind.txt",
+      "red": "Apex_Chef",
+      "blue": "UltimateChefBot",
+      "red_score": 80,
+      "blue_score": 762,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map5_grind.txt",
+      "red": "Apex_Chef",
+      "blue": "iron_chef_bot",
+      "red_score": 80,
+      "blue_score": 762,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map5_grind.txt",
+      "red": "StrategicKitchen",
+      "blue": "TrueUltimateChefBot",
+      "red_score": 80,
+      "blue_score": 78,
+      "winner": "RED"
+    },
+    {
+      "map": "map5_grind.txt",
+      "red": "StrategicKitchen",
+      "blue": "UltimateChefBot",
+      "red_score": 80,
+      "blue_score": 762,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map5_grind.txt",
+      "red": "StrategicKitchen",
+      "blue": "iron_chef_bot",
+      "red_score": 80,
+      "blue_score": 762,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map5_grind.txt",
+      "red": "TrueUltimateChefBot",
+      "blue": "UltimateChefBot",
+      "red_score": 78,
+      "blue_score": 762,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map5_grind.txt",
+      "red": "TrueUltimateChefBot",
+      "blue": "iron_chef_bot",
+      "red_score": 78,
+      "blue_score": 762,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map5_grind.txt",
+      "red": "UltimateChefBot",
+      "blue": "iron_chef_bot",
+      "red_score": 762,
+      "blue_score": 762,
+      "winner": "TIE"
+    },
+    {
+      "map": "map6_overload.txt",
+      "red": "planner_bot",
+      "blue": "Apex_Chef",
+      "red_score": -592,
+      "blue_score": -790,
+      "winner": "RED"
+    },
+    {
+      "map": "map6_overload.txt",
+      "red": "planner_bot",
+      "blue": "StrategicKitchen",
+      "red_score": -592,
+      "blue_score": -790,
+      "winner": "RED"
+    },
+    {
+      "map": "map6_overload.txt",
+      "red": "planner_bot",
+      "blue": "TrueUltimateChefBot",
+      "red_score": -592,
+      "blue_score": -792,
+      "winner": "RED"
+    },
+    {
+      "map": "map6_overload.txt",
+      "red": "planner_bot",
+      "blue": "UltimateChefBot",
+      "red_score": -592,
+      "blue_score": -268,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map6_overload.txt",
+      "red": "planner_bot",
+      "blue": "iron_chef_bot",
+      "red_score": -592,
+      "blue_score": -266,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map6_overload.txt",
+      "red": "Apex_Chef",
+      "blue": "StrategicKitchen",
+      "red_score": -790,
+      "blue_score": -790,
+      "winner": "TIE"
+    },
+    {
+      "map": "map6_overload.txt",
+      "red": "Apex_Chef",
+      "blue": "TrueUltimateChefBot",
+      "red_score": -790,
+      "blue_score": -792,
+      "winner": "RED"
+    },
+    {
+      "map": "map6_overload.txt",
+      "red": "Apex_Chef",
+      "blue": "UltimateChefBot",
+      "red_score": -790,
+      "blue_score": -268,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map6_overload.txt",
+      "red": "Apex_Chef",
+      "blue": "iron_chef_bot",
+      "red_score": -790,
+      "blue_score": -268,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map6_overload.txt",
+      "red": "StrategicKitchen",
+      "blue": "TrueUltimateChefBot",
+      "red_score": -790,
+      "blue_score": -792,
+      "winner": "RED"
+    },
+    {
+      "map": "map6_overload.txt",
+      "red": "StrategicKitchen",
+      "blue": "UltimateChefBot",
+      "red_score": -790,
+      "blue_score": -268,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map6_overload.txt",
+      "red": "StrategicKitchen",
+      "blue": "iron_chef_bot",
+      "red_score": -790,
+      "blue_score": -268,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map6_overload.txt",
+      "red": "TrueUltimateChefBot",
+      "blue": "UltimateChefBot",
+      "red_score": -792,
+      "blue_score": -268,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map6_overload.txt",
+      "red": "TrueUltimateChefBot",
+      "blue": "iron_chef_bot",
+      "red_score": -792,
+      "blue_score": -268,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map6_overload.txt",
+      "red": "UltimateChefBot",
+      "blue": "iron_chef_bot",
+      "red_score": -268,
+      "blue_score": -268,
+      "winner": "TIE"
+    },
+    {
+      "map": "map1.txt",
+      "red": "planner_bot",
+      "blue": "Apex_Chef",
+      "red_score": 228,
+      "blue_score": 230,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map1.txt",
+      "red": "planner_bot",
+      "blue": "StrategicKitchen",
+      "red_score": 228,
+      "blue_score": 230,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map1.txt",
+      "red": "planner_bot",
+      "blue": "TrueUltimateChefBot",
+      "red_score": 228,
+      "blue_score": 270,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map1.txt",
+      "red": "planner_bot",
+      "blue": "UltimateChefBot",
+      "red_score": 228,
+      "blue_score": 10106,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map1.txt",
+      "red": "planner_bot",
+      "blue": "iron_chef_bot",
+      "red_score": 228,
+      "blue_score": 10106,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map1.txt",
+      "red": "Apex_Chef",
+      "blue": "StrategicKitchen",
+      "red_score": 230,
+      "blue_score": 230,
+      "winner": "TIE"
+    },
+    {
+      "map": "map1.txt",
+      "red": "Apex_Chef",
+      "blue": "TrueUltimateChefBot",
+      "red_score": 230,
+      "blue_score": 270,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map1.txt",
+      "red": "Apex_Chef",
+      "blue": "UltimateChefBot",
+      "red_score": 230,
+      "blue_score": 10106,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map1.txt",
+      "red": "Apex_Chef",
+      "blue": "iron_chef_bot",
+      "red_score": 230,
+      "blue_score": 10106,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map1.txt",
+      "red": "StrategicKitchen",
+      "blue": "TrueUltimateChefBot",
+      "red_score": 230,
+      "blue_score": 270,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map1.txt",
+      "red": "StrategicKitchen",
+      "blue": "UltimateChefBot",
+      "red_score": 230,
+      "blue_score": 10106,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map1.txt",
+      "red": "StrategicKitchen",
+      "blue": "iron_chef_bot",
+      "red_score": 230,
+      "blue_score": 10106,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map1.txt",
+      "red": "TrueUltimateChefBot",
+      "blue": "UltimateChefBot",
+      "red_score": 270,
+      "blue_score": 10106,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map1.txt",
+      "red": "TrueUltimateChefBot",
+      "blue": "iron_chef_bot",
+      "red_score": 270,
+      "blue_score": 10106,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map1.txt",
+      "red": "UltimateChefBot",
+      "blue": "iron_chef_bot",
+      "red_score": 10106,
+      "blue_score": 10106,
+      "winner": "TIE"
+    },
+    {
+      "map": "map_challenge.txt",
+      "red": "planner_bot",
+      "blue": "Apex_Chef",
+      "red_score": 230,
+      "blue_score": 230,
+      "winner": "TIE"
+    },
+    {
+      "map": "map_challenge.txt",
+      "red": "planner_bot",
+      "blue": "StrategicKitchen",
+      "red_score": 230,
+      "blue_score": 230,
+      "winner": "TIE"
+    },
+    {
+      "map": "map_challenge.txt",
+      "red": "planner_bot",
+      "blue": "TrueUltimateChefBot",
+      "red_score": 230,
+      "blue_score": 228,
+      "winner": "RED"
+    },
+    {
+      "map": "map_challenge.txt",
+      "red": "planner_bot",
+      "blue": "UltimateChefBot",
+      "red_score": 230,
+      "blue_score": 10106,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map_challenge.txt",
+      "red": "planner_bot",
+      "blue": "iron_chef_bot",
+      "red_score": 230,
+      "blue_score": 10106,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map_challenge.txt",
+      "red": "Apex_Chef",
+      "blue": "StrategicKitchen",
+      "red_score": 230,
+      "blue_score": 230,
+      "winner": "TIE"
+    },
+    {
+      "map": "map_challenge.txt",
+      "red": "Apex_Chef",
+      "blue": "TrueUltimateChefBot",
+      "red_score": 230,
+      "blue_score": 228,
+      "winner": "RED"
+    },
+    {
+      "map": "map_challenge.txt",
+      "red": "Apex_Chef",
+      "blue": "UltimateChefBot",
+      "red_score": 230,
+      "blue_score": 10106,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map_challenge.txt",
+      "red": "Apex_Chef",
+      "blue": "iron_chef_bot",
+      "red_score": 230,
+      "blue_score": 10106,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map_challenge.txt",
+      "red": "StrategicKitchen",
+      "blue": "TrueUltimateChefBot",
+      "red_score": 230,
+      "blue_score": 228,
+      "winner": "RED"
+    },
+    {
+      "map": "map_challenge.txt",
+      "red": "StrategicKitchen",
+      "blue": "UltimateChefBot",
+      "red_score": 230,
+      "blue_score": 10106,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map_challenge.txt",
+      "red": "StrategicKitchen",
+      "blue": "iron_chef_bot",
+      "red_score": 230,
+      "blue_score": 10106,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map_challenge.txt",
+      "red": "TrueUltimateChefBot",
+      "blue": "UltimateChefBot",
+      "red_score": 228,
+      "blue_score": 10106,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map_challenge.txt",
+      "red": "TrueUltimateChefBot",
+      "blue": "iron_chef_bot",
+      "red_score": 228,
+      "blue_score": 10106,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map_challenge.txt",
+      "red": "UltimateChefBot",
+      "blue": "iron_chef_bot",
+      "red_score": 10106,
+      "blue_score": 10106,
+      "winner": "TIE"
+    },
+    {
+      "map": "map_compact.txt",
+      "red": "planner_bot",
+      "blue": "Apex_Chef",
+      "red_score": 228,
+      "blue_score": 230,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map_compact.txt",
+      "red": "planner_bot",
+      "blue": "StrategicKitchen",
+      "red_score": 228,
+      "blue_score": 230,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map_compact.txt",
+      "red": "planner_bot",
+      "blue": "TrueUltimateChefBot",
+      "red_score": 228,
+      "blue_score": 228,
+      "winner": "TIE"
+    },
+    {
+      "map": "map_compact.txt",
+      "red": "planner_bot",
+      "blue": "UltimateChefBot",
+      "red_score": 228,
+      "blue_score": 10106,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map_compact.txt",
+      "red": "planner_bot",
+      "blue": "iron_chef_bot",
+      "red_score": 228,
+      "blue_score": 10106,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map_compact.txt",
+      "red": "Apex_Chef",
+      "blue": "StrategicKitchen",
+      "red_score": 230,
+      "blue_score": 230,
+      "winner": "TIE"
+    },
+    {
+      "map": "map_compact.txt",
+      "red": "Apex_Chef",
+      "blue": "TrueUltimateChefBot",
+      "red_score": 230,
+      "blue_score": 228,
+      "winner": "RED"
+    },
+    {
+      "map": "map_compact.txt",
+      "red": "Apex_Chef",
+      "blue": "UltimateChefBot",
+      "red_score": 230,
+      "blue_score": 10106,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map_compact.txt",
+      "red": "Apex_Chef",
+      "blue": "iron_chef_bot",
+      "red_score": 230,
+      "blue_score": 10106,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map_compact.txt",
+      "red": "StrategicKitchen",
+      "blue": "TrueUltimateChefBot",
+      "red_score": 230,
+      "blue_score": 228,
+      "winner": "RED"
+    },
+    {
+      "map": "map_compact.txt",
+      "red": "StrategicKitchen",
+      "blue": "UltimateChefBot",
+      "red_score": 230,
+      "blue_score": 10106,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map_compact.txt",
+      "red": "StrategicKitchen",
+      "blue": "iron_chef_bot",
+      "red_score": 230,
+      "blue_score": 10106,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map_compact.txt",
+      "red": "TrueUltimateChefBot",
+      "blue": "UltimateChefBot",
+      "red_score": 228,
+      "blue_score": 10106,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map_compact.txt",
+      "red": "TrueUltimateChefBot",
+      "blue": "iron_chef_bot",
+      "red_score": 228,
+      "blue_score": 10106,
+      "winner": "BLUE"
+    },
+    {
+      "map": "map_compact.txt",
+      "red": "UltimateChefBot",
+      "blue": "iron_chef_bot",
+      "red_score": 10106,
+      "blue_score": 10106,
+      "winner": "TIE"
+    },
+    {
+      "map": "mega_warehouse.txt",
+      "red": "planner_bot",
+      "blue": "Apex_Chef",
+      "red_score": 0,
+      "blue_score": 0,
+      "winner": "ERROR"
+    },
+    {
+      "map": "mega_warehouse.txt",
+      "red": "planner_bot",
+      "blue": "StrategicKitchen",
+      "red_score": 150,
+      "blue_score": 50,
+      "winner": "RED"
+    },
+    {
+      "map": "mega_warehouse.txt",
+      "red": "planner_bot",
+      "blue": "TrueUltimateChefBot",
+      "red_score": 150,
+      "blue_score": 80,
+      "winner": "RED"
+    },
+    {
+      "map": "mega_warehouse.txt",
+      "red": "planner_bot",
+      "blue": "UltimateChefBot",
+      "red_score": 150,
+      "blue_score": 78,
+      "winner": "RED"
+    },
+    {
+      "map": "mega_warehouse.txt",
+      "red": "planner_bot",
+      "blue": "iron_chef_bot",
+      "red_score": 150,
+      "blue_score": 78,
+      "winner": "RED"
+    },
+    {
+      "map": "mega_warehouse.txt",
+      "red": "Apex_Chef",
+      "blue": "StrategicKitchen",
+      "red_score": 0,
+      "blue_score": 0,
+      "winner": "ERROR"
+    },
+    {
+      "map": "mega_warehouse.txt",
+      "red": "Apex_Chef",
+      "blue": "TrueUltimateChefBot",
+      "red_score": 0,
+      "blue_score": 0,
+      "winner": "ERROR"
+    },
+    {
+      "map": "mega_warehouse.txt",
+      "red": "Apex_Chef",
+      "blue": "UltimateChefBot",
+      "red_score": 0,
+      "blue_score": 0,
+      "winner": "ERROR"
+    },
+    {
+      "map": "mega_warehouse.txt",
+      "red": "Apex_Chef",
+      "blue": "iron_chef_bot",
+      "red_score": 0,
+      "blue_score": 0,
+      "winner": "ERROR"
+    },
+    {
+      "map": "mega_warehouse.txt",
+      "red": "StrategicKitchen",
+      "blue": "TrueUltimateChefBot",
+      "red_score": 50,
+      "blue_score": 80,
+      "winner": "BLUE"
+    },
+    {
+      "map": "mega_warehouse.txt",
+      "red": "StrategicKitchen",
+      "blue": "UltimateChefBot",
+      "red_score": 50,
+      "blue_score": 78,
+      "winner": "BLUE"
+    },
+    {
+      "map": "mega_warehouse.txt",
+      "red": "StrategicKitchen",
+      "blue": "iron_chef_bot",
+      "red_score": 50,
+      "blue_score": 78,
+      "winner": "BLUE"
+    },
+    {
+      "map": "mega_warehouse.txt",
+      "red": "TrueUltimateChefBot",
+      "blue": "UltimateChefBot",
+      "red_score": 80,
+      "blue_score": 78,
+      "winner": "RED"
+    },
+    {
+      "map": "mega_warehouse.txt",
+      "red": "TrueUltimateChefBot",
+      "blue": "iron_chef_bot",
+      "red_score": 80,
+      "blue_score": 78,
+      "winner": "RED"
+    },
+    {
+      "map": "mega_warehouse.txt",
+      "red": "UltimateChefBot",
+      "blue": "iron_chef_bot",
+      "red_score": 78,
+      "blue_score": 78,
+      "winner": "TIE"
+    },
+    {
+      "map": "mega_maze.txt",
+      "red": "planner_bot",
+      "blue": "Apex_Chef",
+      "red_score": 0,
+      "blue_score": 0,
+      "winner": "ERROR"
+    },
+    {
+      "map": "mega_maze.txt",
+      "red": "planner_bot",
+      "blue": "StrategicKitchen",
+      "red_score": 220,
+      "blue_score": 320,
+      "winner": "BLUE"
+    },
+    {
+      "map": "mega_maze.txt",
+      "red": "planner_bot",
+      "blue": "TrueUltimateChefBot",
+      "red_score": 220,
+      "blue_score": 240,
+      "winner": "BLUE"
+    },
+    {
+      "map": "mega_maze.txt",
+      "red": "planner_bot",
+      "blue": "UltimateChefBot",
+      "red_score": 220,
+      "blue_score": 238,
+      "winner": "BLUE"
+    },
+    {
+      "map": "mega_maze.txt",
+      "red": "planner_bot",
+      "blue": "iron_chef_bot",
+      "red_score": 220,
+      "blue_score": 238,
+      "winner": "BLUE"
+    },
+    {
+      "map": "mega_maze.txt",
+      "red": "Apex_Chef",
+      "blue": "StrategicKitchen",
+      "red_score": 0,
+      "blue_score": 0,
+      "winner": "ERROR"
+    },
+    {
+      "map": "mega_maze.txt",
+      "red": "Apex_Chef",
+      "blue": "TrueUltimateChefBot",
+      "red_score": 0,
+      "blue_score": 0,
+      "winner": "ERROR"
+    },
+    {
+      "map": "mega_maze.txt",
+      "red": "Apex_Chef",
+      "blue": "UltimateChefBot",
+      "red_score": 0,
+      "blue_score": 0,
+      "winner": "ERROR"
+    },
+    {
+      "map": "mega_maze.txt",
+      "red": "Apex_Chef",
+      "blue": "iron_chef_bot",
+      "red_score": 0,
+      "blue_score": 0,
+      "winner": "ERROR"
+    },
+    {
+      "map": "mega_maze.txt",
+      "red": "StrategicKitchen",
+      "blue": "TrueUltimateChefBot",
+      "red_score": 320,
+      "blue_score": 240,
+      "winner": "RED"
+    },
+    {
+      "map": "mega_maze.txt",
+      "red": "StrategicKitchen",
+      "blue": "UltimateChefBot",
+      "red_score": 320,
+      "blue_score": 238,
+      "winner": "RED"
+    },
+    {
+      "map": "mega_maze.txt",
+      "red": "StrategicKitchen",
+      "blue": "iron_chef_bot",
+      "red_score": 320,
+      "blue_score": 238,
+      "winner": "RED"
+    },
+    {
+      "map": "mega_maze.txt",
+      "red": "TrueUltimateChefBot",
+      "blue": "UltimateChefBot",
+      "red_score": 240,
+      "blue_score": 238,
+      "winner": "RED"
+    },
+    {
+      "map": "mega_maze.txt",
+      "red": "TrueUltimateChefBot",
+      "blue": "iron_chef_bot",
+      "red_score": 240,
+      "blue_score": 238,
+      "winner": "RED"
+    },
+    {
+      "map": "mega_maze.txt",
+      "red": "UltimateChefBot",
+      "blue": "iron_chef_bot",
+      "red_score": 238,
+      "blue_score": 238,
+      "winner": "TIE"
+    }
+  ]
+}
