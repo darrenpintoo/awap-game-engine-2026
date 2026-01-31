@@ -45,7 +45,7 @@ class Pathfinding:
     def get_path(controller: RobotController, start: Tuple[int, int], 
                  target: Tuple[int, int], stop_dist: int,
                  avoid: Set[Tuple[int, int]]) -> Optional[List[Tuple[int, int]]]:
-        m = controller.get_map()
+        m = controller.get_map(controller.get_team())
         w, h = m.width, m.height
         
         start_h = Pathfinding.dist(start, target)
@@ -110,7 +110,7 @@ class BotPlayer:
         self.state = 0
     
     def _init(self, controller: RobotController):
-        m = controller.get_map()
+        m = controller.get_map(controller.get_team())
         for x in range(m.width):
             for y in range(m.height):
                 tile = m.tiles[x][y]
@@ -138,7 +138,7 @@ class BotPlayer:
     
     def get_avoid_set(self, controller, exclude_bot_id):
         avoid = set()
-        for bid in controller.get_team_bot_ids():
+        for bid in controller.get_team_bot_ids(controller.get_team()):
             if bid != exclude_bot_id:
                 st = controller.get_bot_state(bid)
                 if st:
@@ -170,7 +170,7 @@ class BotPlayer:
         return False
     
     def find_nearest_tile(self, controller, bx, by, tile_name):
-        m = controller.get_map()
+        m = controller.get_map(controller.get_team())
         best_dist = float('inf')
         best_pos = None
         for x in range(m.width):
@@ -186,7 +186,7 @@ class BotPlayer:
         if not self.initialized:
             self._init(controller)
         
-        my_bots = controller.get_team_bot_ids()
+        my_bots = controller.get_team_bot_ids(controller.get_team())
         if not my_bots:
             return
         
@@ -250,7 +250,7 @@ class BotPlayer:
                 shop = self.find_nearest_tile(controller, bx, by, "SHOP")
                 if shop:
                     if self.move_towards(controller, bot_id, shop):
-                        if controller.get_team_money() >= ShopCosts.PAN.buy_cost:
+                        if controller.get_team_money(team) >= ShopCosts.PAN.buy_cost:
                             controller.buy(bot_id, ShopCosts.PAN, shop[0], shop[1])
         
         # State 2: Buy meat
@@ -258,7 +258,7 @@ class BotPlayer:
             shop = self.find_nearest_tile(controller, bx, by, "SHOP")
             if shop:
                 if self.move_towards(controller, bot_id, shop):
-                    if controller.get_team_money() >= FoodType.MEAT.buy_cost:
+                    if controller.get_team_money(team) >= FoodType.MEAT.buy_cost:
                         if controller.buy(bot_id, FoodType.MEAT, shop[0], shop[1]):
                             self.state = 3
         
@@ -295,7 +295,7 @@ class BotPlayer:
             shop = self.find_nearest_tile(controller, bx, by, "SHOP")
             if shop:
                 if self.move_towards(controller, bot_id, shop):
-                    if controller.get_team_money() >= ShopCosts.PLATE.buy_cost:
+                    if controller.get_team_money(team) >= ShopCosts.PLATE.buy_cost:
                         if controller.buy(bot_id, ShopCosts.PLATE, shop[0], shop[1]):
                             self.state = 9
         
@@ -310,7 +310,7 @@ class BotPlayer:
             shop = self.find_nearest_tile(controller, bx, by, "SHOP")
             if shop:
                 if self.move_towards(controller, bot_id, shop):
-                    if controller.get_team_money() >= FoodType.NOODLES.buy_cost:
+                    if controller.get_team_money(team) >= FoodType.NOODLES.buy_cost:
                         if controller.buy(bot_id, FoodType.NOODLES, shop[0], shop[1]):
                             self.state = 11
         

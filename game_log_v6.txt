@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/Users/darrenpinto/Documents/Hackathons/AWAP2026/awap-game-engine-2026-public/src/game.py", line 160, in call_player
+    player.play_turn(controller)
+  File "bots/dpinto/planner_bot.py", line 886, in play_turn
+    self.allocator.assign_tasks(controller, bots)
+  File "bots/dpinto/planner_bot.py", line 719, in assign_tasks
+    shop = self.bp.shops[0]
+KeyError: 0
+[INIT] Map parsed: 49 walkable, 1 cookers, 1 shops
+[PlannerBot] Init complete: 1 counters, 1 cookers
+[TURN RUNNER] RED crashed: 0
+[GAME] RED failed, BLUE wins

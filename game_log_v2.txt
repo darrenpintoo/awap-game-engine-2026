@@ -1,0 +1,88 @@
+Traceback (most recent call last):
+  File "/Users/darrenpinto/Documents/Hackathons/AWAP2026/awap-game-engine-2026-public/src/game.py", line 160, in call_player
+    player.play_turn(controller)
+  File "bots/dpinto/planner_bot.py", line 842, in play_turn
+    self.allocator.assign_tasks(controller, bots)
+  File "bots/dpinto/planner_bot.py", line 455, in assign_tasks
+    if check_holding(bid) == "PLATE":
+  File "bots/dpinto/planner_bot.py", line 46, in __eq__
+    return self.name == other.name and self.state == other.state
+AttributeError: 'str' object has no attribute 'name'
+[INIT] Map parsed: 49 walkable, 1 cookers, 1 shops
+[PlannerBot] Init complete: 1 counters, 1 cookers
+[PlannerBot] Bot 0 BUYING raw MEAT
+[PlannerBot] Bot 1 BUYING raw NOODLES
+[PlannerBot] Bot 1 BOUGHT NOODLES
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 BOUGHT MEAT
+[PlannerBot] Bot 0 has RAW MEAT, task: CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 PLACED for CHOP
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 CHOPPED
+[PlannerBot] Bot 0 PICKING UP chopped MEAT to cook
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 PICKED UP item
+[PlannerBot] Bot 0 has CHOPPED MEAT, task: COOK
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 STARTED COOKING
+[PlannerBot] Bot 0 BUYING PLATE (all ingredients ready)
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 BOUGHT PLATE
+[RC for BLUE WARN]: move() failed: illegal move bot 2 from (9,3) by (-1,-1)
+[PlannerBot] Bot 0 holding PLATE, task: PLACE on assembly
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 PLACED PLATE
+[PlannerBot] Bot 1 has RAW NOODLES, task: PLATE directly
+[PlannerBot] Bot 1 PLATED FOOD
+[PlannerBot] Bot 0 FETCHING cooked MEAT
+[PlannerBot] Bot 1 FETCHING cooked MEAT
+[PlannerBot] Bot 1 TOOK FROM PAN
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.FETCH_COOKED
+[PlannerBot] Bot 1 has COOKED MEAT, task: PLATE
+[PlannerBot] Bot 1 PLATED FOOD
+[PlannerBot] Bot 0 FETCHING full plate for delivery
+[PlannerBot] Bot 1 FETCHING full plate for delivery
+[PlannerBot] Bot 1 PICKED UP item
+[PlannerBot] Bot 0 CLEARING INVALID task TaskType.PICKUP
+[PlannerBot] Bot 1 holding PLATE, task: PLACE on assembly
+[PlannerBot] Bot 1 PLACED PLATE
+[PlannerBot] Bot 0 FETCHING full plate for delivery
+[PlannerBot] Bot 1 FETCHING full plate for delivery
+[PlannerBot] Bot 0 PICKED UP item
+[PlannerBot] Bot 1 CLEARING INVALID task TaskType.PICKUP
+[PlannerBot] Bot 0 holding PLATE, task: PLACE on assembly
+[PlannerBot] Bot 0 PLACED PLATE
+[PlannerBot] Bot 0 FETCHING full plate for delivery
+[PlannerBot] Bot 0 PICKED UP item
+[PlannerBot] Bot 0 holding PLATE, task: PLACE on assembly
+[PlannerBot] Bot 1 CAN'T AFFORD MEAT
+[PlannerBot] Bot 1 BUYING raw NOODLES
+[PlannerBot] Bot 0 PLACED PLATE
+[PlannerBot] Bot 0 FETCHING full plate for delivery
+[PlannerBot] Bot 0 PICKED UP item
+[PlannerBot] Bot 0 holding PLATE, task: PLACE on assembly
+[PlannerBot] Bot 0 PLACED PLATE
+[PlannerBot] Bot 0 FETCHING full plate for delivery
+[PlannerBot] Bot 0 PICKED UP item
+[PlannerBot] Bot 1 BOUGHT NOODLES
+[PlannerBot] Bot 0 holding PLATE, task: PLACE on assembly
+[PlannerBot] Bot 1 HOLDING NOODLES (single counter map - don't block plate)
+[PlannerBot] Bot 0 PLACED PLATE
+[TURN RUNNER] RED crashed: 'str' object has no attribute 'name'
+[GAME] RED failed, BLUE wins

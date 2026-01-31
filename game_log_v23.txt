@@ -1,0 +1,727 @@
+[INIT] Map parsed: 49 walkable, 1 cookers, 1 shops
+[PlannerBot] Init complete: 1 counters, 1 cookers
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: False, HasPlate: False
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: Task(BUY @ (10, 4), item=MEAT(PLATED)), 1: Task(BUY @ (10, 4), item=NOODLES(PLATED))}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: False, HasPlate: False
+[PlannerBot] Available: []
+[PlannerBot] [PlannerBot] Assignments at end: {0: Task(BUY @ (10, 4), item=MEAT(PLATED)), 1: Task(BUY @ (10, 4), item=NOODLES(PLATED))}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: False, HasPlate: False
+[PlannerBot] Available: []
+[PlannerBot] [PlannerBot] Assignments at end: {0: Task(BUY @ (10, 4), item=MEAT(PLATED)), 1: Task(BUY @ (10, 4), item=NOODLES(PLATED))}
+[PlannerBot] Bot 1 BOUGHT NOODLES
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: False, HasPlate: False
+[PlannerBot] Available: [1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: Task(BUY @ (10, 4), item=MEAT(PLATED)), 1: None}
+[PlannerBot] Bot 0 BOUGHT MEAT
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: False, HasPlate: False
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: Task(CHOP @ (4, 4), item=MEAT(RAW)), 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: False, HasPlate: False
+[PlannerBot] Available: [1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: Task(CHOP @ (4, 4), item=MEAT(RAW)), 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: False, HasPlate: False
+[PlannerBot] Available: [1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: Task(CHOP @ (4, 4), item=MEAT(RAW)), 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: False, HasPlate: False
+[PlannerBot] Available: [1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: Task(CHOP @ (4, 4), item=MEAT(RAW)), 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: False, HasPlate: False
+[PlannerBot] Available: [1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: Task(CHOP @ (4, 4), item=MEAT(RAW)), 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: False, HasPlate: False
+[PlannerBot] Available: [1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: Task(CHOP @ (4, 4), item=MEAT(RAW)), 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: False, HasPlate: False
+[PlannerBot] Available: [1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: Task(CHOP @ (4, 4), item=MEAT(RAW)), 1: None}
+[PlannerBot] Bot 0 PLACED for CHOP
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: False, HasPlate: False
+[PlannerBot] Available: [1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: Task(CHOP @ (4, 4), item=MEAT(RAW)), 1: None}
+[PlannerBot] Bot 0 CHOPPED
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: True, HasPlate: False
+[PlannerBot] Available: [0, 1]
+[PlannerBot] Bot 0 ASSIGNED TaskType.PICKUP @ (4, 4)
+[PlannerBot] [PlannerBot] Assignments at end: {0: Task(PICKUP @ (4, 4), item=MEAT(PLATED)), 1: Task(MOVE_ITEM @ (4, 2), item=NOODLES(RAW))}
+[PlannerBot] Bot 0 PICKED UP item
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: True, HasPlate: False
+[PlannerBot] Available: [0]
+[PlannerBot] [PlannerBot] Assignments at end: {0: Task(COOK @ (4, 3), item=MEAT(CHOPPED)), 1: Task(MOVE_ITEM @ (4, 2), item=NOODLES(RAW))}
+[PlannerBot] Bot 0 STARTED COOKING
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: True, HasPlate: False
+[PlannerBot] Available: [0]
+[PlannerBot] [PlannerBot] Assignments at end: {0: Task(BUY @ (10, 4), item=PLATE), 1: Task(MOVE_ITEM @ (4, 2), item=NOODLES(RAW))}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: True, HasPlate: False
+[PlannerBot] Available: []
+[PlannerBot] [PlannerBot] Assignments at end: {0: Task(BUY @ (10, 4), item=PLATE), 1: Task(MOVE_ITEM @ (4, 2), item=NOODLES(RAW))}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: True, HasPlate: False
+[PlannerBot] Available: []
+[PlannerBot] [PlannerBot] Assignments at end: {0: Task(BUY @ (10, 4), item=PLATE), 1: Task(MOVE_ITEM @ (4, 2), item=NOODLES(RAW))}
+[PlannerBot] Bot 1 PLACED NOODLES(RAW)
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: True, HasPlate: False
+[PlannerBot] Available: [1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: Task(BUY @ (10, 4), item=PLATE), 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: True, HasPlate: False
+[PlannerBot] Available: [1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: Task(BUY @ (10, 4), item=PLATE), 1: None}
+[PlannerBot] Bot 0 BOUGHT PLATE
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot]   Bot 0 has PLATE
+[PlannerBot] [PlannerBot] Assignments at end: {0: Task(MOVE_ITEM @ (4, 4), item=PLATE), 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: Task(MOVE_ITEM @ (4, 4), item=PLATE), 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: Task(MOVE_ITEM @ (4, 4), item=PLATE), 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: Task(MOVE_ITEM @ (4, 4), item=PLATE), 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: Task(MOVE_ITEM @ (4, 4), item=PLATE), 1: None}
+[PlannerBot] Bot 0 PLACED PLATE
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] Bot 0 ASSIGNED TaskType.FETCH_COOKED @ (4, 3)
+[PlannerBot] [PlannerBot] Assignments at end: {0: Task(FETCH_COOKED @ (4, 3), item=MEAT(PLATED)), 1: None}
+[PlannerBot] Bot 0 TOOK FROM PAN
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED), MEAT(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: Task(PLATE @ (4, 4), item=MEAT(COOKED)), 1: None}
+[PlannerBot] Bot 0 PLATED FOOD
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: move() failed: illegal move bot 2 from (9,3) by (-1,-1)
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: move() failed: illegal move bot 2 from (7,1) by (1,0)
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[PlannerBot] Goal: 1, Needs: [NOODLES(PLATED)], ChoppableReady: True, HasPlate: True
+[PlannerBot] Available: [0, 1]
+[PlannerBot] [PlannerBot] Assignments at end: {0: None, 1: None}
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[RC for BLUE WARN]: submit() failed: no matching order for bot 2
+[GAME OVER] money scores: RED=$275, BLUE=$10156
+[RESULT] BLUE WINS by $9881!

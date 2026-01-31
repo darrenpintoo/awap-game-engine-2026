@@ -13,23 +13,19 @@ BOTS = [
     "bots/duo_noodle_bot.py",
     "bots/eric/iron_chef_bot.py",
     "bots/eric/ironclad_bot.py",
-    "bots/eric/PipelineChefBot.py",
     "bots/hareshm/optimal_bot.py",
 ]
 
 # All maps
 MAPS = [
-    "maps/dpinto/chaos_kitchen.txt",
-    "maps/dpinto/multi_ingredient.txt",
-    "maps/dpinto/time_pressure.txt",
-    "maps/dpinto/resource_war.txt",
-    "maps/dpinto/easy_ramp.txt",
-    "maps/dpinto/rush_orders.txt",
     "maps/eric/map2.txt",
     "maps/eric/map3_sprint.txt",
     "maps/eric/map4_chaos.txt",
+    "maps/eric/map5_grind.txt",
     "maps/eric/map6_overload.txt",
     "maps/haresh/map1.txt",
+    "maps/haresh/map_challenge.txt",
+    "maps/haresh/map_compact.txt",
 ]
 
 TURNS = 200
