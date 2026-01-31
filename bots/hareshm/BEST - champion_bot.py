@@ -33,7 +33,7 @@ except ImportError:
 # CONFIGURATION
 # =============================================================================
 
-DEBUG = True  # Set True for testing
+DEBUG = False  # Set True for testing
 
 def log(msg):
     if DEBUG:
@@ -804,7 +804,6 @@ class BotPlayer:
             
             if holding:
                 info = INGREDIENT_INFO.get(ing_name, {})
-                log(f"BUY_INGREDIENT: holding item, ing={ing_name}, chop={info.get('chop')}, cook={info.get('cook')}")
                 if info.get('chop'):
                     task.state = BotState.PLACE_FOR_CHOP
                     task.target = work
@@ -815,7 +814,6 @@ class BotPlayer:
                     task.state = BotState.ADD_TO_PLATE
                     task.target = assembly
             elif self._move_toward(controller, bot_id, shop, team):
-                log(f"BUY_INGREDIENT: at shop, ing={ing_name}, food_type={food_type}, money={money}, cost={food_type.buy_cost if food_type else 'N/A'}")
                 if food_type and money >= food_type.buy_cost:
                     if controller.buy(bot_id, food_type, sx, sy):
                         log(f"Bought {ing_name}")
@@ -866,30 +864,24 @@ class BotPlayer:
         elif task.state == BotState.WAIT_COOK:
             kx, ky = task.target
             pan_state = self._get_pan_food_state(controller, team, kx, ky)
-            log(f"WAIT_COOK: pan_state={pan_state}, on_plate={self.ingredients_on_plate}")
             
             if pan_state == 1:  # Done
                 task.state = BotState.TAKE_FROM_PAN
-                log("Food done, taking from pan")
                 return
             elif pan_state == 2:  # Burnt
                 task.state = BotState.TAKE_FROM_PAN
-                log("Food burnt, taking from pan")
                 return
             elif pan_state == 0:
                 # While cooking, prep plate and non-cook ingredients
                 if not self.plate_on_assembly and not self.plate_in_box:
                     task.state = BotState.BUY_PLATE
-                    log("Need plate while cooking")
                     return
                 if self.current_order:
                     for ing in self.current_order.required:
                         if ing not in self.ingredients_on_plate and not INGREDIENT_INFO.get(ing, {}).get('cook'):
                             task.state = BotState.BUY_INGREDIENT
                             task.item = ing
-                            log(f"While cooking, will buy {ing}")
                             return
-                    log("No more non-cook ingredients to prep")
         
         # TAKE_FROM_PAN
         elif task.state == BotState.TAKE_FROM_PAN:
@@ -902,6 +894,8 @@ class BotPlayer:
                 else:
                     task.state = BotState.ADD_TO_PLATE
                     task.target = assembly
+                    # Set the item to the cooked ingredient
+                    task.item = self.cooking_ingredient or holding.get('food_name')
             elif self._move_toward(controller, bot_id, (kx, ky), team):
                 if controller.take_from_pan(bot_id, kx, ky):
                     log(f"Took from pan")
