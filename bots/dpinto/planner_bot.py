@@ -362,6 +362,12 @@ class TaskAllocator:
         # Get world state
         world_items = self.get_available_items(controller)
         available_bots = [bid for bid in bots if not self.bp.bot_assignments.get(bid)]
+        reserved_locs = set()
+
+        # Reserve already assigned targets
+        for task in self.bp.bot_assignments.values():
+            if task and task.target_loc:
+                reserved_locs.add(task.target_loc)
         
         # Helper to find specific item in world
         def find_item_loc(ing, bot_pos):
@@ -488,6 +494,10 @@ class TaskAllocator:
                                         self.bp.bot_assignments[bot_id] = Task(TaskType.MOVE_ITEM, c, item="PLATE")
                                         break
                     if bot_id in self.bp.bot_assignments:
+                        # Reserve invalidates this loc for others
+                        t = self.bp.bot_assignments[bot_id]
+                        if t and t.target_loc: reserved_locs.add(t.target_loc)
+                        
                         available_bots.remove(bot_id)
                         continue
                 
@@ -512,6 +522,7 @@ class TaskAllocator:
                             target = assembly_loc
                         
                         self.bp.bot_assignments[bot_id] = Task(TaskType.CHOP, target, item=held)
+                        if target: reserved_locs.add(target)
                         available_bots.remove(bot_id)
                         continue
                     elif (held.state == ItemState.CHOPPED) or (held.name == "EGG" and held.state == ItemState.RAW):
@@ -529,7 +540,24 @@ class TaskAllocator:
                             available_bots.remove(bot_id)
                             continue
 
+            # Fallback: If holding ingredient but couldn't Plate/Chop/Cook, DROP IT.
+            if held and isinstance(held, Ingredient):
+                    # This makes it accessible to the bot holding the plate.
+                    drop_loc = None
+                    for loc in self.bp.all_placeable:
+                         if loc in self.bp.counters and loc not in reserved_locs: # Prefer unreserved counters
+                             tc = controller.get_tile(controller.get_team(), loc[0], loc[1])
+                             if tc and tc.item is None:
+                                 drop_loc = loc; break
+                    
+                    if drop_loc:
+                        self.bp.bot_assignments[bot_id] = Task(TaskType.MOVE_ITEM, drop_loc, item=held)
+                        available_bots.remove(bot_id)
+                        continue
+
             # Idle bot work
+            # Strict check: Must be empty handed (except checking for "handling" logic)
+            # Actually, iterate available bots again
             if sorted_missing := sorted(missing_reqs, key=lambda r: 0 if r.name in ["MEAT", "EGG", "ONIONS"] else 1):
                 for req in sorted_missing:
                     # Coordination check: Is this ingredient ALREADY being handled?
@@ -548,6 +576,14 @@ class TaskAllocator:
                     for state, ttype in [("COOKED", TaskType.FETCH_COOKED), ("CHOPPED", TaskType.PICKUP), ("RAW", TaskType.CHOP)]:
                         loc = find_item_loc(f"{req.name}({state})", bot_pos)
                         if loc:
+                            # Critical Fix: If holding Plate exists, DO NOT PICK UP items from Counters.
+                            # Let the Plate holder get them. Only fetch from Cookers.
+                            if has_plate and loc in self.bp.counters:
+                                continue
+                            
+                            # Critical Fix: Respect Reservations
+                            if loc in reserved_locs: continue
+
                             # Robustness: FETCH_COOKED only for Cookers. PICKUP for everything else.
                             final_type = ttype
                             if state == "COOKED" and loc not in self.bp.cookers:
@@ -665,6 +701,7 @@ class BotPlayer:
         
         # Check proximity
         dist = max(abs(pos[0] - task.target_loc[0]), abs(pos[1] - task.target_loc[1]))
+        # log(f"Bot {bot_id} exec {task.type} @ {task.target_loc} (pos={pos} dist={dist})")
         
         if dist <= 1:
             # We are ready to interact
@@ -715,7 +752,7 @@ class BotPlayer:
             
             # If interaction attempted but failed, we might need to clear task or wait
             if not success:
-                log(f"Bot {bot_id} FAILED action {task.type} @ {task.target_loc}, clearing task")
+                # log(f"Bot {bot_id} FAILED action {task.type} @ {task.target_loc} (held={state.get('holding')}), clearing task")
                 self.bot_assignments[bot_id] = None
                 return
             else:
