@@ -32,7 +32,7 @@ class BotPlayer:
                     if dx == 0 and dy == 0: continue
                     nx, ny = curr_x + dx, curr_y + dy
                     if 0 <= nx < w and 0 <= ny < h and (nx, ny) not in visited:
-                        if controller.get_map().is_tile_walkable(nx, ny):
+                        if controller.get_map(controller.get_team()).is_tile_walkable(nx, ny):
                             visited.add((nx, ny))
                             queue.append(((nx, ny), path + [(dx, dy)]))
         return None
@@ -52,7 +52,7 @@ class BotPlayer:
     def find_nearest_tile(self, controller: RobotController, bot_x: int, bot_y: int, tile_name: str) -> Optional[Tuple[int, int]]:
         best_dist = 9999
         best_pos = None
-        m = controller.get_map()
+        m = controller.get_map(controller.get_team())
         for x in range(m.width):
             for y in range(m.height):
                 tile = m.tiles[x][y]
@@ -237,6 +237,6 @@ class BotPlayer:
             dx = random.choice([-1, 1])
             dy = random.choice([-1, 1])
             nx,ny = bx + dx, by + dy
-            if controller.get_map().is_tile_walkable(nx, ny):
+            if controller.get_map(controller.get_team()).is_tile_walkable(nx, ny):
                 controller.move(bot_id, dx, dy)
                 return

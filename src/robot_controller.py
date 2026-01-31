@@ -90,14 +90,14 @@ class RobotController:
     def get_enemy_team(self) -> Team:
         return Team.RED if self.__team == Team.BLUE else Team.BLUE
 
-    def get_map(self) -> Map:
+    def get_map(self, team: Team) -> Map:
         '''Deep copy for the user'''
-        return copy.deepcopy(self.__game_state.get_map(self.__team))
+        return copy.deepcopy(self.__game_state.get_map(team))
 
-    def get_orders(self) -> List[Dict[str, Any]]:
+    def get_orders(self, team: Team) -> List[Dict[str, Any]]:
         '''returns list of dictionaries (each order is represented by the dictionary)'''
         res = []
-        for o in self.__game_state.orders.get(self.__team, []):
+        for o in self.__game_state.orders.get(team, []):
             res.append(
                 {
                     "order_id": o.order_id,
