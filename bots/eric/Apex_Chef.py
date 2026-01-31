@@ -1,7 +1,7 @@
 """
-APEX CHEF v1.0
-Codename: "The Planner Killer"
-Strategy: Global Supply Chain Optimization + Aggressive Sabotage
+APEX CHEF v1.1
+Strategy: Global Supply Chain + Aggressive Sabotage + State Guarding
+Fixes: Auto-places items before chopping, scans counters for pending work.
 """
 
 import time
@@ -32,9 +32,9 @@ from item import Pan, Plate, Food
 # Priority Hierarchy (Higher = More Urgent)
 P_CRITICAL     = 1000  # Save burning food
 P_SABOTAGE     = 950   # Steal plates (Phase 2)
-P_STATE_FIX    = 800   # "I hold X, I must do Y" (Prevents getting stuck)
+P_STATE_FIX    = 800   # "I hold X, I must do Y"
+P_WORLD_STATE  = 700   # "Item on counter needs X"
 P_SUBMIT       = 500   # Cash in
-P_COOK_STEP    = 300   # Active cooking steps
 P_LOGISTICS    = 100   # Buying/Fetching
 P_MAINTENANCE  = 50    # Washing
 P_IDLE         = 0
@@ -52,6 +52,7 @@ class JobType(Enum):
     
     # Sabotage
     STEAL_PLATE = auto()
+    STEAL_PAN = auto()
     
     # Standard Flow
     SUBMIT = auto()
@@ -63,6 +64,8 @@ class JobType(Enum):
     START_COOK = auto()
     TAKE_FROM_PAN = auto()
     ADD_TO_PLATE = auto()
+    PICKUP_PLATE = auto()     # New: Pickup plated food
+    TAKE_CLEAN_PLATE = auto() # New: Get plate from sink
     WASH = auto()
     IDLE = auto()
 
@@ -114,7 +117,7 @@ class BotPlayer:
         # State Tracking
         self.cooking_info = {}
         self.active_orders = []
-        self.global_supply = Counter() # Supply Chain Tracker
+        self.global_supply = Counter()
 
     # -------------------------------------------------------------------------
     # INITIALIZATION
@@ -154,15 +157,12 @@ class BotPlayer:
             visited = {start}
             while queue:
                 (cx, cy), dist = queue.popleft()
-                # 8 Directions
                 for dx in [-1, 0, 1]:
                     for dy in [-1, 0, 1]:
                         if dx==0 and dy==0: continue
                         nx, ny = cx+dx, cy+dy
-                        
                         if (nx, ny) in visited: continue
                         if not (0 <= nx < m.width and 0 <= ny < m.height): continue
-                        
                         if getattr(m.tiles[nx][ny], 'is_walkable', False):
                             visited.add((nx, ny))
                             self.dist_matrix[start][(nx, ny)] = dist + 1
@@ -172,10 +172,8 @@ class BotPlayer:
     # STATE ANALYSIS
     # -------------------------------------------------------------------------
     def update_state(self, controller: RobotController):
-        # 1. Orders
         self.active_orders = [o for o in controller.get_orders() if o.get('is_active')]
         
-        # 2. Cooking Status
         self.cooking_info.clear()
         for kx, ky in self.cookers:
             t = controller.get_tile(controller.get_team(), kx, ky)
@@ -186,19 +184,16 @@ class BotPlayer:
                     getattr(t, 'cook_progress', 0), item.food.cooked_stage
                 )
 
-        # 3. Supply Chain Audit (Prevent Double-Buying)
+        # Supply Audit
         self.global_supply.clear()
-        # Count held items
         for bid in controller.get_team_bot_ids():
             h = controller.get_bot_state(bid).get('holding')
             if h and h.get('type') == 'Food':
                 self.global_supply[h['food_name']] += 1
-        # Count items on counters/boxes
         for cx, cy in self.counters:
             t = controller.get_tile(controller.get_team(), cx, cy)
             if t and t.item and isinstance(t.item, Food):
                 self.global_supply[t.item.food_name] += 1
-        # Count items in pans
         for info in self.cooking_info.values():
             self.global_supply[info.food_name] += 1
 
@@ -216,7 +211,7 @@ class BotPlayer:
             elif info.cooked_stage == 0 and info.turns_to_burned < 5:
                 jobs.append(Job(JobType.TAKE_FROM_PAN, target=loc, priority=P_CRITICAL + 10))
 
-        # 2. STATE-TRANSITION (Fix "Holding" States)
+        # 2. STATE-TRANSITION (Finish what you hold)
         for bot_id in bots:
             bot = controller.get_bot_state(bot_id)
             if not bot: continue
@@ -224,13 +219,11 @@ class BotPlayer:
             if not holding: continue
 
             h_type = holding.get('type')
-            
             if h_type == 'Food':
                 name = holding.get('food_name', '').upper()
                 is_chopped = holding.get('is_chopped', False)
                 stage = holding.get('cooked_stage', 0)
                 
-                # Logic tree for food processing
                 if name in ['MEAT', 'ONIONS'] and not is_chopped:
                     jobs.append(Job(JobType.CHOP, priority=P_STATE_FIX)) 
                 elif (name == 'MEAT' and is_chopped and stage == 0) or (name == 'EGG' and stage == 0):
@@ -245,40 +238,61 @@ class BotPlayer:
             elif h_type == 'Pan':
                 jobs.append(Job(JobType.PLACE_ON_COUNTER, priority=P_STATE_FIX))
 
-        # 3. SABOTAGE (Phase 2 Only)
+        # 3. WORLD STATE SCAN (Items on counters)
+        for cx, cy in self.counters:
+            t = controller.get_tile(controller.get_team(), cx, cy)
+            if not t: continue
+            item = getattr(t, 'item', None)
+            
+            if isinstance(item, Food):
+                name = getattr(item, 'food_name', '').upper()
+                is_chopped = getattr(item, 'is_chopped', False)
+                
+                # Raw Meat/Onion on counter -> Needs Chop
+                if name in ['MEAT', 'ONIONS'] and not is_chopped:
+                    jobs.append(Job(JobType.CHOP, target=(cx, cy), priority=P_WORLD_STATE))
+                
+                # Chopped Meat on counter -> Needs Cook
+                elif name == 'MEAT' and is_chopped:
+                    jobs.append(Job(JobType.START_COOK, priority=P_WORLD_STATE)) # Generic pickup logic
+            
+            elif isinstance(item, Plate):
+                # Plate on counter -> Pickup?
+                foods = getattr(item, 'food', [])
+                if len(foods) >= 1:
+                    jobs.append(Job(JobType.PICKUP_PLATE, target=(cx, cy), priority=P_SUBMIT))
+
+        # 4. SABOTAGE (Phase 2 Only)
         switch_info = controller.get_switch_info()
         if switch_info['my_team_switched']:
-            # Aggressive Plate Denial
             for st in self.sink_tables:
                 jobs.append(Job(JobType.STEAL_PLATE, target=st, priority=P_SABOTAGE))
-            return jobs # Ignore normal orders during sabotage
+            for ck in self.cookers:
+                jobs.append(Job(JobType.STEAL_PAN, target=ck, priority=P_SABOTAGE - 50))
+            return jobs
 
-        # 4. ORDER FULFILLMENT (Supply Chain Logic)
+        # 5. ORDER FULFILLMENT
         for order in self.active_orders:
-            # Calculate demand for this order
             needed_for_order = Counter()
-            for req in order['required']:
-                needed_for_order[req.upper()] += 1
+            for req in order['required']: needed_for_order[req.upper()] += 1
             
             prio = P_LOGISTICS + (order['reward'] // 100)
-            
             for item, count in needed_for_order.items():
                 have = self.global_supply[item]
                 needed = count - have
-                
                 if needed > 0:
                     ft = self._name_to_foodtype(item)
                     if ft:
-                        # Generate jobs to fill deficit
                         for _ in range(needed):
                             jobs.append(Job(JobType.BUY_INGREDIENT, item=ft, priority=prio))
-                            self.global_supply[item] += 1 # Virtual increment to prevent double-buy
+                            self.global_supply[item] += 1
 
-        # 5. MAINTENANCE
+        # 6. MAINTENANCE
         clean_plates = sum(getattr(controller.get_tile(controller.get_team(), *s), 'num_clean_plates', 0) for s in self.sink_tables)
         if clean_plates < 2:
-            for s in self.sinks: 
-                jobs.append(Job(JobType.WASH, target=s, priority=P_MAINTENANCE))
+            for s in self.sinks: jobs.append(Job(JobType.WASH, target=s, priority=P_MAINTENANCE))
+        if clean_plates > 0:
+            for st in self.sink_tables: jobs.append(Job(JobType.TAKE_CLEAN_PLATE, target=st, priority=P_MAINTENANCE + 10))
             
         jobs.append(Job(JobType.BUY_PAN, priority=40))
         jobs.append(Job(JobType.BUY_PLATE, priority=45))
@@ -293,7 +307,6 @@ class BotPlayer:
         bots = controller.get_team_bot_ids()
         if not bots or not jobs: return {}
         
-        # Create Cost Matrix (Rows=Bots, Cols=Jobs)
         cost_matrix = np.full((len(bots), len(jobs)), float(COST_IMPOSSIBLE))
         
         for r, bid in enumerate(bots):
@@ -302,10 +315,9 @@ class BotPlayer:
             holding = bot.get('holding')
             
             for c, job in enumerate(jobs):
-                # 1. Distance Cost
+                # 1. Distance
                 target = job.target
                 if not target:
-                    # Dynamically resolve nearest target for generic jobs
                     if job.job_type == JobType.BUY_INGREDIENT: target = self.get_nearest(pos, self.shops)
                     elif job.job_type == JobType.CHOP: target = self.get_nearest(pos, self.counters) 
                     elif job.job_type == JobType.START_COOK: target = self.get_nearest(pos, self.cookers)
@@ -314,29 +326,28 @@ class BotPlayer:
                 
                 dist = self.get_dist(pos, target) if target else 0
                 
-                # 2. State Constraints (The Guard)
+                # 2. State Penalties
                 penalty = 0
                 jt = job.job_type
                 
-                # Physical impossibility checks
+                # Can't chop/cook if holding wrong things
                 if jt == JobType.CHOP:
-                    if not holding or holding.get('type') == 'Plate': penalty = COST_HIGH
-                    else: penalty = -500 # Bias to finish holding task
+                    if holding and holding.get('type') == 'Plate': penalty = COST_HIGH
+                    elif holding and holding.get('type') == 'Food': penalty = -200 # Holding food? Encouraged!
                 elif jt == JobType.START_COOK:
                     if not holding or holding.get('type') != 'Food': penalty = COST_HIGH
                     else: penalty = -500
-                elif jt == JobType.BUY_INGREDIENT or jt == JobType.BUY_PAN:
+                elif jt in [JobType.BUY_INGREDIENT, JobType.BUY_PAN, JobType.TAKE_CLEAN_PLATE]:
                     if holding: penalty = COST_HIGH
                 elif jt == JobType.SUBMIT:
                     if not holding or holding.get('type') != 'Plate': penalty = COST_HIGH
 
                 cost_matrix[r, c] = dist - job.priority + penalty
 
-        # 3. Solve Assignment
         if HAS_SCIPY:
             row, col = linear_sum_assignment(cost_matrix)
         else:
-            col = np.argmin(cost_matrix, axis=1) # Fallback
+            col = np.argmin(cost_matrix, axis=1)
             row = range(len(bots))
 
         return {bots[r]: jobs[c] for r, c in zip(row, col)}
@@ -354,26 +365,20 @@ class BotPlayer:
         while queue:
             curr, path = queue.popleft()
             
-            # Adjacency check
             if self.get_dist(curr, target) <= 1:
                 if not path: return (0,0)
-                # Reservation Logic
                 next_node = (start[0]+path[0][0], start[1]+path[0][1])
                 self.reserved_nodes.add((next_node[0], next_node[1], turn+1))
                 return path[0]
             
-            if len(path) > 10: continue # Depth limit
+            if len(path) > 10: continue
             
-            # 8-Way Movement (Chebyshev) + Wait
+            # 8-Way + Wait
             moves = [(0,1),(0,-1),(1,0),(-1,0),(1,1),(1,-1),(-1,1),(-1,-1),(0,0)]
-            
             for dx, dy in moves:
                 nx, ny = curr[0]+dx, curr[1]+dy
-                
-                # Validations
                 if not (0<=nx<self.map.width and 0<=ny<self.map.height): continue
                 if (nx, ny) not in self.walkable: continue
-                # Collision Check
                 if (nx, ny, turn+len(path)+1) in self.reserved_nodes: continue
                 
                 if (nx, ny) not in visited:
@@ -382,7 +387,7 @@ class BotPlayer:
         return (0,0)
 
     # -------------------------------------------------------------------------
-    # EXECUTION
+    # EXECUTION (PATCHED)
     # -------------------------------------------------------------------------
     def execute(self, controller, bot_id, job):
         bot = controller.get_bot_state(bot_id)
@@ -390,8 +395,9 @@ class BotPlayer:
         holding = bot.get('holding')
         
         # 1. HANDS FULL OVERRIDE
-        # If assigned to buy but hands full -> Trash it
-        if job.job_type == JobType.BUY_INGREDIENT and holding:
+        needs_empty = job.job_type in [JobType.BUY_INGREDIENT, JobType.BUY_PAN, JobType.BUY_PLATE, 
+                                       JobType.TAKE_FROM_PAN, JobType.STEAL_PAN, JobType.TAKE_CLEAN_PLATE]
+        if needs_empty and holding:
             trash = self.get_nearest(pos, self.trashes)
             if self.get_dist(pos, trash) <= 1: 
                 controller.trash(bot_id, trash[0], trash[1])
@@ -404,44 +410,86 @@ class BotPlayer:
         if not target:
             if job.job_type == JobType.BUY_INGREDIENT: target = self.get_nearest(pos, self.shops)
             elif job.job_type == JobType.PLACE_ON_COUNTER: target = self._find_empty(controller, self.counters, pos)
-            elif job.job_type == JobType.CHOP: target = self._find_choppable(controller, self.counters, pos)
+            elif job.job_type == JobType.CHOP: target = self.get_nearest(pos, self.counters) 
             elif job.job_type == JobType.START_COOK: target = self._find_empty_pan(controller, self.cookers, pos)
             elif job.job_type == JobType.ADD_TO_PLATE: target = self._find_plate(controller, self.counters, pos)
             elif job.job_type == JobType.SUBMIT: target = self.get_nearest(pos, self.submits)
+            elif job.job_type == JobType.TAKE_CLEAN_PLATE: target = self.get_nearest(pos, self.sink_tables)
         
         if not target: return 
         
         # 3. ACT or MOVE
         if self.get_dist(pos, target) <= 1:
-            self._perform_action(controller, bot_id, job, target)
+            self._perform_action(controller, bot_id, job, target, holding)
         else:
             self.move_bot(controller, bot_id, target)
 
     def move_bot(self, controller, bot_id, target):
         dx, dy = self.get_move(controller, bot_id, target, controller.get_turn())
+        
+        # Deadlock Breaker: If stuck (0,0), try random valid move
+        if dx == 0 and dy == 0:
+            moves = [(0,1), (0,-1), (1,0), (-1,0), (1,1), (1,-1), (-1,1), (-1,-1)]
+            random.shuffle(moves)
+            bot = controller.get_bot_state(bot_id)
+            for m in moves:
+                nx, ny = bot['x']+m[0], bot['y']+m[1]
+                if (nx, ny) in self.walkable:
+                     dx, dy = m
+                     break
+        
         controller.move(bot_id, dx, dy)
 
-    def _perform_action(self, controller, bot_id, job, target):
+    def _perform_action(self, controller, bot_id, job, target, holding):
         tx, ty = target
         jt = job.job_type
         
-        if jt == JobType.BUY_INGREDIENT: controller.buy(bot_id, job.item, tx, ty)
-        elif jt == JobType.BUY_PAN: controller.buy(bot_id, ShopCosts.PAN, tx, ty)
-        elif jt == JobType.BUY_PLATE: controller.buy(bot_id, ShopCosts.PLATE, tx, ty)
-        elif jt == JobType.CHOP: controller.chop(bot_id, tx, ty)
-        elif jt == JobType.START_COOK: controller.place(bot_id, tx, ty)
-        elif jt == JobType.TAKE_FROM_PAN: controller.take_from_pan(bot_id, tx, ty)
-        elif jt == JobType.ADD_TO_PLATE: controller.add_food_to_plate(bot_id, tx, ty)
-        elif jt == JobType.SUBMIT: controller.submit(bot_id, tx, ty)
-        elif jt == JobType.PLACE_ON_COUNTER: controller.place(bot_id, tx, ty)
-        elif jt == JobType.WASH: controller.wash_sink(bot_id, tx, ty)
+        if jt == JobType.BUY_INGREDIENT: 
+            if not holding: controller.buy(bot_id, job.item, tx, ty)
+        elif jt == JobType.BUY_PAN: 
+            if not holding: controller.buy(bot_id, ShopCosts.PAN, tx, ty)
+        elif jt == JobType.BUY_PLATE: 
+            if not holding: controller.buy(bot_id, ShopCosts.PLATE, tx, ty)
+            
+        elif jt == JobType.CHOP:
+            if holding: controller.place(bot_id, tx, ty) # Fix: Place first!
+            else: controller.chop(bot_id, tx, ty)
+            
+        elif jt == JobType.START_COOK:
+            if holding: controller.place(bot_id, tx, ty) # Place starts cook
+            
+        elif jt == JobType.TAKE_FROM_PAN: 
+            if not holding: controller.take_from_pan(bot_id, tx, ty)
+            
+        elif jt == JobType.ADD_TO_PLATE:
+            if holding: controller.add_food_to_plate(bot_id, tx, ty)
+            
+        elif jt == JobType.SUBMIT: 
+            if holding and holding.get('type') == 'Plate': controller.submit(bot_id, tx, ty)
+            
+        elif jt == JobType.PLACE_ON_COUNTER: 
+            if holding: controller.place(bot_id, tx, ty)
+            
+        elif jt == JobType.WASH:
+            tile = controller.get_tile(controller.get_team(), tx, ty)
+            if getattr(tile, 'num_dirty_plates', 0) > 0:
+                controller.wash_sink(bot_id, tx, ty)
+                
+        elif jt == JobType.TAKE_CLEAN_PLATE:
+            if not holding: controller.take_clean_plate(bot_id, tx, ty)
+            
+        elif jt == JobType.PICKUP_PLATE:
+            if not holding: controller.pickup(bot_id, tx, ty)
+            
         elif jt == JobType.STEAL_PLATE:
-            if controller.get_bot_state(bot_id).get('holding'): 
-                # Holding stolen plate? Trash it
+            if holding: 
                 tr = self.get_nearest((tx, ty), self.trashes)
                 controller.trash(bot_id, tr[0], tr[1])
             else: 
                 controller.take_clean_plate(bot_id, tx, ty)
+                
+        elif jt == JobType.STEAL_PAN:
+            if not holding: controller.pickup(bot_id, tx, ty)
 
     # -------------------------------------------------------------------------
     # HELPERS
@@ -455,14 +503,10 @@ class BotPlayer:
         return min(locs, key=lambda l: self.get_dist(pos, l))
 
     def _find_empty(self, c, locs, pos):
-        # Prefer closest empty counter/box
         sorted_locs = sorted(locs, key=lambda x: self.get_dist(pos, x))
         for l in sorted_locs:
             if not getattr(c.get_tile(c.get_team(), *l), 'item', None): return l
         return sorted_locs[0] if sorted_locs else None
-
-    def _find_choppable(self, c, locs, pos):
-        return self.get_nearest(pos, locs)
 
     def _find_empty_pan(self, c, locs, pos):
         for l in sorted(locs, key=lambda x: self.get_dist(pos, x)):
@@ -494,21 +538,16 @@ class BotPlayer:
         self.update_state(controller)
         self.reserved_nodes.clear()
         
-        # Turn 250: Aggressive Switch
         turn = controller.get_turn()
         if 250 <= turn < 350 and not controller.get_switch_info()['my_team_switched']:
             controller.switch_maps()
 
-        # 1. Think
         jobs = self.generate_jobs(controller)
-        
-        # 2. Pair
         assigns = self.assign_tasks(controller, jobs)
         
-        # 3. Act (Priority Order)
         sorted_bots = sorted(assigns.keys(), key=lambda b: assigns[b].priority, reverse=True)
         
         start_ts = time.time()
         for bid in sorted_bots:
-            if time.time() - start_ts > 0.45: break # Hard Time Limit
+            if time.time() - start_ts > 0.45: break 
             self.execute(controller, bid, assigns[bid])

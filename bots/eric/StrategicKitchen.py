@@ -121,7 +121,7 @@ class BotPlayer:
     # -------------------------------------------------------------------------
     def initialize(self, controller: RobotController):
         if self.initialized: return
-        m = controller.get_map()
+        m = controller.get_map(controller.get_team())
         
         # Parse Map
         for x in range(m.width):
@@ -173,7 +173,7 @@ class BotPlayer:
     # -------------------------------------------------------------------------
     def update_state(self, controller: RobotController):
         # 1. Orders
-        self.active_orders = [o for o in controller.get_orders() if o.get('is_active')]
+        self.active_orders = [o for o in controller.get_orders(controller.get_team()) if o.get('is_active')]
         
         # 2. Cooking Status
         self.cooking_info.clear()
@@ -189,7 +189,7 @@ class BotPlayer:
         # 3. Supply Chain Audit (Prevent Double-Buying)
         self.global_supply.clear()
         # Count held items
-        for bid in controller.get_team_bot_ids():
+        for bid in controller.get_team_bot_ids(controller.get_team()):
             h = controller.get_bot_state(bid).get('holding')
             if h and h.get('type') == 'Food':
                 self.global_supply[h['food_name']] += 1
@@ -207,7 +207,7 @@ class BotPlayer:
     # -------------------------------------------------------------------------
     def generate_jobs(self, controller) -> List[Job]:
         jobs = []
-        bots = controller.get_team_bot_ids()
+        bots = controller.get_team_bot_ids(controller.get_team())
         
         # 1. EMERGENCY (Save Burnt Food)
         for loc, info in self.cooking_info.items():
@@ -227,12 +227,13 @@ class BotPlayer:
             
             if h_type == 'Food':
                 name = holding.get('food_name', '').upper()
-                is_chopped = holding.get('is_chopped', False)
+                is_chopped = holding.get('chopped', False)
                 stage = holding.get('cooked_stage', 0)
                 
                 # Logic tree for food processing
                 if name in ['MEAT', 'ONIONS'] and not is_chopped:
-                    jobs.append(Job(JobType.CHOP, priority=P_STATE_FIX)) 
+                    # Must place first!
+                    jobs.append(Job(JobType.PLACE_ON_COUNTER, priority=P_STATE_FIX)) 
                 elif (name == 'MEAT' and is_chopped and stage == 0) or (name == 'EGG' and stage == 0):
                     jobs.append(Job(JobType.START_COOK, priority=P_STATE_FIX))
                 else:
@@ -244,6 +245,16 @@ class BotPlayer:
             
             elif h_type == 'Pan':
                 jobs.append(Job(JobType.PLACE_ON_COUNTER, priority=P_STATE_FIX))
+
+        # 2b. MAP SCANNING (Find items to work on)
+        team = controller.get_team()
+        for cx, cy in self.counters:
+             tile = controller.get_tile(team, cx, cy)
+             if tile and tile.item and isinstance(tile.item, Food):
+                  # Check key: 'chopped' isn't on object implies not chopped? 
+                  # Wait, tile.item is Item object. 'chopped' is attr.
+                  if tile.item.food_name in ['MEAT', 'ONIONS'] and not tile.item.chopped:
+                       jobs.append(Job(JobType.CHOP, target=(cx, cy), priority=P_COOK_STEP))
 
         # 3. SABOTAGE (Phase 2 Only)
         switch_info = controller.get_switch_info()
@@ -290,7 +301,7 @@ class BotPlayer:
     # HIVE MIND: TASK ASSIGNMENT
     # -------------------------------------------------------------------------
     def assign_tasks(self, controller, jobs):
-        bots = controller.get_team_bot_ids()
+        bots = controller.get_team_bot_ids(controller.get_team())
         if not bots or not jobs: return {}
         
         # Create Cost Matrix (Rows=Bots, Cols=Jobs)
@@ -351,6 +362,15 @@ class BotPlayer:
         queue = deque([(start, [])])
         visited = {start}
         
+        # Dynamic Obstacles (Prevent colliding with any bot)
+        obstacles = set()
+        all_bots = controller.get_team_bot_ids(controller.get_team()) + \
+                   controller.get_team_bot_ids(controller.get_enemy_team())
+        for bid in all_bots:
+            if bid == bot_id: continue
+            b = controller.get_bot_state(bid)
+            if b: obstacles.add((b['x'], b['y']))
+        
         while queue:
             curr, path = queue.popleft()
             
@@ -376,6 +396,9 @@ class BotPlayer:
                 # Collision Check
                 if (nx, ny, turn+len(path)+1) in self.reserved_nodes: continue
                 
+                # Dynamic Collision (Immediate step)
+                if len(path) == 0 and (nx, ny) in obstacles: continue
+
                 if (nx, ny) not in visited:
                     visited.add((nx, ny))
                     queue.append(((nx, ny), path + [(dx, dy)]))

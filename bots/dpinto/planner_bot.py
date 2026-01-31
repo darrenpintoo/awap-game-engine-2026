@@ -154,7 +154,7 @@ class AStar:
                  start_time: int, reservation: ReservationTable, my_id: int, 
                  stop_dist: int = 1) -> Optional[List[Tuple[int, int]]]:
         
-        m = controller.get_map()
+        m = controller.get_map(controller.get_team())
         w, h = m.width, m.height
         
         # (f_score, g_score, x, y, path)
@@ -232,7 +232,7 @@ class OrderManager:
         
     def update_goals(self, controller, current_turn):
         self.active_goals = []
-        orders = controller.get_orders()
+        orders = controller.get_orders(controller.get_team())
         
         for order in orders:
             # Parse requirements
@@ -496,7 +496,7 @@ class BotPlayer:
         self.bot_assignments: Dict[int, Optional[Task]] = {}
         
     def _init_map(self, controller):
-        m = controller.get_map()
+        m = controller.get_map(controller.get_team())
         for x in range(m.width):
             for y in range(m.height):
                 t = m.tiles[x][y].tile_name
@@ -596,7 +596,7 @@ class BotPlayer:
             self._init_map(controller)
             
         current_turn = controller.get_turn()
-        bots = controller.get_team_bot_ids()
+        bots = controller.get_team_bot_ids(controller.get_team())
         self.reservations.clear()
         
         # 1. Update Goals
