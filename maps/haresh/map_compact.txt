@@ -1,0 +1,12 @@
+##########
+#.C.K.$..#
+#b.C....b#
+#..S.T.U.#
+#........#
+#....R...#
+##########
+
+SWITCH: turn=250 duration=100
+
+ORDERS:
+start=0  duration=200  required=NOODLES,MEAT           reward=10000 penalty=3
