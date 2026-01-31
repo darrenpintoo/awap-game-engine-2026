@@ -158,6 +158,7 @@ class GameState:
         self.team_money: Dict[Team, int] = {Team.RED: 150, Team.BLUE: 150}
         
         #each team has its own independent order list
+        #this is filled in in game.py after processing the map
         self.orders: Dict[Team, List[Order]] = {Team.RED: [], Team.BLUE: []}
         
         self.next_order_id = 1
