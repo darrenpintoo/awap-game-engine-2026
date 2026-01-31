@@ -1,0 +1,16 @@
+################
+#b.C..K..S..$..#
+#..............#
+#..............#
+#..............#
+#..U..T..R..B.b#
+################
+
+SWITCH: turn=250 duration=100
+
+ORDERS:
+start=0   duration=80   required=NOODLES              reward=30 penalty=2
+start=20  duration=80   required=SAUCE                reward=25 penalty=2
+start=40  duration=100  required=NOODLES,SAUCE        reward=50 penalty=3
+start=80  duration=120  required=NOODLES,MEAT         reward=80 penalty=5
+start=120 duration=150  required=NOODLES,MEAT,SAUCE   reward=100 penalty=6
