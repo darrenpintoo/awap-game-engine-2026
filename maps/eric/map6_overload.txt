@@ -1,0 +1,70 @@
+##############
+#b...C..$....#
+#....K..U....#
+#....S..T....#
+#............#
+#............#
+#....R..B...b#
+##############
+
+SWITCH: turn=250 duration=100
+
+ORDERS:
+# Wave 1 - 4 concurrent orders (turn 0-30)
+start=0   duration=30  required=NOODLES           reward=60   penalty=20
+start=0   duration=30  required=MEAT              reward=120  penalty=40
+start=0   duration=35  required=NOODLES,MEAT      reward=200  penalty=60
+start=5   duration=30  required=EGG               reward=70   penalty=25
+
+# Wave 2 - 5 concurrent (turn 30-70)
+start=30  duration=35  required=NOODLES           reward=60   penalty=20
+start=35  duration=30  required=MEAT              reward=120  penalty=40
+start=35  duration=35  required=NOODLES,MEAT      reward=200  penalty=60
+start=40  duration=30  required=ONIONS            reward=50   penalty=15
+start=45  duration=35  required=MEAT,EGG          reward=180  penalty=55
+
+# Wave 3 - 6 concurrent (turn 70-120)
+start=70  duration=30  required=NOODLES           reward=60   penalty=20
+start=70  duration=30  required=MEAT              reward=120  penalty=40
+start=75  duration=35  required=NOODLES,MEAT      reward=200  penalty=60
+start=80  duration=30  required=EGG               reward=70   penalty=25
+start=85  duration=35  required=ONIONS,MEAT       reward=160  penalty=50
+start=90  duration=40  required=NOODLES,MEAT,EGG  reward=350  penalty=100
+
+# Wave 4 - High value rush (turn 120-180)
+start=120 duration=25  required=NOODLES,MEAT      reward=250  penalty=80
+start=125 duration=25  required=MEAT,EGG          reward=220  penalty=70
+start=130 duration=25  required=NOODLES,ONIONS    reward=140  penalty=45
+start=135 duration=25  required=MEAT              reward=150  penalty=50
+start=140 duration=30  required=NOODLES,MEAT,EGG  reward=400  penalty=120
+start=145 duration=25  required=NOODLES           reward=70   penalty=25
+
+# Wave 5 - Chaos (turn 180-250)
+start=180 duration=20  required=NOODLES           reward=80   penalty=30
+start=185 duration=20  required=MEAT              reward=150  penalty=50
+start=190 duration=25  required=NOODLES,MEAT      reward=220  penalty=70
+start=195 duration=20  required=EGG               reward=90   penalty=30
+start=200 duration=25  required=MEAT,ONIONS       reward=180  penalty=55
+start=205 duration=25  required=NOODLES,MEAT      reward=220  penalty=70
+start=210 duration=20  required=NOODLES           reward=80   penalty=30
+start=215 duration=25  required=MEAT,EGG          reward=200  penalty=65
+
+# Wave 6 - Post-sabotage (turn 350-450)
+start=350 duration=25  required=NOODLES,MEAT      reward=250  penalty=80
+start=355 duration=25  required=MEAT              reward=150  penalty=50
+start=360 duration=30  required=NOODLES,MEAT,EGG  reward=400  penalty=120
+start=370 duration=25  required=NOODLES           reward=80   penalty=30
+start=380 duration=25  required=MEAT,EGG          reward=220  penalty=70
+start=390 duration=30  required=NOODLES,MEAT      reward=250  penalty=80
+start=400 duration=25  required=ONIONS            reward=60   penalty=20
+start=410 duration=25  required=MEAT              reward=150  penalty=50
+start=420 duration=20  required=NOODLES           reward=90   penalty=35
+start=430 duration=25  required=NOODLES,MEAT      reward=250  penalty=80
+
+# Wave 7 - Endgame sprint (turn 450-500)
+start=450 duration=20  required=NOODLES           reward=100  penalty=40
+start=455 duration=20  required=MEAT              reward=180  penalty=60
+start=460 duration=20  required=NOODLES           reward=100  penalty=40
+start=465 duration=20  required=MEAT              reward=180  penalty=60
+start=470 duration=20  required=NOODLES,MEAT      reward=300  penalty=100
+start=480 duration=15  required=NOODLES           reward=120  penalty=50
