@@ -1,0 +1,60 @@
+# Test Map: Medium Balanced (15x15)
+# Description: Standard tournament-style map with balanced resource distribution
+# Tests: Parallel order execution, resource sharing, standard pathfinding
+# Difficulty: Medium, representative of typical tournament conditions
+
+###############
+#R....$$$....R#
+#.............#
+#..B.........B#
+#..B..CCC....B#
+#..B.........B#
+#b.K...T...K.b#
+#.....S.S.....#
+#..CC.....CC..#
+#.............#
+#..B.........B#
+#..B..CCC....B#
+#..B.........B#
+#.............#
+###..U.U.U..###
+
+SWITCH: turn=250 duration=100
+
+ORDERS:
+# Wave 1: Simple starters (turns 1-60)
+start=1   duration=18  required=NOODLES           reward=30 penalty=10
+start=5   duration=18  required=SAUCE             reward=30 penalty=10
+start=10  duration=18  required=ONIONS            reward=30 penalty=10
+start=15  duration=20  required=EGG               reward=35 penalty=12
+start=20  duration=20  required=MEAT              reward=35 penalty=12
+start=25  duration=18  required=NOODLES           reward=30 penalty=10
+start=30  duration=18  required=SAUCE             reward=30 penalty=10
+start=40  duration=20  required=EGG               reward=35 penalty=12
+start=50  duration=20  required=MEAT              reward=35 penalty=12
+
+# Wave 2: Two-ingredient combos (turns 60-140)
+start=60  duration=25  required=EGG,NOODLES       reward=50 penalty=15
+start=70  duration=25  required=MEAT,ONIONS       reward=55 penalty=15
+start=80  duration=25  required=SAUCE,NOODLES     reward=45 penalty=12
+start=90  duration=25  required=EGG,MEAT          reward=60 penalty=18
+start=100 duration=25  required=ONIONS,SAUCE      reward=40 penalty=12
+start=110 duration=25  required=MEAT,SAUCE        reward=55 penalty=15
+start=120 duration=25  required=EGG,ONIONS        reward=50 penalty=15
+start=130 duration=25  required=NOODLES,ONIONS    reward=45 penalty=12
+
+# Wave 3: Three-ingredient orders (turns 140-220)
+start=140 duration=30  required=EGG,MEAT,NOODLES        reward=75 penalty=20
+start=155 duration=30  required=ONIONS,SAUCE,NOODLES    reward=65 penalty=18
+start=170 duration=30  required=EGG,ONIONS,MEAT         reward=80 penalty=22
+start=185 duration=30  required=MEAT,NOODLES,SAUCE      reward=75 penalty=20
+start=200 duration=30  required=EGG,NOODLES,SAUCE       reward=70 penalty=18
+start=215 duration=30  required=MEAT,ONIONS,SAUCE       reward=75 penalty=20
+
+# Wave 4: Complex four/five ingredient orders (turns 230+)
+start=230 duration=40  required=EGG,MEAT,NOODLES,ONIONS       reward=100 penalty=30
+start=250 duration=45  required=MEAT,NOODLES,ONIONS,SAUCE     reward=110 penalty=35
+start=270 duration=50  required=EGG,MEAT,NOODLES,SAUCE        reward=115 penalty=35
+start=290 duration=55  required=EGG,MEAT,NOODLES,ONIONS,SAUCE reward=150 penalty=50
+start=320 duration=60  required=EGG,MEAT,NOODLES,ONIONS,SAUCE reward=160 penalty=55
+start=350 duration=60  required=EGG,MEAT,NOODLES,ONIONS,SAUCE reward=170 penalty=60

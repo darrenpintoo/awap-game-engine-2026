@@ -1,0 +1,72 @@
+# Test Map: Large Sprawl (25x25)
+# Description: Expansive map testing long-distance pathfinding and resource planning
+# Tests: Long-range navigation, multi-zone strategy, efficient routing, parallelism
+# Difficulty: Medium-Hard, rewards efficient pathfinding and planning
+
+#########################
+#R...............$$$$..R#
+#.......................#
+#..BBB.......CCC.......B#
+#..BBB...............B.B#
+#..BBB...............B.B#
+#.......................#
+#......K.........K......#
+#.......................#
+#..CCC...........CCC....#
+#.......................#
+#.......................#
+#b.....S.T.U.T.S......b.#
+#.......................#
+#.......................#
+#..CCC...........CCC....#
+#.......................#
+#......K.........K......#
+#.......................#
+#..BBB...............B.B#
+#..BBB...............B.B#
+#..BBB.......CCC.......B#
+#.......................#
+#R...............$$$$..R#
+#########################
+
+SWITCH: turn=250 duration=100
+
+ORDERS:
+# Early game: Simple orders to establish economy
+start=1   duration=25  required=NOODLES           reward=35 penalty=10
+start=8   duration=25  required=SAUCE             reward=35 penalty=10
+start=15  duration=25  required=ONIONS            reward=35 penalty=10
+start=22  duration=30  required=EGG               reward=40 penalty=12
+start=29  duration=30  required=MEAT              reward=40 penalty=12
+
+# Early-mid: Two-ingredient orders
+start=40  duration=30  required=EGG,NOODLES       reward=55 penalty=15
+start=50  duration=30  required=MEAT,ONIONS       reward=60 penalty=15
+start=60  duration=30  required=SAUCE,NOODLES     reward=50 penalty=12
+start=70  duration=30  required=EGG,MEAT          reward=65 penalty=18
+start=80  duration=30  required=ONIONS,SAUCE      reward=45 penalty=12
+
+# Mid game: Parallel opportunity with overlapping orders
+start=95  duration=35  required=NOODLES,SAUCE          reward=50 penalty=15
+start=100 duration=35  required=EGG,ONIONS             reward=55 penalty=15
+start=105 duration=35  required=MEAT,NOODLES           reward=60 penalty=15
+start=110 duration=35  required=ONIONS,MEAT            reward=60 penalty=15
+start=115 duration=35  required=SAUCE,EGG              reward=55 penalty=15
+
+# Mid-late: Three-ingredient complexity
+start=140 duration=40  required=EGG,MEAT,NOODLES        reward=85 penalty=22
+start=160 duration=40  required=ONIONS,SAUCE,NOODLES    reward=75 penalty=20
+start=180 duration=40  required=EGG,ONIONS,MEAT         reward=90 penalty=25
+start=200 duration=40  required=MEAT,NOODLES,SAUCE      reward=85 penalty=22
+start=220 duration=40  required=EGG,NOODLES,SAUCE       reward=80 penalty=20
+
+# Late game: High complexity, high reward
+start=250 duration=50  required=EGG,MEAT,NOODLES,ONIONS       reward=120 penalty=35
+start=280 duration=55  required=MEAT,NOODLES,ONIONS,SAUCE     reward=130 penalty=40
+start=310 duration=60  required=EGG,MEAT,NOODLES,SAUCE        reward=135 penalty=40
+start=340 duration=65  required=EGG,MEAT,NOODLES,ONIONS,SAUCE reward=180 penalty=60
+
+# Endgame rush: Multiple concurrent high-value orders
+start=380 duration=70  required=EGG,MEAT,NOODLES,ONIONS,SAUCE reward=200 penalty=70
+start=400 duration=75  required=EGG,MEAT,NOODLES,ONIONS,SAUCE reward=220 penalty=75
+start=420 duration=80  required=EGG,MEAT,NOODLES,ONIONS,SAUCE reward=240 penalty=80

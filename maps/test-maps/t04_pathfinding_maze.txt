@@ -1,0 +1,58 @@
+# Test Map: Pathfinding Maze (18x18)
+# Description: Narrow corridors and single-tile chokepoints stress test
+# Tests: Pathfinding efficiency, collision avoidance, dead-end handling, bot coordination
+# Difficulty: Hard - bots must navigate complex corridors without blocking each other
+# Key challenge: Single-tile passages force sequential movement and coordination
+
+##################
+#b.#.......#....R#
+#..#.#####.#......#
+#..#.....#.#.####.#
+#..#.###.#.#......#
+#..#...#.#.#####..#
+#..###.#.#.......##
+#......#.#.#####..#
+#.####.#.#......$.#
+#....#.#.#.######.#
+#.##.#.#.#........#
+#..#.#.#.#.######.#
+#..#...#...#...CCK#
+#..#####.###......#
+#........#..T.S.U.#
+#.#########.......#
+#...............b.#
+##################
+
+SWITCH: turn=250 duration=100
+
+ORDERS:
+# Pathfinding warm-up: Simple orders requiring navigation
+start=1   duration=30  required=NOODLES         reward=40 penalty=12
+start=10  duration=30  required=SAUCE           reward=40 penalty=12
+start=20  duration=35  required=EGG             reward=50 penalty=15
+start=30  duration=35  required=MEAT            reward=50 penalty=15
+
+# Overlapping orders force both bots to navigate simultaneously
+start=45  duration=35  required=NOODLES,SAUCE        reward=55 penalty=18
+start=50  duration=35  required=EGG,ONIONS           reward=60 penalty=18
+
+# Corridor stress: Multiple orders requiring trips through chokepoints
+start=70  duration=40  required=EGG,NOODLES          reward=65 penalty=20
+start=75  duration=40  required=MEAT,SAUCE           reward=70 penalty=20
+start=80  duration=40  required=ONIONS,NOODLES       reward=60 penalty=18
+
+# Mid-game: Increasing complexity while navigating
+start=110 duration=45  required=EGG,MEAT,NOODLES         reward=90 penalty=28
+start=125 duration=45  required=ONIONS,SAUCE,NOODLES     reward=80 penalty=25
+start=140 duration=45  required=EGG,ONIONS,MEAT          reward=95 penalty=30
+
+# Heavy corridor usage phase
+start=165 duration=50  required=MEAT,NOODLES,SAUCE       reward=100 penalty=32
+start=185 duration=50  required=EGG,NOODLES,ONIONS       reward=95 penalty=30
+start=205 duration=50  required=MEAT,ONIONS,SAUCE        reward=100 penalty=32
+
+# Late game: Full complexity orders with corridor navigation
+start=230 duration=60  required=EGG,MEAT,NOODLES,ONIONS       reward=130 penalty=45
+start=260 duration=65  required=MEAT,NOODLES,ONIONS,SAUCE     reward=140 penalty=50
+start=290 duration=70  required=EGG,MEAT,NOODLES,SAUCE        reward=145 penalty=50
+start=330 duration=80  required=EGG,MEAT,NOODLES,ONIONS,SAUCE reward=200 penalty=70

@@ -1,0 +1,51 @@
+##############
+#b...C..$....#
+#....K..U....#
+#....S..T....#
+#............#
+#............#
+#.SKCR..B$UTb#
+##############
+
+
+SWITCH: turn=250 duration=100
+
+ORDERS:
+# Wave 1 - 4 concurrent orders (turn 0-30)
+start=0   duration=30  required=NOODLES           reward=60   penalty=5
+start=0   duration=30  required=MEAT              reward=120  penalty=10
+start=0   duration=35  required=NOODLES,MEAT      reward=200  penalty=15
+start=5   duration=30  required=EGG               reward=70   penalty=5
+
+# Wave 2 - 5 concurrent (turn 30-70)
+start=30  duration=35  required=NOODLES           reward=60   penalty=5
+start=35  duration=30  required=MEAT              reward=120  penalty=10
+start=35  duration=35  required=NOODLES,MEAT      reward=200  penalty=15
+start=40  duration=30  required=ONIONS            reward=50   penalty=5
+start=45  duration=35  required=MEAT,EGG          reward=180  penalty=15
+
+# Wave 3 - 6 concurrent (turn 70-120)
+start=70  duration=30  required=NOODLES           reward=60   penalty=5
+start=70  duration=30  required=MEAT              reward=120  penalty=10
+start=75  duration=35  required=NOODLES,MEAT      reward=200  penalty=15
+start=80  duration=30  required=EGG               reward=70   penalty=5
+start=85  duration=35  required=ONIONS,MEAT       reward=160  penalty=15
+start=90  duration=40  required=NOODLES,MEAT,EGG  reward=350  penalty=25
+
+# Wave 4 - High value rush (turn 120-180)
+start=120 duration=25  required=NOODLES,MEAT      reward=250  penalty=20
+start=125 duration=25  required=MEAT,EGG          reward=220  penalty=15
+start=130 duration=25  required=NOODLES,ONIONS    reward=140  penalty=10
+start=135 duration=25  required=MEAT              reward=150  penalty=10
+start=140 duration=30  required=NOODLES,MEAT,EGG  reward=400  penalty=30
+start=145 duration=25  required=NOODLES           reward=70   penalty=5
+
+# Wave 5 - Chaos (turn 180-250)
+start=180 duration=20  required=NOODLES           reward=80   penalty=5
+start=185 duration=20  required=MEAT              reward=150  penalty=10
+start=190 duration=25  required=NOODLES,MEAT      reward=220  penalty=15
+start=195 duration=20  required=EGG               reward=90   penalty=5
+start=200 duration=25  required=MEAT,ONIONS       reward=180  penalty=15
+start=205 duration=25  required=NOODLES,MEAT      reward=220  penalty=15
+start=210 duration=20  required=NOODLES           reward=80   penalty=5
+start=215 duration=25  required=MEAT,EGG          reward=200  penalty=15

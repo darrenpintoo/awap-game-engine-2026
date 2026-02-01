@@ -5,7 +5,7 @@ Kb.CC.T
 K.CC...
 R..CC.$
 
-SWITCH: turn=250 duration=100
+SWITCH: turn=300 duration=1000000
 
 ORDERS:
 start=10     duration=200  required=EGG,ONIONS,MEAT,NOODLES,SAUCE           reward=10000 penalty=3

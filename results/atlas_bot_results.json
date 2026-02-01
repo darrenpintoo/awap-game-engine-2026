@@ -1,0 +1,656 @@
+{
+  "timestamp": "2026-02-01T16:25:48.343897",
+  "atlas_bot": "M:\\A0 Coding Projects\\GitHub\\AWAP\\awap-game-engine-2026\\bots\\atlas_bot.py",
+  "target_bot": "m:\\A0 Coding Projects\\GitHub\\AWAP\\test.py",
+  "matches": [
+    {
+      "map": "chess",
+      "category": "official",
+      "atlas_side": "red",
+      "red_score": 747,
+      "blue_score": 2265,
+      "winner": "blue",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "chess",
+      "category": "official",
+      "atlas_side": "blue",
+      "red_score": 2265,
+      "blue_score": 747,
+      "winner": "red",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "chopped",
+      "category": "official",
+      "atlas_side": "red",
+      "red_score": 950,
+      "blue_score": 1144,
+      "winner": "blue",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "chopped",
+      "category": "official",
+      "atlas_side": "blue",
+      "red_score": 1144,
+      "blue_score": 950,
+      "winner": "red",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "orbit",
+      "category": "official",
+      "atlas_side": "red",
+      "red_score": 792,
+      "blue_score": 11084,
+      "winner": "blue",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "orbit",
+      "category": "official",
+      "atlas_side": "blue",
+      "red_score": 11084,
+      "blue_score": 792,
+      "winner": "red",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "simple_map",
+      "category": "official",
+      "atlas_side": "red",
+      "red_score": 709,
+      "blue_score": 1122,
+      "winner": "blue",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "simple_map",
+      "category": "official",
+      "atlas_side": "blue",
+      "red_score": 1122,
+      "blue_score": 709,
+      "winner": "red",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "small_wall",
+      "category": "official",
+      "atlas_side": "red",
+      "red_score": 0,
+      "blue_score": 1619,
+      "winner": "blue",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "small_wall",
+      "category": "official",
+      "atlas_side": "blue",
+      "red_score": 1619,
+      "blue_score": 0,
+      "winner": "red",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "split",
+      "category": "official",
+      "atlas_side": "red",
+      "red_score": 257,
+      "blue_score": 2063,
+      "winner": "blue",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "split",
+      "category": "official",
+      "atlas_side": "blue",
+      "red_score": 2704,
+      "blue_score": 257,
+      "winner": "red",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "throughput",
+      "category": "official",
+      "atlas_side": "red",
+      "red_score": 1209,
+      "blue_score": 30190,
+      "winner": "blue",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "throughput",
+      "category": "official",
+      "atlas_side": "blue",
+      "red_score": 30190,
+      "blue_score": 1209,
+      "winner": "red",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "v1",
+      "category": "official",
+      "atlas_side": "red",
+      "red_score": 779,
+      "blue_score": 1681,
+      "winner": "blue",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "v1",
+      "category": "official",
+      "atlas_side": "blue",
+      "red_score": 1681,
+      "blue_score": 779,
+      "winner": "red",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "01_tiny_sprint",
+      "category": "test-maps",
+      "atlas_side": "red",
+      "red_score": 542,
+      "blue_score": 934,
+      "winner": "blue",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "01_tiny_sprint",
+      "category": "test-maps",
+      "atlas_side": "blue",
+      "red_score": 1232,
+      "blue_score": 542,
+      "winner": "red",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "02_balanced_medium",
+      "category": "test-maps",
+      "atlas_side": "red",
+      "red_score": 388,
+      "blue_score": 1101,
+      "winner": "blue",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "02_balanced_medium",
+      "category": "test-maps",
+      "atlas_side": "blue",
+      "red_score": 1101,
+      "blue_score": 388,
+      "winner": "red",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "03_grand_kitchen",
+      "category": "test-maps",
+      "atlas_side": "red",
+      "red_score": 0,
+      "blue_score": 0,
+      "winner": "error",
+      "error": "Could not parse result",
+      "output": null
+    },
+    {
+      "map": "03_grand_kitchen",
+      "category": "test-maps",
+      "atlas_side": "blue",
+      "red_score": 0,
+      "blue_score": 0,
+      "winner": "error",
+      "error": "Could not parse result",
+      "output": null
+    },
+    {
+      "map": "04_varied_orders",
+      "category": "test-maps",
+      "atlas_side": "red",
+      "red_score": 187,
+      "blue_score": 1559,
+      "winner": "blue",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "04_varied_orders",
+      "category": "test-maps",
+      "atlas_side": "blue",
+      "red_score": 1559,
+      "blue_score": 187,
+      "winner": "red",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "05_chokepoint_chaos",
+      "category": "test-maps",
+      "atlas_side": "red",
+      "red_score": 548,
+      "blue_score": 590,
+      "winner": "blue",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "05_chokepoint_chaos",
+      "category": "test-maps",
+      "atlas_side": "blue",
+      "red_score": 590,
+      "blue_score": 548,
+      "winner": "red",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "06_resource_crunch",
+      "category": "test-maps",
+      "atlas_side": "red",
+      "red_score": 348,
+      "blue_score": 644,
+      "winner": "blue",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "06_resource_crunch",
+      "category": "test-maps",
+      "atlas_side": "blue",
+      "red_score": 644,
+      "blue_score": 348,
+      "winner": "red",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "07_pressure_cooker",
+      "category": "test-maps",
+      "atlas_side": "red",
+      "red_score": 0,
+      "blue_score": 0,
+      "winner": "red",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "07_pressure_cooker",
+      "category": "test-maps",
+      "atlas_side": "blue",
+      "red_score": 0,
+      "blue_score": 0,
+      "winner": "blue",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "08_sabotage_alley",
+      "category": "test-maps",
+      "atlas_side": "red",
+      "red_score": 92,
+      "blue_score": 1630,
+      "winner": "blue",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "08_sabotage_alley",
+      "category": "test-maps",
+      "atlas_side": "blue",
+      "red_score": 1630,
+      "blue_score": 92,
+      "winner": "red",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "09_remote_pantry",
+      "category": "test-maps",
+      "atlas_side": "red",
+      "red_score": 291,
+      "blue_score": 1329,
+      "winner": "blue",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "09_remote_pantry",
+      "category": "test-maps",
+      "atlas_side": "blue",
+      "red_score": 1329,
+      "blue_score": 291,
+      "winner": "red",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "10_burn_risk",
+      "category": "test-maps",
+      "atlas_side": "red",
+      "red_score": 0,
+      "blue_score": 361,
+      "winner": "blue",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "10_burn_risk",
+      "category": "test-maps",
+      "atlas_side": "blue",
+      "red_score": 361,
+      "blue_score": 0,
+      "winner": "red",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "11_grinder_(erics-map-5)",
+      "category": "test-maps",
+      "atlas_side": "red",
+      "red_score": 767,
+      "blue_score": 2546,
+      "winner": "blue",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "11_grinder_(erics-map-5)",
+      "category": "test-maps",
+      "atlas_side": "blue",
+      "red_score": 2546,
+      "blue_score": 767,
+      "winner": "red",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "12_overload-eric",
+      "category": "test-maps",
+      "atlas_side": "red",
+      "red_score": 957,
+      "blue_score": 2106,
+      "winner": "blue",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "12_overload-eric",
+      "category": "test-maps",
+      "atlas_side": "blue",
+      "red_score": 2106,
+      "blue_score": 957,
+      "winner": "red",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "13_throughput",
+      "category": "test-maps",
+      "atlas_side": "red",
+      "red_score": 1209,
+      "blue_score": 40335,
+      "winner": "blue",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "13_throughput",
+      "category": "test-maps",
+      "atlas_side": "blue",
+      "red_score": 40335,
+      "blue_score": 1209,
+      "winner": "red",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "01_tiny_sprint",
+      "category": "test-maps-revised-for-fairness",
+      "atlas_side": "red",
+      "red_score": 762,
+      "blue_score": 1261,
+      "winner": "blue",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "01_tiny_sprint",
+      "category": "test-maps-revised-for-fairness",
+      "atlas_side": "blue",
+      "red_score": 1261,
+      "blue_score": 762,
+      "winner": "red",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "02_balanced_medium",
+      "category": "test-maps-revised-for-fairness",
+      "atlas_side": "red",
+      "red_score": 601,
+      "blue_score": 1599,
+      "winner": "blue",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "02_balanced_medium",
+      "category": "test-maps-revised-for-fairness",
+      "atlas_side": "blue",
+      "red_score": 1599,
+      "blue_score": 601,
+      "winner": "red",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "03_grand_kitchen",
+      "category": "test-maps-revised-for-fairness",
+      "atlas_side": "red",
+      "red_score": 0,
+      "blue_score": 0,
+      "winner": "error",
+      "error": "Could not parse result",
+      "output": null
+    },
+    {
+      "map": "03_grand_kitchen",
+      "category": "test-maps-revised-for-fairness",
+      "atlas_side": "blue",
+      "red_score": 0,
+      "blue_score": 0,
+      "winner": "error",
+      "error": "Could not parse result",
+      "output": null
+    },
+    {
+      "map": "04_varied_orders",
+      "category": "test-maps-revised-for-fairness",
+      "atlas_side": "red",
+      "red_score": 622,
+      "blue_score": 1299,
+      "winner": "blue",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "04_varied_orders",
+      "category": "test-maps-revised-for-fairness",
+      "atlas_side": "blue",
+      "red_score": 1299,
+      "blue_score": 622,
+      "winner": "red",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "05_parallel_paths",
+      "category": "test-maps-revised-for-fairness",
+      "atlas_side": "red",
+      "red_score": 619,
+      "blue_score": 1674,
+      "winner": "blue",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "05_parallel_paths",
+      "category": "test-maps-revised-for-fairness",
+      "atlas_side": "blue",
+      "red_score": 1674,
+      "blue_score": 619,
+      "winner": "red",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "06_high_throughput",
+      "category": "test-maps-revised-for-fairness",
+      "atlas_side": "red",
+      "red_score": 533,
+      "blue_score": 541,
+      "winner": "blue",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "06_high_throughput",
+      "category": "test-maps-revised-for-fairness",
+      "atlas_side": "blue",
+      "red_score": 541,
+      "blue_score": 533,
+      "winner": "red",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "07_tight_timing",
+      "category": "test-maps-revised-for-fairness",
+      "atlas_side": "red",
+      "red_score": 38,
+      "blue_score": 1617,
+      "winner": "blue",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "07_tight_timing",
+      "category": "test-maps-revised-for-fairness",
+      "atlas_side": "blue",
+      "red_score": 1617,
+      "blue_score": 38,
+      "winner": "red",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "08_resource_sharing",
+      "category": "test-maps-revised-for-fairness",
+      "atlas_side": "red",
+      "red_score": 630,
+      "blue_score": 1301,
+      "winner": "blue",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "08_resource_sharing",
+      "category": "test-maps-revised-for-fairness",
+      "atlas_side": "blue",
+      "red_score": 1301,
+      "blue_score": 630,
+      "winner": "red",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "09_sabotage_ready",
+      "category": "test-maps-revised-for-fairness",
+      "atlas_side": "red",
+      "red_score": 0,
+      "blue_score": 0,
+      "winner": "error",
+      "error": "Could not parse result",
+      "output": null
+    },
+    {
+      "map": "09_sabotage_ready",
+      "category": "test-maps-revised-for-fairness",
+      "atlas_side": "blue",
+      "red_score": 0,
+      "blue_score": 0,
+      "winner": "error",
+      "error": "Could not parse result",
+      "output": null
+    },
+    {
+      "map": "10_endgame_crunch",
+      "category": "test-maps-revised-for-fairness",
+      "atlas_side": "red",
+      "red_score": 116,
+      "blue_score": 1071,
+      "winner": "blue",
+      "error": null,
+      "output": null
+    },
+    {
+      "map": "10_endgame_crunch",
+      "category": "test-maps-revised-for-fairness",
+      "atlas_side": "blue",
+      "red_score": 1071,
+      "blue_score": 116,
+      "winner": "red",
+      "error": null,
+      "output": null
+    }
+  ],
+  "summary": {
+    "total_matches": 62,
+    "atlas_wins": 2,
+    "target_wins": 54,
+    "ties": 0,
+    "errors": 6,
+    "by_category": {
+      "official": {
+        "wins": 0,
+        "losses": 16,
+        "ties": 0
+      },
+      "test-maps": {
+        "wins": 2,
+        "losses": 22,
+        "ties": 0
+      },
+      "test-maps-revised-for-fairness": {
+        "wins": 0,
+        "losses": 16,
+        "ties": 0
+      }
+    },
+    "by_side": {
+      "red_wins": 1,
+      "blue_wins": 1
+    },
+    "win_rate": 3.571428571428571
+  }
+}

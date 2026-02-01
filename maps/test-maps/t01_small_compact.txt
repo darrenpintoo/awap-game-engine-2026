@@ -1,0 +1,49 @@
+# Test Map: Small Compact (8x8)
+# Description: Minimal footprint map testing efficiency in tight spaces
+# Tests: Basic pathfinding, resource proximity optimization, quick order turnaround
+# Difficulty: Easy-Medium, good for baseline performance measurement
+
+########
+#b.CCU.#
+#.K..$.#
+#.S....#
+#....T.#
+#.$..K.#
+#.R.CC.#
+########
+
+SWITCH: turn=250 duration=100
+
+ORDERS:
+# Phase 1: Simple single-ingredient orders for warmup
+start=1   duration=15  required=NOODLES         reward=25 penalty=8
+start=5   duration=15  required=SAUCE           reward=25 penalty=8
+start=10  duration=15  required=ONIONS          reward=25 penalty=8
+start=15  duration=15  required=EGG             reward=30 penalty=10
+start=20  duration=15  required=MEAT            reward=30 penalty=10
+
+# Phase 2: Two-ingredient combinations
+start=30  duration=20  required=EGG,NOODLES     reward=40 penalty=12
+start=40  duration=20  required=MEAT,ONIONS     reward=45 penalty=12
+start=50  duration=20  required=SAUCE,NOODLES   reward=35 penalty=10
+start=60  duration=20  required=EGG,SAUCE       reward=40 penalty=12
+start=70  duration=20  required=MEAT,NOODLES    reward=45 penalty=12
+
+# Phase 3: Three-ingredient complexity
+start=85  duration=25  required=EGG,MEAT,NOODLES      reward=60 penalty=15
+start=100 duration=25  required=ONIONS,SAUCE,NOODLES  reward=55 penalty=15
+start=115 duration=25  required=EGG,ONIONS,MEAT       reward=65 penalty=18
+start=130 duration=25  required=MEAT,NOODLES,SAUCE    reward=60 penalty=15
+start=145 duration=25  required=EGG,ONIONS,SAUCE      reward=55 penalty=15
+
+# Phase 4: Rapid-fire simple orders
+start=165 duration=12  required=NOODLES         reward=20 penalty=10
+start=168 duration=12  required=SAUCE           reward=20 penalty=10
+start=171 duration=12  required=ONIONS          reward=20 penalty=10
+start=174 duration=12  required=NOODLES         reward=20 penalty=10
+start=177 duration=12  required=SAUCE           reward=20 penalty=10
+
+# Phase 5: Final complex orders
+start=200 duration=30  required=EGG,MEAT,NOODLES,ONIONS       reward=80 penalty=25
+start=220 duration=35  required=EGG,MEAT,NOODLES,SAUCE        reward=85 penalty=25
+start=240 duration=40  required=MEAT,NOODLES,ONIONS,SAUCE     reward=90 penalty=30
