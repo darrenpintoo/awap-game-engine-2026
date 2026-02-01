@@ -8,7 +8,7 @@
 #......$...b#
 #############
 
-SWITCH: turn=400 duration=50
+SWITCH: turn=250 duration=50
 
 ORDERS:
 start=0   duration=80  required=NOODLES,MEAT      reward=300  penalty=75
