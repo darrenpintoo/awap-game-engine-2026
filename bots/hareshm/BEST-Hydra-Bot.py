@@ -393,29 +393,30 @@ class MapClassifier:
     
     def _recommend_mode(self, analysis: MapAnalysis) -> GameMode:
         """Recommend best mode based on map characteristics"""
-        # RUSH: Small maps with simple orders
-        if analysis.size in [MapSize.TINY, MapSize.SMALL]:
-            if analysis.order_pattern == OrderPattern.SIMPLE_HEAVY:
-                return GameMode.RUSH
-            if analysis.num_cookers <= 1:
-                return GameMode.RUSH
+        # PRIORITY 1: RUSH for simple-heavy order patterns (regardless of map size)
+        # This beats rush_bot at its own game
+        if analysis.order_pattern == OrderPattern.SIMPLE_HEAVY:
+            return GameMode.RUSH
         
-        # EFFICIENCY: Mixed orders with good infrastructure
+        # PRIORITY 2: RUSH for tiny maps with few cookers
+        if analysis.size == MapSize.TINY and analysis.num_cookers <= 1:
+            return GameMode.RUSH
+        
+        # PRIORITY 3: EFFICIENCY for mixed orders with good infrastructure
+        # This is our strongest mode - optimizes profit per turn
         if analysis.order_pattern == OrderPattern.MIXED:
-            if analysis.num_counters >= 3 and analysis.num_cookers >= 2:
-                return GameMode.EFFICIENCY
+            return GameMode.EFFICIENCY
         
-        # TURTLE: Large maps with abundant resources
+        # PRIORITY 4: TURTLE for large maps with abundant resources
         if analysis.size == MapSize.LARGE:
-            if analysis.num_cookers >= 3 and analysis.num_counters >= 5:
+            if analysis.num_cookers >= 2 and analysis.num_counters >= 4:
                 return GameMode.TURTLE
         
-        # AGGRESSIVE: Small maps where sabotage is impactful
-        if analysis.size in [MapSize.TINY, MapSize.SMALL]:
-            if analysis.num_cookers <= 2:
-                return GameMode.AGGRESSIVE
+        # PRIORITY 5: For time pressure or complex orders, use EFFICIENCY
+        if analysis.order_pattern in [OrderPattern.TIME_PRESSURE, OrderPattern.COMPLEX_HEAVY]:
+            return GameMode.EFFICIENCY
         
-        # Default to BALANCED
+        # Default to BALANCED (proven to work well in original tournament)
         return GameMode.BALANCED
 
 
@@ -476,53 +477,53 @@ class ScoredOrder:
         self.efficiency = self.profit / max(self.turns_needed, 1)
         self.base_score = self.efficiency
         
-        # Mode-specific adjustments
+        # Mode-specific adjustments - PROVEN scoring from champion_bot
+        # Key insight: Champion uses profit/turn + bonuses for simplicity
+        
+        # BIG bonus for simpler orders (fewer ingredients = more reliable)
+        simplicity_bonus = (5 - len(self.required)) * 2.0
+        
+        # Bonus for orders with no cooking (faster completion)
+        no_cook_bonus = 3.0 if cook_count == 0 else 0
+        
+        # Bonus for single-ingredient orders
+        single_bonus = 5.0 if len(self.required) == 1 else 0
+        
+        # Penalty for orders with multiple cook items (risky)
+        multi_cook_penalty = cook_count * 2.0 if cook_count > 1 else 0
+        
+        # Bonus for orders with only simple ingredients
+        simple_count = sum(1 for ing in self.required if ing in ['SAUCE', 'NOODLES'])
+        simple_ing_bonus = simple_count * 1.0
+        
+        # Base mode score = profit/turn + all bonuses
+        self.mode_score = self.base_score + simplicity_bonus + no_cook_bonus + single_bonus + simple_ing_bonus - multi_cook_penalty
+        
+        # Mode-specific multipliers (small adjustments only)
         if mode == GameMode.RUSH:
-            # Rush: Strongly prefer simple non-cooking orders
-            if len(self.required) <= 2 and cook_count == 0:
-                self.mode_score = self.base_score * 2.0 + 10
-            elif len(self.required) <= 2:
-                self.mode_score = self.base_score * 1.2
-            elif cook_count > 0:
-                self.mode_score = self.base_score * 0.3
-            else:
-                self.mode_score = self.base_score * 0.5
+            # Rush: Extra bonus for simple non-cooking orders
+            if cook_count == 0:
+                self.mode_score *= 1.3
+            if len(self.required) <= 2:
+                self.mode_score *= 1.2
         
         elif mode == GameMode.EFFICIENCY:
-            # Efficiency: Prefer best profit/turn, penalize complexity
-            self.mode_score = self.base_score
-            if len(self.required) > 3:
-                self.mode_score *= 0.5  # Soft penalty for complex
-            if cook_count == 0:
-                self.mode_score *= 1.3  # Bonus for no cooking
-            if len(self.required) == 1:
-                self.mode_score *= 1.2  # Bonus for single ingredient
+            # Efficiency: Extra weight on profit/turn
+            self.mode_score = self.base_score * 1.5 + simplicity_bonus + no_cook_bonus + single_bonus
         
         elif mode == GameMode.TURTLE:
-            # Turtle: Balance throughput, accept moderate complexity
-            self.mode_score = self.base_score
+            # Turtle: Accept moderate complexity
             if len(self.required) <= 3:
-                self.mode_score *= 1.2
-            # Slight preference for cooking (use both bots)
-            if cook_count == 1:
                 self.mode_score *= 1.1
         
         elif mode == GameMode.AGGRESSIVE:
-            # Aggressive: Focus on quick wins while sabotaging
-            if len(self.required) <= 2 and cook_count == 0:
-                self.mode_score = self.base_score * 1.5 + 5
-            else:
-                self.mode_score = self.base_score * 0.3
+            # Aggressive: Strongly prefer fast completable orders
+            if cook_count == 0 and len(self.required) <= 2:
+                self.mode_score *= 1.5
+            elif cook_count > 0:
+                self.mode_score *= 0.8
         
-        else:  # BALANCED
-            # Balanced: Moderate preferences
-            self.mode_score = self.base_score
-            if len(self.required) <= 2:
-                self.mode_score += 2.0
-            if cook_count == 0:
-                self.mode_score += 1.5
-            if len(self.required) >= 5:
-                self.mode_score *= 0.7
+        # BALANCED uses the base score with bonuses (no additional multiplier)
 
 
 class OrderSelector:
@@ -563,12 +564,12 @@ class OrderSelector:
     @staticmethod
     def get_rush_order(controller: RobotController, team: Team,
                        exclude_ids: Set[int] = None) -> Optional[ScoredOrder]:
-        """Get simplest non-cooking order for rush mode"""
+        """Get simplest non-cooking order for parallel rush execution"""
         current_turn = controller.get_turn()
         orders = controller.get_orders(team)
         
-        best = None
-        best_score = -9999
+        # Pass 1: Look for simple non-cooking orders (ideal for parallel execution)
+        candidates = []
         
         for order in orders:
             if not order.get('is_active'):
@@ -581,31 +582,90 @@ class OrderSelector:
             required = order['required']
             time_left = order['expires_turn'] - current_turn
             
-            if time_left < 15:
-                continue
-            
-            # Rush rule: max 2 ingredients, no cooking
-            if len(required) > 2:
-                continue
-            
+            # For parallel execution, MUST NOT have cooking (parallel bot can't cook)
             has_cooking = any(INGREDIENT_INFO.get(i, {}).get('cook') for i in required)
             if has_cooking:
                 continue
             
-            score = 100 - len(required) * 30 + order['reward'] / 10
-            if score > best_score:
-                best_score = score
-                so = ScoredOrder(
-                    order_id=order_id,
-                    required=required,
-                    reward=order['reward'],
-                    penalty=order.get('penalty', 0),
-                    expires_turn=order['expires_turn']
-                )
-                so.mode_score = score
-                best = so
+            # Calculate minimum time needed based on ingredients
+            # Single SAUCE/NOODLES: ~8 turns (buy plate, buy ing, add, submit)
+            # Single ONIONS: ~15 turns (buy plate, buy, chop, pickup, add, submit)
+            # Double ingredients: add ~5 turns per extra
+            simple_only = all(i in ['SAUCE', 'NOODLES'] for i in required)
+            has_chop = any(INGREDIENT_INFO.get(i, {}).get('chop') for i in required)
+            
+            if simple_only and len(required) == 1:
+                min_time = 8  # Very fast - just buy and add
+            elif simple_only:
+                min_time = 10 + (len(required) - 1) * 3  # More ingredients
+            elif has_chop and len(required) == 1:
+                min_time = 15  # Chop takes time
+            else:
+                min_time = 15 + len(required) * 3  # Default
+            
+            if time_left < min_time:
+                continue
+            
+            # Score by simplicity and speed
+            score = 200
+            score -= len(required) * 30  # Fewer ingredients = faster
+            
+            # Bonus for SAUCE/NOODLES only (no chopping needed)
+            if simple_only:
+                score += 80
+            
+            # Slight bonus for reward
+            score += order['reward'] / 20
+            
+            so = ScoredOrder(
+                order_id=order_id,
+                required=required,
+                reward=order['reward'],
+                penalty=order.get('penalty', 0),
+                expires_turn=order['expires_turn']
+            )
+            so.mode_score = score
+            candidates.append(so)
         
-        return best
+        if candidates:
+            candidates.sort(key=lambda x: x.mode_score, reverse=True)
+            return candidates[0]
+        
+        # Pass 2: If no non-cooking orders, try orders with only chopping (no cooking)
+        for order in orders:
+            if not order.get('is_active'):
+                continue
+            
+            order_id = order['order_id']
+            if exclude_ids and order_id in exclude_ids:
+                continue
+            
+            required = order['required']
+            time_left = order['expires_turn'] - current_turn
+            
+            if time_left < 25:  # Need more time for chopping
+                continue
+            
+            has_cooking = any(INGREDIENT_INFO.get(i, {}).get('cook') for i in required)
+            if has_cooking:
+                continue  # Still skip cooking orders
+            
+            # Accept orders with chopping
+            so = ScoredOrder(
+                order_id=order_id,
+                required=required,
+                reward=order['reward'],
+                penalty=order.get('penalty', 0),
+                expires_turn=order['expires_turn']
+            )
+            so.mode_score = 50 - len(required) * 10
+            candidates.append(so)
+        
+        if candidates:
+            candidates.sort(key=lambda x: x.mode_score, reverse=True)
+            return candidates[0]
+        
+        return None
 
 
 # =============================================================================
@@ -1752,18 +1812,24 @@ class BotPlayer:
             # Could implement defensive measures here
         
         # Execute based on current mode
-        if self.current_mode == GameMode.RUSH:
-            # Both bots run independent parallel pipelines
+        # STRATEGY: Use parallel bots when simple orders exist to maximize throughput
+        
+        # Check if any non-cooking orders exist for parallel execution
+        rush_order_0 = OrderSelector.get_rush_order(controller, team)
+        rush_order_1 = OrderSelector.get_rush_order(controller, team, {rush_order_0.order_id} if rush_order_0 else set())
+        
+        # If 2+ simple orders available, both bots can work in parallel
+        if rush_order_0 and rush_order_1:
+            # Both bots run independent parallel pipelines - MAX THROUGHPUT
             order_id_0 = self._execute_parallel_bot(controller, bots[0], team)
             if len(bots) > 1:
                 exclude = {order_id_0} if order_id_0 else set()
                 self._execute_parallel_bot(controller, bots[1], team, exclude)
         
-        elif self.current_mode == GameMode.TURTLE:
-            # Both bots process orders, split by role (handled in execute)
-            self._execute_primary_bot(controller, bots[0], team)
+        # If only 1 simple order, bot 0 does it in parallel, bot 1 is helper
+        elif rush_order_0:
+            order_id_0 = self._execute_parallel_bot(controller, bots[0], team)
             if len(bots) > 1:
-                # Helper washes dishes or assists
                 self._execute_helper_bot(controller, bots[1], team)
         
         elif self.current_mode == GameMode.AGGRESSIVE:
@@ -1772,8 +1838,9 @@ class BotPlayer:
             if len(bots) > 1:
                 self._execute_helper_bot(controller, bots[1], team)
         
-        else:  # BALANCED, EFFICIENCY
-            # Primary order fulfillment, helper supports
+        else:
+            # No simple orders available - use primary bot which handles cooking
             self._execute_primary_bot(controller, bots[0], team)
             if len(bots) > 1:
+                # Helper bot washes dishes and assists
                 self._execute_helper_bot(controller, bots[1], team)
