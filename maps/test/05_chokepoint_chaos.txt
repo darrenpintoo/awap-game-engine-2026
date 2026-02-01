@@ -1,0 +1,41 @@
+# MAP: chokepoint_chaos.txt
+# DESCRIPTION: 18x18 map with narrow corridors and single-tile chokepoints
+# TESTS: Pathfinding stress, collision avoidance, navigation under contention
+# SIZE: 18x18 (maze-like with restricted movement)
+
+##################
+#$B..#....#....B$#
+#.B..#....#....B.#
+#....#....#......#
+####.#....#.#####.
+#....#....#......#
+#....#.b..#....K.#
+#....######....K.#
+#.............CC.#
+#.......U........#
+#.CC.....######..#
+#.K....#..b.#....#
+#.K....#....#....#
+#......#....#.####
+#......#....#....#
+#.B....#....#..B.#
+#$B..R.#.TS.#.R.B#
+##################
+
+SWITCH: turn=250 duration=100
+
+ORDERS:
+start=1   duration=30  required=NOODLES           reward=50 penalty=20
+start=10  duration=30  required=ONIONS            reward=50 penalty=20
+start=20  duration=30  required=EGG               reward=50 penalty=20
+start=30  duration=30  required=MEAT              reward=50 penalty=20
+start=50  duration=35  required=EGG,NOODLES       reward=80 penalty=35
+start=70  duration=35  required=MEAT,ONIONS       reward=80 penalty=35
+start=90  duration=40  required=SAUCE             reward=70 penalty=30
+start=110 duration=45  required=EGG,MEAT,NOODLES  reward=120 penalty=50
+start=130 duration=45  required=NOODLES,ONIONS,SAUCE  reward=120 penalty=50
+start=160 duration=50  required=EGG,MEAT,ONIONS,SAUCE  reward=150 penalty=60
+start=190 duration=55  required=EGG,MEAT,NOODLES,ONIONS  reward=180 penalty=70
+start=220 duration=60  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=250 penalty=100
+start=260 duration=60  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=250 penalty=100
+start=300 duration=60  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=250 penalty=100

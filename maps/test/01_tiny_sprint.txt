@@ -1,0 +1,32 @@
+# MAP: tiny_sprint.txt
+# DESCRIPTION: Ultra-compact 8x8 map for basic navigation and speed tests
+# TESTS: Basic pathfinding, simple order fulfillment, minimal complexity
+# SIZE: 8x8 (smaller than throughput.txt)
+
+########
+#$..R.U#
+#.b..b.#
+#B....B#
+#B.CC.B#
+#..KK..#
+#.TS...#
+########
+
+SWITCH: turn=150 duration=75
+
+ORDERS:
+start=1   duration=15  required=NOODLES           reward=50 penalty=20
+start=5   duration=15  required=ONIONS            reward=50 penalty=20
+start=10  duration=15  required=EGG               reward=50 penalty=20
+start=15  duration=15  required=MEAT              reward=50 penalty=20
+start=25  duration=20  required=EGG,NOODLES       reward=80 penalty=30
+start=35  duration=20  required=MEAT,ONIONS       reward=80 penalty=30
+start=45  duration=20  required=NOODLES,ONIONS    reward=80 penalty=30
+start=55  duration=25  required=EGG,MEAT          reward=100 penalty=40
+start=70  duration=25  required=EGG,MEAT,NOODLES  reward=120 penalty=50
+start=85  duration=30  required=MEAT,NOODLES,ONIONS  reward=120 penalty=50
+start=100 duration=30  required=EGG,ONIONS,SAUCE  reward=150 penalty=60
+start=120 duration=35  required=EGG,MEAT,NOODLES,ONIONS  reward=200 penalty=80
+start=140 duration=40  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=300 penalty=100
+start=160 duration=40  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=300 penalty=100
+start=180 duration=40  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=300 penalty=100

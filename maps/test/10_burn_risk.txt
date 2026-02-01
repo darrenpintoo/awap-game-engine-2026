@@ -1,0 +1,41 @@
+# MAP: burn_risk.txt
+# DESCRIPTION: 14x14 map with cook-timing-critical orders (eggs and meat)
+# TESTS: Cook timing precision, burn avoidance, cooker monitoring
+# SIZE: 14x14 (many cookers, heavy EGG/MEAT orders that can burn)
+
+##############
+#$..........U#
+#.B........B.#
+#.B..CCCC..B.#
+#....CCCC....#
+#.KK......KK.#
+#.KK..b...KK.#
+#............#
+#....b.......#
+#.KK......KK.#
+#.TS......TS.#
+#.B........B.#
+#R..........R#
+##############
+
+SWITCH: turn=250 duration=100
+
+ORDERS:
+start=1   duration=20  required=EGG               reward=80 penalty=50
+start=3   duration=20  required=EGG               reward=80 penalty=50
+start=6   duration=20  required=MEAT              reward=80 penalty=50
+start=9   duration=20  required=MEAT              reward=80 penalty=50
+start=15  duration=25  required=EGG,EGG           reward=120 penalty=70
+start=22  duration=25  required=MEAT,MEAT         reward=120 penalty=70
+start=30  duration=25  required=EGG,MEAT          reward=130 penalty=75
+start=40  duration=30  required=EGG,EGG,EGG       reward=180 penalty=100
+start=50  duration=30  required=MEAT,MEAT,MEAT    reward=180 penalty=100
+start=65  duration=30  required=EGG,EGG,MEAT      reward=170 penalty=95
+start=80  duration=35  required=EGG,MEAT,MEAT     reward=170 penalty=95
+start=100 duration=35  required=EGG,MEAT,NOODLES  reward=150 penalty=80
+start=120 duration=40  required=EGG,EGG,MEAT,MEAT reward=220 penalty=120
+start=145 duration=40  required=EGG,MEAT,ONIONS,SAUCE  reward=200 penalty=110
+start=175 duration=45  required=EGG,EGG,MEAT,NOODLES   reward=230 penalty=130
+start=210 duration=50  required=EGG,MEAT,MEAT,NOODLES,ONIONS  reward=280 penalty=150
+start=250 duration=55  required=EGG,EGG,MEAT,MEAT,SAUCE  reward=300 penalty=170
+start=290 duration=55  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=320 penalty=180

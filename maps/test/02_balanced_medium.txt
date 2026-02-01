@@ -1,0 +1,44 @@
+# MAP: balanced_medium.txt
+# DESCRIPTION: Well-balanced 15x15 symmetric map with varied order complexity
+# TESTS: All-around bot performance, order prioritization, resource management
+# SIZE: 15x15 (similar to chopped.txt)
+
+###############
+#$...........R#
+#B.CC...CC...B#
+#B...........B#
+#..K.......K..#
+#.............#
+#b.T.......T.b#
+#..S.......S..#
+#.............#
+#..K.......K..#
+#B...........B#
+#B.CC...CC...B#
+#R....U$U....R#
+#.............#
+###############
+
+SWITCH: turn=250 duration=100
+
+ORDERS:
+start=1   duration=20  required=NOODLES              reward=40 penalty=15
+start=5   duration=20  required=ONIONS               reward=40 penalty=15
+start=10  duration=20  required=EGG                  reward=40 penalty=15
+start=15  duration=20  required=MEAT                 reward=40 penalty=15
+start=25  duration=25  required=SAUCE                reward=50 penalty=20
+start=35  duration=25  required=EGG,NOODLES          reward=60 penalty=25
+start=45  duration=25  required=MEAT,ONIONS          reward=60 penalty=25
+start=55  duration=30  required=NOODLES,SAUCE        reward=70 penalty=30
+start=70  duration=30  required=EGG,MEAT             reward=80 penalty=35
+start=85  duration=30  required=ONIONS,SAUCE         reward=80 penalty=35
+start=100 duration=35  required=EGG,MEAT,NOODLES     reward=100 penalty=40
+start=115 duration=35  required=MEAT,ONIONS,SAUCE    reward=100 penalty=40
+start=130 duration=40  required=EGG,NOODLES,ONIONS   reward=120 penalty=50
+start=150 duration=40  required=NOODLES,MEAT,SAUCE   reward=120 penalty=50
+start=170 duration=45  required=EGG,MEAT,ONIONS,SAUCE  reward=150 penalty=60
+start=190 duration=45  required=EGG,NOODLES,ONIONS,SAUCE  reward=150 penalty=60
+start=210 duration=50  required=EGG,MEAT,NOODLES,ONIONS  reward=180 penalty=70
+start=230 duration=50  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=250 penalty=100
+start=260 duration=50  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=250 penalty=100
+start=290 duration=50  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=250 penalty=100

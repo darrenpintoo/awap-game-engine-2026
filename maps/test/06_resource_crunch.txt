@@ -1,0 +1,37 @@
+# MAP: resource_crunch.txt
+# DESCRIPTION: 14x14 map with severely limited cooking infrastructure
+# TESTS: Resource contention, cooker/sink prioritization, waiting strategy
+# SIZE: 14x14 (limited: 1 cooker, 1 sink, 2 counters)
+
+##############
+#$...........#
+#.B.........R#
+#.B..........#
+#.B..........#
+#.B....b.....#
+#............#
+#.....CC.....#
+#.......b....#
+#.....K......#
+#............#
+#....TS....U.#
+#R..........B#
+##############
+
+SWITCH: turn=300 duration=100
+
+ORDERS:
+start=1   duration=40  required=NOODLES           reward=60 penalty=30
+start=1   duration=40  required=ONIONS            reward=60 penalty=30
+start=10  duration=45  required=EGG               reward=70 penalty=35
+start=20  duration=45  required=MEAT              reward=70 penalty=35
+start=40  duration=50  required=EGG,NOODLES       reward=100 penalty=50
+start=60  duration=50  required=MEAT,ONIONS       reward=100 penalty=50
+start=80  duration=60  required=SAUCE             reward=80 penalty=40
+start=100 duration=60  required=EGG,MEAT          reward=120 penalty=60
+start=130 duration=70  required=NOODLES,SAUCE     reward=130 penalty=65
+start=160 duration=70  required=EGG,MEAT,NOODLES  reward=150 penalty=75
+start=200 duration=80  required=MEAT,ONIONS,SAUCE reward=160 penalty=80
+start=240 duration=80  required=EGG,NOODLES,ONIONS,SAUCE  reward=200 penalty=100
+start=290 duration=90  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=300 penalty=150
+start=350 duration=90  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=300 penalty=150

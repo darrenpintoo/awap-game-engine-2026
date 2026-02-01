@@ -1,0 +1,40 @@
+# MAP: remote_pantry.txt
+# DESCRIPTION: 20x16 map with ingredient boxes far from cooking/submit areas
+# TESTS: Ingredient logistics, long-distance travel efficiency, path optimization
+# SIZE: 20x16 (wide layout with distant resources)
+
+####################
+#BBBB.............$#
+#BBBB..............#
+#BBBB..............#
+#..................#
+#.....b............#
+#..................#
+#.......CCCC.......#
+#.......CCCC.......#
+#...KK........KK...#
+#..................#
+#............b.....#
+#..................#
+#.TS............TS.#
+#R..............U.R#
+####################
+
+SWITCH: turn=300 duration=120
+
+ORDERS:
+start=1   duration=35  required=NOODLES           reward=50 penalty=25
+start=10  duration=35  required=ONIONS            reward=50 penalty=25
+start=20  duration=35  required=EGG               reward=50 penalty=25
+start=30  duration=35  required=MEAT              reward=50 penalty=25
+start=50  duration=40  required=NOODLES,ONIONS    reward=70 penalty=35
+start=70  duration=40  required=EGG,MEAT          reward=70 penalty=35
+start=90  duration=45  required=SAUCE             reward=60 penalty=30
+start=110 duration=50  required=EGG,NOODLES,SAUCE reward=100 penalty=50
+start=140 duration=50  required=MEAT,ONIONS,SAUCE reward=100 penalty=50
+start=170 duration=55  required=EGG,MEAT,NOODLES  reward=130 penalty=65
+start=200 duration=60  required=NOODLES,ONIONS,MEAT,SAUCE  reward=160 penalty=80
+start=240 duration=65  required=EGG,MEAT,NOODLES,ONIONS  reward=180 penalty=90
+start=280 duration=70  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=250 penalty=125
+start=330 duration=70  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=250 penalty=125
+start=380 duration=75  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=280 penalty=140

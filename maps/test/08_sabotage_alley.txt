@@ -1,0 +1,42 @@
+# MAP: sabotage_alley.txt
+# DESCRIPTION: 16x16 map where enemy sabotage has maximum impact
+# TESTS: Sabotage vulnerability, defensive cooking, counter management
+# SIZE: 16x16 (shared counters, exposed cooking areas)
+# NOTE: Single shared cooking area forces interaction, making sabotage impactful
+
+################
+#$.............#
+#.B...........R#
+#.B............#
+#.B.....b......#
+#..............#
+#.....CCCC.....#
+#.....CCCC.....#
+#..KK......KK..#
+#..............#
+#......b.......#
+#.TS........TS.#
+#..............#
+#.B...........B#
+#R........U...$#
+################
+
+SWITCH: turn=250 duration=100
+
+ORDERS:
+start=1   duration=25  required=EGG               reward=60 penalty=30
+start=5   duration=25  required=MEAT              reward=60 penalty=30
+start=15  duration=25  required=EGG               reward=60 penalty=30
+start=20  duration=25  required=MEAT              reward=60 penalty=30
+start=30  duration=30  required=EGG,EGG           reward=100 penalty=50
+start=40  duration=30  required=MEAT,MEAT         reward=100 penalty=50
+start=55  duration=35  required=EGG,MEAT          reward=120 penalty=60
+start=70  duration=35  required=EGG,NOODLES       reward=120 penalty=60
+start=90  duration=40  required=MEAT,ONIONS,SAUCE reward=150 penalty=75
+start=110 duration=40  required=EGG,NOODLES,SAUCE reward=150 penalty=75
+start=135 duration=45  required=EGG,MEAT,NOODLES  reward=180 penalty=90
+start=160 duration=45  required=EGG,MEAT,ONIONS   reward=180 penalty=90
+start=190 duration=50  required=EGG,MEAT,NOODLES,ONIONS  reward=220 penalty=110
+start=220 duration=55  required=EGG,MEAT,NOODLES,SAUCE   reward=240 penalty=120
+start=260 duration=60  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=300 penalty=150
+start=300 duration=60  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=300 penalty=150

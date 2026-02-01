@@ -1,0 +1,37 @@
+# MAP: pressure_cooker.txt
+# DESCRIPTION: 10x10 map with extremely short order durations and high penalties
+# TESTS: Speed optimization, quick decision-making, penalty avoidance
+# SIZE: 10x10 (compact with time pressure)
+
+##########
+#$R....RU#
+#.B....B.#
+#.B.CC.B.#
+#.KK..KK.#
+#..b..b..#
+#.TS..TS.#
+#.B....B.#
+#........#
+##########
+
+SWITCH: turn=150 duration=60
+
+ORDERS:
+start=1   duration=6   required=NOODLES           reward=100 penalty=80
+start=3   duration=6   required=ONIONS            reward=100 penalty=80
+start=6   duration=7   required=EGG               reward=100 penalty=80
+start=9   duration=7   required=MEAT              reward=100 penalty=80
+start=15  duration=8   required=EGG,NOODLES       reward=150 penalty=100
+start=20  duration=8   required=MEAT,ONIONS       reward=150 penalty=100
+start=25  duration=8   required=NOODLES,ONIONS    reward=150 penalty=100
+start=32  duration=10  required=EGG,MEAT          reward=180 penalty=120
+start=40  duration=10  required=SAUCE             reward=120 penalty=80
+start=48  duration=12  required=EGG,NOODLES,SAUCE reward=200 penalty=130
+start=58  duration=12  required=MEAT,ONIONS,SAUCE reward=200 penalty=130
+start=70  duration=14  required=EGG,MEAT,NOODLES  reward=250 penalty=160
+start=82  duration=14  required=NOODLES,ONIONS,SAUCE  reward=250 penalty=160
+start=96  duration=16  required=EGG,MEAT,NOODLES,ONIONS  reward=300 penalty=200
+start=112 duration=16  required=EGG,ONIONS,SAUCE  reward=280 penalty=180
+start=130 duration=18  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=400 penalty=250
+start=150 duration=18  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=400 penalty=250
+start=170 duration=20  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=500 penalty=300

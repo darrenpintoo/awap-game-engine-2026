@@ -1,0 +1,50 @@
+# MAP: grand_kitchen.txt
+# DESCRIPTION: Large 25x25 map testing long-distance pathfinding and coordination
+# TESTS: Long pathfinding, multi-area coordination, ingredient logistics
+# SIZE: 25x25 (larger than any official map)
+
+#########################
+#$.....................$#
+#.B......R....R......B.#
+#.B..................B.#
+#....CC........CC......#
+#....CC........CC......#
+#..........b...........#
+#.......K......K.......#
+#......................#
+#.B..................B.#
+#.B...T....U....T...B.#
+#.....S........S.......#
+#......................#
+#......................#
+#.B..................B.#
+#.B..................B.#
+#......................#
+#.......K......K.......#
+#..........b...........#
+#....CC........CC......#
+#....CC........CC......#
+#.B..................B.#
+#.B......R....R......B.#
+#$.....................$#
+#########################
+
+SWITCH: turn=300 duration=120
+
+ORDERS:
+start=1   duration=40  required=NOODLES           reward=30 penalty=10
+start=10  duration=40  required=ONIONS            reward=30 penalty=10
+start=20  duration=40  required=EGG               reward=30 penalty=10
+start=30  duration=40  required=MEAT              reward=30 penalty=10
+start=50  duration=50  required=EGG,NOODLES       reward=50 penalty=20
+start=70  duration=50  required=MEAT,ONIONS       reward=50 penalty=20
+start=90  duration=50  required=SAUCE             reward=60 penalty=25
+start=110 duration=60  required=EGG,MEAT,SAUCE    reward=80 penalty=30
+start=130 duration=60  required=NOODLES,ONIONS,SAUCE  reward=80 penalty=30
+start=150 duration=70  required=EGG,MEAT,NOODLES  reward=100 penalty=40
+start=180 duration=70  required=MEAT,NOODLES,ONIONS  reward=100 penalty=40
+start=210 duration=80  required=EGG,MEAT,NOODLES,ONIONS  reward=150 penalty=60
+start=250 duration=80  required=EGG,MEAT,NOODLES,SAUCE  reward=150 penalty=60
+start=290 duration=90  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=200 penalty=80
+start=340 duration=90  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=200 penalty=80
+start=390 duration=100 required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=250 penalty=100

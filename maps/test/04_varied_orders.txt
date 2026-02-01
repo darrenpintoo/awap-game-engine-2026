@@ -1,0 +1,41 @@
+# MAP: varied_orders.txt
+# DESCRIPTION: 12x12 map with highly varied order complexity and timing
+# TESTS: Order prioritization, dynamic decision-making, reward optimization
+# SIZE: 12x12 (medium compact)
+
+############
+#$....R...U#
+#.B......B.#
+#.B.CC...B.#
+#....CC....#
+#.K......K.#
+#.b......b.#
+#.K......K.#
+#.....CC...#
+#.TS....TS.#
+#.B......B.#
+############
+
+SWITCH: turn=200 duration=80
+
+ORDERS:
+start=1   duration=8   required=NOODLES           reward=100 penalty=80
+start=1   duration=60  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=50 penalty=10
+start=5   duration=10  required=ONIONS            reward=80 penalty=60
+start=10  duration=100 required=SAUCE,SAUCE,SAUCE reward=200 penalty=20
+start=15  duration=12  required=EGG               reward=60 penalty=40
+start=20  duration=15  required=MEAT,MEAT         reward=70 penalty=50
+start=30  duration=50  required=EGG,EGG,EGG       reward=150 penalty=30
+start=40  duration=20  required=NOODLES,ONIONS    reward=50 penalty=25
+start=50  duration=80  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=300 penalty=50
+start=60  duration=25  required=SAUCE             reward=40 penalty=20
+start=70  duration=15  required=EGG,NOODLES       reward=120 penalty=90
+start=80  duration=30  required=MEAT,ONIONS,SAUCE reward=100 penalty=40
+start=100 duration=10  required=NOODLES           reward=200 penalty=150
+start=110 duration=60  required=EGG,MEAT          reward=60 penalty=20
+start=120 duration=8   required=ONIONS            reward=150 penalty=100
+start=130 duration=45  required=EGG,NOODLES,SAUCE reward=80 penalty=30
+start=150 duration=12  required=MEAT              reward=100 penalty=70
+start=160 duration=100 required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=400 penalty=100
+start=180 duration=20  required=EGG,MEAT,NOODLES  reward=150 penalty=80
+start=200 duration=50  required=SAUCE,SAUCE       reward=120 penalty=40
