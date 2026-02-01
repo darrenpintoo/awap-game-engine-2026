@@ -1,0 +1,40 @@
+# MAP: 10_endgame_crunch.txt
+# DESCRIPTION: 14x12 map with orders clustered toward end
+# TESTS: Late-game optimization, endgame score calculation
+# FAIR DESIGN: Early orders for warmup, critical decisions late
+# WINNING STRATEGY: Position well early, maximize throughput in final push
+
+##############
+#$..........U#
+#.B........B.#
+#.B..CCCC..B.#
+#....CCCC....#
+#..KKK..KKK..#
+#..b......b..#
+#..KKK..KKK..#
+#............#
+#.B........B.#
+#.TS......TS.#
+#$..R....R..$#
+##############
+
+SWITCH: turn=300 duration=100
+
+ORDERS:
+start=1   duration=40  required=NOODLES           reward=30 penalty=10
+start=20  duration=40  required=SAUCE             reward=30 penalty=10
+start=45  duration=45  required=ONIONS            reward=40 penalty=15
+start=80  duration=45  required=EGG               reward=50 penalty=20
+start=120 duration=50  required=NOODLES,SAUCE     reward=55 penalty=20
+start=165 duration=50  required=MEAT              reward=60 penalty=25
+start=200 duration=30  required=EGG,NOODLES       reward=100 penalty=50
+start=210 duration=30  required=MEAT,ONIONS       reward=110 penalty=55
+start=220 duration=32  required=ONIONS,SAUCE      reward=90 penalty=45
+start=232 duration=35  required=EGG,MEAT          reward=140 penalty=70
+start=248 duration=35  required=NOODLES,ONIONS,SAUCE  reward=120 penalty=60
+start=265 duration=38  required=EGG,MEAT,NOODLES  reward=170 penalty=85
+start=285 duration=40  required=MEAT,ONIONS,SAUCE reward=160 penalty=80
+start=310 duration=42  required=EGG,NOODLES,ONIONS,SAUCE  reward=200 penalty=100
+start=340 duration=45  required=EGG,MEAT,NOODLES,ONIONS  reward=240 penalty=120
+start=375 duration=50  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=320 penalty=160
+start=420 duration=55  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=350 penalty=175

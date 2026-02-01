@@ -1,0 +1,35 @@
+# MAP: 07_tight_timing.txt
+# DESCRIPTION: 12x10 map with shorter order durations
+# TESTS: Speed optimization, quick decision-making
+# FAIR DESIGN: Adequate resources, achievable but challenging timing
+# WINNING STRATEGY: Fast execution, don't over-engineer, prioritize completable orders
+
+############
+#$.R.....U$#
+#.B......B.#
+#.B.CCCC.B.#
+#...CCCC...#
+#.KK....KK.#
+#..b....b..#
+#.KK....KK.#
+#.TS....TS.#
+############
+
+SWITCH: turn=200 duration=80
+
+ORDERS:
+start=1   duration=12  required=SAUCE             reward=60 penalty=40
+start=4   duration=14  required=NOODLES           reward=65 penalty=45
+start=10  duration=16  required=ONIONS            reward=70 penalty=50
+start=18  duration=18  required=EGG               reward=85 penalty=55
+start=28  duration=20  required=NOODLES,SAUCE     reward=100 penalty=60
+start=40  duration=22  required=MEAT              reward=95 penalty=60
+start=55  duration=24  required=EGG,NOODLES       reward=120 penalty=70
+start=72  duration=26  required=ONIONS,SAUCE      reward=100 penalty=60
+start=92  duration=28  required=EGG,MEAT          reward=160 penalty=90
+start=115 duration=30  required=NOODLES,ONIONS    reward=110 penalty=65
+start=140 duration=32  required=EGG,MEAT,NOODLES  reward=200 penalty=110
+start=168 duration=35  required=MEAT,ONIONS,SAUCE reward=180 penalty=100
+start=200 duration=38  required=EGG,NOODLES,ONIONS,SAUCE  reward=230 penalty=125
+start=235 duration=42  required=EGG,MEAT,NOODLES,ONIONS  reward=280 penalty=150
+start=275 duration=48  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=350 penalty=180

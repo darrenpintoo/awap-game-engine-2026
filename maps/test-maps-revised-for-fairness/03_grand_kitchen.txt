@@ -1,0 +1,47 @@
+# MAP: 03_grand_kitchen.txt
+# DESCRIPTION: Large 22x20 open map testing algorithm scalability
+# TESTS: Efficient pathfinding on large maps, resource localization
+# FAIR DESIGN: Open layout with multiple resource clusters, no chokepoints
+# WINNING STRATEGY: Minimize travel distance, work in zones, parallel cooking
+
+######################
+#$..................$#
+#.B................B.#
+#.B..CC......CC....B.#
+#.B................B.#
+#.......KK..KK.......#
+#....................#
+#...b..........b.....#
+#....................#
+#.TS..............TS.#
+#....................#
+#....................#
+#.TS..............TS.#
+#....................#
+#...b..........b.....#
+#....................#
+#.......KK..KK.......#
+#.B..CC......CC....B.#
+#.B................B.#
+#$..R....U.U....R..$#
+######################
+
+SWITCH: turn=400 duration=150
+
+ORDERS:
+start=1   duration=35  required=NOODLES           reward=35 penalty=12
+start=8   duration=35  required=SAUCE             reward=35 penalty=12
+start=15  duration=35  required=ONIONS            reward=45 penalty=18
+start=25  duration=40  required=EGG               reward=55 penalty=22
+start=40  duration=40  required=NOODLES,SAUCE     reward=60 penalty=22
+start=55  duration=45  required=MEAT              reward=70 penalty=30
+start=75  duration=45  required=EGG,NOODLES       reward=80 penalty=30
+start=100 duration=50  required=ONIONS,SAUCE      reward=75 penalty=28
+start=130 duration=55  required=EGG,MEAT          reward=110 penalty=42
+start=165 duration=55  required=NOODLES,ONIONS,SAUCE  reward=100 penalty=38
+start=200 duration=60  required=EGG,MEAT,NOODLES  reward=140 penalty=52
+start=245 duration=65  required=MEAT,ONIONS,SAUCE reward=135 penalty=50
+start=295 duration=70  required=EGG,NOODLES,ONIONS,SAUCE  reward=170 penalty=62
+start=350 duration=75  required=EGG,MEAT,NOODLES,ONIONS  reward=190 penalty=70
+start=410 duration=80  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=260 penalty=95
+start=480 duration=85  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=280 penalty=100

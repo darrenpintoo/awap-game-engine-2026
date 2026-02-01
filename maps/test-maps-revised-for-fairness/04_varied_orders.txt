@@ -1,0 +1,37 @@
+# MAP: 04_varied_orders.txt  
+# DESCRIPTION: 14x12 map with highly varied order profiles
+# TESTS: Order prioritization, dynamic decision-making
+# FAIR DESIGN: Standard layout, orders vary from trivial to complex
+# WINNING STRATEGY: Pick orders based on profit/time ratio, don't chase complexity
+
+##############
+#$.....R....U#
+#.B........B.#
+#.B..CCCC..B.#
+#............#
+#..KK....KK..#
+#..b......b..#
+#..KK....KK..#
+#............#
+#.TS......TS.#
+#.B........B.#
+##############
+
+SWITCH: turn=250 duration=100
+
+ORDERS:
+start=1   duration=15  required=SAUCE             reward=60 penalty=40
+start=1   duration=60  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=80 penalty=15
+start=8   duration=18  required=NOODLES           reward=55 penalty=35
+start=15  duration=20  required=ONIONS            reward=50 penalty=30
+start=25  duration=25  required=EGG               reward=65 penalty=35
+start=35  duration=50  required=NOODLES,SAUCE,SAUCE  reward=100 penalty=25
+start=50  duration=25  required=MEAT              reward=75 penalty=40
+start=65  duration=30  required=EGG,NOODLES       reward=90 penalty=40
+start=85  duration=35  required=SAUCE,SAUCE       reward=80 penalty=35
+start=105 duration=40  required=MEAT,ONIONS       reward=100 penalty=45
+start=130 duration=45  required=EGG,MEAT,NOODLES  reward=140 penalty=55
+start=160 duration=20  required=SAUCE             reward=100 penalty=70
+start=175 duration=50  required=NOODLES,ONIONS,SAUCE  reward=120 penalty=45
+start=210 duration=55  required=EGG,MEAT,ONIONS,SAUCE  reward=180 penalty=70
+start=255 duration=60  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=250 penalty=90

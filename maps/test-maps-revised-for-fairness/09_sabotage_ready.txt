@@ -1,0 +1,40 @@
+# MAP: 09_sabotage_ready.txt
+# DESCRIPTION: 16x14 map optimized for sabotage strategy testing
+# TESTS: Strategic sabotage timing, offense vs defense decisions
+# FAIR DESIGN: Good switch timing opportunities, balanced base production
+# WINNING STRATEGY: Choose optimal sabotage window, balance disruption vs production
+
+################
+#$..............#
+#.B............B#
+#.B...CCCC...B.#
+#......CCCC....#
+#...KK......KK..#
+#..b..........b.#
+#...............#
+#...............#
+#..b..........b.#
+#...KK......KK..#
+#......CCCC.....#
+#.B...CCCC....B.#
+#.TS....U....TS.#
+#$..R........R.$#
+################
+
+SWITCH: turn=250 duration=120
+
+ORDERS:
+start=1   duration=28  required=NOODLES           reward=50 penalty=20
+start=10  duration=28  required=SAUCE             reward=50 penalty=20
+start=22  duration=32  required=ONIONS            reward=60 penalty=25
+start=38  duration=35  required=EGG               reward=70 penalty=30
+start=58  duration=38  required=NOODLES,SAUCE     reward=80 penalty=32
+start=82  duration=40  required=MEAT              reward=90 penalty=40
+start=110 duration=45  required=EGG,NOODLES       reward=110 penalty=45
+start=142 duration=48  required=ONIONS,SAUCE      reward=95 penalty=38
+start=178 duration=52  required=EGG,MEAT          reward=150 penalty=62
+start=220 duration=55  required=NOODLES,ONIONS,SAUCE  reward=130 penalty=52
+start=265 duration=58  required=EGG,MEAT,NOODLES  reward=175 penalty=70
+start=315 duration=62  required=MEAT,ONIONS,SAUCE reward=165 penalty=66
+start=370 duration=68  required=EGG,MEAT,NOODLES,ONIONS  reward=225 penalty=90
+start=430 duration=75  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=310 penalty=125

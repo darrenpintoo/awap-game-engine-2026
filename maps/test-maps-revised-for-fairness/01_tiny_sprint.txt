@@ -1,0 +1,31 @@
+# MAP: 01_tiny_sprint.txt
+# DESCRIPTION: Small 10x8 map for quick decision-making tests
+# TESTS: Fast order selection, efficient movement in tight spaces
+# FAIR DESIGN: All resources accessible, symmetric layout, progressive difficulty
+# WINNING STRATEGY: Prioritize simple orders early, build to complex orders
+
+##########
+#$..R..U$#
+#.b....b.#
+#B.CC.CC.B
+#B......B#
+#..KKKK..#
+#..TS....#
+##########
+
+SWITCH: turn=180 duration=80
+
+ORDERS:
+start=1   duration=20  required=NOODLES           reward=40 penalty=15
+start=5   duration=20  required=SAUCE             reward=40 penalty=15
+start=10  duration=20  required=ONIONS            reward=50 penalty=20
+start=20  duration=25  required=EGG               reward=60 penalty=25
+start=30  duration=25  required=NOODLES,SAUCE     reward=70 penalty=25
+start=45  duration=30  required=EGG,NOODLES       reward=90 penalty=35
+start=60  duration=30  required=ONIONS,SAUCE      reward=80 penalty=30
+start=80  duration=35  required=MEAT              reward=80 penalty=35
+start=100 duration=35  required=EGG,MEAT          reward=120 penalty=45
+start=120 duration=40  required=NOODLES,ONIONS,SAUCE  reward=130 penalty=50
+start=145 duration=45  required=EGG,MEAT,NOODLES  reward=160 penalty=60
+start=175 duration=50  required=EGG,MEAT,NOODLES,ONIONS  reward=200 penalty=75
+start=210 duration=55  required=EGG,MEAT,NOODLES,ONIONS,SAUCE  reward=280 penalty=100
