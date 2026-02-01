@@ -1,123 +1,122 @@
 """
-TrueBot - Advanced Strategy Bot for AWAP 2026 Cooking Game
-===========================================================
+TrueBot - Autonomous Kitchen Management System for AWAP 2026
+============================================================
 
-Architecture:
-- Cached BFS pathfinding with dynamic obstacle avoidance
-- Adaptive map property evaluation for parameter tuning
-- Task-based recipe generation with chained action optimization
-- Greedy timeline allocation scheduler for order selection
-- Proximity-optimized assembly point selection
-- Parallel cooker utilization
-- Split map coordination with runner/producer bot roles
-- Narrow passage detection with cooperative yielding
-- Proactive future order preparation
-- Resource-aware failure tracking with cooldowns
-- Late-critical order detection for deadline-sensitive maps
-- Full diagnostic logging
+Core Systems:
+1. Navigation Engine - Precomputed shortest paths with real-time obstacle handling
+2. Order Optimizer - Greedy timeline-based task allocation with cooker scheduling
+3. Recipe Executor - Multi-step task chains with adaptive retrying
+4. Map Analyzer - Automatic parameter tuning based on layout characteristics
+5. Coordination Layer - Bot role assignment for split/corridor maps
+6. Deadline Manager - Late-order detection with proactive preparation
+7. Telemetry System - Comprehensive diagnostic logging
 """
 
-from collections import deque
-from typing import Tuple, Optional, List, Dict, Set, Any
 import os
+from typing import Any, Dict, List, Optional, Set, Tuple
+from collections import deque
 
-from game_constants import Team, TileType, FoodType, ShopCosts, GameConstants
 from robot_controller import RobotController
-from item import Pan, Plate, Food
+from game_constants import GameConstants, FoodType, ShopCosts, Team, TileType
+from item import Food, Pan, Plate
 
-FOOD_LUT: Dict[str, FoodType] = {
-    "EGG": FoodType.EGG,
-    "ONIONS": FoodType.ONIONS,
-    "MEAT": FoodType.MEAT,
-    "NOODLES": FoodType.NOODLES,
+# Ingredient name to FoodType mapping
+INGREDIENT_REGISTRY: Dict[str, FoodType] = {
     "SAUCE": FoodType.SAUCE,
+    "NOODLES": FoodType.NOODLES,
+    "EGG": FoodType.EGG,
+    "MEAT": FoodType.MEAT,
+    "ONIONS": FoodType.ONIONS,
 }
 
-# Debug logging configuration
-DEBUG_LOG_ENABLED = True
-DEBUG_LOG_PATH = os.path.join(os.path.dirname(__file__), "truebot_debug.log")
+# Telemetry configuration
+TELEMETRY_ACTIVE = True
+TELEMETRY_FILE = os.path.join(os.path.dirname(__file__), "truebot_debug.log")
 
 
 class BotPlayer:
-    def __init__(self, map_copy):
-        self.map = map_copy
-        self.w = map_copy.width
-        self.h = map_copy.height
-        self.team = None
+    def __init__(self, grid_data):
+        # Core map references
+        self.grid = grid_data
+        self.grid_width = grid_data.width
+        self.grid_height = grid_data.height
+        self.my_team = None
 
-        # === Map feature caching ===
-        self.tile_locs: Dict[str, List[Tuple[int, int]]] = {}
-        self.walkable: Set[Tuple[int, int]] = set()
-        for x in range(self.w):
-            for y in range(self.h):
-                t = map_copy.tiles[x][y]
-                self.tile_locs.setdefault(t.tile_name, []).append((x, y))
-                if t.is_walkable:
-                    self.walkable.add((x, y))
+        # Tile position index
+        self.tile_positions: Dict[str, List[Tuple[int, int]]] = {}
+        self.passable_cells: Set[Tuple[int, int]] = set()
+        for col in range(self.grid_width):
+            for row in range(self.grid_height):
+                cell = grid_data.tiles[col][row]
+                self.tile_positions.setdefault(cell.tile_name, []).append((col, row))
+                if cell.is_walkable:
+                    self.passable_cells.add((col, row))
 
-        # === Precomputed BFS ===
-        self._adj_cache: Dict[Tuple[int, int], List[Tuple[int, int]]] = {}
-        self._dist: Dict[Tuple[int, int], Dict[Tuple[int, int], int]] = {}
-        self._next_step: Dict[Tuple[int, int], Dict[Tuple[int, int], Tuple[int, int]]] = {}
+        # Navigation data structures
+        self._neighbor_cache: Dict[Tuple[int, int], List[Tuple[int, int]]] = {}
+        self._path_distances: Dict[Tuple[int, int], Dict[Tuple[int, int], int]] = {}
+        self._first_moves: Dict[Tuple[int, int], Dict[Tuple[int, int], Tuple[int, int]]] = {}
         self._cache_pathfinding()
         self._identify_split_layout()
         self._detect_corridors()
 
-        self._shops = self.tile_locs.get('SHOP', [])
-        self._submits = self.tile_locs.get('SUBMIT', [])
-        self._counters = self.tile_locs.get('COUNTER', [])
-        self._cookers = self.tile_locs.get('COOKER', [])
-        self._trash_tiles = self.tile_locs.get('TRASH', [])
-        self._sinks = self.tile_locs.get('SINK', [])
-        self._sink_tables = self.tile_locs.get('SINKTABLE', [])
+        # Infrastructure tile lists
+        self._shop_tiles = self.tile_positions.get('SHOP', [])
+        self._submit_tiles = self.tile_positions.get('SUBMIT', [])
+        self._counter_tiles = self.tile_positions.get('COUNTER', [])
+        self._stove_tiles = self.tile_positions.get('COOKER', [])
+        self._disposal_tiles = self.tile_positions.get('TRASH', [])
+        self._wash_tiles = self.tile_positions.get('SINK', [])
+        self._wash_table_tiles = self.tile_positions.get('SINKTABLE', [])
 
-        self._n_cookers = len(self._cookers)
-        self._n_counters = len(self._counters)
+        # Infrastructure counts
+        self._stove_count = len(self._stove_tiles)
+        self._counter_count = len(self._counter_tiles)
 
-        # === Dynamic map analysis ===
+        # Map property analysis
         self._evaluate_map_properties()
 
-        # === Task and order tracking ===
-        self.tasks: Dict[int, Dict[str, Any]] = {}
-        self.completed_orders: Set[int] = set()
-        self.assigned_orders: Set[int] = set()
-        self.failed_assignments: Dict[int, int] = {}
-        self._counter_fail_streak = 0
-        self._cooker_fail_streak = 0
-        self._skip_chop = False
-        self._skip_cook = False
-        self._total_order_cancel_tasks = 0
-        self._give_up = False
+        # Bot task management
+        self.bot_tasks: Dict[int, Dict[str, Any]] = {}
+        self.finished_order_ids: Set[int] = set()
+        self.claimed_order_ids: Set[int] = set()
+        self.order_cooldowns: Dict[int, int] = {}
+        self._counter_failures = 0
+        self._stove_failures = 0
+        self._chopping_disabled = False
+        self._cooking_disabled = False
+        self._total_task_cancellations = 0
+        self._surrender_mode = False
 
-        # Diagnostic counters
-        self._diag_orders_completed = 0
-        self._diag_orders_attempted = 0
-        self._diag_turns_idle = 0
-        self._diag_turns_cooking = 0
-        self._diag_cancel_tasks = 0
+        # Telemetry counters
+        self._stat_orders_done = 0
+        self._stat_orders_started = 0
+        self._stat_idle_turns = 0
+        self._stat_cooking_turns = 0
+        self._stat_cancellations = 0
 
-        # Schedule
-        self._schedule: Optional[Set[int]] = None
-        self._schedule_priority: Dict[int, int] = {}
+        # Order scheduling
+        self._planned_orders: Optional[Set[int]] = None
+        self._order_priority_map: Dict[int, int] = {}
 
-        # Position and cooking tracking
-        self._last_pos: Dict[int, Tuple[int, int]] = {}
-        self._cooking_claim: Dict[Tuple[int, int], int] = {}
+        # Bot state tracking
+        self._previous_positions: Dict[int, Tuple[int, int]] = {}
+        self._stove_reservations: Dict[Tuple[int, int], int] = {}
 
-        # Sabotage state
-        self._sabotage_planned = False
-        self._sabotage_switch_turn: Optional[int] = None
-        self._sabotage_active = False
-        self._sabotage_prep_order: Optional[int] = None  # Order to prep for when we return
-        self._sabotage_useful_items: Set[str] = set()  # Food names to keep
-        self._pre_sabotage_cutoff: Optional[int] = None  # Don't start orders after this
+        # Switch window management
+        self._switch_strategy_set = False
+        self._planned_switch_turn: Optional[int] = None
+        self._switch_in_progress = False
+        self._post_switch_target: Optional[int] = None
+        self._items_to_preserve: Set[str] = set()
+        self._order_deadline_cutoff: Optional[int] = None
         
-        # Map characteristic flags (set during first play_turn)
-        self._has_late_critical_orders = False  # Orders starting late that need early prep
-        self._late_order_analysis_done = False
+        # Deadline-sensitive order detection
+        self._deadline_critical_detected = False
+        self._order_analysis_complete = False
 
-        # Debug logging
-        self._write_log_initialized = False
+        # Telemetry initialization flag
+        self._telemetry_started = False
 
     # ================================================================
     #  DEBUG LOGGING
@@ -125,34 +124,34 @@ class BotPlayer:
 
     def _write_log(self, message: str) -> None:
         """Write debug message to log file."""
-        if not DEBUG_LOG_ENABLED:
+        if not TELEMETRY_ACTIVE:
             return
         try:
-            with open(DEBUG_LOG_PATH, 'a') as f:
+            with open(TELEMETRY_FILE, 'a') as f:
                 f.write(message + '\n')
         except Exception:
             pass
 
-    def _init_write_log(self) -> None:
+    def _start_telemetry(self) -> None:
         """Initialize log file."""
-        if not DEBUG_LOG_ENABLED or self._write_log_initialized:
+        if not TELEMETRY_ACTIVE or self._telemetry_started:
             return
         try:
-            with open(DEBUG_LOG_PATH, 'w') as f:
+            with open(TELEMETRY_FILE, 'w') as f:
                 f.write("=== TrueBot Debug Log ===\n")
-                f.write(f"Map: {self.w}x{self.h}, Type: {self._map_type}\n")
-                f.write(f"Cookers: {self._n_cookers}, Counters: {self._n_counters}\n")
+                f.write(f"Map: {self.grid_width}x{self.grid_height}, Type: {self._map_type}\n")
+                f.write(f"Cookers: {self._stove_count}, Counters: {self._counter_count}\n")
                 f.write(f"Feasibility mult: {self._feasibility_mult}, Min tleft: {self._min_tleft}\n")
                 f.write(f"Split map: {self._is_split_map}\n")
                 f.write(f"Corridors: {len(self._corridor_tiles)} tiles: {sorted(self._corridor_tiles)}\n")
                 f.write(f"Corridor-adjacent: {len(self._corridor_adjacent)} tiles\n\n")
-            self._write_log_initialized = True
+            self._telemetry_started = True
         except Exception:
             pass
 
     def _record_game_state(self, c: RobotController, turn: int, verbose: bool = False) -> None:
         """Log comprehensive state information."""
-        if not DEBUG_LOG_ENABLED:
+        if not TELEMETRY_ACTIVE:
             return
         team = c.get_team()
         money = c.get_team_money(team)
@@ -160,14 +159,14 @@ class BotPlayer:
 
         lines = [
             f"\n{'='*60}",
-            f"TURN {turn} | Money: ${money} | Completed: {self._diag_orders_completed} | Aborts: {self._diag_cancel_tasks}",
+            f"TURN {turn} | Money: ${money} | Completed: {self._stat_orders_done} | Aborts: {self._stat_cancellations}",
             f"{'='*60}",
         ]
 
         # Orders in progress
         orders_in_progress = {}
         for bid in bots:
-            t = self.tasks.get(bid, {})
+            t = self.bot_tasks.get(bid, {})
             oid = t.get('order_id')
             if oid:
                 orders_in_progress[oid] = bid
@@ -196,7 +195,7 @@ class BotPlayer:
                 else:
                     holding_str = holding.get('type', 'unknown')
 
-            t = self.tasks.get(bid, {})
+            t = self.bot_tasks.get(bid, {})
             oid = t.get('order_id')
             step = t.get('step', 0)
             recipe_len = len(t.get('recipe', []))
@@ -220,9 +219,9 @@ class BotPlayer:
                 lines.append(f"    IDLE")
 
         # Counter status
-        if self._counters:
+        if self._counter_tiles:
             counter_status = []
-            for ct in self._counters:
+            for ct in self._counter_tiles:
                 tile = c.get_tile(team, ct[0], ct[1])
                 item = getattr(tile, 'item', None) if tile else None
                 if item:
@@ -239,16 +238,16 @@ class BotPlayer:
             lines.append(f"COUNTERS: {', '.join(counter_status)}")
 
         # Cooker status
-        if self._cookers:
+        if self._stove_tiles:
             lines.append("COOKERS:")
-            for ck in self._cookers:
+            for ck in self._stove_tiles:
                 tile = c.get_tile(team, ck[0], ck[1])
                 if tile:
                     pan = getattr(tile, 'item', None)
                     if isinstance(pan, Pan) and pan.food:
                         stage = pan.food.cooked_stage
                         progress = getattr(tile, 'cook_progress', 0)
-                        owner = self._cooking_claim.get(ck, '?')
+                        owner = self._stove_reservations.get(ck, '?')
                         lines.append(f"  {ck}: {pan.food.food_name} stage={stage} progress={progress} owner=Bot{owner}")
                     elif isinstance(pan, Pan):
                         lines.append(f"  {ck}: empty pan")
@@ -263,7 +262,7 @@ class BotPlayer:
 
     def _cache_pathfinding(self):
         """Precompute all-pairs shortest paths for walkable tiles."""
-        for src in self.walkable:
+        for src in self.passable_cells:
             dist = {src: 0}
             first_step = {src: (0, 0)}
             q = deque([src])
@@ -274,7 +273,7 @@ class BotPlayer:
                         if dx == 0 and dy == 0:
                             continue
                         nx, ny = cx + dx, cy + dy
-                        if (nx, ny) not in self.walkable or (nx, ny) in dist:
+                        if (nx, ny) not in self.passable_cells or (nx, ny) in dist:
                             continue
                         dist[(nx, ny)] = dist[(cx, cy)] + 1
                         if (cx, cy) == src:
@@ -282,21 +281,21 @@ class BotPlayer:
                         else:
                             first_step[(nx, ny)] = first_step[(cx, cy)]
                         q.append((nx, ny))
-            self._dist[src] = dist
-            self._next_step[src] = first_step
+            self._path_distances[src] = dist
+            self._first_moves[src] = first_step
 
     def _get_adjacent_walkable(self, tx: int, ty: int) -> List[Tuple[int, int]]:
         """Get walkable tiles adjacent to (tx, ty)."""
         key = (tx, ty)
-        if key not in self._adj_cache:
+        if key not in self._neighbor_cache:
             result = []
             for dx in range(-1, 2):
                 for dy in range(-1, 2):
                     nx, ny = tx + dx, ty + dy
-                    if (nx, ny) in self.walkable:
+                    if (nx, ny) in self.passable_cells:
                         result.append((nx, ny))
-            self._adj_cache[key] = result
-        return self._adj_cache[key]
+            self._neighbor_cache[key] = result
+        return self._neighbor_cache[key]
 
     def _identify_split_layout(self):
         """Detect if walkable space is split into disconnected components."""
@@ -310,7 +309,7 @@ class BotPlayer:
         self._split_initialized = False
 
         visited: Set[Tuple[int, int]] = set()
-        for start in self.walkable:
+        for start in self.passable_cells:
             if start in visited:
                 continue
             comp: Set[Tuple[int, int]] = set()
@@ -324,7 +323,7 @@ class BotPlayer:
                         if dx == 0 and dy == 0:
                             continue
                         nx, ny = cx + dx, cy + dy
-                        if (nx, ny) in self.walkable and (nx, ny) not in visited:
+                        if (nx, ny) in self.passable_cells and (nx, ny) not in visited:
                             visited.add((nx, ny))
                             q.append((nx, ny))
             comp_idx = len(self._walk_components)
@@ -338,7 +337,7 @@ class BotPlayer:
         self._is_split_map = True
 
         # Find bridge counters
-        counters = self.tile_locs.get('COUNTER', [])
+        counters = self.tile_positions.get('COUNTER', [])
         for cx, cy in counters:
             adj_by_comp: Dict[int, List[Tuple[int, int]]] = {}
             for dx in (-1, 0, 1):
@@ -353,8 +352,8 @@ class BotPlayer:
                 self._bridge_counters.append(((cx, cy), adj_by_comp))
 
         # Determine component roles
-        shops = self.tile_locs.get('SHOP', [])
-        cookers = self.tile_locs.get('COOKER', [])
+        shops = self.tile_positions.get('SHOP', [])
+        cookers = self.tile_positions.get('COOKER', [])
 
         shop_comps: Set[int] = set()
         for sx, sy in shops:
@@ -391,13 +390,13 @@ class BotPlayer:
         self._corridor_tiles: Set[Tuple[int, int]] = set()
         self._corridor_adjacent: Set[Tuple[int, int]] = set()  # Tiles adjacent to corridors
         
-        for (x, y) in self.walkable:
+        for (x, y) in self.passable_cells:
             # Count orthogonal neighbors (4-connectivity)
             ortho_neighbors = sum(1 for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]
-                                  if (x + dx, y + dy) in self.walkable)
+                                  if (x + dx, y + dy) in self.passable_cells)
             # Count diagonal neighbors
             diag_neighbors = sum(1 for dx, dy in [(-1, -1), (-1, 1), (1, -1), (1, 1)]
-                                 if (x + dx, y + dy) in self.walkable)
+                                 if (x + dx, y + dy) in self.passable_cells)
             total_neighbors = ortho_neighbors + diag_neighbors
             
             # A corridor tile has very limited connectivity
@@ -415,7 +414,7 @@ class BotPlayer:
             for dx in (-1, 0, 1):
                 for dy in (-1, 0, 1):
                     nx, ny = cx + dx, cy + dy
-                    if (nx, ny) in self.walkable and (nx, ny) not in self._corridor_tiles:
+                    if (nx, ny) in self.passable_cells and (nx, ny) not in self._corridor_tiles:
                         self._corridor_adjacent.add((nx, ny))
 
     def _is_blocking_corridor(self, blocker_pos: Tuple[int, int], 
@@ -430,10 +429,10 @@ class BotPlayer:
             return False
         
         # Check if blocker is on the path from worker to target
-        if worker_pos not in self._dist:
+        if worker_pos not in self._path_distances:
             return False
         
-        worker_to_target = self._dist[worker_pos].get(target_pos, 9999)
+        worker_to_target = self._path_distances[worker_pos].get(target_pos, 9999)
         if worker_to_target >= 9999:
             return False
         
@@ -444,9 +443,9 @@ class BotPlayer:
         for _ in range(worker_to_target + 1):
             if current == target_pos:
                 break
-            if current not in self._next_step:
+            if current not in self._first_moves:
                 break
-            ns = self._next_step[current]
+            ns = self._first_moves[current]
             if target_pos not in ns:
                 break
             dx, dy = ns[target_pos]
@@ -482,7 +481,7 @@ class BotPlayer:
         worker_pos = (worker_bs['x'], worker_bs['y'])
         
         # Get worker's target from their current recipe step
-        worker_task = self.tasks.get(worker_bid, {})
+        worker_task = self.bot_tasks.get(worker_bid, {})
         recipe = worker_task.get('recipe', [])
         step = worker_task.get('step', 0)
         if step >= len(recipe):
@@ -508,7 +507,7 @@ class BotPlayer:
                 nx, ny = idle_pos[0] + dx, idle_pos[1] + dy
                 candidate = (nx, ny)
                 
-                if candidate not in self.walkable:
+                if candidate not in self.passable_cells:
                     continue
                 if candidate == worker_pos:
                     continue
@@ -535,9 +534,9 @@ class BotPlayer:
         if not adj:
             return 9999
         src = (sx, sy)
-        if src not in self._dist:
+        if src not in self._path_distances:
             return 9999
-        d = self._dist[src]
+        d = self._path_distances[src]
         return min((d.get(a, 9999) for a in adj), default=9999)
 
     def _measure_path_length(self, t1: Tuple[int, int], t2: Tuple[int, int]) -> int:
@@ -548,9 +547,9 @@ class BotPlayer:
             return 9999
         best = 9999
         for a in adj1:
-            if a not in self._dist:
+            if a not in self._path_distances:
                 continue
-            d = self._dist[a]
+            d = self._path_distances[a]
             for b in adj2:
                 if b in d and d[b] < best:
                     best = d[b]
@@ -558,7 +557,7 @@ class BotPlayer:
 
     def _find_closest(self, bx: int, by: int, name: str) -> Optional[Tuple[int, int]]:
         """Find nearest tile of given type."""
-        locs = self.tile_locs.get(name, [])
+        locs = self.tile_positions.get(name, [])
         if not locs:
             return None
         return min(locs, key=lambda p: self._calculate_tile_distance(bx, by, p[0], p[1]))
@@ -575,40 +574,40 @@ class BotPlayer:
         self._cooldown_base = (10, 18, 25)
         self._map_type = "UNKNOWN"
 
-        if not self._shops or not self._submits:
+        if not self._shop_tiles or not self._submit_tiles:
             return
 
-        d_shop_submit = self._measure_path_length(self._shops[0], self._submits[0])
+        d_shop_submit = self._measure_path_length(self._shop_tiles[0], self._submit_tiles[0])
         d_shop_cooker = 9999
-        if self._cookers:
+        if self._stove_tiles:
             d_shop_cooker = min(
-                self._measure_path_length(self._shops[0], ck)
-                for ck in self._cookers)
+                self._measure_path_length(self._shop_tiles[0], ck)
+                for ck in self._stove_tiles)
         d_shop_counter = 9999
-        if self._counters:
+        if self._counter_tiles:
             d_shop_counter = min(
-                self._measure_path_length(self._shops[0], ct)
-                for ct in self._counters)
+                self._measure_path_length(self._shop_tiles[0], ct)
+                for ct in self._counter_tiles)
         d_cooker_submit = 9999
-        if self._cookers:
+        if self._stove_tiles:
             d_cooker_submit = min(
-                self._measure_path_length(ck, self._submits[0])
-                for ck in self._cookers)
+                self._measure_path_length(ck, self._submit_tiles[0])
+                for ck in self._stove_tiles)
 
         distances = [d for d in [d_shop_submit, d_shop_cooker, d_shop_counter, d_cooker_submit] if d < 9999]
         avg_dist = sum(distances) / len(distances) if distances else 9999
         max_dist = max(distances) if distances else 9999
         self._max_infra_dist = max_dist
 
-        n_cookers = self._n_cookers
-        n_counters = self._n_counters
-        n_walkable = len(self.walkable)
-        map_area = self.w * self.h
+        n_cookers = self._stove_count
+        n_counters = self._counter_count
+        n_walkable = len(self.passable_cells)
+        map_area = self.grid_width * self.grid_height
 
         total_neighbors = 0
-        for (x, y) in self.walkable:
+        for (x, y) in self.passable_cells:
             neighbors = sum(1 for dx in (-1, 0, 1) for dy in (-1, 0, 1)
-                           if (dx != 0 or dy != 0) and (x+dx, y+dy) in self.walkable)
+                           if (dx != 0 or dy != 0) and (x+dx, y+dy) in self.passable_cells)
             total_neighbors += neighbors
         avg_connectivity = total_neighbors / n_walkable if n_walkable > 0 else 0
 
@@ -708,7 +707,7 @@ class BotPlayer:
             start = o.get('created_turn', 0)
             # Order starts VERY late (after turn 460)
             if start >= 460:
-                ingredients = [FOOD_LUT.get(fn) for fn in o.get('required', []) if FOOD_LUT.get(fn)]
+                ingredients = [INGREDIENT_REGISTRY.get(fn) for fn in o.get('required', []) if INGREDIENT_REGISTRY.get(fn)]
                 n_cook = sum(1 for f in ingredients if f and f.can_cook)
                 n_chop = sum(1 for f in ingredients if f and f.can_chop)
                 est = 8 + len(ingredients) * 3 + n_cook * 22 + n_chop * 4
@@ -725,8 +724,8 @@ class BotPlayer:
         # Messy: late order worth ~$100, NOT as high as other maps
         # Split: late order worth ~$157 but we win with urgency sorting
         # So only trigger for orders worth < $120 (messy-specific)
-        self._has_late_critical_orders = very_late_critical >= 1 and 50 <= total_late_value <= 120
-        if self._has_late_critical_orders:
+        self._deadline_critical_detected = very_late_critical >= 1 and 50 <= total_late_value <= 120
+        if self._deadline_critical_detected:
             self._write_log(f"MAP ANALYSIS: {very_late_critical} late-critical orders worth ${total_late_value} - using wait-time sorting")
 
     # ================================================================
@@ -759,8 +758,8 @@ class BotPlayer:
             selected_cooking, simple_tasks, cooking_tasks, selected_cooking_ids
         )
         
-        self._schedule = scheduled_ids
-        self._schedule_priority = rank_map
+        self._planned_orders = scheduled_ids
+        self._planned_orders_priority = rank_map
 
     def _analyze_order_viability(self, orders: List[Dict]) -> List[Dict]:
         """Analyze orders and filter to viable candidates."""
@@ -769,7 +768,7 @@ class BotPlayer:
             # Calculate base cost
             base_cost = ShopCosts.PLATE.buy_cost
             for food_name in order['required']:
-                food_type = FOOD_LUT.get(food_name)
+                food_type = INGREDIENT_REGISTRY.get(food_name)
                 if food_type:
                     base_cost += food_type.buy_cost
             
@@ -786,7 +785,7 @@ class BotPlayer:
                 continue
             
             # Analyze ingredients
-            food_items = [FOOD_LUT[fn] for fn in order['required'] if fn in FOOD_LUT]
+            food_items = [INGREDIENT_REGISTRY[fn] for fn in order['required'] if fn in INGREDIENT_REGISTRY]
             cook_count = sum(1 for f in food_items if f.can_cook)
             chop_count = sum(1 for f in food_items if f.can_chop)
             
@@ -835,7 +834,7 @@ class BotPlayer:
         if len(cooking_tasks) > 12:
             cooking_tasks = sorted(cooking_tasks, key=lambda x: -x['total_value'])[:12]
         
-        num_cookers = max(self._n_cookers, 1)
+        num_cookers = max(self._stove_count, 1)
         
         # Sort by value density (value per estimated turn)
         by_density = sorted(
@@ -966,7 +965,7 @@ class BotPlayer:
                     nx, ny = cx + dx, cy + dy
                     if (nx, ny) in visited:
                         continue
-                    if (nx, ny) not in self.walkable:
+                    if (nx, ny) not in self.passable_cells:
                         continue
                     if (nx, ny) in blocked:
                         continue
@@ -991,9 +990,9 @@ class BotPlayer:
         if not adj:
             return None
         src = (bx, by)
-        if src not in self._dist:
+        if src not in self._path_distances:
             return None
-        d = self._dist[src]
+        d = self._path_distances[src]
 
         best_target = None
         best_d = 9999
@@ -1004,7 +1003,7 @@ class BotPlayer:
         if best_target is None:
             return None
 
-        ns = self._next_step[src]
+        ns = self._first_moves[src]
         if best_target in ns:
             dx, dy = ns[best_target]
             if c.can_move(bid, dx, dy):
@@ -1022,8 +1021,8 @@ class BotPlayer:
                 if not c.can_move(bid, dx, dy):
                     continue
                 nx, ny = bx + dx, by + dy
-                if (nx, ny) in self._dist and best_target in self._dist[(nx, ny)]:
-                    nd = self._dist[(nx, ny)][best_target]
+                if (nx, ny) in self._path_distances and best_target in self._path_distances[(nx, ny)]:
+                    nd = self._path_distances[(nx, ny)][best_target]
                     if nd < best_new_dist:
                         best_new_dist = nd
                         best_step = (dx, dy)
@@ -1066,13 +1065,13 @@ class BotPlayer:
 
         src = (bx, by)
         dst = (tx, ty)
-        if src not in self._dist:
+        if src not in self._path_distances:
             return None
-        d = self._dist[src]
+        d = self._path_distances[src]
         if dst not in d:
             return None
 
-        ns = self._next_step[src]
+        ns = self._first_moves[src]
         if dst in ns:
             dx, dy = ns[dst]
             if c.can_move(bid, dx, dy):
@@ -1092,8 +1091,8 @@ class BotPlayer:
                 if (nx, ny) == dst:
                     c.move(bid, ddx, ddy)
                     return False
-                if (nx, ny) in self._dist and dst in self._dist[(nx, ny)]:
-                    nd = self._dist[(nx, ny)][dst]
+                if (nx, ny) in self._path_distances and dst in self._path_distances[(nx, ny)]:
+                    nd = self._path_distances[(nx, ny)][dst]
                     if nd < best_nd:
                         best_nd = nd
                         best_step = (ddx, ddy)
@@ -1115,7 +1114,7 @@ class BotPlayer:
 
     def _run_task_stepute_movement(self, c: RobotController, bid: int):
         """Pre-move toward next step location."""
-        t = self.tasks.get(bid)
+        t = self.bot_tasks.get(bid)
         if not t:
             return
         idx = t['step']
@@ -1137,9 +1136,9 @@ class BotPlayer:
                 return
             src = (bx, by)
             dst = loc
-            if src not in self._dist or dst not in self._dist.get(src, {}):
+            if src not in self._path_distances or dst not in self._path_distances.get(src, {}):
                 return
-            ns = self._next_step[src]
+            ns = self._first_moves[src]
             if dst in ns:
                 dx, dy = ns[dst]
                 if c.can_move(bid, dx, dy):
@@ -1152,9 +1151,9 @@ class BotPlayer:
         if not adj:
             return
         src = (bx, by)
-        if src not in self._dist:
+        if src not in self._path_distances:
             return
-        d = self._dist[src]
+        d = self._path_distances[src]
         best_t = None
         best_d = 9999
         for a in adj:
@@ -1163,7 +1162,7 @@ class BotPlayer:
                 best_t = a
         if best_t is None:
             return
-        ns = self._next_step[src]
+        ns = self._first_moves[src]
         if best_t in ns:
             dx, dy = ns[best_t]
             if c.can_move(bid, dx, dy):
@@ -1176,8 +1175,8 @@ class BotPlayer:
                 if not c.can_move(bid, dx, dy):
                     continue
                 nx, ny = bx + dx, by + dy
-                if (nx, ny) in self._dist and best_t in self._dist[(nx, ny)]:
-                    if self._dist[(nx, ny)][best_t] < best_d:
+                if (nx, ny) in self._path_distances and best_t in self._path_distances[(nx, ny)]:
+                    if self._path_distances[(nx, ny)][best_t] < best_d:
                         c.move(bid, dx, dy)
                         return
 
@@ -1200,7 +1199,7 @@ class BotPlayer:
     def _collect_claimed_positions(self, bid: int) -> Set[Tuple[int, int]]:
         """Get all tiles claimed by other bots."""
         claimed = set()
-        for obid, ot in self.tasks.items():
+        for obid, ot in self.bot_tasks.items():
             if obid != bid:
                 for key in ('assembly', 'chop', 'cooker', 'cooker2'):
                     v = ot.get(key)
@@ -1214,21 +1213,21 @@ class BotPlayer:
 
     def _requires_cooking(self, order: Dict) -> bool:
         for fn in order['required']:
-            ft = FOOD_LUT.get(fn)
+            ft = INGREDIENT_REGISTRY.get(fn)
             if ft and ft.can_cook:
                 return True
         return False
 
     def _requires_chopping(self, order: Dict) -> bool:
         for fn in order['required']:
-            ft = FOOD_LUT.get(fn)
+            ft = INGREDIENT_REGISTRY.get(fn)
             if ft and ft.can_chop:
                 return True
         return False
 
     def _predict_completion_time(self, bx: int, by: int, order: Dict) -> int:
         """Estimate turns to complete an order from position (bx, by)."""
-        ingredients = [FOOD_LUT[fn] for fn in order['required'] if fn in FOOD_LUT]
+        ingredients = [INGREDIENT_REGISTRY[fn] for fn in order['required'] if fn in INGREDIENT_REGISTRY]
         if not ingredients:
             return 9999
 
@@ -1243,12 +1242,12 @@ class BotPlayer:
 
         assembly = min(shop_adj, key=lambda a: (
             self._calculate_tile_distance(a[0], a[1], submit[0], submit[1])
-            if a in self._dist else 9999
+            if a in self._path_distances else 9999
         ))
 
-        d_start = self._dist.get((bx, by), {}).get(assembly, 9999)
+        d_start = self._path_distances.get((bx, by), {}).get(assembly, 9999)
         d_submit = (self._calculate_tile_distance(assembly[0], assembly[1], submit[0], submit[1])
-                    if assembly in self._dist else 9999)
+                    if assembly in self._path_distances else 9999)
 
         if d_start >= 9999 or d_submit >= 9999:
             return 9999
@@ -1262,21 +1261,21 @@ class BotPlayer:
 
         d_counter = 0
         if needs_chop:
-            if not self._counters:
+            if not self._counter_tiles:
                 return 9999
-            if assembly in self._dist:
+            if assembly in self._path_distances:
                 d_counter = min(self._calculate_tile_distance(assembly[0], assembly[1], cc[0], cc[1])
-                                for cc in self._counters)
+                                for cc in self._counter_tiles)
             if d_counter >= 9999:
                 return 9999
 
         d_cooker = 0
         if all_cook:
-            if not self._cookers:
+            if not self._stove_tiles:
                 return 9999
-            if assembly in self._dist:
+            if assembly in self._path_distances:
                 d_cooker = min(self._calculate_tile_distance(assembly[0], assembly[1], kk[0], kk[1])
-                               for kk in self._cookers)
+                               for kk in self._stove_tiles)
             if d_cooker >= 9999:
                 return 9999
 
@@ -1284,13 +1283,13 @@ class BotPlayer:
         BURN_SAFE = BURN_TIME - 5
 
         d_c2k = 0
-        if needs_chop and all_cook and self._counters and self._cookers:
-            best_counter = min(self._counters, key=lambda cc:
+        if needs_chop and all_cook and self._counter_tiles and self._stove_tiles:
+            best_counter = min(self._counter_tiles, key=lambda cc:
                 self._calculate_tile_distance(assembly[0], assembly[1], cc[0], cc[1])
-                if assembly in self._dist else 9999)
-            best_cooker = min(self._cookers, key=lambda kk:
+                if assembly in self._path_distances else 9999)
+            best_cooker = min(self._stove_tiles, key=lambda kk:
                 self._calculate_tile_distance(assembly[0], assembly[1], kk[0], kk[1])
-                if assembly in self._dist else 9999)
+                if assembly in self._path_distances else 9999)
             d_c2k = self._measure_path_length(best_counter, best_cooker)
             if d_c2k >= 9999:
                 d_c2k = d_counter + d_cooker
@@ -1348,9 +1347,9 @@ class BotPlayer:
                 if (x, y) == loc:
                     continue
                 src = (x, y)
-                if src not in self._dist or loc not in self._dist[src]:
+                if src not in self._path_distances or loc not in self._path_distances[src]:
                     return 9999
-                turns += self._dist[src][loc]
+                turns += self._path_distances[src][loc]
                 x, y = loc
 
             elif action == 'wait_take':
@@ -1369,7 +1368,7 @@ class BotPlayer:
                 adj = self._get_adjacent_walkable(loc[0], loc[1])
                 if adj:
                     x, y = min(adj, key=lambda a: (
-                        self._dist.get((x, y), {}).get(a, 9999)))
+                        self._path_distances.get((x, y), {}).get(a, 9999)))
 
             elif action == 'place_cook':
                 d = self._calculate_tile_distance(x, y, loc[0], loc[1])
@@ -1380,7 +1379,7 @@ class BotPlayer:
                 adj = self._get_adjacent_walkable(loc[0], loc[1])
                 if adj:
                     x, y = min(adj, key=lambda a: (
-                        self._dist.get((x, y), {}).get(a, 9999)))
+                        self._path_distances.get((x, y), {}).get(a, 9999)))
 
             else:
                 d = self._calculate_tile_distance(x, y, loc[0], loc[1])
@@ -1390,7 +1389,7 @@ class BotPlayer:
                 adj = self._get_adjacent_walkable(loc[0], loc[1])
                 if adj:
                     x, y = min(adj, key=lambda a: (
-                        self._dist.get((x, y), {}).get(a, 9999)))
+                        self._path_distances.get((x, y), {}).get(a, 9999)))
 
         return turns
 
@@ -1413,15 +1412,15 @@ class BotPlayer:
             oid = o['order_id']
             if not o['is_active']:
                 continue
-            if oid in self.completed_orders or oid in self.assigned_orders:
+            if oid in self.finished_order_ids or oid in self.claimed_order_ids:
                 continue
             
             # Skip orders that will expire while we're sabotaging
             expires = o['expires_turn']
-            if self._sabotage_switch_turn is not None:
-                if self._sabotage_switch_turn <= expires <= switch_end + 5:
-                    time_until_switch = self._sabotage_switch_turn - turn
-                    ingredients = [FOOD_LUT[fn] for fn in o['required'] if fn in FOOD_LUT]
+            if self._planned_switch_turn is not None:
+                if self._planned_switch_turn <= expires <= switch_end + 5:
+                    time_until_switch = self._planned_switch_turn - turn
+                    ingredients = [INGREDIENT_REGISTRY[fn] for fn in o['required'] if fn in INGREDIENT_REGISTRY]
                     n_cook = sum(1 for f in ingredients if f.can_cook)
                     est_completion = 8 + len(ingredients) * 3 + n_cook * 22
                     if est_completion > time_until_switch - 5:
@@ -1429,11 +1428,11 @@ class BotPlayer:
             
             cost = ShopCosts.PLATE.buy_cost
             for fn in o['required']:
-                ft = FOOD_LUT.get(fn)
+                ft = INGREDIENT_REGISTRY.get(fn)
                 if ft:
                     cost += ft.buy_cost
             cooldown = cd_cheap if cost < 60 else (cd_mid if cost < 120 else cd_expensive)
-            if oid in self.failed_assignments and turn - self.failed_assignments[oid] < cooldown:
+            if oid in self.order_cooldowns and turn - self.order_cooldowns[oid] < cooldown:
                 continue
             profit = o['reward'] - cost
             penalty = o.get('penalty', 0)
@@ -1442,7 +1441,7 @@ class BotPlayer:
             value = profit + penalty
             if value <= 0:
                 continue
-            ingredients = [FOOD_LUT[fn] for fn in o['required'] if fn in FOOD_LUT]
+            ingredients = [INGREDIENT_REGISTRY[fn] for fn in o['required'] if fn in INGREDIENT_REGISTRY]
             n_cook = sum(1 for f in ingredients if f.can_cook)
             n_chop = sum(1 for f in ingredients if f.can_chop)
             needs_cook = n_cook > 0
@@ -1496,14 +1495,14 @@ class BotPlayer:
             # This lets us be ready exactly when order activates
             if wait_turns > 80:
                 continue
-            if oid in self.completed_orders or oid in self.assigned_orders:
+            if oid in self.finished_order_ids or oid in self.claimed_order_ids:
                 continue
             cost = ShopCosts.PLATE.buy_cost
             for fn in o['required']:
-                ft = FOOD_LUT.get(fn)
+                ft = INGREDIENT_REGISTRY.get(fn)
                 if ft:
                     cost += ft.buy_cost
-            if oid in self.failed_assignments:
+            if oid in self.order_cooldowns:
                 continue
             profit = o['reward'] - cost
             # Accept orders with small losses if penalty is high
@@ -1514,7 +1513,7 @@ class BotPlayer:
             if profit + penalty <= 0:
                 continue
             value = profit + penalty
-            ingredients = [FOOD_LUT[fn] for fn in o['required'] if fn in FOOD_LUT]
+            ingredients = [INGREDIENT_REGISTRY[fn] for fn in o['required'] if fn in INGREDIENT_REGISTRY]
             n_cook = sum(1 for f in ingredients if f.can_cook)
             n_chop = sum(1 for f in ingredients if f.can_chop)
             tleft = o['expires_turn'] - turn
@@ -1533,7 +1532,7 @@ class BotPlayer:
             })
         
         # ADAPTIVE SORTING based on map characteristics:
-        if self._has_late_critical_orders:
+        if self._deadline_critical_detected:
             # On maps with late critical orders, sort by soonest start + efficiency
             # This ensures late orders get picked up in time
             out.sort(key=lambda x: (x['wait_turns'], -x['efficiency']))
@@ -1572,13 +1571,13 @@ class BotPlayer:
         if free and submit:
             return min(free, key=lambda a: (
                 self._calculate_tile_distance(a[0], a[1], submit[0], submit[1])
-                if a in self._dist else 9999
+                if a in self._path_distances else 9999
             ))
         if free:
             return free[0]
-        free_c = [cc for cc in self._counters if cc not in claimed]
+        free_c = [cc for cc in self._counter_tiles if cc not in claimed]
         if not free_c:
-            free_c = list(self._counters)
+            free_c = list(self._counter_tiles)
         if free_c:
             return min(free_c, key=lambda cc: self._calculate_tile_distance(bx, by, cc[0], cc[1]))
         return None
@@ -1604,9 +1603,9 @@ class BotPlayer:
             self._write_log(f"  Recipe fail Order #{order['order_id']}: no assembly point")
             return None
 
-        assembly_walkable = assembly in self.walkable
+        assembly_walkable = assembly in self.passable_cells
 
-        ingredients = [FOOD_LUT[fn] for fn in order['required'] if fn in FOOD_LUT]
+        ingredients = [INGREDIENT_REGISTRY[fn] for fn in order['required'] if fn in INGREDIENT_REGISTRY]
         cook_chop = [f for f in ingredients if f.can_cook and f.can_chop]
         cook_only = [f for f in ingredients if f.can_cook and not f.can_chop]
         chop_only = [f for f in ingredients if f.can_chop and not f.can_cook]
@@ -1616,9 +1615,9 @@ class BotPlayer:
         cooker = None
         cooker2 = None
         if all_cook:
-            free_k = [kk for kk in self._cookers if kk not in claimed]
+            free_k = [kk for kk in self._stove_tiles if kk not in claimed]
             if not free_k:
-                all_k = sorted(self._cookers, key=lambda kk: self._calculate_tile_distance(
+                all_k = sorted(self._stove_tiles, key=lambda kk: self._calculate_tile_distance(
                     assembly[0], assembly[1], kk[0], kk[1]))
                 if all_k:
                     cooker = all_k[0]
@@ -1641,17 +1640,17 @@ class BotPlayer:
         chop_c = None
         needs_chop = bool(cook_chop) or bool(chop_only)
         if needs_chop:
-            if not self._counters:
+            if not self._counter_tiles:
                 self._write_log(f"  Recipe fail Order #{order['order_id']}: no counters on map")
                 return None
             # First try counters that aren't claimed by other bots
-            chop_candidates = [cc for cc in self._counters if cc not in claimed]
+            chop_candidates = [cc for cc in self._counter_tiles if cc not in claimed]
             
             # If no unclaimed counters, check if any claimed counter is available for sequential use:
             # - The counter is currently empty (no item on it)
             # - AND the claiming bot has finished its chopping steps
             if not chop_candidates:
-                for cc in self._counters:
+                for cc in self._counter_tiles:
                     if cc in claimed:
                         # Check if counter is currently empty
                         tile = c.get_tile(team, cc[0], cc[1])
@@ -1660,13 +1659,13 @@ class BotPlayer:
                         
                         # Check if the claiming bot is done with chopping
                         claiming_bid = None
-                        for obid, ot in self.tasks.items():
+                        for obid, ot in self.bot_tasks.items():
                             if obid != bid and ot.get('chop') == cc:
                                 claiming_bid = obid
                                 break
                         
                         if claiming_bid is not None:
-                            ot = self.tasks[claiming_bid]
+                            ot = self.bot_tasks[claiming_bid]
                             recipe = ot.get('recipe', [])
                             step = ot.get('step', 0)
                             # Check if any remaining steps use this counter for chopping
@@ -1684,12 +1683,12 @@ class BotPlayer:
                             chop_candidates.append(cc)
             
             if not chop_candidates:
-                self._write_log(f"  Recipe fail Order #{order['order_id']}: no free counters (all {len(self._counters)} in active use)")
+                self._write_log(f"  Recipe fail Order #{order['order_id']}: no free counters (all {len(self._counter_tiles)} in active use)")
                 return None
             chop_c = min(chop_candidates, key=lambda cc: self._calculate_tile_distance(
                 assembly[0], assembly[1], cc[0], cc[1]))
 
-        t = self.tasks[bid]
+        t = self.bot_tasks[bid]
         t['assembly'] = assembly
         t['chop'] = chop_c
         t['cooker'] = cooker
@@ -1713,7 +1712,7 @@ class BotPlayer:
         # Cleanup cookers if needed
         for ck in (cooker, cooker2):
             if ck:
-                if self._cooking_claim.get(ck) is not None and self._cooking_claim[ck] != bid:
+                if self._stove_reservations.get(ck) is not None and self._stove_reservations[ck] != bid:
                     continue
                 tile_k = c.get_tile(team, ck[0], ck[1])
                 if tile_k and isinstance(getattr(tile_k, 'item', None), Pan):
@@ -1728,15 +1727,15 @@ class BotPlayer:
         BURN_SAFE = BURN_TIME - 5
 
         d_cooker_from_asm = 9999
-        if cooker and assembly in self._dist:
+        if cooker and assembly in self._path_distances:
             d_cooker_from_asm = self._calculate_tile_distance(assembly[0], assembly[1], cooker[0], cooker[1])
 
         d_cooker2_from_asm = 9999
-        if cooker2 and assembly in self._dist:
+        if cooker2 and assembly in self._path_distances:
             d_cooker2_from_asm = self._calculate_tile_distance(assembly[0], assembly[1], cooker2[0], cooker2[1])
 
         d_chop_from_asm = 0
-        if chop_c and assembly in self._dist:
+        if chop_c and assembly in self._path_distances:
             d_chop_from_asm = self._calculate_tile_distance(assembly[0], assembly[1], chop_c[0], chop_c[1])
 
         parallel_work = (2 * d_cooker_from_asm + 2 + len(simple) * 2 +
@@ -1945,7 +1944,7 @@ class BotPlayer:
 
         # Find resources in runner's component
         shop = None
-        for sx, sy in self.tile_locs.get('SHOP', []):
+        for sx, sy in self.tile_positions.get('SHOP', []):
             for dx in (-1, 0, 1):
                 for dy in (-1, 0, 1):
                     nx, ny = sx + dx, sy + dy
@@ -1958,7 +1957,7 @@ class BotPlayer:
                 break
 
         submit = None
-        for sx, sy in self.tile_locs.get('SUBMIT', []):
+        for sx, sy in self.tile_positions.get('SUBMIT', []):
             for dx in (-1, 0, 1):
                 for dy in (-1, 0, 1):
                     nx, ny = sx + dx, sy + dy
@@ -1975,7 +1974,7 @@ class BotPlayer:
 
         # Find cooker in producer's component
         cooker = None
-        for kx, ky in self.tile_locs.get('COOKER', []):
+        for kx, ky in self.tile_positions.get('COOKER', []):
             for dx in (-1, 0, 1):
                 for dy in (-1, 0, 1):
                     nx, ny = kx + dx, ky + dy
@@ -1997,11 +1996,11 @@ class BotPlayer:
             return None
         assembly = min(runner_shop_adj, key=lambda a: (
             self._calculate_tile_distance(a[0], a[1], submit[0], submit[1])
-            if a in self._dist else 9999
+            if a in self._path_distances else 9999
         ))
 
         # Classify ingredients
-        ingredients = [FOOD_LUT[fn] for fn in order['required'] if fn in FOOD_LUT]
+        ingredients = [INGREDIENT_REGISTRY[fn] for fn in order['required'] if fn in INGREDIENT_REGISTRY]
         cook_chop = [f for f in ingredients if f.can_cook and f.can_chop]
         cook_only = [f for f in ingredients if f.can_cook and not f.can_chop]
         chop_only = [f for f in ingredients if f.can_chop and not f.can_cook]
@@ -2054,24 +2053,24 @@ class BotPlayer:
 
     def _cancel_task(self, c: RobotController, bid: int, reason: str = "unknown"):
         """Abort current task and clean up any held/placed items."""
-        self._diag_cancel_tasks += 1
-        t = self.tasks.get(bid, {})
+        self._stat_cancellations += 1
+        t = self.bot_tasks.get(bid, {})
         oid = t.get('order_id')
         turn = c.get_turn()
 
         self._write_log(f"ABORT Bot {bid}: reason='{reason}' order_id={oid}")
 
         if oid:
-            self.assigned_orders.discard(oid)
-            self._total_order_cancel_tasks += 1
+            self.claimed_order_ids.discard(oid)
+            self._total_task_cancellations += 1
             give_up_threshold = 8 if self._is_split_map else 4
-            if self._total_order_cancel_tasks >= give_up_threshold and self._diag_orders_completed == 0:
-                self._give_up = True
+            if self._total_task_cancellations >= give_up_threshold and self._stat_orders_done == 0:
+                self._surrender_mode = True
 
         # Release cooker claims
-        for ck_pos, owner in list(self._cooking_claim.items()):
+        for ck_pos, owner in list(self._stove_reservations.items()):
             if owner == bid:
-                del self._cooking_claim[ck_pos]
+                del self._stove_reservations[ck_pos]
 
         # Clean up: if bot is holding something, create a trash recipe
         bs = c.get_bot_state(bid)
@@ -2098,23 +2097,23 @@ class BotPlayer:
                       'is_split_order': False, 'partner_bid': None,
                       'stuck_count': 0, 'last_progress': turn})
 
-            if partner_bid is not None and partner_bid in self.tasks:
-                pt = self.tasks[partner_bid]
+            if partner_bid is not None and partner_bid in self.bot_tasks:
+                pt = self.bot_tasks[partner_bid]
                 if pt.get('partner_bid') == bid:
                     pt['partner_bid'] = None
                     self._cancel_task(c, partner_bid, reason=f"partner {bid} aborted")
 
     def _manage_burnt_food(self, c: RobotController, bid: int):
         """Handle burnt food."""
-        t = self.tasks[bid]
+        t = self.bot_tasks[bid]
         oid = t.get('order_id')
         if oid:
-            self.assigned_orders.discard(oid)
-            self.failed_assignments[oid] = c.get_turn()
+            self.claimed_order_ids.discard(oid)
+            self.order_cooldowns[oid] = c.get_turn()
 
-        for ck_pos, owner in list(self._cooking_claim.items()):
+        for ck_pos, owner in list(self._stove_reservations.items()):
             if owner == bid:
-                del self._cooking_claim[ck_pos]
+                del self._stove_reservations[ck_pos]
 
         bs = c.get_bot_state(bid)
         if bs:
@@ -2138,19 +2137,19 @@ class BotPlayer:
 
     def _run_task_step(self, c: RobotController, bid: int):
         """Execute current recipe step."""
-        t = self.tasks[bid]
+        t = self.bot_tasks[bid]
         recipe = t['recipe']
         idx = t['step']
         turn = c.get_turn()
 
         if idx >= len(recipe):
-            self._diag_turns_idle += 1
+            self._stat_idle_turns += 1
             return
 
         step = recipe[idx]
         action = step[0]
         if action == 'wait_take':
-            self._diag_turns_cooking += 1
+            self._stat_cooking_turns += 1
         used_move = False
         prev_step = idx
         team = c.get_team()
@@ -2269,7 +2268,7 @@ class BotPlayer:
                         t['last_progress'] = turn
                     return
             if c.place(bid, loc[0], loc[1]):
-                self._cooking_claim[loc] = bid
+                self._stove_reservations[loc] = bid
                 t['step'] += 1
             else:
                 t['stuck_count'] += 1
@@ -2341,17 +2340,17 @@ class BotPlayer:
             if tile and isinstance(getattr(tile, 'item', None), Pan):
                 pan = tile.item
                 if pan.food:
-                    claim_owner = self._cooking_claim.get(loc)
+                    claim_owner = self._stove_reservations.get(loc)
                     if claim_owner is not None and claim_owner != bid:
                         t['last_progress'] = turn
                         return
                     if pan.food.cooked_stage == 1:
                         if c.take_from_pan(bid, loc[0], loc[1]):
-                            self._cooking_claim.pop(loc, None)
+                            self._stove_reservations.pop(loc, None)
                             t['step'] += 1
                     elif pan.food.cooked_stage >= 2:
                         if c.take_from_pan(bid, loc[0], loc[1]):
-                            self._cooking_claim.pop(loc, None)
+                            self._stove_reservations.pop(loc, None)
                             self._manage_burnt_food(c, bid)
                             return
                 else:
@@ -2399,7 +2398,7 @@ class BotPlayer:
                     t['last_progress'] = turn
                     return
             if c.take_from_pan(bid, loc[0], loc[1]):
-                self._cooking_claim.pop(loc, None)
+                self._stove_reservations.pop(loc, None)
                 t['step'] += 1
             else:
                 t['stuck_count'] += 1
@@ -2436,16 +2435,16 @@ class BotPlayer:
                 return
             used_move = (mv is True)
             if c.submit(bid, loc[0], loc[1]):
-                self._diag_orders_completed += 1
+                self._stat_orders_done += 1
                 self._write_log(f"COMPLETED Order #{oid}")
                 if oid:
-                    self.completed_orders.add(oid)
-                    self.assigned_orders.discard(oid)
-                self._counter_fail_streak = 0
-                self._cooker_fail_streak = 0
-                self._skip_chop = False
-                self._skip_cook = False
-                self._total_order_cancel_tasks = 0
+                    self.finished_order_ids.add(oid)
+                    self.claimed_order_ids.discard(oid)
+                self._counter_failures = 0
+                self._stove_failures = 0
+                self._chopping_disabled = False
+                self._cooking_disabled = False
+                self._total_task_cancellations = 0
                 t.update({'recipe': [], 'step': 0, 'order_id': None,
                           'assembly': None, 'chop': None, 'cooker': None,
                           'cooker2': None, 'is_future_order': False,
@@ -2527,7 +2526,7 @@ class BotPlayer:
 
     def _attempt_chained_action(self, c: RobotController, bid: int, prev_used_move: bool):
         """After completing a step, try to execute next step in same turn."""
-        t = self.tasks[bid]
+        t = self.bot_tasks[bid]
         recipe = t['recipe']
         idx = t['step']
         if idx >= len(recipe):
@@ -2595,7 +2594,7 @@ class BotPlayer:
         elif action == 'place_cook':
             if bs.get('holding'):
                 if c.place(bid, loc[0], loc[1]):
-                    self._cooking_claim[loc] = bid
+                    self._stove_reservations[loc] = bid
                     t['step'] += 1
                     t['stuck_count'] = 0
                     t['last_progress'] = c.get_turn()
@@ -2614,7 +2613,7 @@ class BotPlayer:
         elif action == 'take_pan':
             if not bs.get('holding'):
                 if c.take_from_pan(bid, loc[0], loc[1]):
-                    self._cooking_claim.pop(loc, None)
+                    self._stove_reservations.pop(loc, None)
                     t['step'] += 1
                     t['stuck_count'] = 0
                     t['last_progress'] = c.get_turn()
@@ -2638,15 +2637,15 @@ class BotPlayer:
                     return
                 t['is_future_order'] = False
             if c.submit(bid, loc[0], loc[1]):
-                self._diag_orders_completed += 1
+                self._stat_orders_done += 1
                 if oid:
-                    self.completed_orders.add(oid)
-                    self.assigned_orders.discard(oid)
-                self._counter_fail_streak = 0
-                self._cooker_fail_streak = 0
-                self._skip_chop = False
-                self._skip_cook = False
-                self._total_order_cancel_tasks = 0
+                    self.finished_order_ids.add(oid)
+                    self.claimed_order_ids.discard(oid)
+                self._counter_failures = 0
+                self._stove_failures = 0
+                self._chopping_disabled = False
+                self._cooking_disabled = False
+                self._total_task_cancellations = 0
                 t.update({'recipe': [], 'step': 0, 'order_id': None,
                           'assembly': None, 'chop': None, 'cooker': None,
                           'cooker2': None, 'is_future_order': False,
@@ -2664,7 +2663,7 @@ class BotPlayer:
         best_d = 9999
         best = None
         team = c.get_team()
-        for cx, cy in self._counters:
+        for cx, cy in self._counter_tiles:
             if (cx, cy) in exclude:
                 continue
             tile = c.get_tile(team, cx, cy)
@@ -2679,10 +2678,10 @@ class BotPlayer:
         """Find any empty walkable tile to drop an item on (last resort)."""
         team = c.get_team()
         src = (bx, by)
-        if src not in self._dist:
+        if src not in self._path_distances:
             return None
-        d = self._dist[src]
-        candidates = sorted(self.walkable, key=lambda p: d.get(p, 9999))
+        d = self._path_distances[src]
+        candidates = sorted(self.passable_cells, key=lambda p: d.get(p, 9999))
         for wx, wy in candidates[:50]:
             if d.get((wx, wy), 9999) >= 9999:
                 break
@@ -2704,23 +2703,23 @@ class BotPlayer:
             return
         bx, by = bs['x'], bs['y']
         targets = []
-        for tx, ty in self._trash_tiles:
+        for tx, ty in self._disposal_tiles:
             targets.extend(self._get_adjacent_walkable(tx, ty))
         team = c.get_team()
-        for tx, ty in self._counters:
+        for tx, ty in self._counter_tiles:
             tile = c.get_tile(team, tx, ty)
             if tile and getattr(tile, 'item', None) is None:
                 targets.extend(self._get_adjacent_walkable(tx, ty))
         if not targets:
             return
         src = (bx, by)
-        if src not in self._dist:
+        if src not in self._path_distances:
             return
-        d = self._dist[src]
+        d = self._path_distances[src]
         best_t = min(targets, key=lambda a: d.get(a, 9999))
         if best_t not in d:
             return
-        ns = self._next_step[src]
+        ns = self._first_moves[src]
         if best_t in ns:
             dx, dy = ns[best_t]
             if c.can_move(bid, dx, dy):
@@ -2749,7 +2748,7 @@ class BotPlayer:
         - Items we trash cost more than orders we miss (rare)
         - Or there are very few/no orders during the window
         """
-        if self._sabotage_planned:
+        if self._switch_strategy_set:
             return
             
         switch_info = c.get_switch_info()
@@ -2758,7 +2757,7 @@ class BotPlayer:
         turn = c.get_turn()
         
         if turn >= switch_turn:
-            self._sabotage_planned = True
+            self._switch_strategy_set = True
             return
         
         # Count orders active during sabotage window
@@ -2779,8 +2778,8 @@ class BotPlayer:
         # Each item we trash is worth ~$5-40
         # So sabotage is rarely worth it
         if orders_during_switch >= 1:
-            self._sabotage_switch_turn = None
-            self._sabotage_planned = True
+            self._planned_switch_turn = None
+            self._switch_strategy_set = True
             self._write_log(f"SABOTAGE DISABLED: {orders_during_switch} orders during window worth ~${total_order_value}")
             return
         
@@ -2790,8 +2789,8 @@ class BotPlayer:
         if best_switch_turn >= switch_end:
             best_switch_turn = switch_turn
         
-        self._sabotage_switch_turn = best_switch_turn
-        self._pre_sabotage_cutoff = switch_turn - 10
+        self._planned_switch_turn = best_switch_turn
+        self._order_deadline_cutoff = switch_turn - 10
         
         # Identify a good order to prep for when we return
         for o in orders:
@@ -2801,15 +2800,15 @@ class BotPlayer:
             expires = o.get('expires_turn', 0)
             # Order that starts after switch window ends
             if starts >= switch_end - 10:
-                self._sabotage_prep_order = o.get('order_id')
+                self._post_switch_target = o.get('order_id')
                 # Track what items we need for this order
                 for item in o.get('required', []):
-                    self._sabotage_useful_items.add(item)
+                    self._items_to_preserve.add(item)
                 break
         
-        self._sabotage_planned = True
+        self._switch_strategy_set = True
         self._write_log(f"SABOTAGE ENABLED: Switch at turn {best_switch_turn}, window ends {switch_end}")
-        self._write_log(f"  Prep order: #{self._sabotage_prep_order}, useful items: {self._sabotage_useful_items}")
+        self._write_log(f"  Prep order: #{self._post_switch_target}, useful items: {self._items_to_preserve}")
 
     def _should_switch_now(self, c: RobotController) -> bool:
         """Determine if we should switch maps now."""
@@ -2821,13 +2820,13 @@ class BotPlayer:
             return False
         
         # If sabotage is disabled, don't switch
-        if self._sabotage_switch_turn is None:
+        if self._planned_switch_turn is None:
             return False
             
         turn = c.get_turn()
         
         # If we have a planned switch turn, use that
-        return turn >= self._sabotage_switch_turn
+        return turn >= self._planned_switch_turn
 
     def _run_task_stepute_sabotage(self, c: RobotController, bots: List[int]) -> bool:
         """Execute sabotage actions while on enemy map. Returns True if we're in sabotage mode."""
@@ -2837,10 +2836,10 @@ class BotPlayer:
         
         # Check if we're on enemy map
         if not switch_info['my_team_switched']:
-            self._sabotage_active = False
+            self._switch_in_progress = False
             return False
             
-        self._sabotage_active = True
+        self._switch_in_progress = True
         self._write_log(f"SABOTAGE MODE: Turn {turn}")
         
         enemy_team = c.get_enemy_team()
@@ -2955,25 +2954,25 @@ class BotPlayer:
         """Main entry point."""
         turn = c.get_turn()
         team = c.get_team()
-        if self.team is None:
-            self.team = team
+        if self.my_team is None:
+            self.my_team = team
 
         # Initialize log
         if turn == 1:
-            self._init_write_log()
+            self._start_telemetry()
 
         bots = c.get_team_bot_ids(team)
         orders = c.get_orders(team)
         money = c.get_team_money(team)
 
         # Analyze order timing characteristics (once)
-        if not self._late_order_analysis_done:
+        if not self._order_analysis_complete:
             self._analyze_late_orders(orders)
-            self._late_order_analysis_done = True
+            self._order_analysis_complete = True
 
         for bid in bots:
-            if bid not in self.tasks:
-                self.tasks[bid] = {
+            if bid not in self.bot_tasks:
+                self.bot_tasks[bid] = {
                     'recipe': [], 'step': 0, 'order_id': None,
                     'assembly': None, 'chop': None, 'cooker': None, 'cooker2': None,
                     'stuck_count': 0, 'last_progress': turn,
@@ -3021,7 +3020,7 @@ class BotPlayer:
         if self._should_switch_now(c):
             if c.switch_maps():
                 self._write_log(f"SWITCHED TO ENEMY MAP at turn {turn}!")
-                self._sabotage_active = True
+                self._switch_in_progress = True
         
         # If we're in sabotage mode, execute sabotage actions and skip normal processing
         if self._run_task_stepute_sabotage(c, bots):
@@ -3036,7 +3035,7 @@ class BotPlayer:
         completed_ids = {o['order_id'] for o in orders if o.get('completed_turn') is not None}
         future_ids = {o['order_id'] for o in orders if not o['is_active'] and o['created_turn'] > turn}
         for bid in bots:
-            t = self.tasks[bid]
+            t = self.bot_tasks[bid]
             oid = t.get('order_id')
             if oid and oid not in active_ids and oid not in completed_ids:
                 if t.get('is_future_order') and oid in future_ids:
@@ -3048,16 +3047,16 @@ class BotPlayer:
             bs = c.get_bot_state(bid)
             if bs:
                 pos = (bs['x'], bs['y'])
-                old_pos = self._last_pos.get(bid)
-                self._last_pos[bid] = pos
-                t = self.tasks[bid]
+                old_pos = self._previous_positions.get(bid)
+                self._previous_positions[bid] = pos
+                t = self.bot_tasks[bid]
                 if old_pos and old_pos != pos and t.get('recipe'):
                     t['last_progress'] = turn
                     t['stuck_count'] = 0
 
         # Detect stuck bots
         for bid in bots:
-            t = self.tasks[bid]
+            t = self.bot_tasks[bid]
             if not t['recipe'] or t['step'] >= len(t['recipe']):
                 continue
             if t.get('is_future_order'):
@@ -3078,25 +3077,25 @@ class BotPlayer:
             if sc > 15 or no_progress > 35:
                 oid = t.get('order_id')
                 if oid:
-                    self.failed_assignments[oid] = turn
+                    self.order_cooldowns[oid] = turn
                     step_idx = t.get('step', 0)
                     recipe = t.get('recipe', [])
                     if step_idx < len(recipe):
                         stuck_action = recipe[step_idx][0]
                         if stuck_action in ('place', 'chop') and t.get('chop'):
-                            self._counter_fail_streak += 1
-                            if self._counter_fail_streak >= 3:
-                                self._skip_chop = True
+                            self._counter_failures += 1
+                            if self._counter_failures >= 3:
+                                self._chopping_disabled = True
                         elif stuck_action in ('place_cook', 'wait_take') and t.get('cooker'):
-                            self._cooker_fail_streak += 1
-                            if self._cooker_fail_streak >= 3:
-                                self._skip_cook = True
+                            self._stove_failures += 1
+                            if self._stove_failures >= 3:
+                                self._cooking_disabled = True
                 self._cancel_task(c, bid, reason=f"stuck sc={sc} no_progress={no_progress}")
 
         # Handle idle bots holding items
         idle_bots = []
         for bid in bots:
-            t = self.tasks[bid]
+            t = self.bot_tasks[bid]
             if t['recipe'] and t['step'] < len(t['recipe']):
                 continue
             bs = c.get_bot_state(bid)
@@ -3127,12 +3126,12 @@ class BotPlayer:
         # Only do this if we have idle bots and resources are blocked
         if idle_bots:
             # Check if counter has an item that's blocking (not claimed by any active order)
-            for cc in self._counters:
+            for cc in self._counter_tiles:
                 tile = c.get_tile(team, cc[0], cc[1])
                 if tile and getattr(tile, 'item', None) is not None:
                     # Check if any bot is using this counter
                     counter_in_use = False
-                    for obid, ot in self.tasks.items():
+                    for obid, ot in self.bot_tasks.items():
                         if ot.get('chop') == cc and ot.get('order_id') is not None:
                             counter_in_use = True
                             break
@@ -3145,7 +3144,7 @@ class BotPlayer:
                             trash = self._find_closest(bs['x'], bs['y'], 'TRASH')
                             if trash:
                                 self._write_log(f"  Cleanup: Bot {bid} clearing abandoned item from counter {cc}")
-                                t = self.tasks[bid]
+                                t = self.bot_tasks[bid]
                                 t['recipe'] = [('pickup', cc), ('trash', trash)]
                                 t['step'] = 0
                                 t['order_id'] = None
@@ -3156,15 +3155,15 @@ class BotPlayer:
                         break  # Only clean one item per turn
             
             # Check if cooker has food that's abandoned (cooked but not claimed, or burnt)
-            for kk in self._cookers:
+            for kk in self._stove_tiles:
                 tile = c.get_tile(team, kk[0], kk[1])
                 if tile and isinstance(getattr(tile, 'item', None), Pan):
                     pan = tile.item
                     if pan.food is not None:
                         # Check if any bot is using this cooker
-                        cooker_in_use = self._cooking_claim.get(kk) is not None
+                        cooker_in_use = self._stove_reservations.get(kk) is not None
                         if not cooker_in_use:
-                            for obid, ot in self.tasks.items():
+                            for obid, ot in self.bot_tasks.items():
                                 if ot.get('cooker') == kk and ot.get('order_id') is not None:
                                     cooker_in_use = True
                                     break
@@ -3177,7 +3176,7 @@ class BotPlayer:
                                 trash = self._find_closest(bs['x'], bs['y'], 'TRASH')
                                 if trash:
                                     self._write_log(f"  Cleanup: Bot {bid} clearing abandoned food from cooker {kk}")
-                                    t = self.tasks[bid]
+                                    t = self.bot_tasks[bid]
                                     t['recipe'] = [('take_pan', kk), ('trash', trash)]
                                     t['step'] = 0
                                     t['order_id'] = None
@@ -3187,23 +3186,23 @@ class BotPlayer:
                                     break
                             break  # Only clean one item per turn
 
-        if self._give_up:
+        if self._surrender_mode:
             for bid in bots:
                 self._run_task_step(c, bid)
             return
 
         # Count resource usage
         n_cooking_bots = sum(1 for bid in bots
-                             if self.tasks[bid].get('cooker') is not None
-                             and self.tasks[bid].get('order_id') is not None)
+                             if self.bot_tasks[bid].get('cooker') is not None
+                             and self.bot_tasks[bid].get('order_id') is not None)
         n_chopping_bots = sum(1 for bid in bots
-                              if self.tasks[bid].get('chop') is not None
-                              and self.tasks[bid].get('order_id') is not None)
+                              if self.bot_tasks[bid].get('chop') is not None
+                              and self.bot_tasks[bid].get('order_id') is not None)
 
         # Calculate available money
         committed_spending = 0
         for bid in bots:
-            t = self.tasks[bid]
+            t = self.bot_tasks[bid]
             if t.get('recipe') and t.get('order_id') is not None:
                 recipe = t.get('recipe', [])
                 step = t.get('step', 0)
@@ -3222,7 +3221,7 @@ class BotPlayer:
                 self._run_task_step(c, bid)
             # Idle movement for split map
             for bid in bots:
-                t = self.tasks[bid]
+                t = self.bot_tasks[bid]
                 if t['recipe'] and t['step'] < len(t['recipe']):
                     continue
                 bs = c.get_bot_state(bid)
@@ -3237,8 +3236,8 @@ class BotPlayer:
                         comp = self._bot_comp.get(bid)
                         shop_adj = [a for a in shop_adj if self._tile_component.get(a) == comp]
                         if shop_adj and (bx, by) not in shop_adj:
-                            target = min(shop_adj, key=lambda a: self._dist.get((bx, by), {}).get(a, 9999))
-                            if target in self._dist.get((bx, by), {}):
+                            target = min(shop_adj, key=lambda a: self._path_distances.get((bx, by), {}).get(a, 9999))
+                            if target in self._path_distances.get((bx, by), {}):
                                 self._step_to_tile(c, bid, target[0], target[1])
                 elif role == 'producer' and self._bridge_counters:
                     bc_pos = self._bridge_counters[0][0]
@@ -3246,8 +3245,8 @@ class BotPlayer:
                     comp = self._bot_comp.get(bid)
                     bc_adj = [a for a in bc_adj if self._tile_component.get(a) == comp]
                     if bc_adj and (bx, by) not in bc_adj:
-                        target = min(bc_adj, key=lambda a: self._dist.get((bx, by), {}).get(a, 9999))
-                        if target in self._dist.get((bx, by), {}):
+                        target = min(bc_adj, key=lambda a: self._path_distances.get((bx, by), {}).get(a, 9999))
+                        if target in self._path_distances.get((bx, by), {}):
                             self._step_to_tile(c, bid, target[0], target[1])
             return
 
@@ -3264,29 +3263,29 @@ class BotPlayer:
                 self._write_log(f"  Order #{o['order_id']}: {o['required']} profit={cand['profit']} tleft={cand['tleft']} needs_cook={cand['needs_cook']} needs_chop={cand['needs_chop']}")
 
         for bid in idle_bots:
-            bstate = c.get_bot_state(bid)
-            if not bstate:
+            bot_state = c.get_bot_state(bid)
+            if not bot_state:
                 continue
-            bx, by = bstate['x'], bstate['y']
+            bx, by = bot_state['x'], bot_state['y']
             self._write_log(f"  Bot {bid} at ({bx},{by}) evaluating orders...")
             for ci, cand in enumerate(candidates):
                 oid = cand['order']['order_id']
-                if oid in self.assigned_orders:
+                if oid in self.claimed_order_ids:
                     continue
                 # Check if enough money remains after committed spending
                 if available_money - newly_committed < cand['cost'] + 2:
                     self._write_log(f"    Skip #{oid}: insufficient money (need {cand['cost']+2}, have {available_money - newly_committed})")
                     continue
-                if cand['needs_cook'] and n_cooking_bots >= max(self._n_cookers * 2, 2):
-                    self._write_log(f"    Skip #{oid}: too many cooking bots ({n_cooking_bots} >= {max(self._n_cookers * 2, 2)})")
+                if cand['needs_cook'] and n_cooking_bots >= max(self._stove_count * 2, 2):
+                    self._write_log(f"    Skip #{oid}: too many cooking bots ({n_cooking_bots} >= {max(self._stove_count * 2, 2)})")
                     continue
-                if cand['needs_chop'] and n_chopping_bots >= max(self._n_counters * 2, 2):
-                    self._write_log(f"    Skip #{oid}: too many chopping bots ({n_chopping_bots} >= {max(self._n_counters * 2, 2)})")
+                if cand['needs_chop'] and n_chopping_bots >= max(self._counter_count * 2, 2):
+                    self._write_log(f"    Skip #{oid}: too many chopping bots ({n_chopping_bots} >= {max(self._counter_count * 2, 2)})")
                     continue
-                if self._skip_chop and cand['needs_chop']:
+                if self._chopping_disabled and cand['needs_chop']:
                     self._write_log(f"    Skip #{oid}: skip_chop flag set")
                     continue
-                if self._skip_cook and cand['needs_cook']:
+                if self._cooking_disabled and cand['needs_cook']:
                     self._write_log(f"    Skip #{oid}: skip_cook flag set")
                     continue
                 est = self._predict_completion_time(bx, by, cand['order'])
@@ -3309,34 +3308,34 @@ class BotPlayer:
                 continue
             cand = candidates[ci]
             oid = cand['order']['order_id']
-            if oid in self.assigned_orders or oid in assigned_oids:
+            if oid in self.claimed_order_ids or oid in assigned_oids:
                 continue
             if available_money - newly_committed < cand['cost'] + 2:
                 continue
-            bstate2 = c.get_bot_state(bid)
-            if not bstate2:
+            bot_state2 = c.get_bot_state(bid)
+            if not bot_state2:
                 continue
-            bx2, by2 = bstate2['x'], bstate2['y']
-            saved_task = {k: v for k, v in self.tasks[bid].items()}
+            bx2, by2 = bot_state2['x'], bot_state2['y']
+            saved_task = {k: v for k, v in self.bot_tasks[bid].items()}
             recipe = self._generate_recipe(cand['order'], c, bid)
             if not recipe:
-                self.tasks[bid].update(saved_task)
+                self.bot_tasks[bid].update(saved_task)
                 continue
             recipe_est = self._calculate_recipe_duration(recipe, bx2, by2)
             if recipe_est > cand['tleft'] * 1.1:
-                self.tasks[bid].update(saved_task)
+                self.bot_tasks[bid].update(saved_task)
                 continue
             if turn + recipe_est > GameConstants.TOTAL_TURNS:
-                self.tasks[bid].update(saved_task)
+                self.bot_tasks[bid].update(saved_task)
                 continue
-            t = self.tasks[bid]
+            t = self.bot_tasks[bid]
             t['recipe'] = recipe
             t['step'] = 0
             t['order_id'] = oid
             t['stuck_count'] = 0
             t['last_progress'] = turn
-            self.assigned_orders.add(oid)
-            self._diag_orders_attempted += 1
+            self.claimed_order_ids.add(oid)
+            self._stat_orders_started += 1
             self._write_log(f"ASSIGNED Order #{oid} to Bot {bid}")
             assigned_bots.add(bid)
             assigned_oids.add(oid)
@@ -3355,23 +3354,23 @@ class BotPlayer:
                 if not future_candidates:
                     self._write_log(f"  Bot {bid} has no future orders to consider")
                     break
-                bstate = c.get_bot_state(bid)
-                if not bstate:
+                bot_state = c.get_bot_state(bid)
+                if not bot_state:
                     continue
-                bx, by = bstate['x'], bstate['y']
+                bx, by = bot_state['x'], bot_state['y']
                 self._write_log(f"  Bot {bid} at ({bx},{by}) evaluating future orders...")
                 for fc in future_candidates:
                     oid = fc['order']['order_id']
-                    if oid in self.assigned_orders or oid in assigned_oids:
+                    if oid in self.claimed_order_ids or oid in assigned_oids:
                         continue
                     # Check if enough money remains after committed spending
                     if available_money - newly_committed < fc['cost'] + 2:
                         self._write_log(f"    Skip future #{oid}: insufficient money")
                         continue
-                    if fc['needs_cook'] and n_cooking_bots >= max(self._n_cookers * 2, 2):
+                    if fc['needs_cook'] and n_cooking_bots >= max(self._stove_count * 2, 2):
                         self._write_log(f"    Skip future #{oid}: too many cooking bots")
                         continue
-                    if fc['needs_chop'] and n_chopping_bots >= max(self._n_counters * 2, 2):
+                    if fc['needs_chop'] and n_chopping_bots >= max(self._counter_count * 2, 2):
                         self._write_log(f"    Skip future #{oid}: too many chopping bots")
                         continue
                     est = self._predict_completion_time(bx, by, fc['order'])
@@ -3385,28 +3384,28 @@ class BotPlayer:
                         self._write_log(f"    Skip future #{oid}: est={est} > tleft*mult={actual_tleft}*{self._feasibility_mult:.1f}={actual_tleft*self._feasibility_mult:.0f}")
                         continue
                     self._write_log(f"    Consider future #{oid}: wait={fc.get('wait_turns', 0)} est={est}")
-                    saved_task = {k: v for k, v in self.tasks[bid].items()}
+                    saved_task = {k: v for k, v in self.bot_tasks[bid].items()}
                     recipe = self._generate_recipe(fc['order'], c, bid)
                     if recipe:
                         recipe_est = self._calculate_recipe_duration(recipe, bx, by)
                         if turn + recipe_est > GameConstants.TOTAL_TURNS:
-                            self.tasks[bid].update(saved_task)
+                            self.bot_tasks[bid].update(saved_task)
                             self._write_log(f"    Reject future #{oid}: recipe would end after game")
                             continue
                         # Also check against actual time left, not inflated effective_tleft
                         if recipe_est > actual_tleft * 1.1:
-                            self.tasks[bid].update(saved_task)
+                            self.bot_tasks[bid].update(saved_task)
                             self._write_log(f"    Reject future #{oid}: recipe_est={recipe_est} > tleft*1.1={actual_tleft*1.1:.0f}")
                             continue
-                        t = self.tasks[bid]
+                        t = self.bot_tasks[bid]
                         t['recipe'] = recipe
                         t['step'] = 0
                         t['order_id'] = oid
                         t['stuck_count'] = 0
                         t['last_progress'] = turn
                         t['is_future_order'] = True
-                        self.assigned_orders.add(oid)
-                        self._diag_orders_attempted += 1
+                        self.claimed_order_ids.add(oid)
+                        self._stat_orders_started += 1
                         self._write_log(f"ASSIGNED Future Order #{oid} to Bot {bid}")
                         assigned_bots.add(bid)
                         assigned_oids.add(oid)
@@ -3424,7 +3423,7 @@ class BotPlayer:
         # Post-exec: assign orders to newly idle bots
         newly_idle = []
         for bid in bots:
-            t = self.tasks[bid]
+            t = self.bot_tasks[bid]
             if t['recipe'] and t['step'] < len(t['recipe']):
                 continue
             bs = c.get_bot_state(bid)
@@ -3437,7 +3436,7 @@ class BotPlayer:
             money2 = c.get_team_money(team)
             committed_spending2 = 0
             for bid in bots:
-                t = self.tasks[bid]
+                t = self.bot_tasks[bid]
                 if t.get('recipe') and t.get('order_id') is not None:
                     recipe = t.get('recipe', [])
                     step = t.get('step', 0)
@@ -3450,31 +3449,31 @@ class BotPlayer:
             available_money2 = money2 - committed_spending2
             candidates2 = self._prioritize_active_orders(orders, turn, c)
             n_ck2 = sum(1 for b in bots
-                        if self.tasks[b].get('cooker') is not None
-                        and self.tasks[b].get('order_id') is not None)
+                        if self.bot_tasks[b].get('cooker') is not None
+                        and self.bot_tasks[b].get('order_id') is not None)
             n_ch2 = sum(1 for b in bots
-                        if self.tasks[b].get('chop') is not None
-                        and self.tasks[b].get('order_id') is not None)
+                        if self.bot_tasks[b].get('chop') is not None
+                        and self.bot_tasks[b].get('order_id') is not None)
             assignments2 = []
             newly_committed2 = 0
             for bid in newly_idle:
-                bstate = c.get_bot_state(bid)
-                if not bstate:
+                bot_state = c.get_bot_state(bid)
+                if not bot_state:
                     continue
-                bx, by = bstate['x'], bstate['y']
+                bx, by = bot_state['x'], bot_state['y']
                 for ci, cand in enumerate(candidates2):
                     oid = cand['order']['order_id']
-                    if oid in self.assigned_orders:
+                    if oid in self.claimed_order_ids:
                         continue
                     if available_money2 - newly_committed2 < cand['cost'] + 2:
                         continue
-                    if cand['needs_cook'] and n_ck2 >= max(self._n_cookers * 2, 2):
+                    if cand['needs_cook'] and n_ck2 >= max(self._stove_count * 2, 2):
                         continue
-                    if cand['needs_chop'] and n_ch2 >= max(self._n_counters * 2, 2):
+                    if cand['needs_chop'] and n_ch2 >= max(self._counter_count * 2, 2):
                         continue
-                    if self._skip_chop and cand['needs_chop']:
+                    if self._chopping_disabled and cand['needs_chop']:
                         continue
-                    if self._skip_cook and cand['needs_cook']:
+                    if self._cooking_disabled and cand['needs_cook']:
                         continue
                     est = self._predict_completion_time(bx, by, cand['order'])
                     if est > cand['tleft'] * self._feasibility_mult:
@@ -3491,32 +3490,32 @@ class BotPlayer:
                     continue
                 cand = candidates2[ci]
                 oid = cand['order']['order_id']
-                if oid in self.assigned_orders or oid in assigned_oids2:
+                if oid in self.claimed_order_ids or oid in assigned_oids2:
                     continue
                 if available_money2 - newly_committed2 < cand['cost'] + 2:
                     continue
-                bstate3 = c.get_bot_state(bid)
-                if not bstate3:
+                bot_state3 = c.get_bot_state(bid)
+                if not bot_state3:
                     continue
-                bx3, by3 = bstate3['x'], bstate3['y']
-                saved_task2 = {k: v for k, v in self.tasks[bid].items()}
+                bx3, by3 = bot_state3['x'], bot_state3['y']
+                saved_task2 = {k: v for k, v in self.bot_tasks[bid].items()}
                 recipe = self._generate_recipe(cand['order'], c, bid)
                 if recipe:
                     recipe_est = self._calculate_recipe_duration(recipe, bx3, by3)
                     if recipe_est > cand['tleft'] * 1.1:
-                        self.tasks[bid].update(saved_task2)
+                        self.bot_tasks[bid].update(saved_task2)
                         continue
                     if turn + recipe_est > GameConstants.TOTAL_TURNS:
-                        self.tasks[bid].update(saved_task2)
+                        self.bot_tasks[bid].update(saved_task2)
                         continue
-                    t = self.tasks[bid]
+                    t = self.bot_tasks[bid]
                     t['recipe'] = recipe
                     t['step'] = 0
                     t['order_id'] = oid
                     t['stuck_count'] = 0
                     t['last_progress'] = turn
-                    self.assigned_orders.add(oid)
-                    self._diag_orders_attempted += 1
+                    self.claimed_order_ids.add(oid)
+                    self._stat_orders_started += 1
                     assigned_bots2.add(bid)
                     assigned_oids2.add(oid)
                     newly_committed2 += cand['cost']
@@ -3525,7 +3524,7 @@ class BotPlayer:
         idle_bot_list = []
         working_bot_list = []
         for bid in bots:
-            t = self.tasks[bid]
+            t = self.bot_tasks[bid]
             if t['recipe'] and t['step'] < len(t['recipe']):
                 working_bot_list.append(bid)
             else:
@@ -3548,7 +3547,7 @@ class BotPlayer:
                 worker_pos = (worker_bs['x'], worker_bs['y'])
                 
                 # Get worker's target
-                worker_task = self.tasks.get(worker_bid, {})
+                worker_task = self.bot_tasks.get(worker_bid, {})
                 recipe = worker_task.get('recipe', [])
                 step = worker_task.get('step', 0)
                 if step >= len(recipe):
@@ -3563,7 +3562,7 @@ class BotPlayer:
                 if current_step[0] != 'goto':
                     adj = self._get_adjacent_walkable(target_pos[0], target_pos[1])
                     if adj:
-                        target_pos = min(adj, key=lambda a: self._dist.get(worker_pos, {}).get(a, 9999))
+                        target_pos = min(adj, key=lambda a: self._path_distances.get(worker_pos, {}).get(a, 9999))
                 
                 # Check if idle bot is blocking
                 if self._is_blocking_corridor(idle_pos, worker_pos, target_pos):
@@ -3576,7 +3575,7 @@ class BotPlayer:
         # Move idle bots toward shop (but avoid corridors if possible)
         # The yielding logic above already handles cases where idle bots block working bots
         for bid in bots:
-            t = self.tasks[bid]
+            t = self.bot_tasks[bid]
             if t['recipe'] and t['step'] < len(t['recipe']):
                 continue
             bs = c.get_bot_state(bid)
@@ -3595,8 +3594,8 @@ class BotPlayer:
                     shop_adj_safe = shop_adj
                 
                 if shop_adj_safe and (bx, by) not in shop_adj_safe:
-                    target = min(shop_adj_safe, key=lambda a: self._dist.get((bx, by), {}).get(a, 9999))
-                    if target and target in self._dist.get((bx, by), {}):
+                    target = min(shop_adj_safe, key=lambda a: self._path_distances.get((bx, by), {}).get(a, 9999))
+                    if target and target in self._path_distances.get((bx, by), {}):
                         self._navigate_toward(c, bid, target[0], target[1])
 
     def _prioritize_split_orders(self, orders: List[Dict], turn: int,
@@ -3607,14 +3606,14 @@ class BotPlayer:
             oid = o['order_id']
             if not o['is_active']:
                 continue
-            if oid in self.completed_orders or oid in self.assigned_orders:
+            if oid in self.finished_order_ids or oid in self.claimed_order_ids:
                 continue
             cost = ShopCosts.PLATE.buy_cost
             for fn in o['required']:
-                ft = FOOD_LUT.get(fn)
+                ft = INGREDIENT_REGISTRY.get(fn)
                 if ft:
                     cost += ft.buy_cost
-            if oid in self.failed_assignments:
+            if oid in self.order_cooldowns:
                 continue
             profit = o['reward'] - cost
             penalty = o.get('penalty', 0)
@@ -3623,7 +3622,7 @@ class BotPlayer:
             # Accept if profit is positive OR if completing avoids penalty
             if profit + penalty <= 0 and penalty <= 0:
                 continue
-            ingredients = [FOOD_LUT[fn] for fn in o['required'] if fn in FOOD_LUT]
+            ingredients = [INGREDIENT_REGISTRY[fn] for fn in o['required'] if fn in INGREDIENT_REGISTRY]
             n_cook = sum(1 for f in ingredients if f.can_cook)
             n_chop = sum(1 for f in ingredients if f.can_chop)
             needs_cook = n_cook > 0
@@ -3644,7 +3643,7 @@ class BotPlayer:
 
     def _predict_split_completion(self, order: Dict) -> int:
         """Rough turn estimate for a split map order."""
-        ingredients = [FOOD_LUT[fn] for fn in order['required'] if fn in FOOD_LUT]
+        ingredients = [INGREDIENT_REGISTRY[fn] for fn in order['required'] if fn in INGREDIENT_REGISTRY]
         if not ingredients:
             return 9999
         n_cook = sum(1 for f in ingredients if f.can_cook)
@@ -3671,7 +3670,7 @@ class BotPlayer:
         # Calculate available money (subtract committed spending)
         committed_spending = 0
         for bid in bots:
-            t = self.tasks[bid]
+            t = self.bot_tasks[bid]
             if t.get('recipe') and t.get('order_id') is not None:
                 recipe = t.get('recipe', [])
                 step = t.get('step', 0)
@@ -3692,7 +3691,7 @@ class BotPlayer:
             producer_bid = idle_producers[0]
             for cand in candidates:
                 oid = cand['order']['order_id']
-                if oid in self.assigned_orders:
+                if oid in self.claimed_order_ids:
                     continue
                 if available_money < cand['cost'] + 2:
                     continue
@@ -3705,7 +3704,7 @@ class BotPlayer:
                 if not result:
                     continue
                 runner_recipe, producer_recipe = result
-                rt = self.tasks[runner_bid]
+                rt = self.bot_tasks[runner_bid]
                 rt['recipe'] = runner_recipe
                 rt['step'] = 0
                 rt['order_id'] = oid
@@ -3713,7 +3712,7 @@ class BotPlayer:
                 rt['last_progress'] = turn
                 rt['is_split_order'] = True
                 rt['partner_bid'] = producer_bid
-                pt = self.tasks[producer_bid]
+                pt = self.bot_tasks[producer_bid]
                 pt['recipe'] = producer_recipe
                 pt['step'] = 0
                 pt['order_id'] = oid
@@ -3721,8 +3720,8 @@ class BotPlayer:
                 pt['last_progress'] = turn
                 pt['is_split_order'] = True
                 pt['partner_bid'] = runner_bid
-                self.assigned_orders.add(oid)
-                self._diag_orders_attempted += 1
+                self.claimed_order_ids.add(oid)
+                self._stat_orders_started += 1
                 available_money -= cand['cost']
                 idle_producers.pop(0)
                 self._write_log(f"SPLIT ASSIGNED Order #{oid} to Runner={runner_bid}, Producer={producer_bid}")
