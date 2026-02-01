@@ -1,0 +1,15 @@
+{
+    "map_path": "maps/v1.txt",
+    "team_red": [
+        "bots/dpinto/BEST^3_defense_bot.py",
+        "bots/dpinto/BEST^3_defense_bot.py"
+    ],
+    "team_blue": [
+        "bots/dpinto/champion_sabotage_optimized.py",
+        "bots/dpinto/champion_sabotage_optimized.py"
+    ],
+    "players": [
+        "BEST^3",
+        "Sabotage"
+    ]
+}

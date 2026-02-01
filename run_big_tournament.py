@@ -1,8 +1,11 @@
 """
-Big Round Robin Tournament Runner (LITERAL NAMES)
-=================================================
-Runs a round robin tournament between 9 specific bots in PARALLEL.
-Using literal filenames as bot identifiers.
+Big Round Robin Tournament Runner (BEST^3 EDITION)
+==================================================
+Runs a round robin tournament between:
+- BEST^3 Defense (New)
+- Dpinto's Best (BestSolo, UltChamp, ChampSabotage)
+- Haresh's Best (BEST^2, Sovereign)
+- Eric's Best (IronBest)
 """
 
 import subprocess
@@ -16,11 +19,9 @@ import os
 
 # Configuration
 BOTS = {
-    # New Variants
-    "aggressive_stealer_bot.py": "bots/dpinto/aggressive_stealer_bot.py",
-    "super_rush_bot.py": "bots/dpinto/super_rush_bot.py",
-    "turtle_defense_bot.py": "bots/dpinto/turtle_defense_bot.py",
-    
+    # NEW
+    "BEST^3_defense_bot.py": "bots/dpinto/BEST^3_defense_bot.py",
+
     # DPinto
     "best_solo_bot_v1.py": "bots/dpinto/best_solo_bot_v1.py",
     "ultimate_champion_bot.py": "bots/dpinto/ultimate_champion_bot.py",
@@ -134,11 +135,11 @@ def main():
             map_short = map_name.split('/')[-1]
             
             # Shorten names for log readability
-            red_short = red[:15]
-            blue_short = blue[:15]
-            win_short = winner[:15]
+            red_short = red[:20]
+            blue_short = blue[:20]
+            win_short = winner[:20]
             
-            print(f"[{current_match}/{total_matches}] {red_short}.. vs {blue_short}.. ({map_short}) -> {win_short}.. ({duration:.1f}s)")
+            print(f"[{current_match}/{total_matches}] {red_short} vs {blue_short} ({map_short}) -> {win_short} ({duration:.1f}s)")
             sys.stdout.flush()
 
     total_time = time.time() - start_all

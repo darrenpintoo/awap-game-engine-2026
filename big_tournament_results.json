@@ -1,56 +1,44 @@
 {
-  "aggressive_stealer_bot.py": {
-    "wins": 36,
-    "losses": 24,
-    "draws": 16,
-    "points": 124
-  },
-  "super_rush_bot.py": {
-    "wins": 13,
-    "losses": 63,
-    "draws": 0,
-    "points": 39
-  },
-  "turtle_defense_bot.py": {
-    "wins": 30,
-    "losses": 48,
-    "draws": 2,
-    "points": 92
+  "BEST^3_defense_bot.py": {
+    "wins": 20,
+    "losses": 12,
+    "draws": 28,
+    "points": 88
   },
   "best_solo_bot_v1.py": {
-    "wins": 34,
-    "losses": 28,
-    "draws": 18,
-    "points": 120
+    "wins": 18,
+    "losses": 22,
+    "draws": 20,
+    "points": 74
   },
   "ultimate_champion_bot.py": {
-    "wins": 42,
-    "losses": 12,
-    "draws": 24,
-    "points": 150
+    "wins": 23,
+    "losses": 9,
+    "draws": 26,
+    "points": 95
   },
   "champion_sabotage_optimized.py": {
-    "wins": 32,
+    "wins": 19,
     "losses": 10,
-    "draws": 28,
-    "points": 124
+    "draws": 29,
+    "points": 86
   },
   "BEST^2-champion_bot.py": {
-    "wins": 44,
+    "wins": 23,
     "losses": 6,
-    "draws": 30,
-    "points": 162
+    "draws": 31,
+    "points": 100
   },
   "SOVEREIGN.py": {
-    "wins": 43,
-    "losses": 15,
+    "wins": 25,
+    "losses": 13,
     "draws": 22,
-    "points": 151
+    "points": 97
   },
   "BEST-IronChefOptimized.py": {
-    "wins": 6,
-    "losses": 74,
+    "wins": 2,
+    "losses": 58,
     "draws": 0,
-    "points": 18
+    "points": 6
   }
 }
