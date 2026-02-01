@@ -223,6 +223,17 @@ class OrderScore:
         if self.turns_needed > time_left:
             self.score = -1000
             return
+
+        # NEW: Check against game end
+        try:
+             total_turns = GameConstants.TOTAL_TURNS
+        except:
+             total_turns = 500
+
+        game_time_left = total_turns - current_turn
+        if self.turns_needed > game_time_left:
+            self.score = -1000
+            return
         
         self.profit = self.reward - self.cost
         
@@ -286,7 +297,14 @@ class OrderAnalyzer:
                     info = INGREDIENT_INFO.get(ing, {})
                     if not info.get('cook') and not info.get('chop'):
                         time_left = order['expires_turn'] - current_turn
-                        if time_left > 20:  # Very lenient for simple orders
+                        
+                        try:
+                             total_turns = GameConstants.TOTAL_TURNS
+                        except:
+                             total_turns = 500
+                        game_time_left = total_turns - current_turn
+
+                        if time_left > 20 and game_time_left > 15:  # Ensure enough game time
                             os = OrderScore(
                                 order_id=order['order_id'],
                                 required=order['required'],
