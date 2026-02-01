@@ -1,6 +1,6 @@
 """
 JuniorChampion Bot - AWAP 2026
-Simplified recipe-based approach with assembly point pattern.
+Enhanced recipe-based approach with two-bot coordination.
 """
 from collections import deque
 from typing import Dict, List, Optional, Set, Tuple
@@ -10,9 +10,12 @@ from robot_controller import RobotController
 from item import Pan, Plate, Food
 
 
-FOOD_LUT = {
-    "EGG": FoodType.EGG, "ONIONS": FoodType.ONIONS,
-    "MEAT": FoodType.MEAT, "NOODLES": FoodType.NOODLES, "SAUCE": FoodType.SAUCE,
+FOOD_INFO = {
+    "EGG": {"type": FoodType.EGG, "chop": False, "cook": True, "cost": 20},
+    "ONIONS": {"type": FoodType.ONIONS, "chop": True, "cook": False, "cost": 30},
+    "MEAT": {"type": FoodType.MEAT, "chop": True, "cook": True, "cost": 80},
+    "NOODLES": {"type": FoodType.NOODLES, "chop": False, "cook": False, "cost": 40},
+    "SAUCE": {"type": FoodType.SAUCE, "chop": False, "cook": False, "cost": 10},
 }
 
 
@@ -39,12 +42,26 @@ class BotPlayer:
         self._counters = self.tile_locs.get('COUNTER', [])
         self._cookers = self.tile_locs.get('COOKER', [])
         self._trash = self.tile_locs.get('TRASH', [])
+        self._sinks = self.tile_locs.get('SINK', [])
+        self._sinktables = self.tile_locs.get('SINKTABLE', [])
+        
+        # Strategic counter selection
+        self.plate_counter = None
+        self.work_counter = None
+        self._select_strategic_counters()
+        
+        # Pre-compute travel distances
+        self.dist_shop_counter = None
+        self.dist_shop_cooker = None
+        self.dist_counter_submit = None
+        self._compute_travel_dists()
         
         self.tasks = {}
         self.assigned = set()
         self.completed = set()
         self.failed = {}
         self.team = None
+        self.map_area = self.w * self.h
     
     def _precompute_bfs(self):
         for src in self.walkable:
@@ -79,6 +96,76 @@ class BotPlayer:
             return 9999
         return min((self._dist[(sx, sy)].get(a, 9999) for a in adj), default=9999)
     
+    def _facility_dist(self, pos_a, pos_b):
+        """Distance between adjacent walkable tiles of two facilities."""
+        if pos_a is None or pos_b is None:
+            return 9999
+        a_adj = self._adj(pos_a[0], pos_a[1])
+        b_adj = self._adj(pos_b[0], pos_b[1])
+        if not a_adj or not b_adj:
+            return 9999
+        best = 9999
+        for a in a_adj:
+            if a not in self._dist:
+                continue
+            for b in b_adj:
+                d = self._dist[a].get(b, 9999)
+                if d < best:
+                    best = d
+        return best
+    
+    def _select_strategic_counters(self):
+        """Select plate counter near submit, work counter near shop/cookers."""
+        if not self._counters:
+            return
+        
+        # Find nearest shop and submit
+        shop = self._shops[0] if self._shops else None
+        submit = self._submits[0] if self._submits else None
+        cooker = self._cookers[0] if self._cookers else None
+        
+        if len(self._counters) >= 2 and submit:
+            # Plate counter: closest to submit with good shop access
+            best_plate = None
+            best_score = 9999
+            for c in self._counters:
+                d_submit = self._facility_dist(c, submit)
+                d_shop = self._facility_dist(c, shop) if shop else 0
+                score = d_submit * 1.0 + d_shop * 0.5
+                if score < best_score:
+                    best_score = score
+                    best_plate = c
+            self.plate_counter = best_plate
+            
+            # Work counter: close to shop and cookers, not plate counter
+            best_work = None
+            best_score = 9999
+            for c in self._counters:
+                if c == self.plate_counter:
+                    continue
+                d_shop = self._facility_dist(c, shop) if shop else 0
+                d_cook = self._facility_dist(c, cooker) if cooker else 0
+                score = d_shop * 1.0 + d_cook * 0.5
+                if score < best_score:
+                    best_score = score
+                    best_work = c
+            self.work_counter = best_work
+        elif self._counters:
+            self.plate_counter = self._counters[0]
+            self.work_counter = self._counters[0] if len(self._counters) == 1 else self._counters[1]
+    
+    def _compute_travel_dists(self):
+        """Pre-compute key travel distances for scoring."""
+        shop = self._shops[0] if self._shops else None
+        submit = self._submits[0] if self._submits else None
+        
+        if shop and self._counters:
+            self.dist_shop_counter = min(self._facility_dist(shop, c) for c in self._counters)
+        if shop and self._cookers:
+            self.dist_shop_cooker = min(self._facility_dist(shop, c) for c in self._cookers)
+        if self._counters and submit:
+            self.dist_counter_submit = min(self._facility_dist(c, submit) for c in self._counters)
+    
     def _nearest(self, x, y, tile_type):
         locs = self.tile_locs.get(tile_type, [])
         if not locs:
@@ -112,6 +199,49 @@ class BotPlayer:
             c.move(bid, dx, dy)
         return False
     
+    def _find_empty_counter(self, c, x, y, exclude=None):
+        """Find empty counter, preferring work_counter."""
+        exclude = exclude or []
+        team = c.get_team()
+        
+        # Try work counter first
+        if self.work_counter and self.work_counter not in exclude:
+            tile = c.get_tile(team, self.work_counter[0], self.work_counter[1])
+            if tile and getattr(tile, 'item', None) is None:
+                return self.work_counter
+        
+        # Find any empty counter
+        for counter in self._counters:
+            if counter in exclude:
+                continue
+            tile = c.get_tile(team, counter[0], counter[1])
+            if tile and getattr(tile, 'item', None) is None:
+                d = self._dist_to(x, y, counter[0], counter[1])
+                if d < 9999:
+                    return counter
+        return None
+    
+    def _find_available_cooker(self, c, x, y):
+        """Find cooker with empty pan."""
+        team = c.get_team()
+        best = None
+        best_dist = 9999
+        
+        for cooker in self._cookers:
+            tile = c.get_tile(team, cooker[0], cooker[1])
+            if tile:
+                pan = getattr(tile, 'item', None)
+                if isinstance(pan, Pan) and pan.food is None:
+                    d = self._dist_to(x, y, cooker[0], cooker[1])
+                    if d < best_dist:
+                        best_dist = d
+                        best = cooker
+        
+        # If no empty pan, return nearest cooker
+        if best is None and self._cookers:
+            best = min(self._cookers, key=lambda ck: self._dist_to(x, y, ck[0], ck[1]))
+        return best
+    
     def play_turn(self, c: RobotController):
         turn = c.get_turn()
         team = c.get_team()
@@ -123,9 +253,14 @@ class BotPlayer:
         
         for bid in bots:
             if bid not in self.tasks:
-                self.tasks[bid] = {'recipe': [], 'step': 0, 'oid': None, 'stuck': 0}
+                self.tasks[bid] = {'recipe': [], 'step': 0, 'oid': None, 'stuck': 0, 'role': 'main'}
         
-        # Clean up expired
+        # Assign roles: first bot is main, second is helper
+        if len(bots) >= 2:
+            self.tasks[bots[0]]['role'] = 'main'
+            self.tasks[bots[1]]['role'] = 'helper'
+        
+        # Clean up expired orders
         active = {o['order_id'] for o in orders if o['is_active']}
         for bid, t in self.tasks.items():
             if t['oid'] and t['oid'] not in active:
@@ -134,147 +269,277 @@ class BotPlayer:
                 t['step'] = 0
                 t['oid'] = None
         
-        # Assign orders to idle bots
-        for bid in bots:
-            t = self.tasks[bid]
-            if t['recipe'] and t['step'] < len(t['recipe']):
-                continue
-            
-            bs = c.get_bot_state(bid)
-            if not bs:
-                continue
-            
-            # If holding, trash first
-            if bs.get('holding'):
-                trash = self._nearest(bs['x'], bs['y'], 'TRASH')
-                if trash:
-                    t['recipe'] = [('trash', trash)]
-                    t['step'] = 0
-                    t['oid'] = None
-                continue
-            
-            # Find best order
-            best = None
-            best_score = -9999
-            for o in orders:
-                if not o['is_active'] or o['order_id'] in self.assigned or o['order_id'] in self.completed:
-                    continue
-                if o['order_id'] in self.failed and turn - self.failed[o['order_id']] < 20:
-                    continue
-                
-                score = self._score(o, bs['x'], bs['y'], turn)
-                if score > best_score:
-                    best_score = score
-                    best = o
-            
-            if best:
-                recipe = self._make_recipe(c, bid, best, bs)
-                if recipe:
-                    t['recipe'] = recipe
-                    t['step'] = 0
-                    t['oid'] = best['order_id']
-                    self.assigned.add(best['order_id'])
-        
         # Execute bots
         for bid in bots:
+            t = self.tasks[bid]
+            if t['role'] == 'helper':
+                self._run_helper(c, bid, turn, orders)
+            else:
+                self._run_main(c, bid, turn, orders)
+    
+    def _run_main(self, c, bid, turn, orders):
+        """Main bot: complete orders."""
+        t = self.tasks[bid]
+        bs = c.get_bot_state(bid)
+        if not bs:
+            return
+        
+        # If has recipe, execute it
+        if t['recipe'] and t['step'] < len(t['recipe']):
             self._execute(c, bid, turn)
+            return
+        
+        # Find new order
+        if bs.get('holding'):
+            trash = self._nearest(bs['x'], bs['y'], 'TRASH')
+            if trash:
+                t['recipe'] = [('trash', trash)]
+                t['step'] = 0
+                t['oid'] = None
+            return
+        
+        best = None
+        best_score = -9999
+        for o in orders:
+            if not o['is_active'] or o['order_id'] in self.assigned or o['order_id'] in self.completed:
+                continue
+            if o['order_id'] in self.failed and turn - self.failed[o['order_id']] < 20:
+                continue
+            
+            score = self._score(o, bs['x'], bs['y'], turn)
+            if score > best_score:
+                best_score = score
+                best = o
+        
+        if best:
+            recipe = self._make_recipe(c, bid, best, bs)
+            if recipe:
+                t['recipe'] = recipe
+                t['step'] = 0
+                t['oid'] = best['order_id']
+                self.assigned.add(best['order_id'])
+    
+    def _run_helper(self, c, bid, turn, orders):
+        """Helper bot: wash dishes, prepare plates, assist."""
+        bs = c.get_bot_state(bid)
+        if not bs:
+            return
+        
+        team = c.get_team()
+        holding = bs.get('holding')
+        holding_type = holding.get('type') if holding else None
+        
+        # If holding dirty plate, put in sink
+        if holding and holding.get('type') == 'Plate' and holding.get('dirty'):
+            sink = self._nearest(bs['x'], bs['y'], 'SINK')
+            if sink and self._move_to(c, bid, bs, sink):
+                c.put_dirty_plate_in_sink(bid, sink[0], sink[1])
+            return
+        
+        # If sink has dirty plates, wash them
+        for sink in self._sinks:
+            tile = c.get_tile(team, sink[0], sink[1])
+            if tile and hasattr(tile, 'num_dirty_plates') and tile.num_dirty_plates > 0:
+                if self._move_to(c, bid, bs, sink):
+                    c.wash_sink(bid, sink[0], sink[1])
+                return
+        
+        # If plate counter doesn't have plate, prepare one (only on larger maps)
+        if self.plate_counter and self.map_area >= 200:
+            tile = c.get_tile(team, self.plate_counter[0], self.plate_counter[1])
+            plate_item = getattr(tile, 'item', None) if tile else None
+            plate_ready = isinstance(plate_item, Plate) and not plate_item.dirty
+            
+            if not plate_ready:
+                # If holding clean plate, place it
+                if holding_type == 'Plate' and not holding.get('dirty', True):
+                    if self._move_to(c, bid, bs, self.plate_counter):
+                        c.place(bid, self.plate_counter[0], self.plate_counter[1])
+                    return
+                
+                # If holding something else, trash it
+                if holding:
+                    trash = self._nearest(bs['x'], bs['y'], 'TRASH')
+                    if trash and self._move_to(c, bid, bs, trash):
+                        c.trash(bid, trash[0], trash[1])
+                    return
+                
+                # Get plate from sinktable
+                for st in self._sinktables:
+                    tile = c.get_tile(team, st[0], st[1])
+                    if tile and hasattr(tile, 'num_clean_plates') and tile.num_clean_plates > 0:
+                        if self._move_to(c, bid, bs, st):
+                            c.take_clean_plate(bid, st[0], st[1])
+                        return
+                
+                # Buy plate if enough money (only if really well-funded)
+                money = c.get_team_money(team)
+                shop = self._nearest(bs['x'], bs['y'], 'SHOP')
+                if shop and money >= ShopCosts.PLATE.buy_cost + 150:
+                    if self._move_to(c, bid, bs, shop):
+                        c.buy(bid, ShopCosts.PLATE, shop[0], shop[1])
+                    return
+        
+        # Stay near sink
+        sink = self._nearest(bs['x'], bs['y'], 'SINK')
+        if sink:
+            self._move_to(c, bid, bs, sink)
     
     def _score(self, order, x, y, turn):
         req = order['required']
+        
+        # Calculate cost
         cost = ShopCosts.PLATE.buy_cost
         for fn in req:
-            ft = FOOD_LUT.get(fn)
-            if ft:
-                cost += ft.buy_cost
+            info = FOOD_INFO.get(fn, {})
+            cost += info.get('cost', 0)
         
         profit = order['reward'] - cost
         if profit <= 0:
             return -9999
         
         tleft = order['expires_turn'] - turn
-        if tleft < 15:
+        if tleft < 12:
             return -9999
         
-        n_cook = sum(1 for fn in req if FOOD_LUT.get(fn) and FOOD_LUT[fn].can_cook)
-        n_chop = sum(1 for fn in req if FOOD_LUT.get(fn) and FOOD_LUT[fn].can_chop)
-        # Conservative time estimate
-        est = 15 + len(req) * 4 + n_cook * 25 + n_chop * 5
+        # Count processing needs
+        n_cook = sum(1 for fn in req if FOOD_INFO.get(fn, {}).get('cook', False))
+        n_chop = sum(1 for fn in req if FOOD_INFO.get(fn, {}).get('chop', False))
         
-        # Conservative feasibility check
-        if est > tleft * 0.7:
+        # Estimate time with travel distances
+        base = 12
+        per_item = 3
+        cook_time = 22  # Pan cook time
+        chop_time = 4
+        
+        est = base + len(req) * per_item + n_cook * cook_time + n_chop * chop_time
+        
+        # Add travel time estimates
+        travel = 0
+        if self.dist_shop_counter:
+            travel += self.dist_shop_counter * len(req)
+        if self.dist_shop_cooker and n_cook > 0:
+            travel += self.dist_shop_cooker * n_cook
+        if self.dist_counter_submit:
+            travel += self.dist_counter_submit
+        
+        # Adjust travel for map size
+        if self.map_area >= 250:
+            est += travel * 0.8
+        else:
+            est += travel * 0.4
+        
+        # Complexity penalty for limited counters
+        if len(self._counters) <= 1 and n_chop >= 2:
+            return -9999
+        if self.map_area >= 300 and len(self._counters) <= 8:
+            if len(req) >= 4:
+                return -9999
+            if len(req) == 3 and (n_chop + n_cook) >= 2:
+                return -9999
+        
+        # Feasibility check
+        if est > tleft * 0.75:
             return -9999
         
-        return profit / est
+        # Prioritize urgent orders
+        score = profit / max(est, 1)
+        if tleft < 80:
+            score += 0.5
+        
+        return score
     
     def _make_recipe(self, c, bid, order, bs):
         bx, by = bs['x'], bs['y']
+        team = c.get_team()
         
         shop = self._nearest(bx, by, 'SHOP')
         submit = self._nearest(bx, by, 'SUBMIT')
         if not shop or not submit:
             return None
         
-        # Assembly point: walkable adjacent to shop, closest to submit
-        shop_adj = self._adj(shop[0], shop[1])
-        if not shop_adj:
-            return None
-        assembly = min(shop_adj, key=lambda a: self._dist_to(a[0], a[1], submit[0], submit[1]))
+        # Parse ingredients by processing type
+        cook_chop = []
+        cook_only = []
+        chop_only = []
+        simple = []
         
-        # Parse ingredients
-        ingredients = [FOOD_LUT[fn] for fn in order['required'] if fn in FOOD_LUT]
-        cook_chop = [f for f in ingredients if f.can_cook and f.can_chop]
-        cook_only = [f for f in ingredients if f.can_cook and not f.can_chop]
-        chop_only = [f for f in ingredients if f.can_chop and not f.can_cook]
-        simple = [f for f in ingredients if not f.can_cook and not f.can_chop]
+        for fn in order['required']:
+            info = FOOD_INFO.get(fn, {})
+            ftype = info.get('type')
+            if not ftype:
+                continue
+            if info.get('cook') and info.get('chop'):
+                cook_chop.append((fn, ftype))
+            elif info.get('cook'):
+                cook_only.append((fn, ftype))
+            elif info.get('chop'):
+                chop_only.append((fn, ftype))
+            else:
+                simple.append((fn, ftype))
+        
         all_cook = cook_chop + cook_only
+        all_chop = cook_chop + chop_only
         
         # Find resources
-        counter = self._nearest(bx, by, 'COUNTER') if (cook_chop or chop_only) else None
-        cooker = self._nearest(bx, by, 'COOKER') if all_cook else None
+        plate_pos = self.plate_counter or self._nearest(bx, by, 'COUNTER')
+        counter = self.work_counter or self._find_empty_counter(c, bx, by, exclude=[plate_pos])
+        cooker = self._find_available_cooker(c, bx, by) if all_cook else None
         
-        if (cook_chop or chop_only) and not counter:
+        if not plate_pos:
             return None
+        if all_chop and not counter:
+            counter = plate_pos  # Use plate counter for chopping if needed
         if all_cook and not cooker:
             return None
         
         steps = []
-        trash = self._nearest(bx, by, 'TRASH')
         
-        # Go to assembly
-        steps.append(('goto', assembly))
+        # Check if plate is already on plate_counter
+        tile = c.get_tile(team, plate_pos[0], plate_pos[1])
+        plate_item = getattr(tile, 'item', None) if tile else None
+        plate_ready = isinstance(plate_item, Plate) and not plate_item.dirty
         
-        # Buy plate, place at assembly
-        steps.append(('buy', ShopCosts.PLATE, shop))
-        steps.append(('place', assembly))
+        if not plate_ready:
+            # Buy plate and place at plate_counter
+            steps.append(('buy', ShopCosts.PLATE, shop))
+            steps.append(('place', plate_pos))
         
-        # Simple items
-        for ft in simple:
-            steps.append(('buy', ft, shop))
-            steps.append(('add', assembly))
+        # Ensure pan is on cooker for cook orders
+        if all_cook and cooker:
+            tile = c.get_tile(team, cooker[0], cooker[1])
+            pan_item = getattr(tile, 'item', None) if tile else None
+            if not isinstance(pan_item, Pan):
+                steps.append(('buy', ShopCosts.PAN, shop))
+                steps.append(('place', cooker))
+        
+        # Simple items first (fastest)
+        for fn, ftype in simple:
+            steps.append(('buy', ftype, shop))
+            steps.append(('add', plate_pos))
         
         # Chop-only items
-        for ft in chop_only:
-            steps.append(('buy', ft, shop))
+        for fn, ftype in chop_only:
+            steps.append(('buy', ftype, shop))
             steps.append(('place', counter))
             steps.append(('chop', counter))
             steps.append(('pickup', counter))
-            steps.append(('goto', assembly))
-            steps.append(('add', assembly))
+            steps.append(('add', plate_pos))
         
-        # Cook items
-        for ft in all_cook:
-            steps.append(('buy', ft, shop))
-            if ft.can_chop:
+        # Cook items (chop+cook and cook-only)
+        for fn, ftype in all_cook:
+            info = FOOD_INFO.get(fn, {})
+            steps.append(('buy', ftype, shop))
+            if info.get('chop'):
                 steps.append(('place', counter))
                 steps.append(('chop', counter))
                 steps.append(('pickup', counter))
             steps.append(('cook', cooker))
             steps.append(('wait_cook', cooker))
-            steps.append(('goto', assembly))
-            steps.append(('add', assembly))
+            steps.append(('add', plate_pos))
         
         # Submit
-        steps.append(('pickup', assembly))
+        steps.append(('pickup', plate_pos))
         steps.append(('submit', submit))
         
         return steps
@@ -324,6 +589,7 @@ class BotPlayer:
         elif action == 'cook':
             cooker = step[1]
             if self._move_to(c, bid, bs, cooker):
+                # Try start_cook first, then place
                 done = c.start_cook(bid, cooker[0], cooker[1]) or c.place(bid, cooker[0], cooker[1])
         
         elif action == 'wait_cook':
@@ -331,8 +597,19 @@ class BotPlayer:
             if self._move_to(c, bid, bs, cooker):
                 tile = c.get_tile(c.get_team(), cooker[0], cooker[1])
                 if tile and hasattr(tile, 'item') and isinstance(tile.item, Pan):
-                    if tile.item.food and tile.item.food.cooked_stage >= 1:
+                    pan = tile.item
+                    if pan.food and pan.food.cooked_stage >= 1:
                         done = c.take_from_pan(bid, cooker[0], cooker[1])
+                    elif pan.food and pan.food.cooked_stage == 2:
+                        # Burned! Take and trash
+                        if c.take_from_pan(bid, cooker[0], cooker[1]):
+                            # Insert trash step
+                            trash = self._nearest(bs['x'], bs['y'], 'TRASH')
+                            if trash:
+                                t['recipe'].insert(t['step'] + 1, ('trash', trash))
+                                # Re-add buy and cook steps
+                                # This is a simplified recovery - just mark as stuck
+                                t['stuck'] = 100
         
         elif action == 'add':
             target = step[1]
