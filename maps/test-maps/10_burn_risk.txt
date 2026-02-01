@@ -1,8 +1,3 @@
-# MAP: burn_risk.txt
-# DESCRIPTION: 14x14 map with cook-timing-critical orders (eggs and meat)
-# TESTS: Cook timing precision, burn avoidance, cooker monitoring
-# SIZE: 14x14 (many cookers, heavy EGG/MEAT orders that can burn)
-
 ##############
 #$..........U#
 #.B........B.#

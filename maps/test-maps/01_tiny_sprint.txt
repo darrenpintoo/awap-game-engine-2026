@@ -1,8 +1,3 @@
-# MAP: tiny_sprint.txt
-# DESCRIPTION: Ultra-compact 8x8 map for basic navigation and speed tests
-# TESTS: Basic pathfinding, simple order fulfillment, minimal complexity
-# SIZE: 8x8 (smaller than throughput.txt)
-
 ########
 #$..R.U#
 #.b..b.#

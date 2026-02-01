@@ -1,0 +1,932 @@
+{
+  "aggressive_stealer_bot.py": {
+    "wins": 35,
+    "losses": 29,
+    "draws": 20,
+    "points": 125,
+    "matches": 84,
+    "side": {
+      "red": {
+        "w": 17,
+        "l": 15,
+        "d": 10
+      },
+      "blue": {
+        "w": 18,
+        "l": 14,
+        "d": 10
+      }
+    },
+    "vs": {
+      "super_rush_bot.py": {
+        "w": 10,
+        "l": 0,
+        "d": 0
+      },
+      "turtle_defense_bot.py": {
+        "w": 8,
+        "l": 2,
+        "d": 0
+      },
+      "best_solo_bot_v1.py": {
+        "w": 4,
+        "l": 4,
+        "d": 2
+      },
+      "ultimate_champion_bot.py": {
+        "w": 1,
+        "l": 4,
+        "d": 4
+      },
+      "champion_sabotage_optimized.py": {
+        "w": 0,
+        "l": 2,
+        "d": 4
+      },
+      "BEST^3_defense_bot.py": {
+        "w": 0,
+        "l": 6,
+        "d": 4
+      },
+      "BEST^2-champion_bot.py": {
+        "w": 0,
+        "l": 5,
+        "d": 4
+      },
+      "SOVEREIGN.py": {
+        "w": 2,
+        "l": 6,
+        "d": 2
+      },
+      "BEST-IronChefOptimized.py": {
+        "w": 10,
+        "l": 0,
+        "d": 0
+      }
+    },
+    "maps": {
+      "chopped.txt": {
+        "w": 8,
+        "l": 2,
+        "d": 8
+      },
+      "orbit.txt": {
+        "w": 6,
+        "l": 0,
+        "d": 12
+      },
+      "small_wall.txt": {
+        "w": 7,
+        "l": 7,
+        "d": 0
+      },
+      "throughput.txt": {
+        "w": 6,
+        "l": 12,
+        "d": 0
+      },
+      "v1.txt": {
+        "w": 8,
+        "l": 8,
+        "d": 0
+      }
+    }
+  },
+  "super_rush_bot.py": {
+    "wins": 12,
+    "losses": 71,
+    "draws": 0,
+    "points": 36,
+    "matches": 83,
+    "side": {
+      "red": {
+        "w": 6,
+        "l": 36,
+        "d": 0
+      },
+      "blue": {
+        "w": 6,
+        "l": 35,
+        "d": 0
+      }
+    },
+    "vs": {
+      "aggressive_stealer_bot.py": {
+        "w": 0,
+        "l": 10,
+        "d": 0
+      },
+      "turtle_defense_bot.py": {
+        "w": 0,
+        "l": 10,
+        "d": 0
+      },
+      "best_solo_bot_v1.py": {
+        "w": 2,
+        "l": 8,
+        "d": 0
+      },
+      "ultimate_champion_bot.py": {
+        "w": 1,
+        "l": 8,
+        "d": 0
+      },
+      "champion_sabotage_optimized.py": {
+        "w": 0,
+        "l": 6,
+        "d": 0
+      },
+      "BEST^3_defense_bot.py": {
+        "w": 0,
+        "l": 10,
+        "d": 0
+      },
+      "BEST^2-champion_bot.py": {
+        "w": 0,
+        "l": 8,
+        "d": 0
+      },
+      "SOVEREIGN.py": {
+        "w": 1,
+        "l": 9,
+        "d": 0
+      },
+      "BEST-IronChefOptimized.py": {
+        "w": 8,
+        "l": 2,
+        "d": 0
+      }
+    },
+    "maps": {
+      "chopped.txt": {
+        "w": 4,
+        "l": 12,
+        "d": 0
+      },
+      "orbit.txt": {
+        "w": 2,
+        "l": 16,
+        "d": 0
+      },
+      "small_wall.txt": {
+        "w": 4,
+        "l": 9,
+        "d": 0
+      },
+      "throughput.txt": {
+        "w": 2,
+        "l": 16,
+        "d": 0
+      },
+      "v1.txt": {
+        "w": 0,
+        "l": 18,
+        "d": 0
+      }
+    }
+  },
+  "turtle_defense_bot.py": {
+    "wins": 30,
+    "losses": 56,
+    "draws": 4,
+    "points": 94,
+    "matches": 90,
+    "side": {
+      "red": {
+        "w": 15,
+        "l": 28,
+        "d": 2
+      },
+      "blue": {
+        "w": 15,
+        "l": 28,
+        "d": 2
+      }
+    },
+    "vs": {
+      "aggressive_stealer_bot.py": {
+        "w": 2,
+        "l": 8,
+        "d": 0
+      },
+      "super_rush_bot.py": {
+        "w": 10,
+        "l": 0,
+        "d": 0
+      },
+      "best_solo_bot_v1.py": {
+        "w": 4,
+        "l": 6,
+        "d": 0
+      },
+      "ultimate_champion_bot.py": {
+        "w": 2,
+        "l": 8,
+        "d": 0
+      },
+      "champion_sabotage_optimized.py": {
+        "w": 2,
+        "l": 8,
+        "d": 0
+      },
+      "BEST^3_defense_bot.py": {
+        "w": 0,
+        "l": 8,
+        "d": 2
+      },
+      "BEST^2-champion_bot.py": {
+        "w": 0,
+        "l": 8,
+        "d": 2
+      },
+      "SOVEREIGN.py": {
+        "w": 2,
+        "l": 8,
+        "d": 0
+      },
+      "BEST-IronChefOptimized.py": {
+        "w": 8,
+        "l": 2,
+        "d": 0
+      }
+    },
+    "maps": {
+      "chopped.txt": {
+        "w": 6,
+        "l": 12,
+        "d": 0
+      },
+      "orbit.txt": {
+        "w": 4,
+        "l": 14,
+        "d": 0
+      },
+      "small_wall.txt": {
+        "w": 12,
+        "l": 2,
+        "d": 4
+      },
+      "throughput.txt": {
+        "w": 4,
+        "l": 14,
+        "d": 0
+      },
+      "v1.txt": {
+        "w": 4,
+        "l": 14,
+        "d": 0
+      }
+    }
+  },
+  "best_solo_bot_v1.py": {
+    "wins": 34,
+    "losses": 32,
+    "draws": 22,
+    "points": 124,
+    "matches": 88,
+    "side": {
+      "red": {
+        "w": 16,
+        "l": 16,
+        "d": 11
+      },
+      "blue": {
+        "w": 18,
+        "l": 16,
+        "d": 11
+      }
+    },
+    "vs": {
+      "aggressive_stealer_bot.py": {
+        "w": 4,
+        "l": 4,
+        "d": 2
+      },
+      "super_rush_bot.py": {
+        "w": 8,
+        "l": 2,
+        "d": 0
+      },
+      "turtle_defense_bot.py": {
+        "w": 6,
+        "l": 4,
+        "d": 0
+      },
+      "ultimate_champion_bot.py": {
+        "w": 2,
+        "l": 4,
+        "d": 4
+      },
+      "champion_sabotage_optimized.py": {
+        "w": 2,
+        "l": 4,
+        "d": 4
+      },
+      "BEST^3_defense_bot.py": {
+        "w": 1,
+        "l": 4,
+        "d": 4
+      },
+      "BEST^2-champion_bot.py": {
+        "w": 2,
+        "l": 4,
+        "d": 4
+      },
+      "SOVEREIGN.py": {
+        "w": 1,
+        "l": 4,
+        "d": 4
+      },
+      "BEST-IronChefOptimized.py": {
+        "w": 8,
+        "l": 2,
+        "d": 0
+      }
+    },
+    "maps": {
+      "chopped.txt": {
+        "w": 0,
+        "l": 18,
+        "d": 0
+      },
+      "orbit.txt": {
+        "w": 6,
+        "l": 0,
+        "d": 12
+      },
+      "small_wall.txt": {
+        "w": 16,
+        "l": 0,
+        "d": 0
+      },
+      "throughput.txt": {
+        "w": 8,
+        "l": 0,
+        "d": 10
+      },
+      "v1.txt": {
+        "w": 4,
+        "l": 14,
+        "d": 0
+      }
+    }
+  },
+  "ultimate_champion_bot.py": {
+    "wins": 44,
+    "losses": 12,
+    "draws": 30,
+    "points": 162,
+    "matches": 86,
+    "side": {
+      "red": {
+        "w": 22,
+        "l": 6,
+        "d": 15
+      },
+      "blue": {
+        "w": 22,
+        "l": 6,
+        "d": 15
+      }
+    },
+    "vs": {
+      "aggressive_stealer_bot.py": {
+        "w": 4,
+        "l": 1,
+        "d": 4
+      },
+      "super_rush_bot.py": {
+        "w": 8,
+        "l": 1,
+        "d": 0
+      },
+      "turtle_defense_bot.py": {
+        "w": 8,
+        "l": 2,
+        "d": 0
+      },
+      "best_solo_bot_v1.py": {
+        "w": 4,
+        "l": 2,
+        "d": 4
+      },
+      "champion_sabotage_optimized.py": {
+        "w": 2,
+        "l": 0,
+        "d": 6
+      },
+      "BEST^3_defense_bot.py": {
+        "w": 2,
+        "l": 2,
+        "d": 6
+      },
+      "BEST^2-champion_bot.py": {
+        "w": 2,
+        "l": 2,
+        "d": 6
+      },
+      "SOVEREIGN.py": {
+        "w": 4,
+        "l": 2,
+        "d": 4
+      },
+      "BEST-IronChefOptimized.py": {
+        "w": 10,
+        "l": 0,
+        "d": 0
+      }
+    },
+    "maps": {
+      "chopped.txt": {
+        "w": 8,
+        "l": 2,
+        "d": 8
+      },
+      "orbit.txt": {
+        "w": 6,
+        "l": 0,
+        "d": 12
+      },
+      "small_wall.txt": {
+        "w": 4,
+        "l": 10,
+        "d": 0
+      },
+      "throughput.txt": {
+        "w": 8,
+        "l": 0,
+        "d": 10
+      },
+      "v1.txt": {
+        "w": 18,
+        "l": 0,
+        "d": 0
+      }
+    }
+  },
+  "champion_sabotage_optimized.py": {
+    "wins": 32,
+    "losses": 11,
+    "draws": 34,
+    "points": 130,
+    "matches": 77,
+    "side": {
+      "red": {
+        "w": 16,
+        "l": 6,
+        "d": 17
+      },
+      "blue": {
+        "w": 16,
+        "l": 5,
+        "d": 17
+      }
+    },
+    "vs": {
+      "aggressive_stealer_bot.py": {
+        "w": 2,
+        "l": 0,
+        "d": 4
+      },
+      "super_rush_bot.py": {
+        "w": 6,
+        "l": 0,
+        "d": 0
+      },
+      "turtle_defense_bot.py": {
+        "w": 8,
+        "l": 2,
+        "d": 0
+      },
+      "best_solo_bot_v1.py": {
+        "w": 4,
+        "l": 2,
+        "d": 4
+      },
+      "ultimate_champion_bot.py": {
+        "w": 0,
+        "l": 2,
+        "d": 6
+      },
+      "BEST^3_defense_bot.py": {
+        "w": 2,
+        "l": 1,
+        "d": 6
+      },
+      "BEST^2-champion_bot.py": {
+        "w": 0,
+        "l": 2,
+        "d": 8
+      },
+      "SOVEREIGN.py": {
+        "w": 0,
+        "l": 2,
+        "d": 6
+      },
+      "BEST-IronChefOptimized.py": {
+        "w": 10,
+        "l": 0,
+        "d": 0
+      }
+    },
+    "maps": {
+      "chopped.txt": {
+        "w": 6,
+        "l": 2,
+        "d": 8
+      },
+      "orbit.txt": {
+        "w": 6,
+        "l": 0,
+        "d": 12
+      },
+      "small_wall.txt": {
+        "w": 2,
+        "l": 7,
+        "d": 0
+      },
+      "throughput.txt": {
+        "w": 8,
+        "l": 0,
+        "d": 10
+      },
+      "v1.txt": {
+        "w": 10,
+        "l": 2,
+        "d": 4
+      }
+    }
+  },
+  "BEST^3_defense_bot.py": {
+    "wins": 43,
+    "losses": 11,
+    "draws": 34,
+    "points": 163,
+    "matches": 88,
+    "side": {
+      "red": {
+        "w": 21,
+        "l": 6,
+        "d": 17
+      },
+      "blue": {
+        "w": 22,
+        "l": 5,
+        "d": 17
+      }
+    },
+    "vs": {
+      "aggressive_stealer_bot.py": {
+        "w": 6,
+        "l": 0,
+        "d": 4
+      },
+      "super_rush_bot.py": {
+        "w": 10,
+        "l": 0,
+        "d": 0
+      },
+      "turtle_defense_bot.py": {
+        "w": 8,
+        "l": 0,
+        "d": 2
+      },
+      "best_solo_bot_v1.py": {
+        "w": 4,
+        "l": 1,
+        "d": 4
+      },
+      "ultimate_champion_bot.py": {
+        "w": 2,
+        "l": 2,
+        "d": 6
+      },
+      "champion_sabotage_optimized.py": {
+        "w": 1,
+        "l": 2,
+        "d": 6
+      },
+      "BEST^2-champion_bot.py": {
+        "w": 0,
+        "l": 2,
+        "d": 8
+      },
+      "SOVEREIGN.py": {
+        "w": 2,
+        "l": 4,
+        "d": 4
+      },
+      "BEST-IronChefOptimized.py": {
+        "w": 10,
+        "l": 0,
+        "d": 0
+      }
+    },
+    "maps": {
+      "chopped.txt": {
+        "w": 8,
+        "l": 2,
+        "d": 8
+      },
+      "orbit.txt": {
+        "w": 6,
+        "l": 0,
+        "d": 12
+      },
+      "small_wall.txt": {
+        "w": 11,
+        "l": 1,
+        "d": 4
+      },
+      "throughput.txt": {
+        "w": 8,
+        "l": 0,
+        "d": 10
+      },
+      "v1.txt": {
+        "w": 10,
+        "l": 8,
+        "d": 0
+      }
+    }
+  },
+  "BEST^2-champion_bot.py": {
+    "wins": 43,
+    "losses": 6,
+    "draws": 38,
+    "points": 167,
+    "matches": 87,
+    "side": {
+      "red": {
+        "w": 21,
+        "l": 3,
+        "d": 19
+      },
+      "blue": {
+        "w": 22,
+        "l": 3,
+        "d": 19
+      }
+    },
+    "vs": {
+      "aggressive_stealer_bot.py": {
+        "w": 5,
+        "l": 0,
+        "d": 4
+      },
+      "super_rush_bot.py": {
+        "w": 8,
+        "l": 0,
+        "d": 0
+      },
+      "turtle_defense_bot.py": {
+        "w": 8,
+        "l": 0,
+        "d": 2
+      },
+      "best_solo_bot_v1.py": {
+        "w": 4,
+        "l": 2,
+        "d": 4
+      },
+      "ultimate_champion_bot.py": {
+        "w": 2,
+        "l": 2,
+        "d": 6
+      },
+      "champion_sabotage_optimized.py": {
+        "w": 2,
+        "l": 0,
+        "d": 8
+      },
+      "BEST^3_defense_bot.py": {
+        "w": 2,
+        "l": 0,
+        "d": 8
+      },
+      "SOVEREIGN.py": {
+        "w": 2,
+        "l": 2,
+        "d": 6
+      },
+      "BEST-IronChefOptimized.py": {
+        "w": 10,
+        "l": 0,
+        "d": 0
+      }
+    },
+    "maps": {
+      "chopped.txt": {
+        "w": 8,
+        "l": 2,
+        "d": 8
+      },
+      "orbit.txt": {
+        "w": 6,
+        "l": 0,
+        "d": 12
+      },
+      "small_wall.txt": {
+        "w": 9,
+        "l": 2,
+        "d": 4
+      },
+      "throughput.txt": {
+        "w": 8,
+        "l": 0,
+        "d": 10
+      },
+      "v1.txt": {
+        "w": 12,
+        "l": 2,
+        "d": 4
+      }
+    }
+  },
+  "SOVEREIGN.py": {
+    "wins": 47,
+    "losses": 14,
+    "draws": 26,
+    "points": 167,
+    "matches": 87,
+    "side": {
+      "red": {
+        "w": 23,
+        "l": 8,
+        "d": 13
+      },
+      "blue": {
+        "w": 24,
+        "l": 6,
+        "d": 13
+      }
+    },
+    "vs": {
+      "aggressive_stealer_bot.py": {
+        "w": 6,
+        "l": 2,
+        "d": 2
+      },
+      "super_rush_bot.py": {
+        "w": 9,
+        "l": 1,
+        "d": 0
+      },
+      "turtle_defense_bot.py": {
+        "w": 8,
+        "l": 2,
+        "d": 0
+      },
+      "best_solo_bot_v1.py": {
+        "w": 4,
+        "l": 1,
+        "d": 4
+      },
+      "ultimate_champion_bot.py": {
+        "w": 2,
+        "l": 4,
+        "d": 4
+      },
+      "champion_sabotage_optimized.py": {
+        "w": 2,
+        "l": 0,
+        "d": 6
+      },
+      "BEST^3_defense_bot.py": {
+        "w": 4,
+        "l": 2,
+        "d": 4
+      },
+      "BEST^2-champion_bot.py": {
+        "w": 2,
+        "l": 2,
+        "d": 6
+      },
+      "BEST-IronChefOptimized.py": {
+        "w": 10,
+        "l": 0,
+        "d": 0
+      }
+    },
+    "maps": {
+      "chopped.txt": {
+        "w": 18,
+        "l": 0,
+        "d": 0
+      },
+      "orbit.txt": {
+        "w": 6,
+        "l": 0,
+        "d": 12
+      },
+      "small_wall.txt": {
+        "w": 3,
+        "l": 12,
+        "d": 0
+      },
+      "throughput.txt": {
+        "w": 8,
+        "l": 0,
+        "d": 10
+      },
+      "v1.txt": {
+        "w": 12,
+        "l": 2,
+        "d": 4
+      }
+    }
+  },
+  "BEST-IronChefOptimized.py": {
+    "wins": 6,
+    "losses": 84,
+    "draws": 0,
+    "points": 18,
+    "matches": 90,
+    "side": {
+      "red": {
+        "w": 3,
+        "l": 42,
+        "d": 0
+      },
+      "blue": {
+        "w": 3,
+        "l": 42,
+        "d": 0
+      }
+    },
+    "vs": {
+      "aggressive_stealer_bot.py": {
+        "w": 0,
+        "l": 10,
+        "d": 0
+      },
+      "super_rush_bot.py": {
+        "w": 2,
+        "l": 8,
+        "d": 0
+      },
+      "turtle_defense_bot.py": {
+        "w": 2,
+        "l": 8,
+        "d": 0
+      },
+      "best_solo_bot_v1.py": {
+        "w": 2,
+        "l": 8,
+        "d": 0
+      },
+      "ultimate_champion_bot.py": {
+        "w": 0,
+        "l": 10,
+        "d": 0
+      },
+      "champion_sabotage_optimized.py": {
+        "w": 0,
+        "l": 10,
+        "d": 0
+      },
+      "BEST^3_defense_bot.py": {
+        "w": 0,
+        "l": 10,
+        "d": 0
+      },
+      "BEST^2-champion_bot.py": {
+        "w": 0,
+        "l": 10,
+        "d": 0
+      },
+      "SOVEREIGN.py": {
+        "w": 0,
+        "l": 10,
+        "d": 0
+      }
+    },
+    "maps": {
+      "chopped.txt": {
+        "w": 2,
+        "l": 16,
+        "d": 0
+      },
+      "orbit.txt": {
+        "w": 0,
+        "l": 18,
+        "d": 0
+      },
+      "small_wall.txt": {
+        "w": 0,
+        "l": 18,
+        "d": 0
+      },
+      "throughput.txt": {
+        "w": 0,
+        "l": 18,
+        "d": 0
+      },
+      "v1.txt": {
+        "w": 4,
+        "l": 14,
+        "d": 0
+      }
+    }
+  }
+}

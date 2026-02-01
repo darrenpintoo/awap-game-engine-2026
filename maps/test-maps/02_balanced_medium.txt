@@ -1,8 +1,3 @@
-# MAP: balanced_medium.txt
-# DESCRIPTION: Well-balanced 15x15 symmetric map with varied order complexity
-# TESTS: All-around bot performance, order prioritization, resource management
-# SIZE: 15x15 (similar to chopped.txt)
-
 ###############
 #$...........R#
 #B.CC...CC...B#

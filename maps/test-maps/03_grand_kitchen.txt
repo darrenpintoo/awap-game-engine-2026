@@ -1,8 +1,3 @@
-# MAP: grand_kitchen.txt
-# DESCRIPTION: Large 25x25 map testing long-distance pathfinding and coordination
-# TESTS: Long pathfinding, multi-area coordination, ingredient logistics
-# SIZE: 25x25 (larger than any official map)
-
 #########################
 #$.....................$#
 #.B......R....R......B.#

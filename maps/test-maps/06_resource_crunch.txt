@@ -1,8 +1,3 @@
-# MAP: resource_crunch.txt
-# DESCRIPTION: 14x14 map with severely limited cooking infrastructure
-# TESTS: Resource contention, cooker/sink prioritization, waiting strategy
-# SIZE: 14x14 (limited: 1 cooker, 1 sink, 2 counters)
-
 ##############
 #$...........#
 #.B.........R#

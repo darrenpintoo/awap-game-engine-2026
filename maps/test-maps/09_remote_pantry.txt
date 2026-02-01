@@ -1,8 +1,3 @@
-# MAP: remote_pantry.txt
-# DESCRIPTION: 20x16 map with ingredient boxes far from cooking/submit areas
-# TESTS: Ingredient logistics, long-distance travel efficiency, path optimization
-# SIZE: 20x16 (wide layout with distant resources)
-
 ####################
 #BBBB.............$#
 #BBBB..............#

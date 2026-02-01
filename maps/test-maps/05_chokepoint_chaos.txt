@@ -1,8 +1,3 @@
-# MAP: chokepoint_chaos.txt
-# DESCRIPTION: 18x18 map with narrow corridors and single-tile chokepoints
-# TESTS: Pathfinding stress, collision avoidance, navigation under contention
-# SIZE: 18x18 (maze-like with restricted movement)
-
 ##################
 #$B..#....#....B$#
 #.B..#....#....B.#

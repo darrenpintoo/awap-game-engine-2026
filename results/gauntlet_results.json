@@ -1,0 +1,366 @@
+{
+  "Hero_BEST^3": {
+    "wins": 223,
+    "losses": 48,
+    "draws": 159,
+    "points": 828,
+    "games": 430
+  },
+  "Hero_UltChamp": {
+    "wins": 209,
+    "losses": 80,
+    "draws": 136,
+    "points": 763,
+    "games": 425
+  },
+  "Hero_BEST^2": {
+    "wins": 260,
+    "losses": 30,
+    "draws": 140,
+    "points": 920,
+    "games": 430
+  },
+  "Hero_Sovereign": {
+    "wins": 264,
+    "losses": 77,
+    "draws": 72,
+    "points": 864,
+    "games": 413
+  },
+  "duo_noodle_bot.py": {
+    "wins": 0,
+    "losses": 5,
+    "draws": 0,
+    "points": 0,
+    "games": 5
+  },
+  "TrueUltimateChefBot.py": {
+    "wins": 0,
+    "losses": 40,
+    "draws": 0,
+    "points": 0,
+    "games": 40
+  },
+  "BEST-IronChefOptimized.py": {
+    "wins": 0,
+    "losses": 40,
+    "draws": 0,
+    "points": 0,
+    "games": 40
+  },
+  "UltimateChefBot.py": {
+    "wins": 4,
+    "losses": 35,
+    "draws": 0,
+    "points": 12,
+    "games": 39
+  },
+  "Dual.py": {
+    "wins": 16,
+    "losses": 9,
+    "draws": 6,
+    "points": 54,
+    "games": 31
+  },
+  "Apex_Chef.py": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0,
+    "points": 0,
+    "games": 0
+  },
+  "iron_chef_bot.py": {
+    "wins": 8,
+    "losses": 27,
+    "draws": 0,
+    "points": 24,
+    "games": 35
+  },
+  "StrategicKitchen.py": {
+    "wins": 0,
+    "losses": 31,
+    "draws": 0,
+    "points": 0,
+    "games": 31
+  },
+  "best_solo_bot_v1.py": {
+    "wins": 8,
+    "losses": 16,
+    "draws": 16,
+    "points": 40,
+    "games": 40
+  },
+  "champion_sabotage_optimized.py": {
+    "wins": 3,
+    "losses": 8,
+    "draws": 26,
+    "points": 35,
+    "games": 37
+  },
+  "planner_bot_v1.py": {
+    "wins": 8,
+    "losses": 32,
+    "draws": 0,
+    "points": 24,
+    "games": 40
+  },
+  "solo_bot.py": {
+    "wins": 0,
+    "losses": 40,
+    "draws": 0,
+    "points": 0,
+    "games": 40
+  },
+  "pair_bot.py": {
+    "wins": 10,
+    "losses": 20,
+    "draws": 0,
+    "points": 30,
+    "games": 30
+  },
+  "aggressive_stealer_bot.py": {
+    "wins": 4,
+    "losses": 22,
+    "draws": 14,
+    "points": 26,
+    "games": 40
+  },
+  "planner_bot.py": {
+    "wins": 9,
+    "losses": 9,
+    "draws": 0,
+    "points": 27,
+    "games": 18
+  },
+  "team_bot.py": {
+    "wins": 9,
+    "losses": 19,
+    "draws": 0,
+    "points": 27,
+    "games": 28
+  },
+  "super_rush_bot.py": {
+    "wins": 2,
+    "losses": 36,
+    "draws": 0,
+    "points": 6,
+    "games": 38
+  },
+  "turtle_defense_bot.py": {
+    "wins": 4,
+    "losses": 32,
+    "draws": 4,
+    "points": 16,
+    "games": 40
+  },
+  "planner_bot_v2.py": {
+    "wins": 8,
+    "losses": 32,
+    "draws": 0,
+    "points": 24,
+    "games": 40
+  },
+  "v11_paranoid_defense.py": {
+    "wins": 5,
+    "losses": 20,
+    "draws": 15,
+    "points": 30,
+    "games": 40
+  },
+  "v5_high_defense.py": {
+    "wins": 6,
+    "losses": 20,
+    "draws": 14,
+    "points": 32,
+    "games": 40
+  },
+  "v9_simple_bonus.py": {
+    "wins": 3,
+    "losses": 21,
+    "draws": 14,
+    "points": 23,
+    "games": 38
+  },
+  "v10_coordinated_max.py": {
+    "wins": 5,
+    "losses": 20,
+    "draws": 15,
+    "points": 30,
+    "games": 40
+  },
+  "v10_always_sabotage.py": {
+    "wins": 5,
+    "losses": 20,
+    "draws": 15,
+    "points": 30,
+    "games": 40
+  },
+  "v03_simple_order_focus.py": {
+    "wins": 6,
+    "losses": 20,
+    "draws": 14,
+    "points": 32,
+    "games": 40
+  },
+  "v01_greedy_score.py": {
+    "wins": 0,
+    "losses": 10,
+    "draws": 14,
+    "points": 14,
+    "games": 24
+  },
+  "v02_efficient_score.py": {
+    "wins": 4,
+    "losses": 20,
+    "draws": 16,
+    "points": 28,
+    "games": 40
+  },
+  "v06_late_sabotage.py": {
+    "wins": 4,
+    "losses": 20,
+    "draws": 16,
+    "points": 28,
+    "games": 40
+  },
+  "v_final_efficiency.py": {
+    "wins": 10,
+    "losses": 2,
+    "draws": 28,
+    "points": 58,
+    "games": 40
+  },
+  "v8_box_lover.py": {
+    "wins": 6,
+    "losses": 20,
+    "draws": 14,
+    "points": 32,
+    "games": 40
+  },
+  "v07_aggressive_gap.py": {
+    "wins": 4,
+    "losses": 20,
+    "draws": 16,
+    "points": 28,
+    "games": 40
+  },
+  "v12_lazy_defense.py": {
+    "wins": 6,
+    "losses": 19,
+    "draws": 15,
+    "points": 33,
+    "games": 40
+  },
+  "v4_no_sabotage.py": {
+    "wins": 10,
+    "losses": 2,
+    "draws": 28,
+    "points": 58,
+    "games": 40
+  },
+  "v2_efficient.py": {
+    "wins": 4,
+    "losses": 21,
+    "draws": 15,
+    "points": 27,
+    "games": 40
+  },
+  "v18_no_recycling.py": {
+    "wins": 5,
+    "losses": 19,
+    "draws": 16,
+    "points": 31,
+    "games": 40
+  },
+  "v20_hybrid_stable.py": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0,
+    "points": 0,
+    "games": 0
+  },
+  "v08_desperate_only.py": {
+    "wins": 6,
+    "losses": 20,
+    "draws": 14,
+    "points": 32,
+    "games": 40
+  },
+  "v05_early_sabotage.py": {
+    "wins": 6,
+    "losses": 20,
+    "draws": 14,
+    "points": 32,
+    "games": 40
+  },
+  "v6_early_switch.py": {
+    "wins": 4,
+    "losses": 21,
+    "draws": 15,
+    "points": 27,
+    "games": 40
+  },
+  "v04_high_value_focus.py": {
+    "wins": 9,
+    "losses": 16,
+    "draws": 15,
+    "points": 42,
+    "games": 40
+  },
+  "v7_no_recycling.py": {
+    "wins": 6,
+    "losses": 20,
+    "draws": 14,
+    "points": 32,
+    "games": 40
+  },
+  "v1_greedy.py": {
+    "wins": 0,
+    "losses": 10,
+    "draws": 14,
+    "points": 14,
+    "games": 24
+  },
+  "v3_aggressive_sabotage.py": {
+    "wins": 5,
+    "losses": 20,
+    "draws": 15,
+    "points": 30,
+    "games": 40
+  },
+  "v09_no_sabotage.py": {
+    "wins": 10,
+    "losses": 2,
+    "draws": 28,
+    "points": 58,
+    "games": 40
+  },
+  "v17_box_hoarder.py": {
+    "wins": 5,
+    "losses": 20,
+    "draws": 15,
+    "points": 30,
+    "games": 40
+  },
+  "v19_fast_replan.py": {
+    "wins": 4,
+    "losses": 20,
+    "draws": 16,
+    "points": 28,
+    "games": 40
+  },
+  "v13_active_hiding.py": {
+    "wins": 4,
+    "losses": 20,
+    "draws": 16,
+    "points": 28,
+    "games": 40
+  },
+  "optimal_bot.py": {
+    "wins": 0,
+    "losses": 40,
+    "draws": 0,
+    "points": 0,
+    "games": 40
+  }
+}

@@ -1,0 +1,521 @@
+============================================================
+PARALLEL ROUND ROBIN (EXTENDED) (10 workers)
+Bots: 10 | Maps: 5
+============================================================
+Total Matches to Run: 450
+[1/450] super_rush.. vs aggressive.. (chopped.txt) -> aggressive..
+[2/450] aggressive.. vs turtle_def.. (chopped.txt) -> aggressive..
+[3/450] ultimate_c.. vs aggressive.. (chopped.txt) -> DRAW..
+[4/450] aggressive.. vs champion_s.. (chopped.txt) -> DRAW..
+[5/450] aggressive.. vs super_rush.. (chopped.txt) -> aggressive..
+[6/450] best_solo_.. vs aggressive.. (chopped.txt) -> aggressive..
+[7/450] turtle_def.. vs aggressive.. (chopped.txt) -> aggressive..
+[8/450] champion_s.. vs aggressive.. (chopped.txt) -> DRAW..
+[9/450] aggressive.. vs ultimate_c.. (chopped.txt) -> DRAW..
+[10/450] aggressive.. vs best_solo_.. (chopped.txt) -> aggressive..
+[11/450] super_rush.. vs turtle_def.. (chopped.txt) -> turtle_def..
+[12/450] turtle_def.. vs super_rush.. (chopped.txt) -> turtle_def..
+[13/450] aggressive.. vs SOVEREIGN... (chopped.txt) -> SOVEREIGN...
+[14/450] BEST^3_def.. vs aggressive.. (chopped.txt) -> DRAW..
+[15/450] aggressive.. vs BEST^3_def.. (chopped.txt) -> DRAW..
+[16/450] aggressive.. vs BEST^2-cha.. (chopped.txt) -> DRAW..
+[17/450] BEST^2-cha.. vs aggressive.. (chopped.txt) -> DRAW..
+[18/450] SOVEREIGN... vs aggressive.. (chopped.txt) -> SOVEREIGN...
+[19/450] super_rush.. vs champion_s.. (chopped.txt) -> ERROR..
+[20/450] champion_s.. vs super_rush.. (chopped.txt) -> ERROR..
+[21/450] aggressive.. vs BEST-IronC.. (chopped.txt) -> aggressive..
+[22/450] super_rush.. vs best_solo_.. (chopped.txt) -> super_rush..
+[23/450] super_rush.. vs ultimate_c.. (chopped.txt) -> ultimate_c..
+[24/450] best_solo_.. vs super_rush.. (chopped.txt) -> super_rush..
+[25/450] BEST-IronC.. vs aggressive.. (chopped.txt) -> aggressive..
+[26/450] super_rush.. vs BEST^3_def.. (chopped.txt) -> BEST^3_def..
+[27/450] BEST^3_def.. vs super_rush.. (chopped.txt) -> BEST^3_def..
+[28/450] ultimate_c.. vs super_rush.. (chopped.txt) -> ultimate_c..
+[29/450] super_rush.. vs BEST^2-cha.. (chopped.txt) -> BEST^2-cha..
+[30/450] super_rush.. vs SOVEREIGN... (chopped.txt) -> SOVEREIGN...
+[31/450] ultimate_c.. vs turtle_def.. (chopped.txt) -> ultimate_c..
+[32/450] SOVEREIGN... vs super_rush.. (chopped.txt) -> SOVEREIGN...
+[33/450] BEST^2-cha.. vs super_rush.. (chopped.txt) -> BEST^2-cha..
+[34/450] turtle_def.. vs ultimate_c.. (chopped.txt) -> ultimate_c..
+[35/450] turtle_def.. vs best_solo_.. (chopped.txt) -> turtle_def..
+[36/450] best_solo_.. vs turtle_def.. (chopped.txt) -> turtle_def..
+[37/450] champion_s.. vs turtle_def.. (chopped.txt) -> champion_s..
+[38/450] turtle_def.. vs champion_s.. (chopped.txt) -> champion_s..
+[39/450] BEST^3_def.. vs turtle_def.. (chopped.txt) -> BEST^3_def..
+[40/450] super_rush.. vs BEST-IronC.. (chopped.txt) -> super_rush..
+[41/450] turtle_def.. vs BEST^2-cha.. (chopped.txt) -> BEST^2-cha..
+[42/450] turtle_def.. vs BEST^3_def.. (chopped.txt) -> BEST^3_def..
+[43/450] BEST^2-cha.. vs turtle_def.. (chopped.txt) -> BEST^2-cha..
+[44/450] turtle_def.. vs SOVEREIGN... (chopped.txt) -> SOVEREIGN...
+[45/450] SOVEREIGN... vs turtle_def.. (chopped.txt) -> SOVEREIGN...
+[46/450] BEST-IronC.. vs super_rush.. (chopped.txt) -> super_rush..
+[47/450] best_solo_.. vs ultimate_c.. (chopped.txt) -> ultimate_c..
+[48/450] best_solo_.. vs BEST^3_def.. (chopped.txt) -> BEST^3_def..
+[49/450] best_solo_.. vs BEST^2-cha.. (chopped.txt) -> BEST^2-cha..
+[50/450] ultimate_c.. vs best_solo_.. (chopped.txt) -> ultimate_c..
+[51/450] best_solo_.. vs champion_s.. (chopped.txt) -> champion_s..
+[52/450] champion_s.. vs best_solo_.. (chopped.txt) -> champion_s..
+[53/450] BEST^3_def.. vs best_solo_.. (chopped.txt) -> BEST^3_def..
+[54/450] BEST^2-cha.. vs best_solo_.. (chopped.txt) -> BEST^2-cha..
+[55/450] turtle_def.. vs BEST-IronC.. (chopped.txt) -> turtle_def..
+[56/450] BEST-IronC.. vs turtle_def.. (chopped.txt) -> turtle_def..
+[57/450] ultimate_c.. vs champion_s.. (chopped.txt) -> DRAW..
+[58/450] best_solo_.. vs SOVEREIGN... (chopped.txt) -> SOVEREIGN...
+[59/450] SOVEREIGN... vs best_solo_.. (chopped.txt) -> SOVEREIGN...
+[60/450] champion_s.. vs ultimate_c.. (chopped.txt) -> DRAW..
+[61/450] ultimate_c.. vs BEST^3_def.. (chopped.txt) -> DRAW..
+[62/450] BEST^3_def.. vs ultimate_c.. (chopped.txt) -> DRAW..
+[63/450] ultimate_c.. vs BEST^2-cha.. (chopped.txt) -> DRAW..
+[64/450] BEST^2-cha.. vs ultimate_c.. (chopped.txt) -> DRAW..
+[65/450] BEST-IronC.. vs best_solo_.. (chopped.txt) -> BEST-IronC..
+[66/450] ultimate_c.. vs SOVEREIGN... (chopped.txt) -> SOVEREIGN...
+[67/450] SOVEREIGN... vs ultimate_c.. (chopped.txt) -> SOVEREIGN...
+[68/450] best_solo_.. vs BEST-IronC.. (chopped.txt) -> BEST-IronC..
+[69/450] BEST^3_def.. vs champion_s.. (chopped.txt) -> DRAW..
+[70/450] champion_s.. vs BEST^3_def.. (chopped.txt) -> DRAW..
+[71/450] champion_s.. vs BEST^2-cha.. (chopped.txt) -> DRAW..
+[72/450] ultimate_c.. vs BEST-IronC.. (chopped.txt) -> ultimate_c..
+[73/450] BEST^2-cha.. vs champion_s.. (chopped.txt) -> DRAW..
+[74/450] BEST-IronC.. vs ultimate_c.. (chopped.txt) -> ultimate_c..
+[75/450] SOVEREIGN... vs champion_s.. (chopped.txt) -> SOVEREIGN...
+[76/450] champion_s.. vs SOVEREIGN... (chopped.txt) -> SOVEREIGN...
+[77/450] BEST^2-cha.. vs BEST^3_def.. (chopped.txt) -> DRAW..
+[78/450] BEST^3_def.. vs BEST^2-cha.. (chopped.txt) -> DRAW..
+[79/450] BEST^3_def.. vs SOVEREIGN... (chopped.txt) -> SOVEREIGN...
+[80/450] SOVEREIGN... vs BEST^3_def.. (chopped.txt) -> SOVEREIGN...
+[81/450] champion_s.. vs BEST-IronC.. (chopped.txt) -> champion_s..
+[82/450] BEST^2-cha.. vs SOVEREIGN... (chopped.txt) -> SOVEREIGN...
+[83/450] BEST-IronC.. vs champion_s.. (chopped.txt) -> champion_s..
+[84/450] SOVEREIGN... vs BEST^2-cha.. (chopped.txt) -> SOVEREIGN...
+[85/450] BEST^3_def.. vs BEST-IronC.. (chopped.txt) -> BEST^3_def..
+[86/450] BEST-IronC.. vs BEST^3_def.. (chopped.txt) -> BEST^3_def..
+[87/450] BEST^2-cha.. vs BEST-IronC.. (chopped.txt) -> BEST^2-cha..
+[88/450] BEST-IronC.. vs BEST^2-cha.. (chopped.txt) -> BEST^2-cha..
+[89/450] SOVEREIGN... vs BEST-IronC.. (chopped.txt) -> SOVEREIGN...
+[90/450] aggressive.. vs super_rush.. (orbit.txt) -> aggressive..
+[91/450] aggressive.. vs turtle_def.. (orbit.txt) -> aggressive..
+[92/450] super_rush.. vs aggressive.. (orbit.txt) -> aggressive..
+[93/450] turtle_def.. vs aggressive.. (orbit.txt) -> aggressive..
+[94/450] BEST-IronC.. vs SOVEREIGN... (chopped.txt) -> SOVEREIGN...
+[95/450] aggressive.. vs ultimate_c.. (orbit.txt) -> DRAW..
+[96/450] ultimate_c.. vs aggressive.. (orbit.txt) -> DRAW..
+[97/450] aggressive.. vs champion_s.. (orbit.txt) -> DRAW..
+[98/450] champion_s.. vs aggressive.. (orbit.txt) -> DRAW..
+[99/450] BEST^3_def.. vs aggressive.. (orbit.txt) -> DRAW..
+[100/450] aggressive.. vs BEST^3_def.. (orbit.txt) -> DRAW..
+[101/450] aggressive.. vs BEST^2-cha.. (orbit.txt) -> DRAW..
+[102/450] aggressive.. vs best_solo_.. (orbit.txt) -> DRAW..
+[103/450] best_solo_.. vs aggressive.. (orbit.txt) -> DRAW..
+[104/450] BEST^2-cha.. vs aggressive.. (orbit.txt) -> DRAW..
+[105/450] aggressive.. vs SOVEREIGN... (orbit.txt) -> DRAW..
+[106/450] SOVEREIGN... vs aggressive.. (orbit.txt) -> DRAW..
+[107/450] super_rush.. vs turtle_def.. (orbit.txt) -> turtle_def..
+[108/450] turtle_def.. vs super_rush.. (orbit.txt) -> turtle_def..
+[109/450] super_rush.. vs ultimate_c.. (orbit.txt) -> ultimate_c..
+[110/450] ultimate_c.. vs super_rush.. (orbit.txt) -> ultimate_c..
+[111/450] aggressive.. vs BEST-IronC.. (orbit.txt) -> aggressive..
+[112/450] super_rush.. vs best_solo_.. (orbit.txt) -> best_solo_..
+[113/450] champion_s.. vs super_rush.. (orbit.txt) -> champion_s..
+[114/450] super_rush.. vs champion_s.. (orbit.txt) -> champion_s..
+[115/450] best_solo_.. vs super_rush.. (orbit.txt) -> best_solo_..
+[116/450] super_rush.. vs BEST^3_def.. (orbit.txt) -> BEST^3_def..
+[117/450] super_rush.. vs BEST^2-cha.. (orbit.txt) -> BEST^2-cha..
+[118/450] BEST^3_def.. vs super_rush.. (orbit.txt) -> BEST^3_def..
+[119/450] BEST-IronC.. vs aggressive.. (orbit.txt) -> aggressive..
+[120/450] BEST^2-cha.. vs super_rush.. (orbit.txt) -> BEST^2-cha..
+[121/450] super_rush.. vs SOVEREIGN... (orbit.txt) -> SOVEREIGN...
+[122/450] SOVEREIGN... vs super_rush.. (orbit.txt) -> SOVEREIGN...
+[123/450] turtle_def.. vs ultimate_c.. (orbit.txt) -> ultimate_c..
+[124/450] ultimate_c.. vs turtle_def.. (orbit.txt) -> ultimate_c..
+[125/450] turtle_def.. vs champion_s.. (orbit.txt) -> champion_s..
+[126/450] super_rush.. vs BEST-IronC.. (orbit.txt) -> super_rush..
+[127/450] BEST-IronC.. vs super_rush.. (orbit.txt) -> super_rush..
+[128/450] champion_s.. vs turtle_def.. (orbit.txt) -> champion_s..
+[129/450] turtle_def.. vs best_solo_.. (orbit.txt) -> best_solo_..
+[130/450] best_solo_.. vs turtle_def.. (orbit.txt) -> best_solo_..
+[131/450] turtle_def.. vs BEST^3_def.. (orbit.txt) -> BEST^3_def..
+[132/450] BEST^2-cha.. vs turtle_def.. (orbit.txt) -> BEST^2-cha..
+[133/450] BEST^3_def.. vs turtle_def.. (orbit.txt) -> BEST^3_def..
+[134/450] turtle_def.. vs BEST^2-cha.. (orbit.txt) -> BEST^2-cha..
+[135/450] turtle_def.. vs SOVEREIGN... (orbit.txt) -> SOVEREIGN...
+[136/450] SOVEREIGN... vs turtle_def.. (orbit.txt) -> SOVEREIGN...
+[137/450] ultimate_c.. vs best_solo_.. (orbit.txt) -> DRAW..
+[138/450] best_solo_.. vs ultimate_c.. (orbit.txt) -> DRAW..
+[139/450] champion_s.. vs best_solo_.. (orbit.txt) -> DRAW..
+[140/450] BEST^3_def.. vs best_solo_.. (orbit.txt) -> DRAW..
+[141/450] best_solo_.. vs champion_s.. (orbit.txt) -> DRAW..
+[142/450] best_solo_.. vs BEST^3_def.. (orbit.txt) -> DRAW..
+[143/450] best_solo_.. vs BEST^2-cha.. (orbit.txt) -> DRAW..
+[144/450] turtle_def.. vs BEST-IronC.. (orbit.txt) -> turtle_def..
+[145/450] BEST-IronC.. vs turtle_def.. (orbit.txt) -> turtle_def..
+[146/450] ultimate_c.. vs champion_s.. (orbit.txt) -> DRAW..
+[147/450] champion_s.. vs ultimate_c.. (orbit.txt) -> DRAW..
+[148/450] BEST^2-cha.. vs best_solo_.. (orbit.txt) -> DRAW..
+[149/450] ultimate_c.. vs BEST^3_def.. (orbit.txt) -> DRAW..
+[150/450] BEST^3_def.. vs ultimate_c.. (orbit.txt) -> DRAW..
+[151/450] SOVEREIGN... vs best_solo_.. (orbit.txt) -> DRAW..
+[152/450] best_solo_.. vs SOVEREIGN... (orbit.txt) -> DRAW..
+[153/450] ultimate_c.. vs BEST^2-cha.. (orbit.txt) -> DRAW..
+[154/450] BEST^2-cha.. vs ultimate_c.. (orbit.txt) -> DRAW..
+[155/450] ultimate_c.. vs SOVEREIGN... (orbit.txt) -> DRAW..
+[156/450] SOVEREIGN... vs ultimate_c.. (orbit.txt) -> DRAW..
+[157/450] BEST-IronC.. vs best_solo_.. (orbit.txt) -> best_solo_..
+[158/450] champion_s.. vs BEST^3_def.. (orbit.txt) -> DRAW..
+[159/450] BEST^3_def.. vs champion_s.. (orbit.txt) -> DRAW..
+[160/450] best_solo_.. vs BEST-IronC.. (orbit.txt) -> best_solo_..
+[161/450] BEST-IronC.. vs ultimate_c.. (orbit.txt) -> ultimate_c..
+[162/450] ultimate_c.. vs BEST-IronC.. (orbit.txt) -> ultimate_c..
+[163/450] BEST^2-cha.. vs champion_s.. (orbit.txt) -> DRAW..
+[164/450] champion_s.. vs BEST^2-cha.. (orbit.txt) -> DRAW..
+[165/450] SOVEREIGN... vs champion_s.. (orbit.txt) -> DRAW..
+[166/450] champion_s.. vs SOVEREIGN... (orbit.txt) -> DRAW..
+[167/450] BEST^2-cha.. vs BEST^3_def.. (orbit.txt) -> DRAW..
+[168/450] BEST^3_def.. vs BEST^2-cha.. (orbit.txt) -> DRAW..
+[169/450] BEST^3_def.. vs SOVEREIGN... (orbit.txt) -> DRAW..
+[170/450] SOVEREIGN... vs BEST^3_def.. (orbit.txt) -> DRAW..
+[171/450] BEST^2-cha.. vs SOVEREIGN... (orbit.txt) -> DRAW..
+[172/450] SOVEREIGN... vs BEST^2-cha.. (orbit.txt) -> DRAW..
+[173/450] champion_s.. vs BEST-IronC.. (orbit.txt) -> champion_s..
+[174/450] BEST-IronC.. vs champion_s.. (orbit.txt) -> champion_s..
+[175/450] BEST-IronC.. vs BEST^3_def.. (orbit.txt) -> BEST^3_def..
+[176/450] BEST^3_def.. vs BEST-IronC.. (orbit.txt) -> BEST^3_def..
+[177/450] BEST-IronC.. vs BEST^2-cha.. (orbit.txt) -> BEST^2-cha..
+[178/450] super_rush.. vs aggressive.. (small_wall.txt) -> aggressive..
+[179/450] aggressive.. vs super_rush.. (small_wall.txt) -> aggressive..
+[180/450] BEST^2-cha.. vs BEST-IronC.. (orbit.txt) -> BEST^2-cha..
+[181/450] SOVEREIGN... vs BEST-IronC.. (orbit.txt) -> SOVEREIGN...
+[182/450] BEST-IronC.. vs SOVEREIGN... (orbit.txt) -> SOVEREIGN...
+[183/450] turtle_def.. vs aggressive.. (small_wall.txt) -> turtle_def..
+[184/450] aggressive.. vs turtle_def.. (small_wall.txt) -> turtle_def..
+[185/450] BEST^2-cha.. vs aggressive.. (small_wall.txt) -> ERROR..
+[186/450] aggressive.. vs ultimate_c.. (small_wall.txt) -> ERROR..
+[187/450] champion_s.. vs aggressive.. (small_wall.txt) -> ERROR..
+[188/450] aggressive.. vs champion_s.. (small_wall.txt) -> ERROR..
+[189/450] best_solo_.. vs aggressive.. (small_wall.txt) -> best_solo_..
+[190/450] aggressive.. vs best_solo_.. (small_wall.txt) -> best_solo_..
+[191/450] aggressive.. vs BEST^3_def.. (small_wall.txt) -> BEST^3_def..
+[192/450] ultimate_c.. vs aggressive.. (small_wall.txt) -> aggressive..
+[193/450] BEST^3_def.. vs aggressive.. (small_wall.txt) -> BEST^3_def..
+[194/450] aggressive.. vs BEST^2-cha.. (small_wall.txt) -> BEST^2-cha..
+[195/450] ultimate_c.. vs super_rush.. (small_wall.txt) -> ERROR..
+[196/450] super_rush.. vs turtle_def.. (small_wall.txt) -> turtle_def..
+[197/450] SOVEREIGN... vs aggressive.. (small_wall.txt) -> aggressive..
+[198/450] turtle_def.. vs super_rush.. (small_wall.txt) -> turtle_def..
+[199/450] aggressive.. vs SOVEREIGN... (small_wall.txt) -> aggressive..
+[200/450] super_rush.. vs ultimate_c.. (small_wall.txt) -> super_rush..
+[201/450] aggressive.. vs BEST-IronC.. (small_wall.txt) -> aggressive..
+[202/450] super_rush.. vs best_solo_.. (small_wall.txt) -> best_solo_..
+[203/450] super_rush.. vs BEST^2-cha.. (small_wall.txt) -> ERROR..
+[204/450] best_solo_.. vs super_rush.. (small_wall.txt) -> best_solo_..
+[205/450] super_rush.. vs champion_s.. (small_wall.txt) -> ERROR..
+[206/450] BEST^2-cha.. vs super_rush.. (small_wall.txt) -> ERROR..
+[207/450] champion_s.. vs super_rush.. (small_wall.txt) -> ERROR..
+[208/450] BEST-IronC.. vs aggressive.. (small_wall.txt) -> aggressive..
+[209/450] BEST^3_def.. vs super_rush.. (small_wall.txt) -> BEST^3_def..
+[210/450] super_rush.. vs BEST^3_def.. (small_wall.txt) -> BEST^3_def..
+[211/450] super_rush.. vs SOVEREIGN... (small_wall.txt) -> SOVEREIGN...
+[212/450] SOVEREIGN... vs super_rush.. (small_wall.txt) -> super_rush..
+[213/450] turtle_def.. vs ultimate_c.. (small_wall.txt) -> turtle_def..
+[214/450] ultimate_c.. vs turtle_def.. (small_wall.txt) -> turtle_def..
+[215/450] champion_s.. vs turtle_def.. (small_wall.txt) -> turtle_def..
+[216/450] turtle_def.. vs champion_s.. (small_wall.txt) -> turtle_def..
+[217/450] BEST-IronC.. vs super_rush.. (small_wall.txt) -> super_rush..
+[218/450] turtle_def.. vs best_solo_.. (small_wall.txt) -> best_solo_..
+[219/450] super_rush.. vs BEST-IronC.. (small_wall.txt) -> super_rush..
+[220/450] turtle_def.. vs BEST^3_def.. (small_wall.txt) -> DRAW..
+[221/450] best_solo_.. vs turtle_def.. (small_wall.txt) -> best_solo_..
+[222/450] BEST^3_def.. vs turtle_def.. (small_wall.txt) -> DRAW..
+[223/450] turtle_def.. vs BEST^2-cha.. (small_wall.txt) -> DRAW..
+[224/450] BEST^2-cha.. vs turtle_def.. (small_wall.txt) -> DRAW..
+[225/450] turtle_def.. vs SOVEREIGN... (small_wall.txt) -> turtle_def..
+[226/450] SOVEREIGN... vs turtle_def.. (small_wall.txt) -> turtle_def..
+[227/450] best_solo_.. vs BEST^3_def.. (small_wall.txt) -> ERROR..
+[228/450] best_solo_.. vs SOVEREIGN... (small_wall.txt) -> ERROR..
+[229/450] BEST-IronC.. vs turtle_def.. (small_wall.txt) -> turtle_def..
+[230/450] ultimate_c.. vs best_solo_.. (small_wall.txt) -> best_solo_..
+[231/450] turtle_def.. vs BEST-IronC.. (small_wall.txt) -> turtle_def..
+[232/450] best_solo_.. vs ultimate_c.. (small_wall.txt) -> best_solo_..
+[233/450] champion_s.. vs best_solo_.. (small_wall.txt) -> best_solo_..
+[234/450] BEST^3_def.. vs best_solo_.. (small_wall.txt) -> best_solo_..
+[235/450] best_solo_.. vs champion_s.. (small_wall.txt) -> best_solo_..
+[236/450] BEST^2-cha.. vs best_solo_.. (small_wall.txt) -> best_solo_..
+[237/450] best_solo_.. vs BEST^2-cha.. (small_wall.txt) -> best_solo_..
+[238/450] ultimate_c.. vs champion_s.. (small_wall.txt) -> ERROR..
+[239/450] champion_s.. vs ultimate_c.. (small_wall.txt) -> ERROR..
+[240/450] ultimate_c.. vs BEST^2-cha.. (small_wall.txt) -> BEST^2-cha..
+[241/450] ultimate_c.. vs BEST^3_def.. (small_wall.txt) -> BEST^3_def..
+[242/450] BEST^3_def.. vs ultimate_c.. (small_wall.txt) -> BEST^3_def..
+[243/450] ultimate_c.. vs SOVEREIGN... (small_wall.txt) -> ultimate_c..
+[244/450] SOVEREIGN... vs ultimate_c.. (small_wall.txt) -> ultimate_c..
+[245/450] BEST^2-cha.. vs ultimate_c.. (small_wall.txt) -> BEST^2-cha..
+[246/450] BEST^3_def.. vs champion_s.. (small_wall.txt) -> ERROR..
+[247/450] SOVEREIGN... vs best_solo_.. (small_wall.txt) -> best_solo_..
+[248/450] champion_s.. vs BEST^3_def.. (small_wall.txt) -> BEST^3_def..
+[249/450] champion_s.. vs SOVEREIGN... (small_wall.txt) -> ERROR..
+[250/450] SOVEREIGN... vs champion_s.. (small_wall.txt) -> ERROR..
+[251/450] ultimate_c.. vs BEST-IronC.. (small_wall.txt) -> ultimate_c..
+[252/450] BEST^2-cha.. vs champion_s.. (small_wall.txt) -> BEST^2-cha..
+[253/450] champion_s.. vs BEST^2-cha.. (small_wall.txt) -> BEST^2-cha..
+[254/450] best_solo_.. vs BEST-IronC.. (small_wall.txt) -> best_solo_..
+[255/450] BEST-IronC.. vs best_solo_.. (small_wall.txt) -> best_solo_..
+[256/450] BEST-IronC.. vs ultimate_c.. (small_wall.txt) -> ultimate_c..
+[257/450] BEST^3_def.. vs SOVEREIGN... (small_wall.txt) -> BEST^3_def..
+[258/450] SOVEREIGN... vs BEST^3_def.. (small_wall.txt) -> BEST^3_def..
+[259/450] SOVEREIGN... vs BEST^2-cha.. (small_wall.txt) -> BEST^2-cha..
+[260/450] BEST^2-cha.. vs SOVEREIGN... (small_wall.txt) -> BEST^2-cha..
+[261/450] champion_s.. vs BEST-IronC.. (small_wall.txt) -> champion_s..
+[262/450] BEST^2-cha.. vs BEST^3_def.. (small_wall.txt) -> DRAW..
+[263/450] BEST^3_def.. vs BEST^2-cha.. (small_wall.txt) -> DRAW..
+[264/450] BEST-IronC.. vs BEST^3_def.. (small_wall.txt) -> BEST^3_def..
+[265/450] BEST-IronC.. vs champion_s.. (small_wall.txt) -> champion_s..
+[266/450] BEST^3_def.. vs BEST-IronC.. (small_wall.txt) -> BEST^3_def..
+[267/450] super_rush.. vs aggressive.. (throughput.txt) -> aggressive..
+[268/450] aggressive.. vs super_rush.. (throughput.txt) -> aggressive..
+[269/450] aggressive.. vs turtle_def.. (throughput.txt) -> aggressive..
+[270/450] turtle_def.. vs aggressive.. (throughput.txt) -> aggressive..
+[271/450] BEST-IronC.. vs BEST^2-cha.. (small_wall.txt) -> BEST^2-cha..
+[272/450] SOVEREIGN... vs BEST-IronC.. (small_wall.txt) -> SOVEREIGN...
+[273/450] BEST-IronC.. vs SOVEREIGN... (small_wall.txt) -> SOVEREIGN...
+[274/450] BEST^2-cha.. vs BEST-IronC.. (small_wall.txt) -> BEST^2-cha..
+[275/450] aggressive.. vs best_solo_.. (throughput.txt) -> best_solo_..
+[276/450] best_solo_.. vs aggressive.. (throughput.txt) -> best_solo_..
+[277/450] ultimate_c.. vs aggressive.. (throughput.txt) -> ultimate_c..
+[278/450] aggressive.. vs ultimate_c.. (throughput.txt) -> ultimate_c..
+[279/450] aggressive.. vs champion_s.. (throughput.txt) -> champion_s..
+[280/450] BEST^2-cha.. vs aggressive.. (throughput.txt) -> BEST^2-cha..
+[281/450] BEST^3_def.. vs aggressive.. (throughput.txt) -> BEST^3_def..
+[282/450] aggressive.. vs BEST^2-cha.. (throughput.txt) -> BEST^2-cha..
+[283/450] champion_s.. vs aggressive.. (throughput.txt) -> champion_s..
+[284/450] aggressive.. vs BEST^3_def.. (throughput.txt) -> BEST^3_def..
+[285/450] SOVEREIGN... vs aggressive.. (throughput.txt) -> SOVEREIGN...
+[286/450] aggressive.. vs SOVEREIGN... (throughput.txt) -> SOVEREIGN...
+[287/450] ultimate_c.. vs super_rush.. (throughput.txt) -> ultimate_c..
+[288/450] super_rush.. vs ultimate_c.. (throughput.txt) -> ultimate_c..
+[289/450] super_rush.. vs turtle_def.. (throughput.txt) -> turtle_def..
+[290/450] turtle_def.. vs super_rush.. (throughput.txt) -> turtle_def..
+[291/450] super_rush.. vs champion_s.. (throughput.txt) -> champion_s..
+[292/450] champion_s.. vs super_rush.. (throughput.txt) -> champion_s..
+[293/450] super_rush.. vs BEST^3_def.. (throughput.txt) -> BEST^3_def..
+[294/450] BEST^3_def.. vs super_rush.. (throughput.txt) -> BEST^3_def..
+[295/450] super_rush.. vs best_solo_.. (throughput.txt) -> best_solo_..
+[296/450] best_solo_.. vs super_rush.. (throughput.txt) -> best_solo_..
+[297/450] super_rush.. vs BEST^2-cha.. (throughput.txt) -> BEST^2-cha..
+[298/450] BEST^2-cha.. vs super_rush.. (throughput.txt) -> BEST^2-cha..
+[299/450] super_rush.. vs SOVEREIGN... (throughput.txt) -> SOVEREIGN...
+[300/450] SOVEREIGN... vs super_rush.. (throughput.txt) -> SOVEREIGN...
+[301/450] turtle_def.. vs ultimate_c.. (throughput.txt) -> ultimate_c..
+[302/450] ultimate_c.. vs turtle_def.. (throughput.txt) -> ultimate_c..
+[303/450] BEST-IronC.. vs aggressive.. (throughput.txt) -> aggressive..
+[304/450] aggressive.. vs BEST-IronC.. (throughput.txt) -> aggressive..
+[305/450] turtle_def.. vs champion_s.. (throughput.txt) -> champion_s..
+[306/450] best_solo_.. vs turtle_def.. (throughput.txt) -> best_solo_..
+[307/450] turtle_def.. vs best_solo_.. (throughput.txt) -> best_solo_..
+[308/450] champion_s.. vs turtle_def.. (throughput.txt) -> champion_s..
+[309/450] turtle_def.. vs BEST^3_def.. (throughput.txt) -> BEST^3_def..
+[310/450] BEST^3_def.. vs turtle_def.. (throughput.txt) -> BEST^3_def..
+[311/450] BEST^2-cha.. vs turtle_def.. (throughput.txt) -> BEST^2-cha..
+[312/450] turtle_def.. vs SOVEREIGN... (throughput.txt) -> SOVEREIGN...
+[313/450] SOVEREIGN... vs turtle_def.. (throughput.txt) -> SOVEREIGN...
+[314/450] turtle_def.. vs BEST^2-cha.. (throughput.txt) -> BEST^2-cha..
+[315/450] BEST-IronC.. vs super_rush.. (throughput.txt) -> super_rush..
+[316/450] super_rush.. vs BEST-IronC.. (throughput.txt) -> super_rush..
+[317/450] best_solo_.. vs ultimate_c.. (throughput.txt) -> DRAW..
+[318/450] ultimate_c.. vs best_solo_.. (throughput.txt) -> DRAW..
+[319/450] BEST^3_def.. vs best_solo_.. (throughput.txt) -> DRAW..
+[320/450] champion_s.. vs best_solo_.. (throughput.txt) -> DRAW..
+[321/450] best_solo_.. vs champion_s.. (throughput.txt) -> DRAW..
+[322/450] best_solo_.. vs BEST^3_def.. (throughput.txt) -> DRAW..
+[323/450] best_solo_.. vs BEST^2-cha.. (throughput.txt) -> DRAW..
+[324/450] BEST^2-cha.. vs best_solo_.. (throughput.txt) -> DRAW..
+[325/450] turtle_def.. vs BEST-IronC.. (throughput.txt) -> turtle_def..
+[326/450] BEST-IronC.. vs turtle_def.. (throughput.txt) -> turtle_def..
+[327/450] SOVEREIGN... vs best_solo_.. (throughput.txt) -> DRAW..
+[328/450] best_solo_.. vs SOVEREIGN... (throughput.txt) -> DRAW..
+[329/450] champion_s.. vs ultimate_c.. (throughput.txt) -> DRAW..
+[330/450] ultimate_c.. vs champion_s.. (throughput.txt) -> DRAW..
+[331/450] ultimate_c.. vs BEST^3_def.. (throughput.txt) -> DRAW..
+[332/450] BEST^3_def.. vs ultimate_c.. (throughput.txt) -> DRAW..
+[333/450] ultimate_c.. vs BEST^2-cha.. (throughput.txt) -> DRAW..
+[334/450] BEST^2-cha.. vs ultimate_c.. (throughput.txt) -> DRAW..
+[335/450] SOVEREIGN... vs ultimate_c.. (throughput.txt) -> DRAW..
+[336/450] ultimate_c.. vs SOVEREIGN... (throughput.txt) -> DRAW..
+[337/450] champion_s.. vs BEST^3_def.. (throughput.txt) -> DRAW..
+[338/450] BEST^3_def.. vs champion_s.. (throughput.txt) -> DRAW..
+[339/450] champion_s.. vs BEST^2-cha.. (throughput.txt) -> DRAW..
+[340/450] BEST^2-cha.. vs champion_s.. (throughput.txt) -> DRAW..
+[341/450] champion_s.. vs SOVEREIGN... (throughput.txt) -> DRAW..
+[342/450] SOVEREIGN... vs champion_s.. (throughput.txt) -> DRAW..
+[343/450] BEST^3_def.. vs BEST^2-cha.. (throughput.txt) -> DRAW..
+[344/450] BEST^2-cha.. vs BEST^3_def.. (throughput.txt) -> DRAW..
+[345/450] BEST-IronC.. vs best_solo_.. (throughput.txt) -> best_solo_..
+[346/450] best_solo_.. vs BEST-IronC.. (throughput.txt) -> best_solo_..
+[347/450] BEST^3_def.. vs SOVEREIGN... (throughput.txt) -> DRAW..
+[348/450] SOVEREIGN... vs BEST^3_def.. (throughput.txt) -> DRAW..
+[349/450] ultimate_c.. vs BEST-IronC.. (throughput.txt) -> ultimate_c..
+[350/450] BEST-IronC.. vs ultimate_c.. (throughput.txt) -> ultimate_c..
+[351/450] SOVEREIGN... vs BEST^2-cha.. (throughput.txt) -> DRAW..
+[352/450] BEST^2-cha.. vs SOVEREIGN... (throughput.txt) -> DRAW..
+[353/450] champion_s.. vs BEST-IronC.. (throughput.txt) -> champion_s..
+[354/450] BEST-IronC.. vs champion_s.. (throughput.txt) -> champion_s..
+[355/450] BEST^3_def.. vs BEST-IronC.. (throughput.txt) -> BEST^3_def..
+[356/450] BEST-IronC.. vs BEST^3_def.. (throughput.txt) -> BEST^3_def..
+[357/450] BEST^2-cha.. vs BEST-IronC.. (throughput.txt) -> BEST^2-cha..
+[358/450] BEST-IronC.. vs BEST^2-cha.. (throughput.txt) -> BEST^2-cha..
+[359/450] SOVEREIGN... vs BEST-IronC.. (throughput.txt) -> SOVEREIGN...
+[360/450] BEST-IronC.. vs SOVEREIGN... (throughput.txt) -> SOVEREIGN...
+[361/450] super_rush.. vs aggressive.. (v1.txt) -> aggressive..
+[362/450] aggressive.. vs super_rush.. (v1.txt) -> aggressive..
+[363/450] turtle_def.. vs aggressive.. (v1.txt) -> aggressive..
+[364/450] aggressive.. vs turtle_def.. (v1.txt) -> aggressive..
+[365/450] aggressive.. vs champion_s.. (v1.txt) -> ERROR..
+[366/450] champion_s.. vs aggressive.. (v1.txt) -> ERROR..
+[367/450] ultimate_c.. vs aggressive.. (v1.txt) -> ultimate_c..
+[368/450] aggressive.. vs ultimate_c.. (v1.txt) -> ultimate_c..
+[369/450] aggressive.. vs BEST^3_def.. (v1.txt) -> BEST^3_def..
+[370/450] BEST^3_def.. vs aggressive.. (v1.txt) -> BEST^3_def..
+[371/450] aggressive.. vs BEST^2-cha.. (v1.txt) -> BEST^2-cha..
+[372/450] BEST^2-cha.. vs aggressive.. (v1.txt) -> BEST^2-cha..
+[373/450] super_rush.. vs turtle_def.. (v1.txt) -> turtle_def..
+[374/450] turtle_def.. vs super_rush.. (v1.txt) -> turtle_def..
+[375/450] aggressive.. vs SOVEREIGN... (v1.txt) -> SOVEREIGN...
+[376/450] SOVEREIGN... vs aggressive.. (v1.txt) -> SOVEREIGN...
+[377/450] super_rush.. vs ultimate_c.. (v1.txt) -> ultimate_c..
+[378/450] ultimate_c.. vs super_rush.. (v1.txt) -> ultimate_c..
+[379/450] super_rush.. vs champion_s.. (v1.txt) -> champion_s..
+[380/450] champion_s.. vs super_rush.. (v1.txt) -> champion_s..
+[381/450] super_rush.. vs BEST^3_def.. (v1.txt) -> BEST^3_def..
+[382/450] BEST^3_def.. vs super_rush.. (v1.txt) -> BEST^3_def..
+[383/450] BEST-IronC.. vs aggressive.. (v1.txt) -> aggressive..
+[384/450] aggressive.. vs BEST-IronC.. (v1.txt) -> aggressive..
+[385/450] super_rush.. vs BEST^2-cha.. (v1.txt) -> BEST^2-cha..
+[386/450] BEST^2-cha.. vs super_rush.. (v1.txt) -> BEST^2-cha..
+[387/450] best_solo_.. vs aggressive.. (v1.txt) -> aggressive..
+[388/450] aggressive.. vs best_solo_.. (v1.txt) -> aggressive..
+[389/450] super_rush.. vs SOVEREIGN... (v1.txt) -> SOVEREIGN...
+[390/450] SOVEREIGN... vs super_rush.. (v1.txt) -> SOVEREIGN...
+[391/450] turtle_def.. vs ultimate_c.. (v1.txt) -> ultimate_c..
+[392/450] ultimate_c.. vs turtle_def.. (v1.txt) -> ultimate_c..
+[393/450] super_rush.. vs BEST-IronC.. (v1.txt) -> BEST-IronC..
+[394/450] champion_s.. vs turtle_def.. (v1.txt) -> champion_s..
+[395/450] turtle_def.. vs champion_s.. (v1.txt) -> champion_s..
+[396/450] BEST-IronC.. vs super_rush.. (v1.txt) -> BEST-IronC..
+[397/450] turtle_def.. vs BEST^3_def.. (v1.txt) -> BEST^3_def..
+[398/450] BEST^3_def.. vs turtle_def.. (v1.txt) -> BEST^3_def..
+[399/450] BEST^2-cha.. vs turtle_def.. (v1.txt) -> BEST^2-cha..
+[400/450] turtle_def.. vs SOVEREIGN... (v1.txt) -> SOVEREIGN...
+[401/450] SOVEREIGN... vs turtle_def.. (v1.txt) -> SOVEREIGN...
+[402/450] turtle_def.. vs BEST^2-cha.. (v1.txt) -> BEST^2-cha..
+[403/450] super_rush.. vs best_solo_.. (v1.txt) -> best_solo_..
+[404/450] best_solo_.. vs super_rush.. (v1.txt) -> best_solo_..
+[405/450] turtle_def.. vs BEST-IronC.. (v1.txt) -> BEST-IronC..
+[406/450] BEST-IronC.. vs turtle_def.. (v1.txt) -> BEST-IronC..
+[407/450] best_solo_.. vs turtle_def.. (v1.txt) -> turtle_def..
+[408/450] turtle_def.. vs best_solo_.. (v1.txt) -> turtle_def..
+[409/450] best_solo_.. vs ultimate_c.. (v1.txt) -> ultimate_c..
+[410/450] best_solo_.. vs champion_s.. (v1.txt) -> champion_s..
+[411/450] champion_s.. vs best_solo_.. (v1.txt) -> champion_s..
+[412/450] ultimate_c.. vs best_solo_.. (v1.txt) -> ultimate_c..
+[413/450] best_solo_.. vs BEST^3_def.. (v1.txt) -> BEST^3_def..
+[414/450] BEST^3_def.. vs best_solo_.. (v1.txt) -> BEST^3_def..
+[415/450] champion_s.. vs ultimate_c.. (v1.txt) -> ultimate_c..
+[416/450] ultimate_c.. vs champion_s.. (v1.txt) -> ultimate_c..
+[417/450] best_solo_.. vs BEST^2-cha.. (v1.txt) -> BEST^2-cha..
+[418/450] BEST^2-cha.. vs best_solo_.. (v1.txt) -> BEST^2-cha..
+[419/450] ultimate_c.. vs BEST^3_def.. (v1.txt) -> ultimate_c..
+[420/450] BEST^3_def.. vs ultimate_c.. (v1.txt) -> ultimate_c..
+[421/450] ultimate_c.. vs BEST^2-cha.. (v1.txt) -> ultimate_c..
+[422/450] BEST^2-cha.. vs ultimate_c.. (v1.txt) -> ultimate_c..
+[423/450] ultimate_c.. vs SOVEREIGN... (v1.txt) -> ultimate_c..
+[424/450] SOVEREIGN... vs ultimate_c.. (v1.txt) -> ultimate_c..
+[425/450] ultimate_c.. vs BEST-IronC.. (v1.txt) -> ultimate_c..
+[426/450] BEST-IronC.. vs ultimate_c.. (v1.txt) -> ultimate_c..
+[427/450] champion_s.. vs BEST^3_def.. (v1.txt) -> champion_s..
+[428/450] best_solo_.. vs SOVEREIGN... (v1.txt) -> SOVEREIGN...
+[429/450] BEST^3_def.. vs champion_s.. (v1.txt) -> champion_s..
+[430/450] SOVEREIGN... vs best_solo_.. (v1.txt) -> SOVEREIGN...
+[431/450] BEST^2-cha.. vs champion_s.. (v1.txt) -> DRAW..
+[432/450] champion_s.. vs BEST^2-cha.. (v1.txt) -> DRAW..
+[433/450] BEST^3_def.. vs BEST^2-cha.. (v1.txt) -> BEST^2-cha..
+[434/450] SOVEREIGN... vs champion_s.. (v1.txt) -> DRAW..
+[435/450] BEST-IronC.. vs champion_s.. (v1.txt) -> champion_s..
+[436/450] champion_s.. vs SOVEREIGN... (v1.txt) -> DRAW..
+[437/450] champion_s.. vs BEST-IronC.. (v1.txt) -> champion_s..
+[438/450] BEST^2-cha.. vs BEST^3_def.. (v1.txt) -> BEST^2-cha..
+[439/450] BEST^3_def.. vs SOVEREIGN... (v1.txt) -> SOVEREIGN...
+[440/450] SOVEREIGN... vs BEST^3_def.. (v1.txt) -> SOVEREIGN...
+[441/450] best_solo_.. vs BEST-IronC.. (v1.txt) -> best_solo_..
+[442/450] BEST-IronC.. vs best_solo_.. (v1.txt) -> best_solo_..
+[443/450] SOVEREIGN... vs BEST^2-cha.. (v1.txt) -> DRAW..
+[444/450] BEST^2-cha.. vs SOVEREIGN... (v1.txt) -> DRAW..
+[445/450] BEST^3_def.. vs BEST-IronC.. (v1.txt) -> BEST^3_def..
+[446/450] BEST-IronC.. vs BEST^3_def.. (v1.txt) -> BEST^3_def..
+[447/450] SOVEREIGN... vs BEST-IronC.. (v1.txt) -> SOVEREIGN...
+[448/450] BEST^2-cha.. vs BEST-IronC.. (v1.txt) -> BEST^2-cha..
+[449/450] BEST-IronC.. vs SOVEREIGN... (v1.txt) -> SOVEREIGN...
+[450/450] BEST-IronC.. vs BEST^2-cha.. (v1.txt) -> BEST^2-cha..
+
+Tournament Completed in 106.7s
+
+================================================================================
+EXTENDED TOURNAMENT REPORT
+================================================================================
+
+LEADERBOARD
+--------------------------------------------------------------------------------
+BOT NAME                       | PTS   | W   L   D   | Win Rate
+--------------------------------------------------------------------------------
+BEST^2-champion_bot.py         | 167   | 43  6   38  | 49.4%
+SOVEREIGN.py                   | 167   | 47  14  26  | 54.0%
+BEST^3_defense_bot.py          | 163   | 43  11  34  | 48.9%
+ultimate_champion_bot.py       | 162   | 44  12  30  | 51.2%
+champion_sabotage_optimized.py | 130   | 32  11  34  | 41.6%
+aggressive_stealer_bot.py      | 125   | 35  29  20  | 41.7%
+best_solo_bot_v1.py            | 124   | 34  32  22  | 38.6%
+turtle_defense_bot.py          | 94    | 30  56  4   | 33.3%
+super_rush_bot.py              | 36    | 12  71  0   | 14.5%
+BEST-IronChefOptimized.py      | 18    | 6   84  0   | 6.7%
+
+SIDE BALANCE (Red vs Blue)
+--------------------------------------------------------------------------------
+BOT NAME                       | Red WR     | Blue WR   
+--------------------------------------------------------------------------------
+BEST^2-champion_bot.py         |  48.8%     |  50.0%
+SOVEREIGN.py                   |  52.3%     |  55.8%
+BEST^3_defense_bot.py          |  47.7%     |  50.0%
+ultimate_champion_bot.py       |  51.2%     |  51.2%
+champion_sabotage_optimized.py |  41.0%     |  42.1%
+aggressive_stealer_bot.py      |  40.5%     |  42.9%
+best_solo_bot_v1.py            |  37.2%     |  40.0%
+turtle_defense_bot.py          |  33.3%     |  33.3%
+super_rush_bot.py              |  14.3%     |  14.6%
+BEST-IronChefOptimized.py      |   6.7%     |   6.7%
+
+MAP WIN RATES
+--------------------------------------------------------------------------------
+BOT NAME                 chopped.  orbit.tx  small_wa  throughp  v1.txt    
+--------------------------------------------------------------------------------
+BEST^2-champion_bot.py    44.4%     33.3%     60.0%     44.4%     66.7%    
+SOVEREIGN.py             100.0%     33.3%     20.0%     44.4%     66.7%    
+BEST^3_defense_bot.py     44.4%     33.3%     68.8%     44.4%     55.6%    
+ultimate_champion_bot.py  44.4%     33.3%     28.6%     44.4%    100.0%    
+champion_sabotage_optimi  37.5%     33.3%     22.2%     44.4%     62.5%    
+aggressive_stealer_bot.p  44.4%     33.3%     50.0%     33.3%     50.0%    
+best_solo_bot_v1.py        0.0%     33.3%    100.0%     44.4%     22.2%    
+turtle_defense_bot.py     33.3%     22.2%     66.7%     22.2%     22.2%    
+super_rush_bot.py         25.0%     11.1%     30.8%     11.1%      0.0%    
+BEST-IronChefOptimized.p  11.1%      0.0%      0.0%      0.0%     22.2%    
+
+HEAD-TO-HEAD MATRIX (Row vs Column: Win/Loss/Draw)
+------------------------------------------------------------------------------------------------------------------------
+                          | BEST^2 | SOVERE | BEST^3 | ultima | champi | aggres | best_s | turtle | super_ | BEST-I
+------------------------------------------------------------------------------------------------------------------------
+BEST^2-champion_bot.py    | -      | 2-2-6  | 2-0-8  | 2-2-6  | 2-0-8  | 5-0-4  | 4-2-4  | 8-0-2  | 8-0-0  | 10-0-0 | 
+SOVEREIGN.py              | 2-2-6  | -      | 4-2-4  | 2-4-4  | 2-0-6  | 6-2-2  | 4-1-4  | 8-2-0  | 9-1-0  | 10-0-0 | 
+BEST^3_defense_bot.py     | 0-2-8  | 2-4-4  | -      | 2-2-6  | 1-2-6  | 6-0-4  | 4-1-4  | 8-0-2  | 10-0-0 | 10-0-0 | 
+ultimate_champion_bot.py  | 2-2-6  | 4-2-4  | 2-2-6  | -      | 2-0-6  | 4-1-4  | 4-2-4  | 8-2-0  | 8-1-0  | 10-0-0 | 
+champion_sabotage_optimi  | 0-2-8  | 0-2-6  | 2-1-6  | 0-2-6  | -      | 2-0-4  | 4-2-4  | 8-2-0  | 6-0-0  | 10-0-0 | 
+aggressive_stealer_bot.p  | 0-5-4  | 2-6-2  | 0-6-4  | 1-4-4  | 0-2-4  | -      | 4-4-2  | 8-2-0  | 10-0-0 | 10-0-0 | 
+best_solo_bot_v1.py       | 2-4-4  | 1-4-4  | 1-4-4  | 2-4-4  | 2-4-4  | 4-4-2  | -      | 6-4-0  | 8-2-0  | 8-2-0  | 
+turtle_defense_bot.py     | 0-8-2  | 2-8-0  | 0-8-2  | 2-8-0  | 2-8-0  | 2-8-0  | 4-6-0  | -      | 10-0-0 | 8-2-0  | 
+super_rush_bot.py         | 0-8-0  | 1-9-0  | 0-10-0 | 1-8-0  | 0-6-0  | 0-10-0 | 2-8-0  | 0-10-0 | -      | 8-2-0  | 
+BEST-IronChefOptimized.p  | 0-10-0 | 0-10-0 | 0-10-0 | 0-10-0 | 0-10-0 | 0-10-0 | 2-8-0  | 2-8-0  | 2-8-0  | -      | 

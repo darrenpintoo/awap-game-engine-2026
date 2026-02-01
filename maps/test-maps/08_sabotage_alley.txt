@@ -1,8 +1,3 @@
-# MAP: sabotage_alley.txt
-# DESCRIPTION: 16x16 map where enemy sabotage has maximum impact
-# TESTS: Sabotage vulnerability, defensive cooking, counter management
-# SIZE: 16x16 (shared counters, exposed cooking areas)
-# NOTE: Single shared cooking area forces interaction, making sabotage impactful
 
 ################
 #$.............#

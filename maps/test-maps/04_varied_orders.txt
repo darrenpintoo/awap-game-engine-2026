@@ -1,8 +1,3 @@
-# MAP: varied_orders.txt
-# DESCRIPTION: 12x12 map with highly varied order complexity and timing
-# TESTS: Order prioritization, dynamic decision-making, reward optimization
-# SIZE: 12x12 (medium compact)
-
 ############
 #$....R...U#
 #.B......B.#
