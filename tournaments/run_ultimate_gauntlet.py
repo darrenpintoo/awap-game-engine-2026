@@ -34,6 +34,7 @@ def get_path(rel_path):
 HERO_BOTS = {
     "Hero_UltimateChampion": get_path("bots/dpinto/ultimate_champion_bot.py"),
     "Hero_BEST^3": get_path("bots/dpinto/BEST^3_defense_bot.py"),
+    "Hero_BEST^2": get_path("bots/hareshm/BEST^2-champion_bot.py"),
     "Hero_Sovereign": get_path("bots/hareshm/SOVEREIGN.py")
 }
 
@@ -47,16 +48,16 @@ MAPS_OFFICIAL = [
 ]
 
 MAPS_TEST = [
-    "maps/test-maps/01_tiny_sprint.txt",
-    "maps/test-maps/02_balanced_medium.txt",
-    "maps/test-maps/03_grand_kitchen.txt",
-    "maps/test-maps/04_varied_orders.txt",
-    "maps/test-maps/05_chokepoint_chaos.txt",
-    "maps/test-maps/06_resource_crunch.txt",
-    "maps/test-maps/07_pressure_cooker.txt",
-    "maps/test-maps/08_sabotage_alley.txt",
-    "maps/test-maps/09_remote_pantry.txt",
-    "maps/test-maps/10_burn_risk.txt"
+    "maps/test-maps-revised-for-fairness/01_tiny_sprint.txt",
+    "maps/test-maps-revised-for-fairness/02_balanced_medium.txt",
+    "maps/test-maps-revised-for-fairness/03_grand_kitchen.txt",
+    "maps/test-maps-revised-for-fairness/04_varied_orders.txt",
+    "maps/test-maps-revised-for-fairness/05_parallel_paths.txt",
+    "maps/test-maps-revised-for-fairness/06_high_throughput.txt",
+    "maps/test-maps-revised-for-fairness/07_tight_timing.txt",
+    "maps/test-maps-revised-for-fairness/08_resource_sharing.txt",
+    "maps/test-maps-revised-for-fairness/09_sabotage_ready.txt",
+    "maps/test-maps-revised-for-fairness/10_endgame_crunch.txt"
 ]
 
 # Output Path

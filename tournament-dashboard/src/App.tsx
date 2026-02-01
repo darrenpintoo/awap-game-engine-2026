@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import {
   XAxis, YAxis, Tooltip, ResponsiveContainer,
   CartesianGrid, AreaChart, Area, BarChart, Bar
@@ -8,9 +8,10 @@ import {
   Search, Zap, Users,
   Map as MapIcon, Home,
   Filter, BarChart3, Activity, List, Shield, Sword,
-  Trophy, Flame, Clock, Award, DollarSign
+  Trophy, Flame, Clock, Award, DollarSign, Upload, Database
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+
 
 // --- Types ---
 interface Match {
@@ -52,17 +53,22 @@ interface BotStats {
 }
 
 // --- Constants ---
-const HEROES = ["Hero_UltimateChampion", "Hero_BEST^3", "Hero_Sovereign"];
+// Static heroes list for display - will also detect any Hero_ prefixed bots dynamically
+const STATIC_HEROES = ["Hero_UltimateChampion", "Hero_BEST^3", "Hero_Sovereign", "Hero_BEST-Hydra", "Hero_BEST^2"];
 const HERO_COLORS: Record<string, string> = {
   "Hero_UltimateChampion": "#3b82f6",
   "Hero_BEST^3": "#8b5cf6",
   "Hero_Sovereign": "#10b981",
+  "Hero_BEST-Hydra": "#f59e0b",
+  "Hero_BEST^2": "#ec4899",
 };
 
 // --- Utils ---
 const cleanName = (n: string) => n.replace("Hero_", "").replace(".py", "").replace(/_/g, " ");
 const isHero = (n: string) => n.startsWith("Hero_");
 const safeDiv = (n: number, d: number) => d > 0 ? (n / d) * 100 : 0;
+const getHeroColor = (name: string) => HERO_COLORS[name] || "#6366f1";
+
 
 function App() {
   const [data, setData] = useState<Data | null>(null);
@@ -71,8 +77,40 @@ function App() {
   const [selectedBot, setSelectedBot] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [matchFilter, setMatchFilter] = useState({ bot: "", map: "", outcome: "all", sort: "new" });
+  const [dataSource, setDataSource] = useState<'live' | 'file'>('live');
+  const [fileName, setFileName] = useState<string>('');
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Handle file upload
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const json = JSON.parse(event.target?.result as string);
+        setData(json);
+        setDataSource('file');
+        setFileName(file.name);
+      } catch (err) {
+        console.error('Invalid JSON file:', err);
+        alert('Invalid JSON file. Please select a valid tournament data file.');
+      }
+    };
+    reader.readAsText(file);
+  };
+
+  // Reset to live data
+  const resetToLive = () => {
+    setDataSource('live');
+    setFileName('');
+  };
 
   useEffect(() => {
+    // Only auto-fetch if in live mode
+    if (dataSource !== 'live') return;
+
     const fetchData = async () => {
       try {
         const res = await fetch('/data.json?' + new Date().getTime());
@@ -83,7 +121,8 @@ function App() {
     fetchData();
     const interval = setInterval(fetchData, 2000);
     return () => clearInterval(interval);
-  }, []);
+  }, [dataSource]);
+
 
   const { playerStats, timeline, mapStats, globalStats, highScores } = useMemo(() => {
     if (!data) return {
@@ -103,12 +142,14 @@ function App() {
     const sortedByScore = [...data.matches].sort((a, b) => Math.max(b.red_score, b.blue_score) - Math.max(a.red_score, a.blue_score));
 
     chronological.forEach((m, idx) => {
-      // Timeline
-      if (idx % 25 === 0) {
+      // Timeline - track cumulative win rate for heroes
+      if (idx % 25 === 0 && idx > 0) {
         const snap: any = { name: idx };
-        HEROES.forEach(h => {
+        STATIC_HEROES.forEach((h: string) => {
           const hst = s[h];
-          snap[cleanName(h)] = hst && hst.total > 0 ? (hst.score / hst.total) : 0;
+          // Calculate win rate excluding errors
+          const validGames = hst ? (hst.total - hst.e) : 0;
+          snap[cleanName(h)] = validGames > 0 ? ((hst.w / validGames) * 100) : 0;
         });
         tl.push(snap);
       }
@@ -226,10 +267,44 @@ function App() {
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <div className="w-64 h-1.5 bg-white/5 rounded-full overflow-hidden border border-white/5">
+            {/* Data Source Controls */}
+            <div className="flex items-center gap-2">
+              {dataSource === 'file' ? (
+                <div className="flex items-center gap-2 px-3 py-1.5 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+                  <Database size={12} className="text-amber-400" />
+                  <span className="text-[10px] font-bold text-amber-300">{fileName}</span>
+                  <button
+                    onClick={resetToLive}
+                    className="text-[10px] font-black text-amber-400 hover:text-amber-200 underline ml-2"
+                  >
+                    ← Live
+                  </button>
+                </div>
+              ) : (
+                <div className="flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/30 rounded-lg">
+                  <Activity size={12} className="text-emerald-400 animate-pulse" />
+                  <span className="text-[10px] font-bold text-emerald-300">Live Data</span>
+                </div>
+              )}
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileUpload}
+                accept=".json"
+                className="hidden"
+              />
+              <button
+                onClick={() => fileInputRef.current?.click()}
+                className="flex items-center gap-2 px-3 py-1.5 bg-indigo-500/10 border border-indigo-500/30 rounded-lg hover:bg-indigo-500/20 transition-colors"
+              >
+                <Upload size={12} className="text-indigo-400" />
+                <span className="text-[10px] font-bold text-indigo-300">Load JSON</span>
+              </button>
+            </div>
+            <div className="w-48 h-1.5 bg-white/5 rounded-full overflow-hidden border border-white/5">
               <motion.div initial={{ width: 0 }} animate={{ width: `${progress}%` }} className="h-full bg-indigo-500 shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
             </div>
-            <span className="text-[10px] font-black text-slate-600 font-mono">{progress.toFixed(1)}% Complete</span>
+            <span className="text-[10px] font-black text-slate-600 font-mono">{progress.toFixed(1)}%</span>
           </div>
         </header>
 
@@ -239,7 +314,7 @@ function App() {
               <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-8">
                 {/* Hero Power Widgets */}
                 <div className="grid grid-cols-4 gap-6">
-                  {HEROES.map(h => <HeroDetailCard key={h} name={h} stats={playerStats[h]} />)}
+                  {STATIC_HEROES.filter(h => playerStats[h]).map((h: string) => <HeroDetailCard key={h} name={h} stats={playerStats[h]} />)}
                   <div className="bg-indigo-600/10 border border-indigo-500/20 p-8 rounded-[40px] flex flex-col justify-center items-center text-center">
                     <Flame size={32} className="text-indigo-400 mb-4" />
                     <h3 className="text-lg font-black text-white uppercase leading-none">Gauntlet Pulse</h3>
@@ -277,16 +352,17 @@ function App() {
                     {/* Dominance Chart */}
                     <div className="bg-white/[0.02] border border-white/5 rounded-[40px] p-8">
                       <div className="flex justify-between items-center mb-8">
-                        <h3 className="text-[10px] font-black uppercase text-slate-500 tracking-widest flex items-center gap-2"><TrendingUp size={14} className="text-indigo-500" /> Dominance Trajectory</h3>
+                        <h3 className="text-[10px] font-black uppercase text-slate-500 tracking-widest flex items-center gap-2"><TrendingUp size={14} className="text-indigo-500" /> Hero Win Rate Over Time</h3>
+                        <span className="text-[9px] text-slate-600 font-bold uppercase">Cumulative % as matches progress</span>
                       </div>
                       <div className="h-[280px]">
                         <ResponsiveContainer width="100%" height="100%">
                           <AreaChart data={timeline}>
                             <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255,255,255,0.02)" />
                             <XAxis dataKey="name" hide />
-                            <YAxis hide />
-                            <Tooltip contentStyle={{ background: '#020617', border: 'none', borderRadius: '12px', fontSize: '10px' }} />
-                            {HEROES.map(h => (
+                            <YAxis domain={[0, 100]} tick={{ fontSize: 9, fill: '#475569' }} axisLine={false} tickLine={false} tickFormatter={(v) => `${v}%`} width={40} />
+                            <Tooltip contentStyle={{ background: '#020617', border: 'none', borderRadius: '12px', fontSize: '10px' }} formatter={(v) => [`${Number(v || 0).toFixed(1)}%`, '']} />
+                            {STATIC_HEROES.filter(h => playerStats[h]).map((h: string) => (
                               <Area key={h} type="monotone" dataKey={cleanName(h)} stroke={HERO_COLORS[h]} fill={HERO_COLORS[h]} fillOpacity={0.03} strokeWidth={2.5} dot={false} />
                             ))}
                           </AreaChart>
