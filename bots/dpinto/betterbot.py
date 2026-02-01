@@ -234,6 +234,16 @@ class BotPlayer:
         self.initialized = True
         
         # Log detected map features
+        # Scan map for Boxes (which we treat as counters)
+        my_map = controller.get_map(team)
+        width = my_map.width
+        height = my_map.height
+        for x in range(width):
+            for y in range(height):
+                tile = controller.get_tile(team, x, y)
+                if tile and tile.tile_name == "BOX":
+                    self.counters.append((x, y))
+                    
         self._log(f"MAP INIT: counters={self.counters}")
         self._log(f"MAP INIT: cookers={self.cookers}")
         self._log(f"MAP INIT: shops={self.shops}")
@@ -649,7 +659,9 @@ class BotPlayer:
                             # Update the goal's stored_items
                             if self.goal:
                                 stored = self.goal.get('stored_items', {})
-                                stored[ingredient] = counter
+                                if ingredient not in stored:
+                                    stored[ingredient] = []
+                                stored[ingredient].append(counter)
                                 self.goal['stored_items'] = stored
                             self.inactive_bot_storage = None
                             self._swap_control()
@@ -806,8 +818,9 @@ class BotPlayer:
         # Earliest completion turn
         completion_turn = earliest_submit + total_time
         
-        # Only return impossible if WAY over (give some buffer for luck)
-        if completion_turn > expires + 5:
+        # Only return impossible if WAY over (give broad buffer for luck/support)
+        # On small_wall, orders are tight (50 turns), so we must try even if check says 51
+        if completion_turn > expires + 25:
             return 99999
         
         return completion_turn
@@ -1010,9 +1023,20 @@ class BotPlayer:
             # First priority: chop+cook items (MEAT)
             if chop_cook:
                 ing = chop_cook[0]
-                if ing in stored_items:
+                if ing in stored_items and stored_items[ing]:
                     # Already stored - go pick it up for cooking
-                    self._log(f"  INIT: {ing} already stored at {stored_items[ing]}, picking up")
+                    # Pick the nearest one
+                    
+                    # Remove from stored list since we are picking it up
+                    # We'll just remove the first one for now
+                    counter = None
+                    if stored_items[ing]:
+                        counter = stored_items[ing].pop(0)
+                        if not stored_items[ing]:
+                            del stored_items[ing]
+                    self.goal['stored_items'] = stored_items
+                    
+                    self._log(f"  INIT: {ing} already stored at {counter}, picking up")
                     self.goal['current_ingredient'] = ing
                     self.goal['state'] = 'PICKUP_STORED_FOR_COOK'
                 else:
@@ -1024,8 +1048,13 @@ class BotPlayer:
             # Second: chop-only items (ONIONS)
             if chop_only:
                 ing = chop_only[0]
-                if ing in stored_items:
-                    self._log(f"  INIT: {ing} already stored at {stored_items[ing]}, picking up")
+                if ing in stored_items and stored_items[ing]:
+                    counter = stored_items[ing].pop(0)
+                    if not stored_items[ing]:
+                        del stored_items[ing]
+                    self.goal['stored_items'] = stored_items
+
+                    self._log(f"  INIT: {ing} already stored at {counter}, picking up")
                     self.goal['current_ingredient'] = ing
                     self.goal['state'] = 'PICKUP_STORED_FOR_COOK'
                 else:
@@ -1037,9 +1066,13 @@ class BotPlayer:
             # Third: cook-only items (EGG)
             if cook_only:
                 ing = cook_only[0]
-                if ing in stored_items:
-                    # Already stored - go pick it up for cooking
-                    self._log(f"  INIT: {ing} already stored at {stored_items[ing]}, picking up")
+                if ing in stored_items and stored_items[ing]:
+                    counter = stored_items[ing].pop(0)
+                    if not stored_items[ing]:
+                        del stored_items[ing]
+                    self.goal['stored_items'] = stored_items
+
+                    self._log(f"  INIT: {ing} already stored at {counter}, picking up")
                     self.goal['current_ingredient'] = ing
                     self.goal['state'] = 'PICKUP_STORED_FOR_COOK'
                 else:
@@ -1099,7 +1132,13 @@ class BotPlayer:
                     return False
                 
                 # Need to place for chopping
-                exclude = set(self.goal.get('stored_items', {}).values())
+                # Flatten exclude list
+                exclude = set()
+                for locs in self.goal.get('stored_items', {}).values():
+                    if isinstance(locs, list):
+                        exclude.update(locs)
+                    else:
+                        exclude.add(locs)
                 if self.goal.get('plate_counter'):
                     exclude.add(self.goal['plate_counter'])
                 
@@ -1149,12 +1188,16 @@ class BotPlayer:
                 self.goal['state'] = 'INIT'
                 return False
             
-            stored_pos = stored_items[ing]
+            stored_list = stored_items[ing]
             
             # Check if we already picked it up
             if holding and holding.get('type') == 'Food' and holding.get('food_name') == ing:
                 # Already holding it - remove from stored and go to START_COOK
-                del stored_items[ing]
+                # Remove one instance (the one we presumably picked up)
+                if stored_list:
+                    stored_list.pop(0)
+                    if not stored_list:
+                        del stored_items[ing]
                 self.goal['stored_items'] = stored_items
                 self.goal['state'] = 'START_COOK'
                 self._log(f"  PICKUP_STORED: Already holding {ing}, going to START_COOK")
@@ -1175,14 +1218,31 @@ class BotPlayer:
             
             # Go pick it up
             if self._is_blocked(controller, self.active_bot_id, stored_pos, team):
-                return True
-            if self._move_toward(controller, self.active_bot_id, stored_pos, team):
+               stored_pos = stored_list[0]
+            
+            # Navigate to it
+            bot_pos = self._get_bot_pos(controller, self.active_bot_id)
+            if self._chebyshev_dist(bot_pos, stored_pos) <= 1:
+                # If it's a Box, and empty, we can't pickup?
+                # But we only put in stored_items if we placed something.
                 if controller.pickup(self.active_bot_id, stored_pos[0], stored_pos[1]):
                     self._log(f"  PICKUP_STORED: Picked up {ing} from {stored_pos}")
-                    del stored_items[ing]
+                    # Remove from stored
+                    stored_list.pop(0)
+                    if not stored_list:
+                        del stored_items[ing]
                     self.goal['stored_items'] = stored_items
                     self.goal['state'] = 'START_COOK'
-            return False
+                    return True
+                else:
+                    self._log(f"  PICKUP_STORED: pickup() failed at {stored_pos}, removing from memory")
+                    # Assume it's gone/taken
+                    stored_list.pop(0)
+                    if not stored_list:
+                        del stored_items[ing]
+                    self.goal['stored_items'] = stored_items
+                    # Retry
+                    return True
         
         # === STATE: START_COOK ===
         if state == 'START_COOK':
@@ -1311,7 +1371,12 @@ class BotPlayer:
             if holding and holding.get('type') == 'Food' and holding.get('food_name') == ing:
                 if holding.get('chopped'):
                     # Chopped - store on counter
-                    exclude = set(self.goal.get('stored_items', {}).values())
+                    exclude = set()
+                    for locs in self.goal.get('stored_items', {}).values():
+                        if isinstance(locs, list):
+                            exclude.update(locs)
+                        else:
+                            exclude.add(locs)
                     if self.goal.get('plate_counter'):
                         exclude.add(self.goal['plate_counter'])
                     
@@ -1325,7 +1390,9 @@ class BotPlayer:
                         if controller.place(self.active_bot_id, counter[0], counter[1]):
                             # Track where we stored it
                             stored = self.goal.get('stored_items', {})
-                            stored[ing] = counter
+                            if ing not in stored:
+                                stored[ing] = []
+                            stored[ing].append(counter)
                             self.goal['stored_items'] = stored
                             
                             # Remove from queue
@@ -1339,7 +1406,12 @@ class BotPlayer:
                     return False
                 
                 # Need to place for chopping
-                exclude = set(self.goal.get('stored_items', {}).values())
+                exclude = set()
+                for locs in self.goal.get('stored_items', {}).values():
+                    if isinstance(locs, list):
+                        exclude.update(locs)
+                    else:
+                        exclude.add(locs)
                 if self.goal.get('plate_counter'):
                     exclude.add(self.goal['plate_counter'])
                 
@@ -1427,11 +1499,14 @@ class BotPlayer:
                             if self._chebyshev_dist(bot_pos, counter) <= 1:
                                 if controller.place(self.active_bot_id, counter[0], counter[1]):
                                     stored = self.goal.get('stored_items', {})
-                                    stored[food_name] = counter
+                                    if food_name not in stored:
+                                        stored[food_name] = []
+                                    stored[food_name].append(counter)
                                     self.goal['stored_items'] = stored
                             else:
                                 self._move_toward(controller, self.active_bot_id, counter, team)
                             return False
+
                 else:
                     # Holding something non-food, non-plate - trash it
                     self._log(f"  ENSURE_PLATE: Holding unknown {holding_type}, trashing")
@@ -1473,7 +1548,12 @@ class BotPlayer:
                 self.goal['state'] = 'ENSURE_PLATE'
                 return False
             
-            exclude = set(self.goal.get('stored_items', {}).values())
+            exclude = set()
+            for locs in self.goal.get('stored_items', {}).values():
+                if isinstance(locs, list):
+                    exclude.update(locs)
+                else:
+                    exclude.add(locs)
             counter = self._get_free_counter(controller, team, bot_pos, exclude)
             if counter is None:
                 self._log(f"  PLACE_PLATE: No free counter found, trashing plate")
@@ -1571,20 +1651,34 @@ class BotPlayer:
             # Now holding is None - we can pick up or buy things
             
             # Check for stored items we can pick up
+            # Check for stored items we can pick up
             stored_items = self.goal.get('stored_items', {})
-            for ing, counter_pos in list(stored_items.items()):
+            for ing, locs in list(stored_items.items()):
                 if ing in missing:
-                    tile = controller.get_tile(team, counter_pos[0], counter_pos[1])
-                    if tile and isinstance(getattr(tile, 'item', None), Food):
-                        if self._is_blocked(controller, self.active_bot_id, counter_pos, team):
-                            return True
-                        if self._move_toward(controller, self.active_bot_id, counter_pos, team):
-                            controller.pickup(self.active_bot_id, counter_pos[0], counter_pos[1])
-                            del stored_items[ing]
-                        return False
-                    else:
-                        # Item gone from counter
-                        del stored_items[ing]
+                    # Check all locations
+                    # Use a copy since we might modify
+                    for counter_pos in list(locs):
+                        tile = controller.get_tile(team, counter_pos[0], counter_pos[1])
+                        if tile and isinstance(getattr(tile, 'item', None), Food):
+                            if self._is_blocked(controller, self.active_bot_id, counter_pos, team):
+                                continue # Try next location
+                            if self._move_toward(controller, self.active_bot_id, counter_pos, team):
+                                controller.pickup(self.active_bot_id, counter_pos[0], counter_pos[1])
+                                # Remove specific location
+                                if counter_pos in locs:
+                                    locs.remove(counter_pos)
+                                if not locs:
+                                    del stored_items[ing]
+                                self.goal['stored_items'] = stored_items
+                            return False
+                        else:
+                            # Item gone from counter - cleanup
+                            if counter_pos in locs:
+                                locs.remove(counter_pos)
+                            if not locs:
+                                if ing in stored_items:
+                                    del stored_items[ing]
+                            self.goal['stored_items'] = stored_items
             
             # Check for cooked items ready to take
             cooking_items = self.goal.get('cooking_items', {})
@@ -1837,11 +1931,100 @@ class BotPlayer:
         
         return best_bot
     
-    def _do_preparation(self, controller: RobotController, team: Team) -> None:
-        """Do useful preparation work when no orders are available.
+    def _do_active_support(self, controller: RobotController, team: Team) -> None:
+        """Have the inactive bot proactively fetch ingredients."""
+        if self.inactive_bot_id is None or self.goal is None:
+            return
+            
+        bot_id = self.inactive_bot_id
+        bot = controller.get_bot_state(bot_id)
+        bot_pos = (bot['x'], bot['y'])
+        holding = bot.get('holding')
         
-        MINIMAL preparation - avoid wasting money and blocking resources.
-        """
+        # 1. If holding something useful, bring it close
+        if holding:
+            if holding.get('type') == 'Food':
+                food_name = holding.get('food_name')
+                # Check if needed
+                needed = False
+                for q in ['chop_cook_queue', 'chop_only_queue', 'cook_only_queue', 'simple_queue']:
+                    if food_name in self.goal.get(q, []):
+                        needed = True
+                        break
+                
+                if needed:
+                    # Drop off at nearest free counter to Kitchen Center
+                    kitchen = self._get_kitchen_center()
+                    exclude = set()
+                    for locs in self.goal.get('stored_items', {}).values():
+                        if isinstance(locs, list):
+                            exclude.update(locs)
+                        else:
+                            exclude.add(locs)
+                    if self.goal.get('plate_counter'):
+                        exclude.add(self.goal['plate_counter'])
+                        
+                    counter = self._get_free_counter(controller, team, kitchen, exclude)
+                    if counter:
+                        if self._is_blocked(controller, bot_id, counter, team):
+                            return
+                        if self._move_toward(controller, bot_id, counter, team):
+                            if controller.place(bot_id, counter[0], counter[1]):
+                                # Track it properly - append to list
+                                stored = self.goal.get('stored_items', {})
+                                if food_name not in stored:
+                                    stored[food_name] = []
+                                # Only add if not already there (prevent duplicate entries for same location)
+                                if counter not in stored[food_name]:
+                                    stored[food_name].append(counter)
+                                self.goal['stored_items'] = stored
+                                self._log(f"SUPPORT: Delivered {food_name} to {counter}")
+                else:
+                    # Holding garbage - trash it
+                    if self.trashes:
+                        trash = self._get_nearest(bot_pos, self.trashes)
+                        if trash and self._move_toward(controller, bot_id, trash, team):
+                            controller.trash(bot_id, trash[0], trash[1])
+            return
+
+        # 2. Check what's needed and go get it
+        # Prioritize queues: simple > cook > chop
+        candidates = []
+        candidates.extend(self.goal.get('simple_queue', []))
+        candidates.extend(self.goal.get('cook_only_queue', []))
+        candidates.extend(self.goal.get('chop_only_queue', []))
+        
+        target_ing = None
+        for ing in candidates:
+            # Skip if active bot is already handling it
+            if ing == self.goal.get('current_ingredient'):
+                continue
+            
+            # Check how many we already have stored
+            stored_list = self.goal.get('stored_items', {}).get(ing, [])
+            needed_count = candidates.count(ing)
+            if len(stored_list) >= needed_count:
+                continue
+                
+            # Skip if already cooking (handled separately? or just treat as stored?)
+            # Simplified: just check storage buffer
+            
+            target_ing = ing
+            break
+            
+        if target_ing:
+            # Go buy it
+            shop = self._get_nearest(bot_pos, self.shops)
+            if shop:
+                if self._move_toward(controller, bot_id, shop, team):
+                    ft = getattr(FoodType, target_ing, None)
+                    if ft and controller.get_team_money(team) >= ft.buy_cost:
+                        controller.buy(bot_id, ft, shop[0], shop[1])
+                        self._log(f"SUPPORT: Bought {target_ing}")
+
+    def _do_preparation(self, controller: RobotController, team: Team) -> None:
+        """Do useful preparation work when no orders are available."""
+
         if self.active_bot_id is None:
             return
         
@@ -1902,10 +2085,14 @@ class BotPlayer:
             self._log("ACTION: Handling handoff pickup, ending turn")
             return
         
-        # Handle inactive bot storage operations (if the storage bot is now active)
         if self._handle_inactive_bot_storage(controller, team):
             self._log("ACTION: Handling inactive bot storage, ending turn")
             return
+
+        # Run Active Support if goal exists
+        if self.goal is not None and self.inactive_bot_id is not None:
+             self._do_active_support(controller, team)
+
         
         # Check if current goal's order has expired
         if self.goal is not None:
