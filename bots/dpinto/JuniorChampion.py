@@ -247,9 +247,15 @@ class BotPlayer:
         team = c.get_team()
         if self.team is None:
             self.team = team
+            import sys
+            print(f'[{team.name}] Init: shops={len(self._shops)}, counters={len(self._counters)}, cookers={len(self._cookers)}', file=sys.stderr, flush=True)
         
         bots = c.get_team_bot_ids(team)
         orders = c.get_orders(team)
+        
+        if turn <= 15 or turn % 100 == 0:
+            import sys
+            print(f'[T{turn}] {team.name}: bots={len(bots)}, orders={len(orders)}, assigned={len(self.assigned)}, completed={len(self.completed)}', file=sys.stderr, flush=True)
         
         for bid in bots:
             if bid not in self.tasks:
@@ -300,6 +306,12 @@ class BotPlayer:
         
         best = None
         best_score = -9999
+        active_orders = [o for o in orders if o['is_active']]
+        
+        if turn <= 15:
+            import sys
+            print(f'[T{turn}] Active orders: {len(active_orders)}', file=sys.stderr, flush=True)
+        
         for o in orders:
             if not o['is_active'] or o['order_id'] in self.assigned or o['order_id'] in self.completed:
                 continue
@@ -307,6 +319,11 @@ class BotPlayer:
                 continue
             
             score = self._score(o, bs['x'], bs['y'], turn)
+            
+            if turn <= 15:
+                import sys
+                print(f'[T{turn}] Order {o["order_id"]}: {o["required"]}, score={score}', file=sys.stderr, flush=True)
+            
             if score > best_score:
                 best_score = score
                 best = o
@@ -318,6 +335,10 @@ class BotPlayer:
                 t['step'] = 0
                 t['oid'] = best['order_id']
                 self.assigned.add(best['order_id'])
+            else:
+                # Recipe creation failed
+                if turn <= 30:
+                    print(f'[T{turn}] Recipe FAILED for order {best["order_id"]}: {best["required"]}')
     
     def _run_helper(self, c, bid, turn, orders):
         """Helper bot: wash dishes, prepare plates, assist."""
@@ -396,10 +417,16 @@ class BotPlayer:
         
         profit = order['reward'] - cost
         if profit <= 0:
+            if turn <= 15:
+                import sys
+                print(f'  REJECT: profit={profit} <= 0', file=sys.stderr, flush=True)
             return -9999
         
         tleft = order['expires_turn'] - turn
         if tleft < 12:
+            if turn <= 15:
+                import sys
+                print(f'  REJECT: tleft={tleft} < 12', file=sys.stderr, flush=True)
             return -9999
         
         # Count processing needs
@@ -409,7 +436,7 @@ class BotPlayer:
         # Estimate time with travel distances
         base = 12
         per_item = 3
-        cook_time = 22  # Pan cook time
+        cook_time = 22
         chop_time = 4
         
         est = base + len(req) * per_item + n_cook * cook_time + n_chop * chop_time
@@ -431,15 +458,27 @@ class BotPlayer:
         
         # Complexity penalty for limited counters
         if len(self._counters) <= 1 and n_chop >= 2:
+            if turn <= 15:
+                import sys
+                print(f'  REJECT: counters={len(self._counters)}, n_chop={n_chop}', file=sys.stderr, flush=True)
             return -9999
         if self.map_area >= 300 and len(self._counters) <= 8:
             if len(req) >= 4:
+                if turn <= 15:
+                    import sys
+                    print(f'  REJECT: large map, 4+ items', file=sys.stderr, flush=True)
                 return -9999
             if len(req) == 3 and (n_chop + n_cook) >= 2:
+                if turn <= 15:
+                    import sys
+                    print(f'  REJECT: large map, complex 3-item', file=sys.stderr, flush=True)
                 return -9999
         
         # Feasibility check
         if est > tleft * 0.75:
+            if turn <= 15:
+                import sys
+                print(f'  REJECT: est={est} > tleft*0.75={tleft*0.75}', file=sys.stderr, flush=True)
             return -9999
         
         # Prioritize urgent orders
@@ -452,10 +491,13 @@ class BotPlayer:
     def _make_recipe(self, c, bid, order, bs):
         bx, by = bs['x'], bs['y']
         team = c.get_team()
+        turn = c.get_turn()
         
         shop = self._nearest(bx, by, 'SHOP')
         submit = self._nearest(bx, by, 'SUBMIT')
         if not shop or not submit:
+            if turn <= 30:
+                print(f'[T{turn}] Recipe fail: shop={shop}, submit={submit}')
             return None
         
         # Parse ingredients by processing type
@@ -487,10 +529,14 @@ class BotPlayer:
         cooker = self._find_available_cooker(c, bx, by) if all_cook else None
         
         if not plate_pos:
+            if turn <= 30:
+                print(f'[T{turn}] Recipe fail: no plate_pos')
             return None
         if all_chop and not counter:
             counter = plate_pos  # Use plate counter for chopping if needed
         if all_cook and not cooker:
+            if turn <= 30:
+                print(f'[T{turn}] Recipe fail: need cooker but cooker={cooker}, all_cookers={self._cookers}')
             return None
         
         steps = []
@@ -556,6 +602,11 @@ class BotPlayer:
         step = t['recipe'][t['step']]
         action = step[0]
         done = False
+        
+        # Debug: show progress periodically
+        if turn <= 30 or turn % 50 == 0:
+            import sys
+            print(f'[T{turn}] Bot{bid}: step={t["step"]}/{len(t["recipe"])}, action={action}, stuck={t.get("stuck", 0)}', file=sys.stderr, flush=True)
         
         if action == 'goto':
             target = step[1]
