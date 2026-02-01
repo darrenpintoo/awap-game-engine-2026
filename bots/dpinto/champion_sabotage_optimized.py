@@ -36,7 +36,6 @@ except ImportError:
 DEBUG = False  # Set True for testing
 
 def log(msg):
-    msg = "[v_final] " + str(msg)
     if DEBUG:
         print(f"[CHAMPION] {msg}")
 
@@ -455,37 +454,6 @@ class BotPlayer:
                 if st:
                     avoid.add((st['x'], st['y']))
         return avoid
-
-    def _is_enemy_near(self, controller: RobotController, team: Team, target: Tuple[int, int], dist: int = 3) -> bool:
-        """Check if an enemy bot is near a target location"""
-        enemy_team = controller.get_enemy_team()
-        for bid in controller.get_team_bot_ids(enemy_team):
-            st = controller.get_bot_state(bid)
-            if st and st.get('map_team') == team:
-                if FastPathfinder.chebyshev(target, (st['x'], st['y'])) <= dist:
-                    return True
-        return False
-
-    def _hide_resources(self, controller: RobotController, bot_id: int, team: Team):
-        """Emergency: Move pans from cookers to safe counters if enemy is near and actually threatening"""
-        bot = controller.get_bot_state(bot_id)
-        if not bot or bot.get('holding'): return
-
-        # Only hide if we aren't currently cooking something important
-        for kx, ky in self.cookers:
-            pan_state = self._get_pan_food_state(controller, team, kx, ky)
-            # If pan is empty or has cooked food, it's a target for theft
-            if self._has_pan_on_cooker(controller, team, kx, ky) and (pan_state is None or pan_state == 1):
-                if self._is_enemy_near(controller, team, (kx, ky), dist=2): # Tighter radius
-                    # Find a counter that is FAR from any enemy
-                    safe_ctr = next((c for c in self.counters if self._is_counter_empty(controller, team, c[0], c[1]) 
-                                    and not self._is_enemy_near(controller, team, c, dist=4)), None)
-                    if safe_ctr:
-                        if self._move_toward(controller, bot_id, (kx, ky), team):
-                            if controller.pickup(bot_id, kx, ky):
-                                log(f"DEFENSE: Saved pan from intruder near ({kx}, {ky})")
-                        return
-
     
     def _move_toward(self, controller: RobotController, bot_id: int, 
                      target: Tuple[int,int], team: Team) -> bool:
@@ -726,7 +694,7 @@ class BotPlayer:
             require_plate = not (self.single_counter and next_ing and INGREDIENT_INFO.get(next_ing, {}).get('chop'))
             if require_plate and not self.plate_on_assembly and not self.plate_in_box:
                 # Check for clean plates at sink table first (recycling!)
-                if False: # v_final: No recycling
+                if sink_table and self._count_clean_plates(controller, team) > 0:
                     task.state = BotState.GET_CLEAN_PLATE
                     task.target = sink_table
                 else:
@@ -1000,7 +968,7 @@ class BotPlayer:
                 if holding and holding.get('type') == 'Plate':
                     task.sub_state = 1
                 else:
-                    if True and self.plate_storage_box:
+                    if self.plate_storage_box:
                         bx, by = self.plate_storage_box
                         if self._move_toward(controller, bot_id, (bx, by), team):
                             if controller.pickup(bot_id, bx, by):
@@ -1102,23 +1070,21 @@ class BotPlayer:
         our_money = controller.get_team_money(team)
         enemy_money = controller.get_team_money(enemy_team)
         
-        return # v_final: No sabotage
-        # Adaptive Sabotage: Switch only if behind or if late game and tied
         should_sabotage = False
         if can_switch and not self.has_switched:
-            # Performance gap trigger: Only switch if enemy is winning or very close to winning
-            gap = enemy_money - our_money
-            if turn >= 200:
-                if gap > 50: # We are losing significantly
+            if turn >= 280 and turn < 380:
+                # Aggressive sabotage if enemy is ahead or close
+                if enemy_money >= our_money - 50:
                     should_sabotage = True
-                elif turn >= 320 and gap >= -20: # Tight race near the end
-                    should_sabotage = True
+            elif turn >= 350 and enemy_money > our_money:
+                # Desperate sabotage
+                should_sabotage = True
         
         if should_sabotage:
             if controller.switch_maps():
                 self.has_switched = True
                 task.state = BotState.SABOTAGE_STEAL_PAN
-                log(f"ADAPTIVE SWITCH at turn {turn}! (Gap: ${gap})")
+                log(f"SWITCHED TO ENEMY MAP at turn {turn}! (Our: ${our_money}, Enemy: ${enemy_money})")
                 return
         
         # If we're on enemy map, do sabotage
@@ -1136,68 +1102,6 @@ class BotPlayer:
                 if self._move_toward(controller, bot_id, sink, team):
                     controller.wash_sink(bot_id, sx, sy)
                 return
-
-        # Collaborative Prep: Help with ingredients if primary is busy and we have SPACE
-        # Only attempt if there are at least 3 counters (assembly + work + helper)
-        if self.current_order and len(self.counters) >= 3:
-            primary_bot_id = controller.get_team_bot_ids(team)[0]
-            primary_task = self.bot_tasks.get(primary_bot_id)
-            primary_item = primary_task.item if primary_task else None
-            
-            # Use a dedicated helper counter (index 2 or further)
-            helper_ctr = self.counters[2]
-            
-            # Find an ingredient that needs prep but isn't being handled by primary
-            helper_ing = None
-            for ing in self.current_order.required:
-                if ing not in self.ingredients_on_plate and ing != primary_item:
-                    if not INGREDIENT_INFO.get(ing, {}).get('cook'):
-                        helper_ing = ing
-                        break
-            
-            if helper_ing:
-                task.item = helper_ing
-                info = INGREDIENT_INFO.get(helper_ing, {})
-                
-                if holding:
-                    if info.get('chop') and task.state != BotState.CHOP:
-                        task.state = BotState.PLACE_FOR_CHOP
-                        task.target = helper_ctr
-                    else:
-                        task.state = BotState.ADD_TO_PLATE
-                        task.target = self.assembly_counter
-                else:
-                    task.state = BotState.BUY_INGREDIENT
-                
-                if task.state == BotState.BUY_INGREDIENT:
-                    shop = self._get_nearest((bx, by), self.shops)
-                    food_type = getattr(FoodType, helper_ing, None)
-                    if self._move_toward(controller, bot_id, shop, team):
-                        if food_type and controller.get_team_money(team) >= food_type.buy_cost:
-                            controller.buy(bot_id, food_type, shop[0], shop[1])
-                    return
-                elif task.state == BotState.PLACE_FOR_CHOP:
-                    if self._move_toward(controller, bot_id, helper_ctr, team):
-                        if self._is_counter_empty(controller, team, helper_ctr[0], helper_ctr[1]):
-                            controller.place(bot_id, helper_ctr[0], helper_ctr[1])
-                            task.state = BotState.CHOP
-                    return
-                elif task.state == BotState.CHOP:
-                    if self._move_toward(controller, bot_id, helper_ctr, team):
-                        if controller.chop(bot_id, helper_ctr[0], helper_ctr[1]):
-                            task.state = BotState.ADD_TO_PLATE
-                    return
-                elif task.state == BotState.ADD_TO_PLATE:
-                    assembly = self.assembly_counter
-                    if self.plate_on_assembly:
-                        if self._move_toward(controller, bot_id, assembly, team):
-                            if controller.add_food_to_plate(bot_id, assembly[0], assembly[1]):
-                                self.ingredients_on_plate.append(helper_ing)
-                                task.state = BotState.IDLE
-                    else:
-                        # Drop it on a spare counter or stay idle
-                        task.state = BotState.IDLE
-                    return
         
         # If nothing to do, wiggle randomly
         import random
@@ -1208,89 +1112,134 @@ class BotPlayer:
                 controller.move(bot_id, dx, dy)
                 break
     
+    def _find_hiding_spot(self, controller: RobotController, enemy_team: Team):
+        """Find the tile furthest from all enemy activities to hide stolen items."""
+        # Get enemy bot positions
+        enemy_bot_ids = controller.get_team_bot_ids(enemy_team)
+        enemy_positions = []
+        for bid in enemy_bot_ids:
+            b = controller.get_bot_state(bid)
+            if b: enemy_positions.append((b['x'], b['y']))
+            
+        # If no enemies, any corner is fine
+        if not enemy_positions:
+            return (0, 0) # Top-left default
+
+        best_spot = None
+        max_dist = -1
+        
+        # We want a walkable tile that IS NOT a resource tile (don't block counters we might want to steal from)
+        # Actually, hiding on a counter is fine if it's far away. 
+        # But dropping on the floor is often better if we can? No, can only place on counters/tables.
+        # So we need to find a COUNTER or TABLE that is far away.
+        
+        enemy_map = controller.get_map(enemy_team)
+        candidates = []
+        for x in range(enemy_map.width):
+            for y in range(enemy_map.height):
+                tile = enemy_map.tiles[x][y]
+                if tile.tile_name in ["COUNTER", "TABLE"]:
+                    # Check if empty
+                    current_tile = controller.get_tile(enemy_team, x, y)
+                    if not getattr(current_tile, 'item', None):
+                        candidates.append((x, y))
+        
+        for cand in candidates:
+            # Min dist to any enemy bot
+            dist = min([abs(cand[0]-ex) + abs(cand[1]-ey) for ex, ey in enemy_positions])
+            if dist > max_dist:
+                max_dist = dist
+                best_spot = cand
+                
+        return best_spot
+
     def _execute_sabotage(self, controller: RobotController, bot_id: int, 
                           team: Team, task: BotTask):
-        """Execute sabotage actions on enemy map"""
+        """Execute HOARD & HIDE sabotage actions on enemy map"""
         bot = controller.get_bot_state(bot_id)
-        if not bot:
-            return
+        if not bot: return
         
         bx, by = bot['x'], bot['y']
         holding = bot.get('holding')
         enemy_team = controller.get_enemy_team()
         
-        # Get enemy map locations
+        # 1. Abandon Ship Check
+        # If we've been here too long without success, go home? 
+        # For now, let's stick to the plan: steal and hide.
+
+        # 2. If holding stolen item, HIDE IT
+        if holding:
+            hiding_spot = self._find_hiding_spot(controller, enemy_team)
+            if hiding_spot:
+                hx, hy = hiding_spot
+                if self._move_toward(controller, bot_id, hiding_spot, enemy_team):
+                    if controller.place(bot_id, hx, hy):
+                        log(f"HID STOLEN ITEM AT {hiding_spot}!")
+                        # Reset task to steal again
+                        task.state = BotState.SABOTAGE_STEAL_PAN
+            else:
+                # No hiding spot? Trash it if possible, or just hold it.
+                 trash_locs = []
+                 enemy_map = controller.get_map(enemy_team)
+                 for x in range(enemy_map.width):
+                     for y in range(enemy_map.height):
+                         if enemy_map.tiles[x][y].tile_name == "TRASH":
+                             trash_locs.append((x, y))
+                 
+                 trash = self._get_nearest((bx, by), trash_locs)
+                 if trash:
+                     if self._move_toward(controller, bot_id, trash, enemy_team):
+                         controller.trash(bot_id, trash[0], trash[1])
+            return
+
+        # 3. Identify Targets
         enemy_map = controller.get_map(enemy_team)
-        
-        enemy_cookers = []
-        enemy_sink_tables = []
-        enemy_trashes = []
-        enemy_counters = []
+        pans = []
+        plates_with_food = []
+        clean_plates = []
         
         for x in range(enemy_map.width):
             for y in range(enemy_map.height):
-                tile = enemy_map.tiles[x][y]
-                name = tile.tile_name
-                if name == "COOKER":
-                    enemy_cookers.append((x, y))
-                elif name == "SINKTABLE":
-                    enemy_sink_tables.append((x, y))
-                elif name == "TRASH":
-                    enemy_trashes.append((x, y))
-                elif name == "COUNTER":
-                    enemy_counters.append((x, y))
+                tile = controller.get_tile(enemy_team, x, y)
+                if not tile: continue
+                item = getattr(tile, 'item', None)
+                if not item: 
+                    # Check specific tile attributes
+                    if getattr(tile, 'num_clean_plates', 0) > 0:
+                        clean_plates.append((x, y))
+                    continue
+                
+                if isinstance(item, Pan):
+                    pans.append((x, y))
+                elif isinstance(item, Plate):
+                    if item.ingredients: # Valid food on it
+                        plates_with_food.append((x, y))
+                    
+        # 4. Priority Tree
+        # Priority A: Steal Pan (Highest Impact)
+        target = None
+        target_type = "PAN"
         
-        # If holding something, trash it
-        if holding:
-            trash = self._get_nearest((bx, by), enemy_trashes)
-            if trash:
-                if self._move_toward(controller, bot_id, trash, enemy_team):
-                    controller.trash(bot_id, trash[0], trash[1])
-            return
-        
-        # Steal pan from cooker
-        if task.state == BotState.SABOTAGE_STEAL_PAN:
-            cooker = self._get_nearest((bx, by), enemy_cookers)
-            if cooker:
-                kx, ky = cooker
-                tile = controller.get_tile(enemy_team, kx, ky)
-                if tile and isinstance(getattr(tile, 'item', None), Pan):
-                    if self._move_toward(controller, bot_id, cooker, enemy_team):
-                        if controller.pickup(bot_id, kx, ky):
-                            log("STOLE ENEMY PAN!")
-                            task.state = BotState.SABOTAGE_STEAL_PLATE
+        if pans:
+            target = self._get_nearest((bx, by), pans)
+        elif plates_with_food:
+            target = self._get_nearest((bx, by), plates_with_food)
+            target_type = "FOOD_PLATE"
+        elif clean_plates:
+             target = self._get_nearest((bx, by), clean_plates)
+             target_type = "CLEAN_PLATE"
+             
+        if target:
+            tx, ty = target
+            if self._move_toward(controller, bot_id, target, enemy_team):
+                if target_type == "CLEAN_PLATE":
+                    if controller.take_clean_plate(bot_id, tx, ty):
+                        log("STOLE CLEAN PLATE")
                 else:
-                    task.state = BotState.SABOTAGE_STEAL_PLATE
-            else:
-                task.state = BotState.SABOTAGE_STEAL_PLATE
-        
-        # Steal clean plates
-        elif task.state == BotState.SABOTAGE_STEAL_PLATE:
-            sink_table = self._get_nearest((bx, by), enemy_sink_tables)
-            if sink_table:
-                stx, sty = sink_table
-                tile = controller.get_tile(enemy_team, stx, sty)
-                if tile and getattr(tile, 'num_clean_plates', 0) > 0:
-                    if self._move_toward(controller, bot_id, sink_table, enemy_team):
-                        if controller.take_clean_plate(bot_id, stx, sty):
-                            log("STOLE ENEMY CLEAN PLATE!")
-                else:
-                    task.state = BotState.SABOTAGE_BLOCK
-            else:
-                task.state = BotState.SABOTAGE_BLOCK
-        
-        # Block/disrupt enemy
-        elif task.state == BotState.SABOTAGE_BLOCK:
-            # Try to steal items from counters
-            for counter in enemy_counters:
-                cx, cy = counter
-                tile = controller.get_tile(enemy_team, cx, cy)
-                if tile and getattr(tile, 'item', None):
-                    if self._move_toward(controller, bot_id, counter, enemy_team):
-                        controller.pickup(bot_id, cx, cy)
-                    return
-            
-            # Otherwise move randomly to cause chaos
+                    if controller.pickup(bot_id, tx, ty):
+                        log(f"STOLE {target_type}")
+        else:
+            # Nothing to steal? Block/Wiggle
             import random
             dirs = FastPathfinder.DIRS_4.copy()
             random.shuffle(dirs)
@@ -1315,9 +1264,8 @@ class BotPlayer:
         # Check for defense (enemy on our map)
         switch_info = controller.get_switch_info()
         if switch_info.get('enemy_team_switched'):
-            # Only Bot 1 (Helper) should prioritize defense to avoid crippling Bot 0's production
-            if len(my_bots) > 1:
-                self._hide_resources(controller, my_bots[1], team)
+            log("WARNING: Enemy is on our map!")
+            # Could implement defensive measures here
         
         # Execute bots
         # Bot 0: Primary (order fulfillment)
