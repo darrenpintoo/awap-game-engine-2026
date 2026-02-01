@@ -1,8 +1,8 @@
-# MAP: 05_parallel_paths.txt
-# DESCRIPTION: 16x14 map with multiple routes to resources
-# TESTS: Pathfinding efficiency, route optimization
-# FAIR DESIGN: Multiple valid paths, no dead ends, connected layout
-# WINNING STRATEGY: Choose shortest path dynamically, avoid congestion
+// MAP: 05_parallel_paths.txt
+// DESCRIPTION: 16x14 map with multiple routes to resources
+// TESTS: Pathfinding efficiency, route optimization
+// FAIR DESIGN: Multiple valid paths, no dead ends, connected layout
+// WINNING STRATEGY: Choose shortest path dynamically, avoid congestion
 
 ################
 #$..........R.$#

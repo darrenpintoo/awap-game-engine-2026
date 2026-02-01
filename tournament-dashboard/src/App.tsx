@@ -68,7 +68,7 @@ const HERO_COLORS: Record<string, string> = {
 const cleanName = (n: string) => n.replace("Hero_", "").replace(".py", "").replace(/_/g, " ");
 const isHero = (n: string) => n.startsWith("Hero_");
 const safeDiv = (n: number, d: number) => d > 0 ? (n / d) * 100 : 0;
-const getHeroColor = (name: string) => HERO_COLORS[name] || "#6366f1";
+
 
 
 function App() {
@@ -237,9 +237,9 @@ function App() {
     return matches.slice(0, 500);
   }, [data, matchFilter]);
 
-  if (!data) return <div className="flex h-screen items-center justify-center text-indigo-400 font-bold bg-[#020617]">Syncing Data Stream...</div>;
+  if (dataSource === 'file' && !data) return <div className="flex h-screen items-center justify-center text-indigo-400 font-bold bg-[#020617]">Parsing Data File...</div>;
 
-  const progress = (data.metadata.completed_matches / data.metadata.total_matches) * 100;
+  const progress = data ? (data.metadata.completed_matches / data.metadata.total_matches) * 100 : 0;
   const top10Bots = Object.entries(playerStats).sort((a, b) => safeDiv(b[1].w, b[1].total - b[1].e) - safeDiv(a[1].w, a[1].total - a[1].e)).slice(0, 10);
 
   return (
@@ -263,7 +263,10 @@ function App() {
             <h1 className="text-xl font-black uppercase tracking-tighter">Arena <span className="text-indigo-500">Analytics</span></h1>
             <div className="h-4 w-[1px] bg-white/10" />
             <div className="flex gap-6 text-[10px] font-black uppercase text-slate-500 tracking-widest">
-              <span className="flex items-center gap-2"><Activity size={12} className="text-indigo-500" /> Runtime: <span className="text-white font-mono">{data.metadata.completed_matches} Matches</span></span>
+              <span className="flex items-center gap-2">
+                <Activity size={12} className="text-indigo-500" />
+                Runtime: <span className="text-white font-mono">{data ? `${data.metadata.completed_matches} Matches` : 'Connecting...'}</span>
+              </span>
               <span>Total Yield: <span className="text-emerald-400 font-mono">${(globalStats.totalMoney / 1000).toFixed(1)}k</span></span>
             </div>
           </div>
@@ -319,7 +322,7 @@ function App() {
                   <div className="bg-indigo-600/10 border border-indigo-500/20 p-8 rounded-[40px] flex flex-col justify-center items-center text-center">
                     <Flame size={32} className="text-indigo-400 mb-4" />
                     <h3 className="text-lg font-black text-white uppercase leading-none">Gauntlet Pulse</h3>
-                    <p className="text-[10px] text-indigo-300 font-bold uppercase tracking-widest mt-2">{((data.metadata.completed_matches / ((Date.now() - data.metadata.last_updated * 1000) / 1000) || 1)).toFixed(1)} msg/sec</p>
+                    <p className="text-[10px] text-indigo-300 font-bold uppercase tracking-widest mt-2">{data ? ((data.metadata.completed_matches / ((Date.now() - data.metadata.last_updated * 1000) / 1000) || 1)).toFixed(1) : '0.0'} msg/sec</p>
                   </div>
                 </div>
 

@@ -1,8 +1,8 @@
-# MAP: 02_balanced_medium.txt
-# DESCRIPTION: Standard 15x15 symmetric map for all-around testing
-# TESTS: General bot competence across all skills
-# FAIR DESIGN: Mirror symmetric, equal resource access, varied order complexity
-# WINNING STRATEGY: Balance speed and accuracy, use both bots effectively
+// MAP: 02_balanced_medium.txt
+// DESCRIPTION: Standard 15x15 symmetric map for all-around testing
+// TESTS: General bot competence across all skills
+// FAIR DESIGN: Mirror symmetric, equal resource access, varied order complexity
+// WINNING STRATEGY: Balance speed and accuracy, use both bots effectively
 
 ###############
 #$....R.R....$#

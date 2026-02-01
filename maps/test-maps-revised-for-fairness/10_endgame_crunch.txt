@@ -1,8 +1,8 @@
-# MAP: 10_endgame_crunch.txt
-# DESCRIPTION: 14x12 map with orders clustered toward end
-# TESTS: Late-game optimization, endgame score calculation
-# FAIR DESIGN: Early orders for warmup, critical decisions late
-# WINNING STRATEGY: Position well early, maximize throughput in final push
+// MAP: 10_endgame_crunch.txt
+// DESCRIPTION: 14x12 map with orders clustered toward end
+// TESTS: Late-game optimization, endgame score calculation
+// FAIR DESIGN: Early orders for warmup, critical decisions late
+// WINNING STRATEGY: Position well early, maximize throughput in final push
 
 ##############
 #$..........U#

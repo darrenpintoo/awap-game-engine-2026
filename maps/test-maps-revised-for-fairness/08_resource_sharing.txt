@@ -1,8 +1,8 @@
-# MAP: 08_resource_sharing.txt
-# DESCRIPTION: 14x12 map with moderate resource count
-# TESTS: Bot coordination, resource scheduling
-# FAIR DESIGN: Enough resources for success, but requires smart sharing
-# WINNING STRATEGY: Coordinate bots to avoid conflicts, efficient handoffs
+// MAP: 08_resource_sharing.txt
+// DESCRIPTION: 14x12 map with moderate resource count
+// TESTS: Bot coordination, resource scheduling
+// FAIR DESIGN: Enough resources for success, but requires smart sharing
+// WINNING STRATEGY: Coordinate bots to avoid conflicts, efficient handoffs
 
 ##############
 #$..........U#

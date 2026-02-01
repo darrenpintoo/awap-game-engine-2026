@@ -1,8 +1,8 @@
-# MAP: 06_high_throughput.txt
-# DESCRIPTION: 15x13 map with abundant cookers and counters
-# TESTS: Parallel cooking ability, resource utilization
-# FAIR DESIGN: Plenty of resources, no bottlenecks, tests throughput not scarcity
-# WINNING STRATEGY: Cook multiple items simultaneously, maximize parallel work
+// MAP: 06_high_throughput.txt
+// DESCRIPTION: 15x13 map with abundant cookers and counters
+// TESTS: Parallel cooking ability, resource utilization
+// FAIR DESIGN: Plenty of resources, no bottlenecks, tests throughput not scarcity
+// WINNING STRATEGY: Cook multiple items simultaneously, maximize parallel work
 
 ###############
 #$...........R#

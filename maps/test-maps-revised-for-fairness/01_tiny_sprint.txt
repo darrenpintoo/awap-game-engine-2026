@@ -1,8 +1,8 @@
-# MAP: 01_tiny_sprint.txt
-# DESCRIPTION: Small 10x8 map for quick decision-making tests
-# TESTS: Fast order selection, efficient movement in tight spaces
-# FAIR DESIGN: All resources accessible, symmetric layout, progressive difficulty
-# WINNING STRATEGY: Prioritize simple orders early, build to complex orders
+// MAP: 01_tiny_sprint.txt
+// DESCRIPTION: Small 10x8 map for quick decision-making tests
+// TESTS: Fast order selection, efficient movement in tight spaces
+// FAIR DESIGN: All resources accessible, symmetric layout, progressive difficulty
+// WINNING STRATEGY: Prioritize simple orders early, build to complex orders
 
 ##########
 #$..R..U$#

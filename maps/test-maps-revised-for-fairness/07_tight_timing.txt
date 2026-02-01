@@ -1,8 +1,8 @@
-# MAP: 07_tight_timing.txt
-# DESCRIPTION: 12x10 map with shorter order durations
-# TESTS: Speed optimization, quick decision-making
-# FAIR DESIGN: Adequate resources, achievable but challenging timing
-# WINNING STRATEGY: Fast execution, don't over-engineer, prioritize completable orders
+// MAP: 07_tight_timing.txt
+// DESCRIPTION: 12x10 map with shorter order durations
+// TESTS: Speed optimization, quick decision-making
+// FAIR DESIGN: Adequate resources, achievable but challenging timing
+// WINNING STRATEGY: Fast execution, don't over-engineer, prioritize completable orders
 
 ############
 #$.R.....U$#

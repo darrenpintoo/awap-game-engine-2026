@@ -1,8 +1,8 @@
-# MAP: 04_varied_orders.txt  
-# DESCRIPTION: 14x12 map with highly varied order profiles
-# TESTS: Order prioritization, dynamic decision-making
-# FAIR DESIGN: Standard layout, orders vary from trivial to complex
-# WINNING STRATEGY: Pick orders based on profit/time ratio, don't chase complexity
+// MAP: 04_varied_orders.txt  
+// DESCRIPTION: 14x12 map with highly varied order profiles
+// TESTS: Order prioritization, dynamic decision-making
+// FAIR DESIGN: Standard layout, orders vary from trivial to complex
+// WINNING STRATEGY: Pick orders based on profit/time ratio, don't chase complexity
 
 ##############
 #$.....R....U#

@@ -1,8 +1,8 @@
-# MAP: 03_grand_kitchen.txt
-# DESCRIPTION: Large 22x20 open map testing algorithm scalability
-# TESTS: Efficient pathfinding on large maps, resource localization
-# FAIR DESIGN: Open layout with multiple resource clusters, no chokepoints
-# WINNING STRATEGY: Minimize travel distance, work in zones, parallel cooking
+// MAP: 03_grand_kitchen.txt
+// DESCRIPTION: Large 22x20 open map testing algorithm scalability
+// TESTS: Efficient pathfinding on large maps, resource localization
+// FAIR DESIGN: Open layout with multiple resource clusters, no chokepoints
+// WINNING STRATEGY: Minimize travel distance, work in zones, parallel cooking
 
 ######################
 #$..................$#

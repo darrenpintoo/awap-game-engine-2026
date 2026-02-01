@@ -1,8 +1,8 @@
-# MAP: 09_sabotage_ready.txt
-# DESCRIPTION: 16x14 map optimized for sabotage strategy testing
-# TESTS: Strategic sabotage timing, offense vs defense decisions
-# FAIR DESIGN: Good switch timing opportunities, balanced base production
-# WINNING STRATEGY: Choose optimal sabotage window, balance disruption vs production
+// MAP: 09_sabotage_ready.txt
+// DESCRIPTION: 16x14 map optimized for sabotage strategy testing
+// TESTS: Strategic sabotage timing, offense vs defense decisions
+// FAIR DESIGN: Good switch timing opportunities, balanced base production
+// WINNING STRATEGY: Choose optimal sabotage window, balance disruption vs production
 
 ################
 #$..............#
