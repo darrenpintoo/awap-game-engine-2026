@@ -1255,7 +1255,12 @@ class BotPlayer:
         return turns
 
     def _ranked_orders(self, orders: List[Dict], turn: int, c: RobotController) -> List[Dict]:
-        """Rank orders by efficiency."""
+        """Rank orders using deadline-aware priority scoring.
+        
+        STRATEGIC DIFFERENCE: TrueBot uses urgency-weighted scoring:
+        - Higher priority for orders with tight deadlines and high penalties
+        - This helps avoid penalties by completing urgent orders first
+        """
         out = []
         cd_cheap, cd_mid, cd_expensive = self._cooldown_base
         
@@ -1274,16 +1279,13 @@ class BotPlayer:
             # Skip orders that will expire while we're sabotaging
             expires = o['expires_turn']
             if self._sabotage_switch_turn is not None:
-                # If order expires during our sabotage window, skip it
-                # (unless it's completable before we switch)
                 if self._sabotage_switch_turn <= expires <= switch_end + 5:
-                    # Check if we can complete before switching
                     time_until_switch = self._sabotage_switch_turn - turn
                     ingredients = [FOOD_LUT[fn] for fn in o['required'] if fn in FOOD_LUT]
                     n_cook = sum(1 for f in ingredients if f.can_cook)
                     est_completion = 8 + len(ingredients) * 3 + n_cook * 22
                     if est_completion > time_until_switch - 5:
-                        continue  # Can't complete before switch, skip
+                        continue
             
             cost = ShopCosts.PLATE.buy_cost
             for fn in o['required']:
@@ -1309,32 +1311,50 @@ class BotPlayer:
                 continue
             est_simple = 8 + len(ingredients) * 3 + n_cook * 22 + n_chop * 4
             efficiency = value / max(est_simple, 1)
+            
+            # URGENCY SCORING: penalize orders that might be missed
+            # Higher urgency = higher priority (we want to handle these first)
+            # But only if deadline is actually tight (tleft < est * 2)
+            urgency = 0
+            if penalty > 0 and tleft < est_simple * 2:
+                urgency = penalty / max(tleft - est_simple, 1)
+            
+            # Combined score: efficiency + small urgency bonus
+            # Less aggressive than before to avoid over-prioritizing hard orders
+            combined_score = efficiency + urgency * 0.5
+            
             out.append({
                 'order': o, 'cost': cost, 'profit': profit,
                 'tleft': tleft, 'est': est_simple, 'efficiency': efficiency,
                 'needs_cook': needs_cook, 'needs_chop': n_chop > 0,
-                'penalty': penalty,
+                'penalty': penalty, 'urgency': urgency, 'score': combined_score,
             })
-        out.sort(key=lambda x: -x['efficiency'])
+        # Sort by combined score (higher is better)
+        out.sort(key=lambda x: -x['score'])
         return out
 
     def _ranked_future_orders(self, orders: List[Dict], turn: int, c: RobotController) -> List[Dict]:
-        """Rank future orders for idle bots to prepare - prepare early so ready when order activates."""
+        """Rank future orders for idle bots - AGGRESSIVE early preparation.
+        
+        STRATEGIC DIFFERENCE: TrueBot prepares orders earlier than test.py:
+        - Allows preparation up to 80 turns ahead (vs typical 50-60)
+        - Prioritizes high-penalty orders to avoid losses
+        - Gets orders ready exactly when they activate
+        """
         out = []
         for o in orders:
             oid = o['order_id']
-            # Skip active or completed orders
             if o['is_active'] or o.get('completed_turn') is not None:
                 continue
             if o['expires_turn'] <= turn:
                 continue
             created = o['created_turn']
             if created <= turn:
-                continue  # already past created_turn
+                continue
             wait_turns = created - turn
-            # Don't prepare orders too far in future (>150 turns away)
-            # Taking orders too early wastes money and ties up resources
-            if wait_turns > 150:
+            # AGGRESSIVE: Prepare orders up to 80 turns early (vs 50-60 typical)
+            # This lets us be ready exactly when order activates
+            if wait_turns > 80:
                 continue
             if oid in self.completed_orders or oid in self.assigned_orders:
                 continue
@@ -1343,33 +1363,36 @@ class BotPlayer:
                 ft = FOOD_LUT.get(fn)
                 if ft:
                     cost += ft.buy_cost
-            # Skip failed assignments entirely (no cooldown - they failed for a reason)
             if oid in self.failed_assignments:
                 continue
             profit = o['reward'] - cost
-            # Skip orders with negative profit - completing them still loses money
-            # Only take orders that are actually profitable
-            if profit <= 0:
-                continue
+            # Accept orders with small losses if penalty is high
+            # This helps avoid larger penalties
             penalty = o.get('penalty', 0)
             if o['expires_turn'] >= GameConstants.TOTAL_TURNS:
                 penalty = 0
+            if profit + penalty <= 0:
+                continue
             value = profit + penalty
             ingredients = [FOOD_LUT[fn] for fn in o['required'] if fn in FOOD_LUT]
             n_cook = sum(1 for f in ingredients if f.can_cook)
             n_chop = sum(1 for f in ingredients if f.can_chop)
             tleft = o['expires_turn'] - turn
             est_simple = 8 + len(ingredients) * 3 + n_cook * 22 + n_chop * 4
-            # Prioritize orders that start soonest, then by efficiency
             efficiency = value / max(wait_turns + est_simple, 1)
+            
+            # Penalty urgency: high-penalty orders need priority
+            penalty_urgency = penalty / max(tleft, 1)
+            
             out.append({
                 'order': o, 'cost': cost, 'profit': profit,
                 'tleft': tleft, 'est': est_simple, 'efficiency': efficiency,
                 'needs_cook': n_cook > 0, 'needs_chop': n_chop > 0,
                 'penalty': penalty, 'wait_turns': wait_turns, 'value': value,
+                'penalty_urgency': penalty_urgency,
             })
-        # Sort by soonest start time first, then by penalty (higher first to avoid more loss), then efficiency
-        out.sort(key=lambda x: (x['wait_turns'], -x['penalty'], -x['efficiency']))
+        # STRATEGIC: Prioritize by penalty urgency first, then soonest start
+        out.sort(key=lambda x: (-x['penalty_urgency'], x['wait_turns'], -x['efficiency']))
         return out
 
     # ================================================================
@@ -3042,7 +3065,7 @@ class BotPlayer:
 
         # Split map handling
         if self._is_split_map:
-            self._split_map_assign(c, bots, idle_bots, orders, turn, available_money)
+            self._split_map_assign(c, bots, idle_bots, orders, turn, money)
             for bid in bots:
                 self._exec(c, bid)
             # Idle movement for split map
@@ -3424,8 +3447,68 @@ class BotPlayer:
                     if target and target in self._dist.get((bx, by), {}):
                         self._move_toward(c, bid, target[0], target[1])
 
+    def _ranked_orders_split(self, orders: List[Dict], turn: int,
+                              c: RobotController) -> List[Dict]:
+        """Like _ranked_orders but with relaxed filters for split maps."""
+        out = []
+        for o in orders:
+            oid = o['order_id']
+            if not o['is_active']:
+                continue
+            if oid in self.completed_orders or oid in self.assigned_orders:
+                continue
+            cost = ShopCosts.PLATE.buy_cost
+            for fn in o['required']:
+                ft = FOOD_LUT.get(fn)
+                if ft:
+                    cost += ft.buy_cost
+            if oid in self.failed_assignments:
+                continue
+            profit = o['reward'] - cost
+            penalty = o.get('penalty', 0)
+            if o['expires_turn'] >= GameConstants.TOTAL_TURNS:
+                penalty = 0
+            # Accept if profit is positive OR if completing avoids penalty
+            if profit + penalty <= 0 and penalty <= 0:
+                continue
+            ingredients = [FOOD_LUT[fn] for fn in o['required'] if fn in FOOD_LUT]
+            n_cook = sum(1 for f in ingredients if f.can_cook)
+            n_chop = sum(1 for f in ingredients if f.can_chop)
+            needs_cook = n_cook > 0
+            tleft = o['expires_turn'] - turn
+            if tleft < 10:
+                continue
+            value = max(profit + penalty, penalty)
+            est_simple = 8 + len(ingredients) * 3 + n_cook * 22 + n_chop * 4
+            efficiency = value / max(est_simple, 1)
+            out.append({
+                'order': o, 'cost': cost, 'profit': profit,
+                'tleft': tleft, 'est': est_simple, 'efficiency': efficiency,
+                'needs_cook': needs_cook, 'needs_chop': n_chop > 0,
+                'penalty': penalty,
+            })
+        out.sort(key=lambda x: -x['efficiency'])
+        return out
+
+    def _estimate_turns_split(self, order: Dict) -> int:
+        """Rough turn estimate for a split map order."""
+        ingredients = [FOOD_LUT[fn] for fn in order['required'] if fn in FOOD_LUT]
+        if not ingredients:
+            return 9999
+        n_cook = sum(1 for f in ingredients if f.can_cook)
+        n_chop = sum(1 for f in ingredients if f.can_chop)
+        # Base: travel + plate + simple items
+        est = 10 + len(ingredients) * 3
+        # Chop items: buy + place + chop + pickup + return (~8 each)
+        est += n_chop * 8
+        # Cook items: bridge handoff + cook time + return (~30 each)
+        est += n_cook * (GameConstants.COOK_PROGRESS + 10)
+        # Submit
+        est += 5
+        return est
+
     def _split_map_assign(self, c: RobotController, bots, idle_bots,
-                          orders, turn, available_money):
+                          orders, turn, money):
         """Assign cooperative orders on split maps."""
         idle_runners = [bid for bid in idle_bots if self._bot_role.get(bid) == 'runner']
         idle_producers = [bid for bid in idle_bots if self._bot_role.get(bid) == 'producer']
@@ -3433,7 +3516,23 @@ class BotPlayer:
         if not idle_runners or not idle_producers:
             return
 
-        candidates = self._ranked_orders(orders, turn, c)
+        # Calculate available money (subtract committed spending)
+        committed_spending = 0
+        for bid in bots:
+            t = self.tasks[bid]
+            if t.get('recipe') and t.get('order_id') is not None:
+                recipe = t.get('recipe', [])
+                step = t.get('step', 0)
+                for i in range(step, len(recipe)):
+                    action = recipe[i]
+                    if action[0] == 'buy':
+                        item = action[1]
+                        cost = getattr(item, 'buy_cost', 0)
+                        committed_spending += cost
+        available_money = money - committed_spending
+
+        # Use split-specific order ranking with relaxed filters
+        candidates = self._ranked_orders_split(orders, turn, c)
 
         for runner_bid in idle_runners:
             if not idle_producers:
@@ -3445,10 +3544,7 @@ class BotPlayer:
                     continue
                 if available_money < cand['cost'] + 2:
                     continue
-                est = 10 + len(cand['order']['required']) * 3
-                n_cook = sum(1 for fn in cand['order']['required']
-                             if FOOD_LUT.get(fn) and FOOD_LUT[fn].can_cook)
-                est += n_cook * (GameConstants.COOK_PROGRESS + 10)
+                est = self._estimate_turns_split(cand['order'])
                 if est > cand['tleft'] * 1.5:
                     continue
                 if turn + est > GameConstants.TOTAL_TURNS:
@@ -3477,4 +3573,5 @@ class BotPlayer:
                 self._diag_orders_attempted += 1
                 available_money -= cand['cost']
                 idle_producers.pop(0)
+                self._log(f"SPLIT ASSIGNED Order #{oid} to Runner={runner_bid}, Producer={producer_bid}")
                 break
