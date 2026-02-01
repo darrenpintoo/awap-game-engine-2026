@@ -408,7 +408,7 @@ class RobotController:
             return False
 
         if isinstance(b.holding, Plate):
-            b.holding = Plate([], True) #dirty plate
+            b.holding = Plate([], False) #clean plate
         elif isinstance(b.holding, Pan):
             b.holding = Pan(None) #empty pan
         else:
