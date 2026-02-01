@@ -719,9 +719,10 @@ class BotPlayer:
         total_time = 0
         max_cook_time = 0
         
-        # Average movement cost between key locations (approximate)
-        # On this map, features are spread out ~5-8 tiles apart
-        AVG_MOVE = 5
+        # Dynamic AVG_MOVE based on map size - be optimistic to avoid skipping feasible orders
+        game_map = controller.get_map(team)
+        map_diag = max(game_map.width, game_map.height)
+        AVG_MOVE = max(2, map_diag // 5)  # More optimistic: assume efficient pathing
         
         # If no plate yet, need time to get one
         if not plate_ready:
@@ -762,7 +763,7 @@ class BotPlayer:
                 total_time += AVG_MOVE + 1  # Buy
                 total_time += AVG_MOVE + 1 + 6 + 1  # Place, chop, pickup
                 total_time += AVG_MOVE + 1  # Place in cooker
-                max_cook_time = max(max_cook_time, 20)
+                max_cook_time = max(max_cook_time, 10)  # Cooking takes 10 turns
                 total_time += AVG_MOVE + 1 + AVG_MOVE + 1  # Take from pan + add to plate
             elif needs_chop:
                 # ONIONS: buy + move + place + chop + pickup + move to plate + add
@@ -773,7 +774,7 @@ class BotPlayer:
                 # EGG: buy + move to cooker + place + wait + take + move to plate + add
                 total_time += AVG_MOVE + 1  # Buy
                 total_time += AVG_MOVE + 1  # Place in cooker
-                max_cook_time = max(max_cook_time, 20)
+                max_cook_time = max(max_cook_time, 10)  # Cooking takes 10 turns
                 total_time += AVG_MOVE + 1 + AVG_MOVE + 1  # Take + add
             else:
                 # NOODLES, SAUCE: buy + move to plate + add
