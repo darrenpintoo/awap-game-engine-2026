@@ -1,166 +1,187 @@
 
+import sys
 import os
-import subprocess
-import json
+import glob
+import contextlib
+import io
 import time
+from concurrent.futures import ThreadPoolExecutor
 
-# --- Config ---
-BASE_DIR = os.getcwd()
-DASHBOARD_DATA_PATH = os.path.join(BASE_DIR, "tournament-dashboard/public/data.json")
-TURNS = 200
+# Add 'src' directory to path so we can import game module directly
+sys.path.append(os.path.join(os.getcwd(), 'src'))
 
-BOTS = [
-    # Top Tier / Main Comparisons
-    "bots/eric/truebot.py",
-    "bots/dpinto/JuniorChampion.py",
-    "testbots/test.py",
-    
-    # Complex Test Bots
-    "testbots/bot-Burger-2026-02-01T02-27-09-2dd8d56a-a89e-44a5-b5ef-c9131ba69be0.py",
-    "testbots/bot-Noodleheads-2026-02-01T05-40-38-9e379cec-19c7-4005-a542-dbb3067954c0.py",
-    "testbots/bot-robocc-2026-02-01T07-33-15-505ba463-69e7-4818-a269-029515b7499f.py",
-    
-    # Test Bots (bots/test-bots/)
-    "bots/test-bots/adaptive_switcher.py",
-    "bots/test-bots/aggressive_saboteur.py",
-    "bots/test-bots/do_nothing_bot.py",
-    "bots/test-bots/efficiency_maximizer.py",
-    "bots/test-bots/greedy_picker.py",
-    "bots/test-bots/rush_bot.py",
-    "bots/test-bots/turtle_defender.py",
-    "bots/test-bots/zone_coordinator.py"
-]
+try:
+    from game import Game
+    from game_constants import Team, GameConstants
+except ImportError as e:
+    print(f"Error: Could not import game module: {e}")
+    sys.exit(1)
 
+# Configuration
 MAPS = [
-    "maps/eric/throughput.txt",
-    "maps/eric/map5_grind.txt"
+    "maps/chess.txt",
+    "maps/donut.txt", 
+    "maps/messy.txt",
+    "maps/simple_map.txt",
+    "maps/split.txt"
 ]
 
-# Ensure paths exist
-BOTS = [b for b in BOTS if os.path.exists(os.path.join(BASE_DIR, b))]
-MAPS = [m for m in MAPS if os.path.exists(os.path.join(BASE_DIR, m))]
+# Define core bots
+CORE_BOTS = {
+    "TrueBot": "bots/eric/truebot.py",
+    "TestBot": "testbots/test.py", 
+    "JuniorChampion": "bots/dpinto/JuniorChampion.py",
+    "Reaper": "bots/hareshm/reaper.py"
+}
 
-print(f"Loaded {len(BOTS)} bots and {len(MAPS)} maps.")
+# Find opponent test bots
+TEST_BOTS_PATTERN = "testbots/bot-*.py"
+OPPONENT_BOTS = {}
+for path in glob.glob(TEST_BOTS_PATTERN):
+    name = os.path.basename(path).split("-")[1] # e.g. bot-Burger-... -> Burger
+    OPPONENT_BOTS[name] = path
 
+# Combine all bots
+ALL_BOTS = {**CORE_BOTS, **OPPONENT_BOTS}
 
-def load_data():
-    if os.path.exists(DASHBOARD_DATA_PATH):
+print(f"Loaded {len(ALL_BOTS)} bots: {list(ALL_BOTS.keys())}")
+print(f"Loaded {len(MAPS)} maps: {MAPS}")
+
+# Statistics storage
+# {bot_name: {wins: 0, matches: 0, total_score: 0, total_margin: 0}}
+STATS = {name: {"wins": 0, "matches": 0, "total_score": 0, "total_margin": 0} for name in ALL_BOTS}
+
+@contextlib.contextmanager
+def suppress_stdout():
+    """Suppress stdout during game execution to minimalize clutter."""
+    with open(os.devnull, "w") as devnull:
+        old_stdout = sys.stdout
+        sys.stdout = devnull
         try:
-            with open(DASHBOARD_DATA_PATH, 'r') as f:
-                data = json.load(f)
-            return data
-        except:
-            return None
-    return None
+            yield
+        finally:
+            sys.stdout = old_stdout
 
-def init_data():
-    data = load_data()
-    if data is None:
-        data = {
-            "metadata": {
-                "total_matches": 0,
-                "completed_matches": 0,
-                "last_updated": time.time()
-            },
-            "matches": []
-        }
-    return data
-
-def save_data(data):
-    try:
-        data["metadata"]["last_updated"] = time.time()
-        with open(DASHBOARD_DATA_PATH, 'w') as f:
-            json.dump(data, f, indent=2)
-    except Exception as e:
-        print(f"Error saving data: {e}")
-
-def get_bot_name(path):
-    return os.path.basename(path)
-
-def run_match(red_bot, blue_bot, map_path):
-    cmd = [
-        "python3", "src/game.py",
-        "--red", red_bot,
-        "--blue", blue_bot,
-        "--map", map_path,
-        "--turns", str(TURNS)
-    ]
+def run_match(map_path, red_name, red_path, blue_name, blue_path):
+    """Run a single match and return (red_money, blue_money, winner_name)."""
+    
+    # Initialize Game
+    # We set timeout=0 to disable threading overhead since we are running headless
+    # But wait, some bots might need threads? 
+    # game.py says: "Optimization: bypass threading if timeout is disabled (<= 0)"
+    # This is safer for performance in a gauntlet.
     
     try:
-        # print(f"Running {get_bot_name(red_bot)} vs {get_bot_name(blue_bot)} on {os.path.basename(map_path)}")
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
-        output = result.stdout
-        
-        scores_line = [line for line in output.split('\n') if "money scores:" in line]
-        if not scores_line:
-            # Check for crashes/timeouts if no score line
-            # print("  > Failed to get scores")
-            return None
+        # Create game instance
+        # We catch stdout to avoid spam
+        with suppress_stdout():
+            game = Game(
+                red_bot_path=red_path,
+                blue_bot_path=blue_path,
+                map_path=map_path,
+                render=False,
+                turn_limit=2000, # Standard game length
+                per_turn_timeout_s=0, # Disable timeout for speed/debug
+                fps_cap=999
+            )
+            game.run_game()
             
-        line = scores_line[0]
-        parts = line.split("scores:")[1].split(",")
-        red_score = int(parts[0].split("=$")[1])
-        blue_score = int(parts[1].split("=$")[1])
+        # Extract scores
+        red_money = game.game_state.get_team_money(Team.RED)
+        blue_money = game.game_state.get_team_money(Team.BLUE)
         
-        winner = "DRAW"
-        if red_score > blue_score: winner = get_bot_name(red_bot)
-        elif blue_score > red_score: winner = get_bot_name(blue_bot)
-        
-        # Parse duration (assuming it's roughly execution time or simulated turns, 
-        # but game.py doesn't output time directly in easily parsable standard way usually, 
-        # so we'll approximate or check if game.py outputs it. 
-        # Dashboard expects duration. Let's infer or fake it if missing, 
-        # but optimally we'd parse "Game took X seconds")
-        duration = 0.0 # Placeholder
-        
-        return {
-            "red_name": get_bot_name(red_bot),
-            "blue_name": get_bot_name(blue_bot),
-            "map_name": map_path, # Dashboard expects relative path usually or just name
-            "map_type": "official",
-            "winner": winner,
-            "duration": duration,
-            "red_score": red_score,
-            "blue_score": blue_score,
-            "timestamp": int(time.time() * 1000)
-        }
+        game.close()
+        return red_money, blue_money
         
     except Exception as e:
-        print(f"  > Match Error: {e}")
-        return None
+        print(f"CRASH: {red_name} vs {blue_name} on {map_path}: {e}")
+        return 0, 0
 
 def main():
-    data = init_data()
+    print("\n=== STARTING GAUNTLET ===\n")
     
-    # Calculate total remaining matches
-    # We will run Red vs Blue for every pair (including self if we wanted, but usually distinct)
-    # Let's do Full Round Robin excluding self-play for now
-    queue = []
-    for m in MAPS:
-        for i in range(len(BOTS)):
-            for j in range(len(BOTS)):
-                if i == j: continue # Skip self play
-                queue.append((BOTS[i], BOTS[j], m))
+    # We want to run:
+    # 1. Internal Round Robin (Core vs Core)
+    # 2. Gauntlet (Core vs Opponents)
+    
+    # Actually, simpler: just run Core vs All (including other Core)
+    # To save time, we skipped Opponent vs Opponent
+    
+    tasks = []
+    
+    # Generate match list
+    matches = []
+    
+    for map_path in MAPS:
+        map_name = os.path.basename(map_path)
+        
+        # Core vs Everyone (Round Robin style involving Core)
+        for core_name, core_path in CORE_BOTS.items():
+            for opp_name, opp_path in ALL_BOTS.items():
+                if core_name == opp_name: continue
                 
-    data["metadata"]["total_matches"] += len(queue)
-    save_data(data)
+                # Check if we already added the reverse match to avoid duplication?
+                # Actually, side matters (Red/Blue). We should run both ways for fairness.
+                # But to save time, let's doing ONE match per pair?
+                # No, map bias exists. Let's do PAIRS (Home/Away).
+                
+                # To avoid double counting (A vs B AND B vs A when iterating B's loop),
+                # we sort the names.
+                # But we only iterate Core as primary.
+                # If opp is also Core, we will encounter (True, Reaper) and later (Reaper, True).
+                # This works out perfectly: everyone gets to be Red once against everyone else.
+                
+                matches.append({
+                    "map": map_path,
+                    "red": (core_name, core_path),
+                    "blue": (opp_name, opp_path)
+                })
+
+    print(f"Scheduled {len(matches)} matches.")
     
-    print(f"queued {len(queue)} matches.")
+    start_time = time.time()
     
-    completed = 0
-    for red, blue, map_path in queue:
-        res = run_match(red, blue, map_path)
-        if res:
-            data["matches"].append(res)
-            data["metadata"]["completed_matches"] += 1
-            completed += 1
-            if completed % 1 == 0: # Save every match to see live updates
-                save_data(data)
-                print(f"[{completed}/{len(queue)}] {res['red_name']} vs {res['blue_name']}: {res['red_score']}-{res['blue_score']} ({res['winner']})")
-        else:
-            print(f"[{completed}/{len(queue)}] MATCH FAILED: {get_bot_name(red)} vs {get_bot_name(blue)}")
-            
-    print("Gauntlet Complete.")
+    for i, m in enumerate(matches):
+        red_name, red_path = m["red"]
+        blue_name, blue_path = m["blue"]
+        map_path = m["map"]
+        
+        sys.stdout.write(f"\r[{i+1}/{len(matches)}] {red_name} vs {blue_name} on {os.path.basename(map_path)}...")
+        sys.stdout.flush()
+        
+        r_score, b_score = run_match(map_path, red_name, red_path, blue_name, blue_path)
+        
+        # Update Stats
+        # RED Stats
+        STATS[red_name]["matches"] += 1
+        STATS[red_name]["total_score"] += r_score
+        STATS[red_name]["total_margin"] += (r_score - b_score)
+        if r_score > b_score: STATS[red_name]["wins"] += 1
+        
+        # BLUE Stats
+        STATS[blue_name]["matches"] += 1
+        STATS[blue_name]["total_score"] += b_score
+        STATS[blue_name]["total_margin"] += (b_score - r_score)
+        if b_score > r_score: STATS[blue_name]["wins"] += 1
+
+    total_time = time.time() - start_time
+    print(f"\n\nGauntlet Completed in {total_time:.2f}s")
+    
+    # Print Results Table
+    print("\n=== RESULTS ===\n")
+    print(f"{'Bot Name':<20} | {'Win Rate':<10} | {'Avg Score':<10} | {'Avg Margin':<10} | {'Matches':<8}")
+    print("-" * 75)
+    
+    # Sort by Win Rate then Avg Margin
+    ranked = sorted(STATS.items(), key=lambda x: (x[1]["wins"]/max(1, x[1]["matches"]), x[1]["total_margin"]), reverse=True)
+    
+    for name, s in ranked:
+        if s["matches"] == 0: continue
+        win_rate = (s["wins"] / s["matches"]) * 100
+        avg_score = s["total_score"] / s["matches"]
+        avg_margin = s["total_margin"] / s["matches"]
+        
+        print(f"{name:<20} | {win_rate:6.1f}%   | {avg_score:9.0f}  | {avg_margin:+9.0f}  | {s['matches']:<8}")
 
 if __name__ == "__main__":
     main()

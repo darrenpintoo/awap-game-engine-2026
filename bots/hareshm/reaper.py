@@ -630,7 +630,7 @@ class BotPlayer:
                     
                     if self._navigateToTargetPosition(controller, botIdentifier, cookerPos):
                         # If pan has cooked food, extract it first
-                        if tileItem.food is not None and tileItem.food.is_cooked:
+                        if tileItem.food is not None and tileItem.food.cooked_stage >= 1:
                             if controller.take_from_pan(botIdentifier, cookerPos[0], cookerPos[1]):
                                 _emitDiagnostic(f"Extracted contents from cookware at {cookerPos}")
                         else:
@@ -1055,7 +1055,7 @@ class BotPlayer:
                     if tileData is not None:
                         tileItem = getattr(tileData, 'item', None)
                         if isinstance(tileItem, Food):
-                            if tileItem.is_chopped:
+                            if tileItem.chopped:
                                 taskState['phase'] = TASK_STATE_RETRIEVING_PREPARED
                             else:
                                 controller.chop(botIdentifier, prepLoc[0], prepLoc[1])
