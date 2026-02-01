@@ -57,6 +57,7 @@ class BotPlayer:
         self.bot_cookers = {} # Assigned cooker per bot
         self.reserved_counters = set() # Per-turn reservation for assignment
         self.target_ingredients = {} # Planned ingredients
+        self.state_turns = defaultdict(int) # Track how long each bot stays in a state
 
     def initialize(self, controller: RobotController):
         if self.initialized:
@@ -151,10 +152,23 @@ class BotPlayer:
             
             # Roles: Bot 0 = Chef, Others = Support
             for i, bot_id in enumerate(bot_ids):
+                # Stuck detection: If in same state > 60 turns, force reset
+                old_state = self.bot_states.get(bot_id, 0)
                 if i == 0:
                     self._run_chef(controller, bot_id)
                 else:
                     self._run_support(controller, bot_id)
+                
+                new_state = self.bot_states.get(bot_id, 0)
+                if old_state == new_state and new_state != 0:
+                    self.state_turns[bot_id] += 1
+                else:
+                    self.state_turns[bot_id] = 0
+                
+                if self.state_turns[bot_id] > 60:
+                    print(f"[TRUE_ULTIMATE] Bot {bot_id} STUCK in state {new_state} for 60 turns. Resetting.")
+                    self.bot_states[bot_id] = 0
+                    self.state_turns[bot_id] = 0
                     
         except Exception as e:
             print(f"[TRUE_ULTIMATE] Error: {e}")
@@ -337,12 +351,17 @@ class BotPlayer:
                     # Check progress
                     tile = controller.get_tile(controller.get_team(), counter[0], counter[1])
                     item = getattr(tile, 'item', None)
-                    if item and item.chopped:
+                    if not item:
+                         print(f"[TRUE_ULTIMATE] Bot {bot_id} item missing from counter {counter} in State 4. Resetting.")
+                         self.bot_states[bot_id] = 0
+                    elif hasattr(item, 'chopped') and item.chopped:
                          # Pick up
                          if controller.pickup(bot_id, counter[0], counter[1]):
                              self.bot_states[bot_id] = 5
                     else:
-                        controller.chop(bot_id, counter[0], counter[1])
+                         controller.chop(bot_id, counter[0], counter[1])
+            else:
+                self.bot_states[bot_id] = 0
 
         # State 5: Cook (Place in Pan)
         elif state == 5:
@@ -384,8 +403,14 @@ class BotPlayer:
         elif state == 8:
              counter = self.bot_counters.get(bot_id)
              if self._move_toward(controller, bot_id, counter):
-                 controller.pickup(bot_id, counter[0], counter[1])
-                 self.bot_states[bot_id] = 9
+                 # Item-presence check
+                 tile = controller.get_tile(controller.get_team(), counter[0], counter[1])
+                 if not getattr(tile, 'item', None):
+                      print(f"[TRUE_ULTIMATE] Bot {bot_id} item missing from counter {counter} in State 8. Resetting.")
+                      self.bot_states[bot_id] = 0
+                 else:
+                      if controller.pickup(bot_id, counter[0], counter[1]):
+                          self.bot_states[bot_id] = 9
 
         # State 9: Add Noodles to Pan
         elif state == 9:
@@ -439,7 +464,6 @@ class BotPlayer:
         elif state == 12:
              if holding:
                   # Error state: We shouldn't hold anything here
-                  # Maybe we failed to place plate? Go back to 10
                   self.bot_states[bot_id] = 10
              else:
                  cooker = self.bot_cookers.get(bot_id)
@@ -450,7 +474,10 @@ class BotPlayer:
                          # Check if cooked
                          tile = controller.get_tile(controller.get_team(), cooker[0], cooker[1])
                          pan = getattr(tile, 'item', None)
-                         if pan and pan.food and pan.food.cooked_stage >= 2: # Cooked
+                         if not pan or not hasattr(pan, 'food'):
+                              print(f"[TRUE_ULTIMATE] Bot {bot_id} pan/food missing from {cooker} in State 12. Resetting.")
+                              self.bot_states[bot_id] = 0
+                         elif pan.food and hasattr(pan.food, 'cooked_stage') and pan.food.cooked_stage == 1: # Cooked stage is 1
                              if controller.take_from_pan(bot_id, cooker[0], cooker[1]):
                                  self.bot_states[bot_id] = 13
 
@@ -458,23 +485,59 @@ class BotPlayer:
         elif state == 13:
              counter = self.bot_counters.get(bot_id)
              if not counter:
-                  # Lost our plate? Reset?
-                  self.bot_states[bot_id] = 10 # Try to get plate again (will trash food effectively...)
-                  # Actually better to Trash food and restart than hang
+                  self.bot_states[bot_id] = 10
              else:
                   if self._move_toward(controller, bot_id, counter):
-                       # We are holding food. Target has Plate.
-                       if controller.add_food_to_plate(bot_id, counter[0], counter[1]):
-                            # Now pick up the plated food
-                            controller.pickup(bot_id, counter[0], counter[1])
-                            self.bot_states[bot_id] = 15
+                       # Verify plate still exists
+                       tile = controller.get_tile(controller.get_team(), counter[0], counter[1])
+                       if not isinstance(getattr(tile, 'item', None), Plate):
+                            print(f"[TRUE_ULTIMATE] Bot {bot_id} plate missing from counter {counter} in State 13. Resetting.")
+                            self.bot_states[bot_id] = 0
+                       else:
+                            # We are holding food. Target has Plate.
+                            if controller.add_food_to_plate(bot_id, counter[0], counter[1]):
+                                 self.bot_states[bot_id] = 14
+
+        # State 14: Pickup Plated Food
+        elif state == 14:
+             counter = self.bot_counters.get(bot_id)
+             if not counter:
+                 # Lost plate?
+                 self.bot_states[bot_id] = 10
+             else:
+                 if holding and holding.get('type') == 'Plate':
+                     # Already holding it (maybe pickup worked somehow?)
+                     self.bot_states[bot_id] = 15
+                 else:
+                     if self._move_toward(controller, bot_id, counter):
+                         if controller.pickup(bot_id, counter[0], counter[1]):
+                             self.bot_states[bot_id] = 15
 
         # State 15: Submit
         elif state == 15:
              target = self._get_tile_pos('SUBMIT', (bot['x'], bot['y']))
              if target and self._move_toward(controller, bot_id, target):
-                 if controller.submit(bot_id, target[0], target[1]):
-                     self.bot_states[bot_id] = 0 
+                 # Valid order check
+                 if holding and holding.get('type') == 'Plate':
+                     plate_foods = sorted([f.get('food_name') for f in holding.get('food', [])])
+                     orders = controller.get_orders(controller.get_team())
+                     any_match = False
+                     for o in orders:
+                         if not o.get('is_active'): continue
+                         req_foods = sorted(o.get('required', []))
+                         if plate_foods == req_foods:
+                             any_match = True
+                             break
+                     
+                     if any_match:
+                         if controller.submit(bot_id, target[0], target[1]):
+                             self.bot_states[bot_id] = 0
+                     else:
+                         # Invalid plate! Go trash it.
+                         print(f"[TRUE_ULTIMATE] Bot {bot_id} invalid plate {plate_foods}. Trashing.")
+                         self.bot_states[bot_id] = 16
+                 else:
+                     self.bot_states[bot_id] = 0
                      
         # State 16: Trash (Error Recovery)
         elif state == 16:

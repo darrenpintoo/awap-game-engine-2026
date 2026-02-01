@@ -1,7 +1,8 @@
 """
-APEX CHEF v1.1
-Strategy: Global Supply Chain + Aggressive Sabotage + State Guarding
-Fixes: Auto-places items before chopping, scans counters for pending work.
+APEX CHEF v2.2
+Codename: "Bootstrap"
+Strategy: Global Supply Chain + Aggressive Sabotage + API v2 Support
+Fixes: Allows 'Pre-movement' to shops even when broke, preventing start-of-game stalls.
 """
 
 import time
@@ -29,12 +30,13 @@ from item import Pan, Plate, Food
 # CONFIGURATION
 # ============================================
 
-# Priority Hierarchy (Higher = More Urgent)
+# Priority Hierarchy
 P_CRITICAL     = 1000  # Save burning food
 P_SABOTAGE     = 950   # Steal plates (Phase 2)
 P_STATE_FIX    = 800   # "I hold X, I must do Y"
 P_WORLD_STATE  = 700   # "Item on counter needs X"
-P_SUBMIT       = 500   # Cash in
+P_SUBMIT       = 600   # Cash in
+P_COOK_STEP    = 500   # Active cooking steps
 P_LOGISTICS    = 100   # Buying/Fetching
 P_MAINTENANCE  = 50    # Washing
 P_IDLE         = 0
@@ -44,17 +46,10 @@ COST_IMPOSSIBLE = 99999
 COST_HIGH       = 5000
 
 class JobType(Enum):
-    # Critical
     SAVE_FOOD = auto()
-    
-    # State Fixes
     FINISH_ITEM = auto()
-    
-    # Sabotage
     STEAL_PLATE = auto()
     STEAL_PAN = auto()
-    
-    # Standard Flow
     SUBMIT = auto()
     BUY_INGREDIENT = auto()
     BUY_PAN = auto()
@@ -64,8 +59,8 @@ class JobType(Enum):
     START_COOK = auto()
     TAKE_FROM_PAN = auto()
     ADD_TO_PLATE = auto()
-    PICKUP_PLATE = auto()     # New: Pickup plated food
-    TAKE_CLEAN_PLATE = auto() # New: Get plate from sink
+    PICKUP_PLATE = auto()
+    TAKE_CLEAN_PLATE = auto()
     WASH = auto()
     IDLE = auto()
 
@@ -118,13 +113,18 @@ class BotPlayer:
         self.cooking_info = {}
         self.active_orders = []
         self.global_supply = Counter()
+        self.current_money = 0
+        self.my_team = None
+        self.empty_counters = 0
 
     # -------------------------------------------------------------------------
     # INITIALIZATION
     # -------------------------------------------------------------------------
     def initialize(self, controller: RobotController):
         if self.initialized: return
-        m = controller.get_map()
+        
+        self.my_team = controller.get_team()
+        m = controller.get_map(self.my_team) 
         
         # Parse Map
         for x in range(m.width):
@@ -139,16 +139,16 @@ class BotPlayer:
                 elif tn == 'SINK': self.sinks.append((x, y))
                 elif tn == 'SINKTABLE': self.sink_tables.append((x, y))
                 elif tn == 'COUNTER': self.counters.append((x, y))
-                elif tn == 'BOX': self.counters.append((x, y)) # Treat Boxes as Counters
+                elif tn == 'BOX': self.counters.append((x, y))
                 elif tn == 'SUBMIT': 
                     self.submits.append((x, y))
                     self.walkable.add((x, y))
                 elif tn == 'TRASH': self.trashes.append((x, y))
 
-        # Build Chebyshev Distance Matrix (8-way movement)
+        # Build Chebyshev Distance Matrix
         self._build_distance_matrix(m)
         self.initialized = True
-        print(f"[APEX] System Online. {len(self.walkable)} nodes mapped.")
+        print(f"[APEX v2.2] System Online. Team: {self.my_team}")
 
     def _build_distance_matrix(self, m):
         for start in self.walkable:
@@ -161,8 +161,10 @@ class BotPlayer:
                     for dy in [-1, 0, 1]:
                         if dx==0 and dy==0: continue
                         nx, ny = cx+dx, cy+dy
+                        
                         if (nx, ny) in visited: continue
                         if not (0 <= nx < m.width and 0 <= ny < m.height): continue
+                        
                         if getattr(m.tiles[nx][ny], 'is_walkable', False):
                             visited.add((nx, ny))
                             self.dist_matrix[start][(nx, ny)] = dist + 1
@@ -172,11 +174,16 @@ class BotPlayer:
     # STATE ANALYSIS
     # -------------------------------------------------------------------------
     def update_state(self, controller: RobotController):
-        self.active_orders = [o for o in controller.get_orders() if o.get('is_active')]
+        self.my_team = controller.get_team()
         
+        # 1. Orders & Money
+        self.active_orders = [o for o in controller.get_orders(self.my_team) if o.get('is_active')]
+        self.current_money = controller.get_team_money(self.my_team)
+        
+        # 2. Cooking Status
         self.cooking_info.clear()
         for kx, ky in self.cookers:
-            t = controller.get_tile(controller.get_team(), kx, ky)
+            t = controller.get_tile(self.my_team, kx, ky)
             item = getattr(t, 'item', None)
             if isinstance(item, Pan) and item.food:
                 self.cooking_info[(kx, ky)] = CookingInfo(
@@ -184,16 +191,26 @@ class BotPlayer:
                     getattr(t, 'cook_progress', 0), item.food.cooked_stage
                 )
 
-        # Supply Audit
+        # 3. Supply Chain Audit
         self.global_supply.clear()
-        for bid in controller.get_team_bot_ids():
+        self.empty_counters = 0
+        
+        # Count held items
+        for bid in controller.get_team_bot_ids(self.my_team):
             h = controller.get_bot_state(bid).get('holding')
             if h and h.get('type') == 'Food':
                 self.global_supply[h['food_name']] += 1
+                
+        # Count items on counters/boxes
         for cx, cy in self.counters:
-            t = controller.get_tile(controller.get_team(), cx, cy)
-            if t and t.item and isinstance(t.item, Food):
-                self.global_supply[t.item.food_name] += 1
+            t = controller.get_tile(self.my_team, cx, cy)
+            if t and t.item:
+                if isinstance(t.item, Food):
+                    self.global_supply[t.item.food_name] += 1
+            else:
+                self.empty_counters += 1
+                
+        # Count items in pans
         for info in self.cooking_info.values():
             self.global_supply[info.food_name] += 1
 
@@ -202,8 +219,49 @@ class BotPlayer:
     # -------------------------------------------------------------------------
     def generate_jobs(self, controller) -> List[Job]:
         jobs = []
-        bots = controller.get_team_bot_ids()
+        bots = controller.get_team_bot_ids(self.my_team)
         
+        # 0. INVENTORY AUDIT (Tools Check)
+        pan_count = 0
+        plate_count = 0
+        
+        # Count Map Assets
+        for loc in self.cookers:
+            t = controller.get_tile(self.my_team, *loc)
+            if isinstance(getattr(t, 'item', None), Pan): pan_count += 1
+        
+        for loc in self.sink_tables:
+            t = controller.get_tile(self.my_team, *loc)
+            plate_count += getattr(t, 'num_clean_plates', 0)
+            
+        for loc in self.sinks:
+             t = controller.get_tile(self.my_team, *loc)
+             plate_count += getattr(t, 'num_dirty_plates', 0)
+
+        for loc in self.counters:
+            t = controller.get_tile(self.my_team, *loc)
+            item = getattr(t, 'item', None)
+            if isinstance(item, Pan): pan_count += 1
+            if isinstance(item, Plate): plate_count += 1
+            
+        # Count Held Assets
+        for bid in bots:
+            h = controller.get_bot_state(bid).get('holding')
+            if h:
+                if h['type'] == 'Pan': pan_count += 1
+                elif h['type'] == 'Plate': plate_count += 1
+
+        # --- CRITICAL SETUP PHASE ---
+        # FIX: Removed the 'if money >= 10' check.
+        # Bots will now walk to shops even if broke, and wait for passive income.
+        if pan_count < 1: 
+            jobs.append(Job(JobType.BUY_PAN, priority=2000))
+        elif pan_count < len(self.cookers):
+                jobs.append(Job(JobType.BUY_PAN, priority=40))
+
+        if plate_count < 2: 
+            jobs.append(Job(JobType.BUY_PLATE, priority=1900))
+
         # 1. EMERGENCY (Save Burnt Food)
         for loc, info in self.cooking_info.items():
             if info.cooked_stage == 1:
@@ -221,43 +279,45 @@ class BotPlayer:
             h_type = holding.get('type')
             if h_type == 'Food':
                 name = holding.get('food_name', '').upper()
-                is_chopped = holding.get('is_chopped', False)
+                is_chopped = holding.get('chopped', False) # API v2
                 stage = holding.get('cooked_stage', 0)
                 
                 if name in ['MEAT', 'ONIONS'] and not is_chopped:
                     jobs.append(Job(JobType.CHOP, priority=P_STATE_FIX)) 
                 elif (name == 'MEAT' and is_chopped and stage == 0) or (name == 'EGG' and stage == 0):
-                    jobs.append(Job(JobType.START_COOK, priority=P_STATE_FIX))
+                    if pan_count > 0:
+                        jobs.append(Job(JobType.START_COOK, priority=P_STATE_FIX))
+                    else:
+                        jobs.append(Job(JobType.PLACE_ON_COUNTER, priority=P_CRITICAL))
                 else:
                     jobs.append(Job(JobType.ADD_TO_PLATE, priority=P_STATE_FIX))
 
             elif h_type == 'Plate':
                 if len(holding.get('food', [])) > 0:
                     jobs.append(Job(JobType.SUBMIT, priority=P_SUBMIT))
+                else:
+                     jobs.append(Job(JobType.PLACE_ON_COUNTER, priority=P_STATE_FIX - 50))
             
             elif h_type == 'Pan':
                 jobs.append(Job(JobType.PLACE_ON_COUNTER, priority=P_STATE_FIX))
 
-        # 3. WORLD STATE SCAN (Items on counters)
+        # 3. WORLD STATE SCAN
         for cx, cy in self.counters:
-            t = controller.get_tile(controller.get_team(), cx, cy)
+            t = controller.get_tile(self.my_team, cx, cy)
             if not t: continue
             item = getattr(t, 'item', None)
             
             if isinstance(item, Food):
                 name = getattr(item, 'food_name', '').upper()
-                is_chopped = getattr(item, 'is_chopped', False)
+                is_chopped = getattr(item, 'chopped', False)
                 
-                # Raw Meat/Onion on counter -> Needs Chop
                 if name in ['MEAT', 'ONIONS'] and not is_chopped:
                     jobs.append(Job(JobType.CHOP, target=(cx, cy), priority=P_WORLD_STATE))
-                
-                # Chopped Meat on counter -> Needs Cook
                 elif name == 'MEAT' and is_chopped:
-                    jobs.append(Job(JobType.START_COOK, priority=P_WORLD_STATE)) # Generic pickup logic
+                    if pan_count > 0:
+                        jobs.append(Job(JobType.START_COOK, priority=P_WORLD_STATE))
             
             elif isinstance(item, Plate):
-                # Plate on counter -> Pickup?
                 foods = getattr(item, 'food', [])
                 if len(foods) >= 1:
                     jobs.append(Job(JobType.PICKUP_PLATE, target=(cx, cy), priority=P_SUBMIT))
@@ -272,30 +332,42 @@ class BotPlayer:
             return jobs
 
         # 5. ORDER FULFILLMENT
-        for order in self.active_orders:
-            needed_for_order = Counter()
-            for req in order['required']: needed_for_order[req.upper()] += 1
+        kitchen_ready = (pan_count > 0 and plate_count > 0)
+        
+        # Only buy ingredients if we can afford them AND have tools
+        if kitchen_ready:
+            counters_full = (self.empty_counters == 0)
             
-            prio = P_LOGISTICS + (order['reward'] // 100)
-            for item, count in needed_for_order.items():
-                have = self.global_supply[item]
-                needed = count - have
-                if needed > 0:
-                    ft = self._name_to_foodtype(item)
-                    if ft:
-                        for _ in range(needed):
-                            jobs.append(Job(JobType.BUY_INGREDIENT, item=ft, priority=prio))
-                            self.global_supply[item] += 1
+            if not counters_full:
+                for order in self.active_orders:
+                    needed_for_order = Counter()
+                    for req in order['required']: needed_for_order[req.upper()] += 1
+                    
+                    prio = P_LOGISTICS + (order['reward'] // 100)
+                    for item, count in needed_for_order.items():
+                        have = self.global_supply[item]
+                        needed = count - have
+                        
+                        if needed > 0:
+                            ft = self._name_to_foodtype(item)
+                            if ft:
+                                cost = self._get_item_cost(item)
+                                # Strict Money Check for Ingredients (Don't buy if broke)
+                                if self.current_money >= cost:
+                                    for _ in range(needed):
+                                        jobs.append(Job(JobType.BUY_INGREDIENT, item=ft, priority=prio))
+                                        self.global_supply[item] += 1
+                                        self.current_money -= cost 
+                                else:
+                                    break
 
         # 6. MAINTENANCE
-        clean_plates = sum(getattr(controller.get_tile(controller.get_team(), *s), 'num_clean_plates', 0) for s in self.sink_tables)
+        clean_plates = sum(getattr(controller.get_tile(self.my_team, *s), 'num_clean_plates', 0) for s in self.sink_tables)
         if clean_plates < 2:
             for s in self.sinks: jobs.append(Job(JobType.WASH, target=s, priority=P_MAINTENANCE))
         if clean_plates > 0:
             for st in self.sink_tables: jobs.append(Job(JobType.TAKE_CLEAN_PLATE, target=st, priority=P_MAINTENANCE + 10))
             
-        jobs.append(Job(JobType.BUY_PAN, priority=40))
-        jobs.append(Job(JobType.BUY_PLATE, priority=45))
         jobs.append(Job(JobType.IDLE, priority=P_IDLE))
         
         return jobs
@@ -304,7 +376,7 @@ class BotPlayer:
     # HIVE MIND: TASK ASSIGNMENT
     # -------------------------------------------------------------------------
     def assign_tasks(self, controller, jobs):
-        bots = controller.get_team_bot_ids()
+        bots = controller.get_team_bot_ids(self.my_team)
         if not bots or not jobs: return {}
         
         cost_matrix = np.full((len(bots), len(jobs)), float(COST_IMPOSSIBLE))
@@ -315,7 +387,7 @@ class BotPlayer:
             holding = bot.get('holding')
             
             for c, job in enumerate(jobs):
-                # 1. Distance
+                # 1. Distance Cost
                 target = job.target
                 if not target:
                     if job.job_type == JobType.BUY_INGREDIENT: target = self.get_nearest(pos, self.shops)
@@ -326,14 +398,13 @@ class BotPlayer:
                 
                 dist = self.get_dist(pos, target) if target else 0
                 
-                # 2. State Penalties
+                # 2. State Guard
                 penalty = 0
                 jt = job.job_type
                 
-                # Can't chop/cook if holding wrong things
                 if jt == JobType.CHOP:
                     if holding and holding.get('type') == 'Plate': penalty = COST_HIGH
-                    elif holding and holding.get('type') == 'Food': penalty = -200 # Holding food? Encouraged!
+                    elif holding and holding.get('type') == 'Food': penalty = -200 
                 elif jt == JobType.START_COOK:
                     if not holding or holding.get('type') != 'Food': penalty = COST_HIGH
                     else: penalty = -500
@@ -347,7 +418,7 @@ class BotPlayer:
         if HAS_SCIPY:
             row, col = linear_sum_assignment(cost_matrix)
         else:
-            col = np.argmin(cost_matrix, axis=1)
+            col = np.argmin(cost_matrix, axis=1) # Fallback
             row = range(len(bots))
 
         return {bots[r]: jobs[c] for r, c in zip(row, col)}
@@ -373,7 +444,6 @@ class BotPlayer:
             
             if len(path) > 10: continue
             
-            # 8-Way + Wait
             moves = [(0,1),(0,-1),(1,0),(-1,0),(1,1),(1,-1),(-1,1),(-1,-1),(0,0)]
             for dx, dy in moves:
                 nx, ny = curr[0]+dx, curr[1]+dy
@@ -387,7 +457,7 @@ class BotPlayer:
         return (0,0)
 
     # -------------------------------------------------------------------------
-    # EXECUTION (PATCHED)
+    # EXECUTION
     # -------------------------------------------------------------------------
     def execute(self, controller, bot_id, job):
         bot = controller.get_bot_state(bot_id)
@@ -426,18 +496,6 @@ class BotPlayer:
 
     def move_bot(self, controller, bot_id, target):
         dx, dy = self.get_move(controller, bot_id, target, controller.get_turn())
-        
-        # Deadlock Breaker: If stuck (0,0), try random valid move
-        if dx == 0 and dy == 0:
-            moves = [(0,1), (0,-1), (1,0), (-1,0), (1,1), (1,-1), (-1,1), (-1,-1)]
-            random.shuffle(moves)
-            bot = controller.get_bot_state(bot_id)
-            for m in moves:
-                nx, ny = bot['x']+m[0], bot['y']+m[1]
-                if (nx, ny) in self.walkable:
-                     dx, dy = m
-                     break
-        
         controller.move(bot_id, dx, dy)
 
     def _perform_action(self, controller, bot_id, job, target, holding):
@@ -452,11 +510,11 @@ class BotPlayer:
             if not holding: controller.buy(bot_id, ShopCosts.PLATE, tx, ty)
             
         elif jt == JobType.CHOP:
-            if holding: controller.place(bot_id, tx, ty) # Fix: Place first!
+            if holding: controller.place(bot_id, tx, ty)
             else: controller.chop(bot_id, tx, ty)
             
         elif jt == JobType.START_COOK:
-            if holding: controller.place(bot_id, tx, ty) # Place starts cook
+            if holding: controller.place(bot_id, tx, ty)
             
         elif jt == JobType.TAKE_FROM_PAN: 
             if not holding: controller.take_from_pan(bot_id, tx, ty)
@@ -471,9 +529,8 @@ class BotPlayer:
             if holding: controller.place(bot_id, tx, ty)
             
         elif jt == JobType.WASH:
-            tile = controller.get_tile(controller.get_team(), tx, ty)
-            if getattr(tile, 'num_dirty_plates', 0) > 0:
-                controller.wash_sink(bot_id, tx, ty)
+            tile = controller.get_tile(self.my_team, tx, ty)
+            if getattr(tile, 'num_dirty_plates', 0) > 0: controller.wash_sink(bot_id, tx, ty)
                 
         elif jt == JobType.TAKE_CLEAN_PLATE:
             if not holding: controller.take_clean_plate(bot_id, tx, ty)
@@ -485,8 +542,7 @@ class BotPlayer:
             if holding: 
                 tr = self.get_nearest((tx, ty), self.trashes)
                 controller.trash(bot_id, tr[0], tr[1])
-            else: 
-                controller.take_clean_plate(bot_id, tx, ty)
+            else: controller.take_clean_plate(bot_id, tx, ty)
                 
         elif jt == JobType.STEAL_PAN:
             if not holding: controller.pickup(bot_id, tx, ty)
@@ -505,18 +561,18 @@ class BotPlayer:
     def _find_empty(self, c, locs, pos):
         sorted_locs = sorted(locs, key=lambda x: self.get_dist(pos, x))
         for l in sorted_locs:
-            if not getattr(c.get_tile(c.get_team(), *l), 'item', None): return l
+            if not getattr(c.get_tile(self.my_team, *l), 'item', None): return l
         return sorted_locs[0] if sorted_locs else None
 
     def _find_empty_pan(self, c, locs, pos):
         for l in sorted(locs, key=lambda x: self.get_dist(pos, x)):
-            it = getattr(c.get_tile(c.get_team(), *l), 'item', None)
+            it = getattr(c.get_tile(self.my_team, *l), 'item', None)
             if isinstance(it, Pan) and not it.food: return l
         return None
 
     def _find_plate(self, c, locs, pos):
         for l in sorted(locs, key=lambda x: self.get_dist(pos, x)):
-            it = getattr(c.get_tile(c.get_team(), *l), 'item', None)
+            it = getattr(c.get_tile(self.my_team, *l), 'item', None)
             if isinstance(it, Plate): return l
         return None
         
@@ -529,9 +585,18 @@ class BotPlayer:
         if n == 'NOODLES': return FoodType.NOODLES
         if n == 'SAUCE': return FoodType.SAUCE
         return None
+        
+    def _get_item_cost(self, name):
+        name = name.upper()
+        if name == 'MEAT': return 80
+        if name == 'NOODLES': return 40
+        if name == 'ONION' or name == 'ONIONS': return 30
+        if name == 'EGG': return 20
+        if name == 'SAUCE': return 10
+        return 9999
 
     # -------------------------------------------------------------------------
-    # MAIN LOOP
+    # MAIN
     # -------------------------------------------------------------------------
     def play_turn(self, controller: RobotController):
         self.initialize(controller)

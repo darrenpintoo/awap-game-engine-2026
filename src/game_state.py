@@ -154,7 +154,7 @@ class GameState:
         self.bots: Dict[int, BotState] = {}
         
         #shared team money
-        self.team_money: Dict[Team, int] = {Team.RED: 150, Team.BLUE: 150}
+        self.team_money: Dict[Team, int] = {Team.RED: 800, Team.BLUE: 800}
         
         #each team has its own independent order list
         self.orders: Dict[Team, List[Order]] = {Team.RED: [], Team.BLUE: []}

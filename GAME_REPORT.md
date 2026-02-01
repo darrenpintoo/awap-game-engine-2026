@@ -1,4 +1,4 @@
-# AWAP 2026: Carnegie Cookoff - Complete Game Mechanics & Strategy Report
+# AWAP 2026: Carnegie Cookoff - Complete Game Mechanics Report
 
 ## Table of Contents
 1. [Game Overview](#1-game-overview)
@@ -8,8 +8,6 @@
 5. [Bot API Reference](#5-bot-api-reference)
 6. [Order System](#6-order-system)
 7. [Mid-Game Switch Mechanic](#7-mid-game-switch-mechanic)
-8. [Current Bot Strategy](#8-current-bot-strategy)
-9. [Known Weaknesses & Open Questions](#9-known-weaknesses--open-questions)
 
 ---
 
@@ -21,8 +19,8 @@
 |-----------|-------|
 | Total Turns | 500 |
 | Teams | 2 (RED vs BLUE) |
-| Bots per Team | 2 (configurable by map) |
-| Starting Money | $150 per team |
+| Bots per Team | 2 (configurable) |
+| Starting Money | Configurable via `GameConstants` or `GameState` init (default varies) |
 | Passive Income | +$1 per team per turn |
 
 **Win Condition**: Team with the highest `team_money` at turn 500 wins.
@@ -37,7 +35,7 @@ Each turn proceeds as follows:
 1. **Environment Tick**: Cooking progress advances, dishes wash automatically if sink is active
 2. **Order Expiry Check**: Expired orders deduct penalty from team money
 3. **Switch Window Check**: If switch window ended, teleport bots back to home map
-4. **Bot Actions**: Each bot can perform **1 move + 1 action**
+4. **Bot Actions**: Each bot can perform **1 move** AND **1 action** (in that order, or just action)
 
 ### 2.2 Movement
 
@@ -74,7 +72,8 @@ Actions must target a tile within **Chebyshev distance 1** (including the bot's 
 
 ### 3.1 Map Format
 
-Maps are ASCII text files. Example:
+Maps are ASCII text files defining the grid layout and order waves. Note that starting money is NOT configured in the map file.
+
 ```
 ################
 #...C.....$...b#
@@ -109,7 +108,7 @@ start=0  duration=200  required=NOODLES,MEAT  reward=10000 penalty=3
 
 - **Interaction Range**: Must be within Chebyshev distance 1 to interact
 - **Bots cannot stand on non-walkable tiles**
-- **Each map is independent**: RED and BLUE have separate, identical maps
+- **Each map is independent**: RED and BLUE have separate, identical maps (until Switch)
 
 ---
 
@@ -125,14 +124,20 @@ start=0  duration=200  required=NOODLES,MEAT  reward=10000 penalty=3
 | NOODLES | $40 | ❌ | ❌ | No processing needed |
 | SAUCE | $10 | ❌ | ❌ | No processing needed |
 
-### 4.2 Equipment
+**Important Attribute**: Access chopping status via `item.chopped` (boolean), NOT `is_chopped`.
+
+### 4.2 Buying Rules
+- **No Debt**: You cannot buy an item if your team's money is less than the item's cost.
+- **Negative Balance**: If your balance is negative, you cannot buy anything (assuming costs are positive).
+
+### 4.3 Equipment
 
 | Item | Cost | Description |
 |------|------|-------------|
-| PLATE | $2 | Required for plating and submitting orders |
-| PAN | $4 | Required for cooking on the cooker |
+| PLATE | $10 | Value varies by store config. Required for plating/submitting. |
+| PAN | $10 | Value varies. Required for cooking. |
 
-### 4.3 Cooking System
+### 4.4 Cooking System
 
 1. **Place Pan on Cooker** (via `place()`)
 2. **Add Food to Pan** (via `place()` while holding cookable food)
@@ -144,17 +149,19 @@ start=0  duration=200  required=NOODLES,MEAT  reward=10000 penalty=3
 
 > **CRITICAL**: Cooking is automatic and CANNOT be paused. You must retrieve food at exactly the right time.
 
-### 4.4 Plate System
+### 4.5 Plate System
 
-1. **Clean Plates**: Come from `SINKTABLE` (via `take_clean_plate()`)
-2. **Adding Food**: Use `add_food_to_plate()` - bot can hold plate and target food, or hold food and target plate
-3. **Submitting**: Plate must be clean and contain exact ingredients for an order
-4. **After Submission**: Plate becomes dirty and goes to SINK automatically
-5. **Washing**: Bot uses `wash_sink()` on SINK tile. Each turn washing is active, `PLATE_WASH_PROGRESS` (2) increments. At 2, one dirty plate becomes clean and appears at SINKTABLE.
+1. **Clean Plates**: Come from `SINKTABLE` (via `take_clean_plate()`). Can also buy new plates.
+2. **Adding Food**: Use `add_food_to_plate()` - bot can hold plate and target food, or hold food and target plate.
+3. **Submitting**: Plate must be clean and contain exact ingredients for an order.
+4. **After Submission**: Plate becomes dirty.
+5. **Washing**: Bot uses `wash_sink()` on SINK tile. Each turn washing is active, `PLATE_WASH_PROGRESS` increments. When full, a dirty plate becomes clean at SINKTABLE.
 
 ---
 
 ## 5. Bot API Reference
+
+**NOTE**: Many `controller` methods now require the `team` argument (e.g., `controller.get_team()`).
 
 ### 5.1 State Query Methods
 
@@ -162,10 +169,13 @@ start=0  duration=200  required=NOODLES,MEAT  reward=10000 penalty=3
 controller.get_turn() -> int                    # Current turn number
 controller.get_team() -> Team                   # RED or BLUE
 controller.get_enemy_team() -> Team             # The opposing team
-controller.get_map() -> Map                     # Deep copy of your map
-controller.get_orders() -> List[Dict]           # Active orders for your team
-controller.get_team_bot_ids() -> List[int]      # Your bot IDs
-controller.get_team_money() -> int              # Shared team money
+
+# UPDATED: These require the team argument
+controller.get_map(team) -> Map                 # Deep copy of map for specified team
+controller.get_orders(team) -> List[Order]      # Active orders for specified team
+controller.get_team_bot_ids(team) -> List[int]  # Bot IDs for specified team
+
+controller.get_team_money(team) -> int          # Team money
 controller.get_bot_state(bot_id) -> Dict        # Position, holding, etc.
 controller.get_tile(team, x, y) -> Tile         # Tile at position
 ```
@@ -190,12 +200,13 @@ controller.trash(bot_id, target_x, target_y) -> bool        # Trash held item
 ```python
 controller.can_buy(bot_id, item, target_x, target_y) -> bool
 controller.buy(bot_id, item, target_x, target_y) -> bool    # item = FoodType.X or ShopCosts.X
+# FAILS if team_money < cost
 ```
 
 ### 5.5 Food Processing
 
 ```python
-controller.chop(bot_id, target_x, target_y) -> bool         # Chop food on COUNTER (bot must NOT hold anything)
+controller.chop(bot_id, target_x, target_y) -> bool         # Chop food on COUNTER
 controller.start_cook(bot_id, target_x, target_y) -> bool   # Put held food into pan on cooker
 controller.take_from_pan(bot_id, target_x, target_y) -> bool # Take food from pan
 ```
@@ -242,24 +253,8 @@ controller.submit(bot_id, target_x, target_y) -> bool
 ### 6.2 Order Matching Rules
 
 For an order requiring `[NOODLES, MEAT]`:
-- **NOODLES**: Must be raw (not chopped, not cooked) - because `can_chop=False, can_cook=False`
-- **MEAT**: Must be chopped AND cooked (stage 1) - because `can_chop=True, can_cook=True`
-
-**The matching algorithm:**
-```python
-for each required food_type:
-    expected = (food_id, must_be_chopped=can_chop, must_be_cooked=1 if can_cook else 0)
-```
-
-### 6.3 Submission Flow
-
-1. Bot holds a **clean, non-empty Plate**
-2. Bot is adjacent to **SUBMIT** tile (`U`)
-3. Call `controller.submit(bot_id, submit_x, submit_y)`
-4. If plate contents match an active order → **Success**:
-   - Team gains `reward` money
-   - Plate becomes dirty (auto-sent to nearest SINK)
-5. If no match → **Failure**: Action wasted, plate still held
+- **NOODLES**: Must be raw (not chopped, not cooked)
+- **MEAT**: Must be chopped (`item.chopped=True`) AND cooked (`cooked_stage=1`)
 
 ---
 
@@ -267,231 +262,23 @@ for each required food_type:
 
 ### 7.1 Overview
 
-This is a **sabotage mechanic** allowing teams to temporarily invade the enemy's kitchen.
-
-| Parameter | Default Value |
-|-----------|---------------|
-| Switch Turn | 250 |
-| Switch Duration | 100 turns |
+A **sabotage mechanic** allowing teams to temporarily invade the enemy's kitchen.
 
 ### 7.2 Switch Window
 
-- **Active Window**: Turn 250 through Turn 349 (inclusive)
-- **During Window**: Either team can call `switch_maps()` **once per game**
-- **Effect**: All bots on that team teleport to the enemy's map
+- **Active Window**: Defined in map file (e.g., Turn 250 to 350)
+- **Action**: Either team can call `switch_maps()` **once** during the window.
+- **Effect**: All bots on that team teleport to the enemy's map.
 
 ### 7.3 API
 
 ```python
 controller.get_switch_info() -> Dict
-# Returns:
-# {
-#     "turn": int,
-#     "switch_turn": int,
-#     "switch_duration": int,
-#     "window_active": bool,
-#     "window_end_turn": int,
-#     "my_team_switched": bool,
-#     "enemy_team_switched": bool
-# }
-
 controller.can_switch_maps() -> bool
 controller.switch_maps() -> bool           # Does NOT consume action
 ```
 
 ### 7.4 After Switch Window Ends
 
-At turn 350:
-- All switched bots **automatically teleport back** to their home map
-- Bots **keep whatever they are holding** when teleported
-
-### 7.5 Sabotage Strategies
-
-On enemy map, you can:
-1. **Steal their Pan** - They can't cook without it (costs $4 to replace)
-2. **Take food from their pan** and trash it
-3. **Block their SUBMIT station** - Stand on/near it
-4. **Pick up their plated food** from counters and trash it
-
-### 7.6 Defense Strategies
-
-When enemy is on your map:
-1. **Hold important items** - Don't leave plates/food on counters
-2. **Guard your cooker** - Stand adjacent to prevent pickup
-3. **Continue washing** - The sink is safe (can't be sabotaged)
-4. **Rush submissions** - Get food out before it can be stolen
-
----
-
-## 8. Current Bot Strategy
-
-### 8.1 Architecture
-
-The bot uses a **centralized role-based system** with two roles:
-
-| Role | Bot Index | Responsibilities |
-|------|-----------|------------------|
-| **Chef** | Bot 0 | Main cooking loop: buy → chop → cook → plate → submit |
-| **Support** | Bot 1+ | Wash dishes, stay out of way, assist with defense |
-
-### 8.2 Pre-Computation (Initialization)
-
-On first turn:
-1. **Parse map**: Extract locations of all tile types (shops, cookers, sinks, etc.)
-2. **Build distance matrix**: BFS from every walkable tile, storing shortest paths
-3. **Result**: O(1) distance lookups during gameplay
-
-### 8.3 Chef State Machine
-
-```
-State 0:  Init - check if pan exists on cooker
-State 1:  Buy pan → place on cooker
-State 2:  Buy meat
-State 3:  Place meat on counter
-State 4:  Chop meat (bot hands must be empty)
-State 5:  Pick up chopped meat
-State 6:  Place meat in pan (starts cooking automatically)
-State 7:  Buy plate
-State 8:  Place plate on counter
-State 9:  Buy noodles
-State 10: Add noodles to plate
-State 11: Wait for cooking → take from pan (when cooked_stage == 1)
-State 12: Add cooked meat to plate
-State 13: Pick up plate
-State 14: Submit order
-State 15: Handle errors (trash burnt food, restart)
-```
-
-### 8.4 Pathfinding
-
-- **Algorithm**: BFS with 8-directional movement
-- **Target**: Find tile adjacent to destination (since you can't stand on most interactable tiles)
-- **Returns**: First step `(dx, dy)` toward goal
-
-### 8.5 Cooking Tracker
-
-Each turn, the bot scans all cookers and tracks:
-```python
-CookingTracker:
-    location: (x, y)
-    food_name: str
-    cook_progress: int
-    cooked_stage: int
-    turns_to_cooked: int   # 20 - cook_progress
-    turns_to_burned: int   # 40 - cook_progress
-    is_urgent: bool        # True if ≤3 turns from cooked
-```
-
-### 8.6 Sabotage Protocol
-
-**Trigger Conditions** (all must be true):
-- Switch window is active
-- Team has not already switched
-- Current turn > (switch_end - 30)
-
-**Actions on Enemy Map**:
-1. Navigate to enemy cooker
-2. Pickup their pan (with or without food)
-3. Move to corner and hold it
-
-### 8.7 Defense Protocol
-
-**Trigger**: `enemy_team_switched == True`
-
-**Actions**:
-- If holding a plate with food → move toward SUBMIT and stay near
-- Otherwise → guard the cooker by standing adjacent
-
----
-
-## 9. Known Weaknesses & Open Questions
-
-### 9.1 Current Strategy Weaknesses
-
-1. **Single-threaded Chef**: Only Bot 0 does cooking. Bot 1+ mostly idles.
-2. **No parallel order processing**: Cannot work on multiple orders simultaneously.
-3. **Fixed ingredient targeting**: Always makes NOODLES + MEAT, ignores other order types.
-4. **Suboptimal plate recycling**: Doesn't proactively wash dishes during downtime.
-5. **Naive sabotage timing**: Switches late in window, reducing sabotage time.
-6. **No collision avoidance between our bots**: Bots may block each other.
-
-### 9.2 Open Strategic Questions
-
-1. **Multi-order parallelism**: Should Bot 1 start a second order while Bot 0 waits for cooking?
-2. **Preemptive ingredient prep**: Should we pre-buy/pre-chop ingredients during cooking wait?
-3. **Box utilization**: Boxes can store multiple identical items - useful for batching?
-4. **Sabotage ROI**: Is sabotage worth losing ~50 turns of cooking on our own map?
-5. **Optimal switch timing**: Early switch = more sabotage time. Late switch = harder to counter. What's optimal?
-6. **Counter-sabotage**: If enemy switches first, should we also switch to sabotage back?
-
-### 9.3 Potential Improvements
-
-| Improvement | Expected Impact | Complexity |
-|-------------|-----------------|------------|
-| Parallel cooking (2 chefs) | +50% throughput | Medium |
-| Dynamic order selection | Handle varied orders | Medium |
-| Pre-prep during cook wait | -5 turns per order | Low |
-| Hungarian assignment | Optimal multi-bot allocation | High |
-| Time-Space A* | Zero collisions | High |
-| Adaptive sabotage | Counter enemy state | Medium |
-
----
-
-## Appendix A: Complete Order Fulfillment Example
-
-**Order**: `required=["NOODLES", "MEAT"], reward=10000, penalty=3`
-
-**Required Plate Contents**:
-- 1x NOODLES (raw, as-is from shop)
-- 1x MEAT (chopped=True, cooked_stage=1)
-
-**Action Sequence** (approximately 45 turns):
-
-| Turn | Action | Result |
-|------|--------|--------|
-| 1-2 | Move to SHOP | Adjacent to shop |
-| 3 | buy(PAN) | Holding: Pan |
-| 4-5 | Move to COOKER | Adjacent to cooker |
-| 6 | place() | Pan on cooker |
-| 7-8 | Move to SHOP | Adjacent to shop |
-| 9 | buy(MEAT) | Holding: Meat (raw) |
-| 10-11 | Move to COUNTER | Adjacent to counter |
-| 12 | place() | Meat on counter |
-| 13 | chop() | Meat now chopped |
-| 14 | pickup() | Holding: Meat (chopped) |
-| 15-16 | Move to COOKER | Adjacent to cooker |
-| 17 | place() | Meat in pan, cooking starts |
-| 18-19 | Move to SHOP | Adjacent to shop |
-| 20 | buy(PLATE) | Holding: Plate (empty) |
-| 21-22 | Move to COUNTER | Adjacent to counter |
-| 23 | place() | Plate on counter |
-| 24-25 | Move to SHOP | Adjacent to shop |
-| 26 | buy(NOODLES) | Holding: Noodles |
-| 27-28 | Move to COUNTER (plate) | Adjacent to plate |
-| 29 | add_food_to_plate() | Plate now has noodles |
-| 30-31 | Move to COOKER | Adjacent to cooker |
-| 32-36 | (Wait for cooking) | cook_progress: 17→20 |
-| 37 | take_from_pan() | Holding: Meat (cooked) |
-| 38-39 | Move to COUNTER (plate) | Adjacent to plate |
-| 40 | add_food_to_plate() | Plate: [noodles, meat] |
-| 41 | pickup() | Holding: Plate (full) |
-| 42-43 | Move to SUBMIT | Adjacent to submit |
-| 44 | submit() | +$10000, order complete |
-
----
-
-## Appendix B: Glossary
-
-| Term | Definition |
-|------|------------|
-| Chebyshev Distance | Max of horizontal and vertical distance; allows diagonal movement |
-| cook_progress | Counter that increments each turn while food is in pan on cooker |
-| cooked_stage | 0=raw, 1=cooked (good), 2=burned (bad) |
-| Switch Window | Time period when teams can teleport to enemy map |
-| SINKTABLE | Where clean plates appear after washing |
-| Hungarian Algorithm | Optimal solution to bipartite matching (bots to tasks) |
-| Time-Space A* | Pathfinding that reserves (x,y,t) tuples to prevent collisions |
-
----
-
-*This document is designed to be self-contained. Any LLM reading this should have complete understanding of game mechanics to propose strategy improvements.*
+- All switched bots **automatically teleport back** to their home map.
+- Bots **keep whatever they are holding** when teleported.
