@@ -922,7 +922,7 @@ class RobotController:
 
     def __warn(self, msg: str) -> None:
         '''warn string'''
-        print(f"[RC for {self.__team.name} WARN]: {msg}")
+        #print(f"[RC for {self.__team.name} WARN]: {msg}")
 
     def __can_move_internal(self, map_team: Team, x: int, y: int, dx: int, dy: int) -> bool:
         '''private helper to see if we can move by dx, dy from x, y on map_team or not'''
