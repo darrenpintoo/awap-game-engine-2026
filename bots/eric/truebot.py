@@ -2,15 +2,6 @@
 TrueBot - Autonomous Kitchen Management System for AWAP 2026
 ============================================================
 
-Core Systems:
-1. Navigation Engine - Precomputed shortest paths with real-time obstacle handling
-2. Order Optimizer - Greedy timeline-based task allocation with cooker scheduling
-3. Recipe Executor - Multi-step task chains with adaptive retrying
-4. Map Analyzer - Automatic parameter tuning based on layout characteristics
-5. Coordination Layer - Bot role assignment for split/corridor maps
-6. Deadline Manager - Late-order detection with proactive preparation
-7. Telemetry System - Comprehensive diagnostic logging
-"""
 
 import os
 from typing import Any, Dict, List, Optional, Set, Tuple
