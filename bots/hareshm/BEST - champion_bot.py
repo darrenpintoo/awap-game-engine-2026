@@ -1,23 +1,25 @@
 """
-Champion Bot - Ultimate AWAP 2026 Tournament Winner
-====================================================
+ULTIMATE Champion Bot - AWAP 2026 Tournament Winner
+=====================================================
 
-Implements ALL winning strategies:
-1. Smart Order Selection - Picks highest profit/turn orders
-2. Ingredient Efficiency - Prefers cheap ingredients (Sauce > Egg > Noodles > Onions > Meat)
-3. Parallel Pipeline - Both bots work productively
-4. Plate Recycling - Wash and reuse plates
-5. Box Buffering - Pre-buy cheap ingredients
-6. Optimal Sabotage - Strike at the perfect moment
-7. Counter-Sabotage Defense - Protect against enemy
+Combines the BEST strategies from all team bots:
+1. Pre-computed numpy distance matrices (PipelineChefBot)
+2. Dynamic order selection by profit/turn
+3. Parallel cooking - work on other ingredients while cooking
+4. Dual-bot coordination with clear role separation
+5. Strategic sabotage with enemy state awareness
+6. Plate recycling from sink tables
+7. Box buffering for single-counter maps
+8. Robust error recovery
 
 Uses updated API format: get_team_money(team), get_team_bot_ids(team), etc.
 """
 
+import numpy as np
 import heapq
 from collections import deque
 from typing import Tuple, Optional, List, Dict, Set, Any
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum, auto
 
 try:
@@ -31,82 +33,137 @@ except ImportError:
 # CONFIGURATION
 # =============================================================================
 
-DEBUG = True  # Enable for testing
+DEBUG = False  # Set True for testing
 
 def log(msg):
     if DEBUG:
-        print(f"[ChampionBot] {msg}")
+        print(f"[CHAMPION] {msg}")
 
-# Ingredient costs and processing requirements
+
+# Ingredient processing info
 INGREDIENT_INFO = {
-    'SAUCE':   {'cost': 10, 'chop': False, 'cook': False, 'turns': 0},
-    'EGG':     {'cost': 20, 'chop': False, 'cook': True,  'turns': 20},
-    'ONIONS':  {'cost': 30, 'chop': True,  'cook': False, 'turns': 1},
-    'NOODLES': {'cost': 40, 'chop': False, 'cook': False, 'turns': 0},
-    'MEAT':    {'cost': 80, 'chop': True,  'cook': True,  'turns': 21},
+    'SAUCE':   {'cost': 10, 'chop': False, 'cook': False, 'processing_turns': 0},
+    'EGG':     {'cost': 20, 'chop': False, 'cook': True,  'processing_turns': 20},
+    'ONIONS':  {'cost': 30, 'chop': True,  'cook': False, 'processing_turns': 3},
+    'NOODLES': {'cost': 40, 'chop': False, 'cook': False, 'processing_turns': 0},
+    'MEAT':    {'cost': 80, 'chop': True,  'cook': True,  'processing_turns': 25},
 }
 
+
 # =============================================================================
-# PATHFINDING
+# PRE-COMPUTED PATHFINDING (from PipelineChefBot - FAST!)
 # =============================================================================
 
-class Pathfinder:
-    """Optimized A* pathfinding with 8-directional movement"""
+class FastPathfinder:
+    """
+    Pre-computed BFS distance matrices for instant pathfinding.
+    Uses numpy for speed. Supports 8-directional (Chebyshev) movement.
+    """
     
     DIRS_8 = [(-1,-1), (-1,0), (-1,1), (0,-1), (0,1), (1,-1), (1,0), (1,1)]
     DIRS_4 = [(0,1), (0,-1), (1,0), (-1,0)]
+    
+    def __init__(self, map_obj):
+        self.width = map_obj.width
+        self.height = map_obj.height
+        
+        # Pre-compute walkability matrix
+        self.walkable = np.zeros((self.width, self.height), dtype=bool)
+        for x in range(self.width):
+            for y in range(self.height):
+                self.walkable[x, y] = getattr(map_obj.tiles[x][y], 'is_walkable', False)
+        
+        # Cache tile locations by type
+        self.tile_cache: Dict[str, List[Tuple[int, int]]] = {}
+        for x in range(self.width):
+            for y in range(self.height):
+                tile_name = map_obj.tiles[x][y].tile_name
+                if tile_name not in self.tile_cache:
+                    self.tile_cache[tile_name] = []
+                self.tile_cache[tile_name].append((x, y))
+        
+        # Pre-compute distance matrices for key tiles
+        self.dist_matrices: Dict[Tuple[int, int], np.ndarray] = {}
+        key_tiles = ['SHOP', 'COOKER', 'COUNTER', 'SUBMIT', 'TRASH', 'SINK', 'SINKTABLE', 'BOX']
+        for tile_name in key_tiles:
+            if tile_name in self.tile_cache:
+                for pos in self.tile_cache[tile_name]:
+                    self.dist_matrices[pos] = self._compute_distance_matrix(pos)
+    
+    def _compute_distance_matrix(self, target: Tuple[int, int]) -> np.ndarray:
+        """BFS to compute distance from every tile to adjacent-to-target"""
+        dist = np.full((self.width, self.height), 9999.0)
+        tx, ty = target
+        
+        queue = deque()
+        # Start from tiles adjacent to target
+        for dx in [-1, 0, 1]:
+            for dy in [-1, 0, 1]:
+                nx, ny = tx + dx, ty + dy
+                if 0 <= nx < self.width and 0 <= ny < self.height:
+                    if self.walkable[nx, ny]:
+                        dist[nx, ny] = 0
+                        queue.append((nx, ny))
+        
+        while queue:
+            x, y = queue.popleft()
+            for dx, dy in self.DIRS_8:
+                nx, ny = x + dx, y + dy
+                if 0 <= nx < self.width and 0 <= ny < self.height:
+                    if self.walkable[nx, ny] and dist[nx, ny] > dist[x, y] + 1:
+                        dist[nx, ny] = dist[x, y] + 1
+                        queue.append((nx, ny))
+        return dist
     
     @staticmethod
     def chebyshev(p1: Tuple[int,int], p2: Tuple[int,int]) -> int:
         return max(abs(p1[0]-p2[0]), abs(p1[1]-p2[1]))
     
-    @staticmethod
-    def manhattan(p1: Tuple[int,int], p2: Tuple[int,int]) -> int:
-        return abs(p1[0]-p2[0]) + abs(p1[1]-p2[1])
+    def get_nearest_tile(self, pos: Tuple[int, int], tile_name: str) -> Optional[Tuple[int, int]]:
+        """Get nearest tile of given type"""
+        if tile_name not in self.tile_cache or not self.tile_cache[tile_name]:
+            return None
+        positions = self.tile_cache[tile_name]
+        return min(positions, key=lambda p: self.chebyshev(pos, p))
     
-    @staticmethod
-    def get_path(map_obj, start: Tuple[int,int], target: Tuple[int,int], 
-                 stop_dist: int = 1, avoid: Set[Tuple[int,int]] = None) -> Optional[List[Tuple[int,int]]]:
-        """A* to get adjacent to target"""
-        if avoid is None:
-            avoid = set()
-            
-        w, h = map_obj.width, map_obj.height
+    def get_best_step(self, controller: RobotController, bot_id: int, 
+                      target: Tuple[int, int], avoid: Set[Tuple[int, int]] = None) -> Optional[Tuple[int, int]]:
+        """Get best next step toward target using pre-computed distances"""
+        bot = controller.get_bot_state(bot_id)
+        if not bot:
+            return None
         
-        # Already there?
-        if Pathfinder.chebyshev(start, target) <= stop_dist:
-            return []
+        bx, by = bot['x'], bot['y']
         
-        # Priority queue: (f_score, g_score, x, y, path)
-        queue = [(Pathfinder.chebyshev(start, target), 0, start[0], start[1], [])]
-        visited = {start: 0}
+        # Already adjacent?
+        if self.chebyshev((bx, by), target) <= 1:
+            return None
         
-        while queue:
-            f, g, cx, cy, path = heapq.heappop(queue)
-            
-            if Pathfinder.chebyshev((cx, cy), target) <= stop_dist:
-                return path
-            
-            if g > 50:  # Depth limit
+        # Get pre-computed distances if available
+        dist_matrix = self.dist_matrices.get(target)
+        
+        best_step = None
+        best_dist = 9999.0
+        
+        for dx, dy in self.DIRS_8:
+            if not controller.can_move(bot_id, dx, dy):
                 continue
             
-            for dx, dy in Pathfinder.DIRS_8:
-                nx, ny = cx + dx, cy + dy
-                
-                if not (0 <= nx < w and 0 <= ny < h):
-                    continue
-                if not map_obj.is_tile_walkable(nx, ny):
-                    continue
-                if (nx, ny) in avoid:
-                    continue
-                
-                new_g = g + 1
-                if (nx, ny) not in visited or new_g < visited[(nx, ny)]:
-                    visited[(nx, ny)] = new_g
-                    h_score = Pathfinder.chebyshev((nx, ny), target)
-                    heapq.heappush(queue, (new_g + h_score, new_g, nx, ny, path + [(dx, dy)]))
+            nx, ny = bx + dx, by + dy
+            
+            if avoid and (nx, ny) in avoid:
+                continue
+            
+            if dist_matrix is not None:
+                step_dist = dist_matrix[nx, ny]
+            else:
+                step_dist = self.chebyshev((nx, ny), target)
+            
+            if step_dist < best_dist:
+                best_dist = step_dist
+                best_step = (dx, dy)
         
-        return None
+        return best_step
 
 
 # =============================================================================
@@ -125,54 +182,79 @@ class OrderScore:
     cost: int = 0
     turns_needed: int = 0
     profit: float = 0
-    score: float = 0  # profit per turn
+    score: float = 0
     
     def calculate(self, current_turn: int):
-        """Calculate order profitability"""
-        self.cost = 0
-        self.turns_needed = 5  # Base overhead (movement, plating, submit)
+        """Calculate order profitability using conservative time estimates"""
+        self.cost = ShopCosts.PLATE.buy_cost  # Plate cost
+        self.turns_needed = 15  # Base overhead (movement, buying, placing)
         
         needs_cooking = False
+        cook_items = 0
         
         for ing in self.required:
-            info = INGREDIENT_INFO.get(ing, {'cost': 50, 'chop': False, 'cook': False, 'turns': 5})
+            info = INGREDIENT_INFO.get(ing, {'cost': 50, 'chop': False, 'cook': False, 'processing_turns': 5})
             self.cost += info['cost']
             
             if info['cook']:
                 needs_cooking = True
+                cook_items += 1
             if info['chop']:
-                self.turns_needed += 2  # Place + chop + pickup
+                self.turns_needed += 5  # Chop: place + chop + pickup
         
-        # Cooking takes 20 turns but happens in parallel
+        # Cooking takes 20 turns but only 1 item can cook at a time
         if needs_cooking:
-            self.turns_needed = max(self.turns_needed, 25)
+            # First cook item: 25 turns (buy + place + wait + take)
+            # Additional cook items: +25 each (sequential)
+            self.turns_needed = max(self.turns_needed, 30 + (cook_items - 1) * 25)
         
-        # Add plate cost
-        self.cost += ShopCosts.PLATE.buy_cost
+        # Add overhead for each additional ingredient (movement between stations)
+        self.turns_needed += len(self.required) * 3
         
         time_left = self.expires_turn - current_turn
         
-        # Can we complete it?
+        # Be aggressive on early turns, conservative later
+        if time_left < 25:  # Order about to expire
+            self.score = -1000
+            return
+        
+        # On tight maps, take risks - better to try and fail than do nothing
+        # Only reject if REALLY impossible
         if self.turns_needed > time_left:
-            self.score = -1000  # Impossible
+            self.score = -1000
             return
         
         self.profit = self.reward - self.cost
         
-        # Score = profit per turn, with bonus for simpler orders
+        # Score = profit per turn, with bonuses
         self.score = self.profit / max(self.turns_needed, 1)
         
-        # Bonus for orders that are about to expire (urgency)
-        if time_left < 50 and time_left > self.turns_needed:
-            self.score *= 1.2
+        # BIG bonus for simpler orders (fewer ingredients = more reliable)
+        self.score += (5 - len(self.required)) * 2.0
+        
+        # Bonus for orders with no cooking (faster completion)
+        if not needs_cooking:
+            self.score += 3.0
+        
+        # Bonus for single-ingredient orders
+        if len(self.required) == 1:
+            self.score += 5.0
+        
+        # Penalty for orders with multiple cook items (risky)
+        if cook_items > 1:
+            self.score -= cook_items * 2.0
+        
+        # Bonus for orders with only simple ingredients
+        simple_count = sum(1 for ing in self.required if ing in ['SAUCE', 'NOODLES'])
+        self.score += simple_count * 1.0
 
 
 class OrderAnalyzer:
     """Analyzes and ranks orders by profitability"""
     
     @staticmethod
-    def get_best_orders(controller: RobotController, team: Team, limit: int = 3) -> List[OrderScore]:
-        """Get the most profitable orders"""
+    def get_best_orders(controller: RobotController, team: Team, limit: int = 5) -> List[OrderScore]:
+        """Get the most profitable orders - prioritize SIMPLE and FAST orders"""
         current_turn = controller.get_turn()
         orders = controller.get_orders(team)
         
@@ -180,7 +262,7 @@ class OrderAnalyzer:
         for order in orders:
             if not order.get('is_active', False):
                 continue
-                
+            
             os = OrderScore(
                 order_id=order['order_id'],
                 required=order['required'],
@@ -193,7 +275,30 @@ class OrderAnalyzer:
             if os.score > 0:
                 scored.append(os)
         
-        # Sort by score (highest first)
+        # If no viable orders, look for ANY simple order we might complete
+        if not scored:
+            for order in orders:
+                if not order.get('is_active', False):
+                    continue
+                # Try super simple orders (1 ingredient, no cook)
+                if len(order['required']) == 1:
+                    ing = order['required'][0]
+                    info = INGREDIENT_INFO.get(ing, {})
+                    if not info.get('cook') and not info.get('chop'):
+                        time_left = order['expires_turn'] - current_turn
+                        if time_left > 20:  # Very lenient for simple orders
+                            os = OrderScore(
+                                order_id=order['order_id'],
+                                required=order['required'],
+                                reward=order['reward'],
+                                penalty=order.get('penalty', 0),
+                                expires_turn=order['expires_turn']
+                            )
+                            os.score = 10  # Force pick it
+                            os.turns_needed = 15
+                            os.profit = order['reward'] - 50
+                            scored.append(os)
+        
         scored.sort(key=lambda x: x.score, reverse=True)
         return scored[:limit]
 
@@ -220,8 +325,8 @@ class BotState(Enum):
     
     # Plating
     BUY_PLATE = auto()
-    PLACE_PLATE = auto()
     GET_CLEAN_PLATE = auto()
+    PLACE_PLATE = auto()
     ADD_TO_PLATE = auto()
     PICKUP_PLATE = auto()
     STORE_PLATE = auto()
@@ -237,7 +342,6 @@ class BotState(Enum):
     TRASH = auto()
     
     # Sabotage
-    SABOTAGE_SWITCH = auto()
     SABOTAGE_STEAL_PAN = auto()
     SABOTAGE_STEAL_PLATE = auto()
     SABOTAGE_BLOCK = auto()
@@ -249,7 +353,7 @@ class BotTask:
     target: Optional[Tuple[int, int]] = None
     item: Optional[str] = None
     order_id: Optional[int] = None
-    sub_state: int = 0  # For multi-step states
+    sub_state: int = 0
 
 
 # =============================================================================
@@ -257,11 +361,12 @@ class BotTask:
 # =============================================================================
 
 class BotPlayer:
-    """Ultimate Champion Bot"""
+    """Ultimate Champion Bot - Combines all winning strategies"""
     
     def __init__(self, map_copy):
         self.map = map_copy
         self.initialized = False
+        self.pathfinder: Optional[FastPathfinder] = None
         
         # Cached tile locations
         self.shops: List[Tuple[int,int]] = []
@@ -286,6 +391,7 @@ class BotPlayer:
         self.plate_on_assembly: bool = False
         self.ingredients_on_plate: List[str] = []
         self.cooking_ingredient: Optional[str] = None
+        self.cook_start_turn: int = 0
         self.has_switched: bool = False
         self.single_counter: bool = False
         self.plate_storage_box: Optional[Tuple[int, int]] = None
@@ -293,9 +399,16 @@ class BotPlayer:
         self.pending_food_name: Optional[str] = None
         self.pending_food_pos: Optional[Tuple[int, int]] = None
         
+        # Enemy tracking for strategic sabotage
+        self.enemy_progress: int = 0
+        self.our_progress: int = 0
+    
     def _init_map(self, controller: RobotController, team: Team):
-        """Initialize map data"""
+        """Initialize map data with pre-computed pathfinding"""
         m = controller.get_map(team)
+        
+        # Initialize fast pathfinder
+        self.pathfinder = FastPathfinder(m)
         
         for x in range(m.width):
             for y in range(m.height):
@@ -318,10 +431,11 @@ class BotPlayer:
             self.work_counter = self.counters[1] if len(self.counters) > 1 else self.counters[0]
         if self.cookers:
             self.primary_cooker = self.cookers[0]
+        
         self.single_counter = len(self.counters) <= 1
         if self.single_counter and self.boxes:
             self.plate_storage_box = self.boxes[0]
-            
+        
         self.initialized = True
         log(f"Init: {len(self.counters)} counters, {len(self.cookers)} cookers, {len(self.shops)} shops")
     
@@ -329,7 +443,7 @@ class BotPlayer:
         """Get nearest location from list"""
         if not locations:
             return None
-        return min(locations, key=lambda p: Pathfinder.chebyshev(pos, p))
+        return min(locations, key=lambda p: FastPathfinder.chebyshev(pos, p))
     
     def _get_avoid_set(self, controller: RobotController, team: Team, exclude_bot: int) -> Set[Tuple[int,int]]:
         """Get positions to avoid (other bots)"""
@@ -343,28 +457,27 @@ class BotPlayer:
     
     def _move_toward(self, controller: RobotController, bot_id: int, 
                      target: Tuple[int,int], team: Team) -> bool:
-        """Move toward target. Returns True if adjacent."""
+        """Move toward target using pre-computed distances. Returns True if adjacent."""
         bot = controller.get_bot_state(bot_id)
         if not bot:
             return False
-            
+        
         pos = (bot['x'], bot['y'])
         
-        if Pathfinder.chebyshev(pos, target) <= 1:
+        if FastPathfinder.chebyshev(pos, target) <= 1:
             return True
         
         avoid = self._get_avoid_set(controller, team, bot_id)
-        m = controller.get_map(team)
-        path = Pathfinder.get_path(m, pos, target, stop_dist=1, avoid=avoid)
+        step = self.pathfinder.get_best_step(controller, bot_id, target, avoid)
         
-        if path and len(path) > 0:
-            dx, dy = path[0]
+        if step:
+            dx, dy = step
             if controller.can_move(bot_id, dx, dy):
                 controller.move(bot_id, dx, dy)
                 return False
         
         # Try wiggle if stuck
-        for dx, dy in Pathfinder.DIRS_8:
+        for dx, dy in FastPathfinder.DIRS_8:
             if controller.can_move(bot_id, dx, dy):
                 controller.move(bot_id, dx, dy)
                 return False
@@ -434,13 +547,29 @@ class BotPlayer:
             self.current_order = None
     
     def _get_next_ingredient(self) -> Optional[str]:
-        """Get next ingredient needed for current order"""
+        """Get next ingredient needed for current order, prioritizing cooking items"""
         if not self.current_order:
             return None
         
+        # First pass: prioritize ingredients that need cooking (start them first!)
+        for ing in self.current_order.required:
+            if ing not in self.ingredients_on_plate:
+                info = INGREDIENT_INFO.get(ing, {})
+                if info.get('cook'):
+                    return ing
+        
+        # Second pass: ingredients that need chopping
+        for ing in self.current_order.required:
+            if ing not in self.ingredients_on_plate:
+                info = INGREDIENT_INFO.get(ing, {})
+                if info.get('chop') and not info.get('cook'):
+                    return ing
+        
+        # Third pass: remaining ingredients (no processing needed)
         for ing in self.current_order.required:
             if ing not in self.ingredients_on_plate:
                 return ing
+        
         return None
     
     def _execute_primary_bot(self, controller: RobotController, bot_id: int, team: Team):
@@ -452,6 +581,7 @@ class BotPlayer:
         bx, by = bot['x'], bot['y']
         holding = bot.get('holding')
         money = controller.get_team_money(team)
+        current_turn = controller.get_turn()
         
         task = self.bot_tasks.get(bot_id)
         if not task:
@@ -521,7 +651,8 @@ class BotPlayer:
                 task.item = self.pending_food_name
                 task.target = self.pending_food_pos
                 return
-            # If holding a plate and nothing pending, place it to free hands
+            
+            # If holding a plate and nothing pending, place it
             if holding and holding.get('type') == 'Plate' and not self.plate_on_assembly:
                 task.state = BotState.PLACE_PLATE
                 task.target = assembly
@@ -536,31 +667,30 @@ class BotPlayer:
                 task.state = BotState.BUY_PAN
                 return
             
-            # 2. Check plate status - ALWAYS DO THIS FIRST
+            # 2. Check plate status
             plate_contents = self._check_plate_on_counter(controller, team, ax, ay)
             if plate_contents is not None:
                 self.plate_on_assembly = True
                 self.ingredients_on_plate = plate_contents
             elif self.plate_in_box:
-                # Plate stored in box; keep tracked ingredients
                 self.plate_on_assembly = False
             else:
                 self.plate_on_assembly = False
                 self.ingredients_on_plate = []
-
             
             # 3. Choose next ingredient needed
             next_ing = self._get_next_ingredient()
             if self.single_counter:
+                # On single counter maps, prioritize choppable items first
                 for ing in self.current_order.required:
                     if ing not in self.ingredients_on_plate and INGREDIENT_INFO.get(ing, {}).get('chop'):
                         next_ing = ing
                         break
 
-            # 4. MUST have a plate before plating, unless we're chopping first on single-counter maps
+            # 4. MUST have a plate before plating
             require_plate = not (self.single_counter and next_ing and INGREDIENT_INFO.get(next_ing, {}).get('chop'))
             if require_plate and not self.plate_on_assembly and not self.plate_in_box:
-                # Check for clean plates at sink table
+                # Check for clean plates at sink table first (recycling!)
                 if sink_table and self._count_clean_plates(controller, team) > 0:
                     task.state = BotState.GET_CLEAN_PLATE
                     task.target = sink_table
@@ -575,11 +705,10 @@ class BotPlayer:
                 task.target = self.pending_food_pos
                 return
 
-            # Retrieve plate from box unless we still need to chop
+            # Retrieve plate from box if needed
             if not self.plate_on_assembly and self.plate_in_box and self.plate_storage_box:
                 if next_ing and INGREDIENT_INFO.get(next_ing, {}).get('chop'):
-                    # Keep plate stored while chopping
-                    pass
+                    pass  # Keep plate stored while chopping
                 else:
                     task.state = BotState.RETRIEVE_PLATE
                     task.target = self.plate_storage_box
@@ -605,15 +734,14 @@ class BotPlayer:
                     task.target = cooker
                     return
                 elif pan_state == 2:  # Burnt!
-                    task.state = BotState.TAKE_FROM_PAN  # Take and trash
+                    task.state = BotState.TAKE_FROM_PAN
                     task.target = cooker
                     return
                 elif pan_state == 0:  # Still cooking
                     if not self.plate_on_assembly and not self.plate_in_box:
                         task.state = BotState.BUY_PLATE
                         return
-                    # Can do other things while waiting - get other ingredients
-                    # Find a non-cooking ingredient to work on
+                    # Work on non-cooking ingredients while waiting
                     for ing in self.current_order.required:
                         if ing not in self.ingredients_on_plate:
                             ing_info = INGREDIENT_INFO.get(ing, {})
@@ -621,14 +749,13 @@ class BotPlayer:
                                 next_ing = ing
                                 break
                     else:
-                        # All remaining ingredients need cooking, must wait
-                        return
+                        return  # All remaining need cooking, wait
             
             # 6. Start working on next ingredient
             info = INGREDIENT_INFO.get(next_ing, {})
             task.item = next_ing
 
-            # If single counter and we need to chop, stash plate to free counter
+            # If single counter and we need to chop, stash plate
             if info.get('chop') and self.single_counter and self.plate_on_assembly and self.plate_storage_box:
                 task.state = BotState.STORE_PLATE
                 task.target = assembly
@@ -636,12 +763,11 @@ class BotPlayer:
                 return
             
             if info.get('cook') and cooker:
-                # Need to cook - check if pan is free
                 pan_state = self._get_pan_food_state(controller, team, cooker[0], cooker[1])
                 if pan_state is None:  # Pan empty
                     task.state = BotState.BUY_INGREDIENT
                 else:
-                    # Pan busy - try to find non-cooking ingredient
+                    # Pan busy - try non-cooking ingredient
                     for ing in self.current_order.required:
                         if ing not in self.ingredients_on_plate:
                             ing_info = INGREDIENT_INFO.get(ing, {})
@@ -649,13 +775,10 @@ class BotPlayer:
                                 task.item = ing
                                 task.state = BotState.BUY_INGREDIENT
                                 return
-                    # All need cooking, wait
-                    return
+                    return  # Wait
             elif info.get('chop'):
-                # Chop only (ONIONS)
                 task.state = BotState.BUY_INGREDIENT
             else:
-                # No processing needed (SAUCE, NOODLES) - buy and plate
                 task.state = BotState.BUY_INGREDIENT
         
         # BUY_PAN
@@ -680,7 +803,6 @@ class BotPlayer:
             food_type = getattr(FoodType, ing_name, None)
             
             if holding:
-                # Already holding something - process it
                 info = INGREDIENT_INFO.get(ing_name, {})
                 if info.get('chop'):
                     task.state = BotState.PLACE_FOR_CHOP
@@ -733,6 +855,7 @@ class BotPlayer:
             if self._move_toward(controller, bot_id, (kx, ky), team):
                 if controller.place(bot_id, kx, ky):
                     self.cooking_ingredient = task.item
+                    self.cook_start_turn = current_turn
                     task.state = BotState.WAIT_COOK
                     task.target = (kx, ky)
                     log(f"Started cooking {task.item}")
@@ -744,8 +867,10 @@ class BotPlayer:
             
             if pan_state == 1:  # Done
                 task.state = BotState.TAKE_FROM_PAN
+                return
             elif pan_state == 2:  # Burnt
                 task.state = BotState.TAKE_FROM_PAN
+                return
             elif pan_state == 0:
                 # While cooking, prep plate and non-cook ingredients
                 if not self.plate_on_assembly and not self.plate_in_box:
@@ -757,13 +882,11 @@ class BotPlayer:
                             task.state = BotState.BUY_INGREDIENT
                             task.item = ing
                             return
-                # Otherwise keep waiting
         
         # TAKE_FROM_PAN
         elif task.state == BotState.TAKE_FROM_PAN:
             kx, ky = task.target or cooker
             if holding:
-                # Already holding - add to plate or trash if burnt
                 h_cooked = holding.get('cooked_stage', 0)
                 if h_cooked == 2:  # Burnt
                     task.state = BotState.TRASH
@@ -771,6 +894,8 @@ class BotPlayer:
                 else:
                     task.state = BotState.ADD_TO_PLATE
                     task.target = assembly
+                    # Set the item to the cooked ingredient
+                    task.item = self.cooking_ingredient or holding.get('food_name')
             elif self._move_toward(controller, bot_id, (kx, ky), team):
                 if controller.take_from_pan(bot_id, kx, ky):
                     log(f"Took from pan")
@@ -834,7 +959,7 @@ class BotPlayer:
                             task.sub_state = 0
                             log("Stored plate in box")
 
-        # RETRIEVE_PLATE (from box to assembly)
+        # RETRIEVE_PLATE
         elif task.state == BotState.RETRIEVE_PLATE:
             if task.sub_state == 0:
                 if holding and holding.get('type') == 'Plate':
@@ -871,7 +996,6 @@ class BotPlayer:
                             else:
                                 task.state = BotState.BUY_PLATE
                             return
-                # Move toward counter and try again next turn
                 return
             target = task.target or assembly
             if holding and holding.get('type') == 'Plate' and work:
@@ -907,6 +1031,7 @@ class BotPlayer:
                     log(f"SUBMITTED ORDER {self.current_order.order_id if self.current_order else '?'}")
                     self.current_order = None
                     self.ingredients_on_plate = []
+                    self.our_progress += 1
                     task.state = BotState.IDLE
         
         # TRASH
@@ -932,17 +1057,31 @@ class BotPlayer:
             task = BotTask(state=BotState.IDLE)
             self.bot_tasks[bot_id] = task
         
-        # Check if we should sabotage
+        # Strategic sabotage check
         switch_info = controller.get_switch_info()
         can_switch = controller.can_switch_maps()
         
-        # Sabotage timing: after turn 260, if we haven't switched
-        if can_switch and not self.has_switched and turn >= 260 and turn < 350:
-            # Check if enemy has valuable stuff
+        # Sabotage timing: after turn 240, if we're ahead or tied and haven't switched
+        # OR if we're behind and desperate after turn 300
+        enemy_team = controller.get_enemy_team()
+        our_money = controller.get_team_money(team)
+        enemy_money = controller.get_team_money(enemy_team)
+        
+        should_sabotage = False
+        if can_switch and not self.has_switched:
+            if turn >= 280 and turn < 380:
+                # Aggressive sabotage if enemy is ahead or close
+                if enemy_money >= our_money - 50:
+                    should_sabotage = True
+            elif turn >= 350 and enemy_money > our_money:
+                # Desperate sabotage
+                should_sabotage = True
+        
+        if should_sabotage:
             if controller.switch_maps():
                 self.has_switched = True
                 task.state = BotState.SABOTAGE_STEAL_PAN
-                log(f"SWITCHED TO ENEMY MAP at turn {turn}!")
+                log(f"SWITCHED TO ENEMY MAP at turn {turn}! (Our: ${our_money}, Enemy: ${enemy_money})")
                 return
         
         # If we're on enemy map, do sabotage
@@ -963,7 +1102,7 @@ class BotPlayer:
         
         # If nothing to do, wiggle randomly
         import random
-        dirs = Pathfinder.DIRS_4.copy()
+        dirs = FastPathfinder.DIRS_4.copy()
         random.shuffle(dirs)
         for dx, dy in dirs:
             if controller.can_move(bot_id, dx, dy):
@@ -984,10 +1123,10 @@ class BotPlayer:
         # Get enemy map locations
         enemy_map = controller.get_map(enemy_team)
         
-        # Find enemy cookers
         enemy_cookers = []
         enemy_sink_tables = []
         enemy_trashes = []
+        enemy_counters = []
         
         for x in range(enemy_map.width):
             for y in range(enemy_map.height):
@@ -999,6 +1138,8 @@ class BotPlayer:
                     enemy_sink_tables.append((x, y))
                 elif name == "TRASH":
                     enemy_trashes.append((x, y))
+                elif name == "COUNTER":
+                    enemy_counters.append((x, y))
         
         # If holding something, trash it
         if holding:
@@ -1039,11 +1180,20 @@ class BotPlayer:
             else:
                 task.state = BotState.SABOTAGE_BLOCK
         
-        # Block submit station
+        # Block/disrupt enemy
         elif task.state == BotState.SABOTAGE_BLOCK:
-            # Just move around randomly to cause chaos
+            # Try to steal items from counters
+            for counter in enemy_counters:
+                cx, cy = counter
+                tile = controller.get_tile(enemy_team, cx, cy)
+                if tile and getattr(tile, 'item', None):
+                    if self._move_toward(controller, bot_id, counter, enemy_team):
+                        controller.pickup(bot_id, cx, cy)
+                    return
+            
+            # Otherwise move randomly to cause chaos
             import random
-            dirs = Pathfinder.DIRS_4.copy()
+            dirs = FastPathfinder.DIRS_4.copy()
             random.shuffle(dirs)
             for dx, dy in dirs:
                 if controller.can_move(bot_id, dx, dy):

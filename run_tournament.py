@@ -8,12 +8,12 @@ import os
 from pathlib import Path
 
 # Configuration
-CHAMPION_BOT = "bots/hareshm/champion_bot.py"
+CHAMPION_BOT = "bots/hareshm/BEST - champion_bot.py"
 COMPETITOR_BOTS = [
     "bots/duo_noodle_bot.py",
     "bots/dpinto/planner_bot.py", 
-    "bots/eric/iron_chef_bot.py",
     "bots/eric/PipelineChefBot.py",
+    "bots/eric/UltimateChefBot.py",
 ]
 
 MAPS = [

@@ -124,7 +124,7 @@ class BotPlayer:
         if self.initialized: return
         
         self.my_team = controller.get_team()
-        m = controller.get_map(self.my_team) 
+        m = controller.get_map(controller.get_team()self.my_team) 
         
         # Parse Map
         for x in range(m.width):
@@ -376,7 +376,7 @@ class BotPlayer:
     # HIVE MIND: TASK ASSIGNMENT
     # -------------------------------------------------------------------------
     def assign_tasks(self, controller, jobs):
-        bots = controller.get_team_bot_ids(self.my_team)
+        bots = controller.get_team_bot_ids(controller.get_team())
         if not bots or not jobs: return {}
         
         cost_matrix = np.full((len(bots), len(jobs)), float(COST_IMPOSSIBLE))

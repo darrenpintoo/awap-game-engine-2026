@@ -4,16 +4,18 @@
 import subprocess
 import sys
 import os
+import json
 from itertools import combinations
 from collections import defaultdict
 
 # All bots
 BOTS = [
     "bots/dpinto/planner_bot.py",
-    "bots/duo_noodle_bot.py",
+    "bots/eric/Apex_Chef.py",
+    "bots/eric/StrategicKitchen.py",
+    "bots/eric/TrueUltimateChefBot.py",
+    "bots/eric/UltimateChefBot.py",
     "bots/eric/iron_chef_bot.py",
-    "bots/eric/ironclad_bot.py",
-    "bots/hareshm/optimal_bot.py",
 ]
 
 # All maps
@@ -26,6 +28,8 @@ MAPS = [
     "maps/haresh/map1.txt",
     "maps/haresh/map_challenge.txt",
     "maps/haresh/map_compact.txt",
+    "maps/dpinto/mega_warehouse.txt",
+    "maps/dpinto/mega_maze.txt",
 ]
 
 TURNS = 200
@@ -74,7 +78,7 @@ def main():
     print("=" * 60)
     print(f"Bots: {len(BOTS)}")
     print(f"Maps: {len(MAPS)}")
-    print(f"Total matches: {len(list(combinations(BOTS, 2)))}")
+    print(f"Total matches: {len(list(combinations(BOTS, 2))) * len(MAPS)}")
     print("=" * 60)
     
     # Track overall stats
@@ -84,44 +88,69 @@ def main():
     total_score = defaultdict(int)
     match_results = []
     
-    for map_file in MAPS:
-        map_name = os.path.basename(map_file)
-        print(f"\n--- Map: {map_name} ---")
-        
-        for red_bot, blue_bot in combinations(BOTS, 2):
-            red_name = get_bot_name(red_bot)
-            blue_name = get_bot_name(blue_bot)
+    # JSON structure for large maps or full results
+    full_results_json = {
+        "bots": [get_bot_name(b) for b in BOTS],
+        "maps": [os.path.basename(m) for m in MAPS],
+        "matches": []
+    }
+
+    try:
+        for map_file in MAPS:
+            map_name = os.path.basename(map_file)
+            print(f"\n--- Map: {map_name} ---")
             
-            print(f"  {red_name} vs {blue_name}...", end=" ", flush=True)
-            
-            red_score, blue_score, winner = run_game(red_bot, blue_bot, map_file)
-            
-            total_score[red_name] += red_score
-            total_score[blue_name] += blue_score
-            
-            if winner == "RED":
-                wins[red_name] += 1
-                losses[blue_name] += 1
-                print(f"RED WINS ${red_score} vs ${blue_score}")
-            elif winner == "BLUE":
-                wins[blue_name] += 1
-                losses[red_name] += 1
-                print(f"BLUE WINS ${blue_score} vs ${red_score}")
-            elif winner == "TIE":
-                ties[red_name] += 1
-                ties[blue_name] += 1
-                print(f"TIE ${red_score}")
-            else:
-                print(f"ERROR")
-            
-            match_results.append({
-                "map": map_name,
-                "red": red_name,
-                "blue": blue_name,
-                "red_score": red_score,
-                "blue_score": blue_score,
-                "winner": winner
-            })
+            for red_bot, blue_bot in combinations(BOTS, 2):
+                red_name = get_bot_name(red_bot)
+                blue_name = get_bot_name(blue_bot)
+                
+                # Check if PlannerBot is involved (prioritize testing it)
+                if "planner_bot" not in red_name and "planner_bot" not in blue_name:
+                    # Skip non-planner matches for speed to answer user request faster?
+                    # User asked "run planner bot against every other bot".
+                    # But round robin is nicer. I'll keep it ALL for now but maybe speed it up?
+                    # Actually, let's just run them all.
+                    pass
+
+                print(f"  {red_name} vs {blue_name}...", end=" ", flush=True)
+                
+                red_score, blue_score, winner = run_game(red_bot, blue_bot, map_file)
+                
+                total_score[red_name] += red_score
+                total_score[blue_name] += blue_score
+                
+                if winner == "RED":
+                    wins[red_name] += 1
+                    losses[blue_name] += 1
+                    print(f"RED WINS ${red_score} vs ${blue_score}")
+                elif winner == "BLUE":
+                    wins[blue_name] += 1
+                    losses[red_name] += 1
+                    print(f"BLUE WINS ${blue_score} vs ${red_score}")
+                elif winner == "TIE":
+                    ties[red_name] += 1
+                    ties[blue_name] += 1
+                    print(f"TIE ${red_score}")
+                else:
+                    print(f"ERROR")
+                
+                match_data = {
+                    "map": map_name,
+                    "red": red_name,
+                    "blue": blue_name,
+                    "red_score": red_score,
+                    "blue_score": blue_score,
+                    "winner": winner
+                }
+                match_results.append(match_data)
+                full_results_json["matches"].append(match_data)
+                
+                # Write intermediate JSON
+                with open("tournament_results.json", "w") as f:
+                    json.dump(full_results_json, f, indent=2)
+
+    except KeyboardInterrupt:
+        print("\nTournament interrupted!")
     
     # Print final standings
     print("\n" + "=" * 60)
@@ -148,7 +177,8 @@ def main():
         print(f"{s['name']:<20} {s['wins']:>4} {s['losses']:>4} {s['ties']:>4} {s['win_rate']*100:>5.1f}% ${s['score']:>9}")
     
     print("\n" + "=" * 60)
-    print(f"WINNER: {standings[0]['name']} with {standings[0]['wins']} wins!")
+    if standings:
+        print(f"WINNER: {standings[0]['name']} with {standings[0]['wins']} wins!")
     print("=" * 60)
 
 if __name__ == "__main__":
