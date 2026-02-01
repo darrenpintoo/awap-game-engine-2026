@@ -497,19 +497,30 @@ class BotPlayer:
         team = controller.get_team()
         orders = controller.get_orders(team)
         
-        # Check bot capabilities
-        can_cook = self.map_analyzer.can_reach(pos, self.map_analyzer.cookers[0]) if self.map_analyzer.cookers else False
+        # Find nearest facilities for this bot
+        if not self.map_analyzer.shops or not self.map_analyzer.submits:
+            return
+            
+        nearest_shop = min(self.map_analyzer.shops, 
+                          key=lambda s: self.map_analyzer.get_distance_to_tile(pos, s))
+        nearest_submit = min(self.map_analyzer.submits,
+                            key=lambda s: self.map_analyzer.get_distance_to_tile(pos, s))
+        nearest_cooker = min(self.map_analyzer.cookers,
+                            key=lambda c: self.map_analyzer.get_distance_to_tile(pos, c)) if self.map_analyzer.cookers else None
+        
+        # Check bot capabilities using nearest facilities
+        can_cook = self.map_analyzer.can_reach(pos, nearest_cooker) if nearest_cooker else False
         can_chop = self.map_analyzer.can_reach(pos, self.map_analyzer.counters[0]) if self.map_analyzer.counters else False
-        can_submit = self.map_analyzer.can_reach(pos, self.map_analyzer.submits[0]) if self.map_analyzer.submits else False
-        can_shop = self.map_analyzer.can_reach(pos, self.map_analyzer.shops[0]) if self.map_analyzer.shops else False
+        can_submit = self.map_analyzer.can_reach(pos, nearest_submit)
+        can_shop = self.map_analyzer.can_reach(pos, nearest_shop)
         
         if not can_shop or not can_submit:
             return
         
-        # Get distances
-        dist_to_shop = self.map_analyzer.get_distance_to_tile(pos, self.map_analyzer.shops[0]) if self.map_analyzer.shops else 0
-        dist_to_cooker = self.map_analyzer.get_distance_to_tile(pos, self.map_analyzer.cookers[0]) if self.map_analyzer.cookers else 999
-        dist_to_submit = self.map_analyzer.get_distance_to_tile(pos, self.map_analyzer.submits[0]) if self.map_analyzer.submits else 0
+        # Get distances to nearest facilities
+        dist_to_shop = self.map_analyzer.get_distance_to_tile(pos, nearest_shop)
+        dist_to_cooker = self.map_analyzer.get_distance_to_tile(pos, nearest_cooker) if nearest_cooker else 999
+        dist_to_submit = self.map_analyzer.get_distance_to_tile(pos, nearest_submit)
         
         # Skip order selection if bot is too far from shop (inefficient)
         if dist_to_shop > 20:
@@ -567,16 +578,20 @@ class BotPlayer:
             
             time_left = order['expires_turn'] - self.turn
             
-            # More conservative for short-duration orders
-            if time_left < 80:
-                # Short orders - need significant buffer, or skip entirely if too short
-                if time_left < 30:
-                    continue  # Skip very short orders - they're traps
-                if time_est > time_left * 0.6:
+            # Time feasibility check - be more aggressive for simple orders
+            n_cook = sum(1 for f in required if FOOD_INFO.get(f, {}).get('cook', False))
+            if n_cook == 0:
+                # Simple orders (no cooking) - be more aggressive
+                if time_est > time_left * 0.9:
                     continue
             else:
-                if time_est > time_left - 15:
-                    continue
+                # Cooking orders need more buffer due to variability
+                if time_left < 60:
+                    if time_est > time_left * 0.7:
+                        continue
+                else:
+                    if time_est > time_left - 20:
+                        continue
             
             # Score based on simplicity
             complexity = len(required)
