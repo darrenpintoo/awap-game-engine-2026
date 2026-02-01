@@ -115,18 +115,6 @@ class BotPlayer:
         self._deadline_critical_detected = False
         self._order_analysis_complete = False
 
-        # Map-specific strategy flags (detected from map characteristics)
-        self._is_chess_map = self._counter_count >= 80  # Chess has 90 counters
-        self._is_simple_map = (self.grid_width == 10 and self.grid_height == 10 
-                               and self._stove_count == 2 and self._counter_count == 4)
-        self._is_small_wall_map = (self.grid_width == 20 and self._counter_count == 12 
-                                   and self._stove_count == 4)
-        
-        # Sabotage prevention state
-        self._enemy_switched = False
-        self._defense_mode = False
-        self._protected_items: Set[Tuple[int, int]] = set()  # Items we're protecting
-
         # Telemetry initialization flag
         self._telemetry_started = False
 
@@ -580,10 +568,10 @@ class BotPlayer:
 
     def _evaluate_map_properties(self):
         """Analyze map characteristics to determine optimal multipliers."""
-        self._feasibility_mult = 1.32
-        self._max_infra_dist = 8888
-        self._min_tleft = 11
-        self._cooldown_base = (9, 17, 24)
+        self._feasibility_mult = 1.3
+        self._max_infra_dist = 9999
+        self._min_tleft = 10
+        self._cooldown_base = (10, 18, 25)
         self._map_type = "UNKNOWN"
 
         if not self._shop_tiles or not self._submit_tiles:
@@ -634,71 +622,71 @@ class BotPlayer:
 
         if is_compact:
             if is_resource_rich and is_open:
-                self._feasibility_mult = 2.18
-                self._min_tleft = 4
-                self._cooldown_base = (7, 11, 17)
+                self._feasibility_mult = 2.2
+                self._min_tleft = 5
+                self._cooldown_base = (8, 12, 18)
                 self._map_type = "COMPACT_RICH_OPEN"
             elif is_resource_rich:
-                self._feasibility_mult = 1.98
-                self._min_tleft = 5
-                self._cooldown_base = (7, 13, 19)
+                self._feasibility_mult = 2.0
+                self._min_tleft = 6
+                self._cooldown_base = (8, 14, 20)
                 self._map_type = "COMPACT_RICH"
             elif is_corridor:
-                self._feasibility_mult = 1.58
-                self._min_tleft = 7
-                self._cooldown_base = (9, 15, 21)
+                self._feasibility_mult = 1.6
+                self._min_tleft = 8
+                self._cooldown_base = (10, 16, 22)
                 self._map_type = "COMPACT_CORRIDOR"
             else:
-                self._feasibility_mult = 1.78
-                self._min_tleft = 5
-                self._cooldown_base = (7, 14, 19)
+                self._feasibility_mult = 1.8
+                self._min_tleft = 6
+                self._cooldown_base = (8, 15, 20)
                 self._map_type = "COMPACT"
         elif is_spread:
             if is_resource_scarce:
-                self._feasibility_mult = 1.12
-                self._min_tleft = 14
-                self._cooldown_base = (14, 24, 34)
+                self._feasibility_mult = 1.1
+                self._min_tleft = 15
+                self._cooldown_base = (15, 25, 35)
                 self._map_type = "SPREAD_SCARCE"
             elif is_corridor:
-                self._feasibility_mult = 1.17
-                self._min_tleft = 11
-                self._cooldown_base = (11, 21, 29)
+                self._feasibility_mult = 1.15
+                self._min_tleft = 12
+                self._cooldown_base = (12, 22, 30)
                 self._map_type = "SPREAD_CORRIDOR"
             else:
-                self._feasibility_mult = 1.22
-                self._min_tleft = 11
-                self._cooldown_base = (11, 19, 27)
+                self._feasibility_mult = 1.2
+                self._min_tleft = 12
+                self._cooldown_base = (12, 20, 28)
                 self._map_type = "SPREAD"
         else:
             if is_resource_rich and is_open:
-                self._feasibility_mult = 1.68
-                self._min_tleft = 6
-                self._cooldown_base = (9, 14, 21)
+                self._feasibility_mult = 1.7
+                self._min_tleft = 7
+                self._cooldown_base = (10, 15, 22)
                 self._map_type = "MEDIUM_RICH_OPEN"
             elif is_resource_scarce:
-                self._feasibility_mult = 1.27
-                self._min_tleft = 11
-                self._cooldown_base = (11, 19, 27)
+                self._feasibility_mult = 1.25
+                self._min_tleft = 12
+                self._cooldown_base = (12, 20, 28)
                 self._map_type = "MEDIUM_SCARCE"
             elif is_corridor:
-                self._feasibility_mult = 1.38
-                self._min_tleft = 9
-                self._cooldown_base = (11, 17, 24)
+                self._feasibility_mult = 1.4
+                self._min_tleft = 10
+                self._cooldown_base = (12, 18, 25)
                 self._map_type = "MEDIUM_CORRIDOR"
             else:
-                self._feasibility_mult = 1.48
-                self._min_tleft = 7
-                self._cooldown_base = (9, 15, 23)
+                self._feasibility_mult = 1.5
+                self._min_tleft = 8
+                self._cooldown_base = (10, 16, 24)
                 self._map_type = "MEDIUM"
 
         if is_tiny:
-            self._feasibility_mult = min(self._feasibility_mult * 1.18, 2.45)
-            self._min_tleft = max(self._min_tleft - 2, 3)
+            self._feasibility_mult = min(self._feasibility_mult * 1.2, 2.5)
+            self._min_tleft = max(self._min_tleft - 2, 4)
         if is_large:
-            self._feasibility_mult = max(self._feasibility_mult * 0.88, 1.12)
-            self._min_tleft = min(self._min_tleft + 2, 14)
+            self._feasibility_mult = max(self._feasibility_mult * 0.9, 1.1)
+            self._min_tleft = min(self._min_tleft + 2, 15)
         if n_cookers == 0:
-            self._feasibility_mult = min(self._feasibility_mult, 1.32)
+            self._feasibility_mult = min(self._feasibility_mult, 1.3)
 
     def _analyze_late_orders(self, orders: List[Dict]):
         """Analyze if map has late-starting orders that need early preparation.
@@ -722,7 +710,7 @@ class BotPlayer:
                 ingredients = [INGREDIENT_REGISTRY.get(fn) for fn in o.get('required', []) if INGREDIENT_REGISTRY.get(fn)]
                 n_cook = sum(1 for f in ingredients if f and f.can_cook)
                 n_chop = sum(1 for f in ingredients if f and f.can_chop)
-                est = 7 + len(ingredients) * 3 + n_cook * 21 + n_chop * 4
+                est = 8 + len(ingredients) * 3 + n_cook * 22 + n_chop * 4
                 
                 # If est > 30 and start > 460, this order MUST be picked early
                 if est > 30:
@@ -806,13 +794,13 @@ class BotPlayer:
             available_window = order['expires_turn'] - order['created_turn']
             
             # Skip infeasible orders
-            if estimated_turns > available_window * 1.48:
+            if estimated_turns > available_window * 1.5:
                 continue
             
             # Cooker timing calculations
-            setup_turns = 4 + chop_count * 6
+            setup_turns = 5 + chop_count * 6
             cooking_turns = cook_count * GameConstants.COOK_PROGRESS
-            finalize_turns = 7
+            finalize_turns = 8
             
             viable.append({
                 'oid': order['order_id'],
@@ -843,8 +831,8 @@ class BotPlayer:
             return []
         
         # Limit to top candidates by value
-        if len(cooking_tasks) > 11:
-            cooking_tasks = sorted(cooking_tasks, key=lambda x: -x['total_value'])[:11]
+        if len(cooking_tasks) > 12:
+            cooking_tasks = sorted(cooking_tasks, key=lambda x: -x['total_value'])[:12]
         
         num_cookers = max(self._stove_count, 1)
         
@@ -1124,7 +1112,7 @@ class BotPlayer:
 
         return None
 
-    def _execute_early_movement(self, c: RobotController, bid: int):
+    def _run_task_stepute_movement(self, c: RobotController, bid: int):
         """Pre-move toward next step location."""
         t = self.bot_tasks.get(bid)
         if not t:
@@ -1443,7 +1431,7 @@ class BotPlayer:
                 ft = INGREDIENT_REGISTRY.get(fn)
                 if ft:
                     cost += ft.buy_cost
-            cooldown = cd_cheap if cost < 55 else (cd_mid if cost < 115 else cd_expensive)
+            cooldown = cd_cheap if cost < 60 else (cd_mid if cost < 120 else cd_expensive)
             if oid in self.order_cooldowns and turn - self.order_cooldowns[oid] < cooldown:
                 continue
             profit = o['reward'] - cost
@@ -1460,7 +1448,7 @@ class BotPlayer:
             tleft = o['expires_turn'] - turn
             if tleft < self._min_tleft:
                 continue
-            est_simple = 7 + len(ingredients) * 3 + n_cook * 21 + n_chop * 4
+            est_simple = 8 + len(ingredients) * 3 + n_cook * 22 + n_chop * 4
             efficiency = value / max(est_simple, 1)
             
             # URGENCY SCORING: penalize orders that might be missed
@@ -1486,6 +1474,8 @@ class BotPlayer:
 
     def _prioritize_upcoming_orders(self, orders: List[Dict], turn: int, c: RobotController) -> List[Dict]:
         """Rank future orders for idle bots - AGGRESSIVE early preparation.
+        
+        STRATEGIC DIFFERENCE: TrueBot prepares orders earlier than test.py:
         - Allows preparation up to 80 turns ahead (vs typical 50-60)
         - Prioritizes high-penalty orders to avoid losses
         - Gets orders ready exactly when they activate
@@ -1527,7 +1517,7 @@ class BotPlayer:
             n_cook = sum(1 for f in ingredients if f.can_cook)
             n_chop = sum(1 for f in ingredients if f.can_chop)
             tleft = o['expires_turn'] - turn
-            est_simple = 7 + len(ingredients) * 3 + n_cook * 21 + n_chop * 4
+            est_simple = 8 + len(ingredients) * 3 + n_cook * 22 + n_chop * 4
             efficiency = value / max(wait_turns + est_simple, 1)
             
             # Penalty urgency: high-penalty orders need priority
@@ -2532,7 +2522,7 @@ class BotPlayer:
                 return
 
         if not used_move and t['step'] < len(t['recipe']):
-            self._execute_early_movement(c, bid)
+            self._run_task_stepute_movement(c, bid)
 
     def _attempt_chained_action(self, c: RobotController, bid: int, prev_used_move: bool):
         """After completing a step, try to execute next step in same turn."""
@@ -2547,7 +2537,7 @@ class BotPlayer:
         loc = self._get_action_target(step)
         if loc is None:
             if not prev_used_move:
-                self._execute_early_movement(c, bid)
+                self._run_task_stepute_movement(c, bid)
             return
 
         bs = c.get_bot_state(bid)
@@ -2564,12 +2554,12 @@ class BotPlayer:
                     self._attempt_chained_action(c, bid, prev_used_move)
                 return
             if not prev_used_move:
-                self._execute_early_movement(c, bid)
+                self._run_task_stepute_movement(c, bid)
             return
 
         if max(abs(bx - loc[0]), abs(by - loc[1])) > 1:
             if not prev_used_move:
-                self._execute_early_movement(c, bid)
+                self._run_task_stepute_movement(c, bid)
             return
 
         team = c.get_team()
@@ -2838,80 +2828,7 @@ class BotPlayer:
         # If we have a planned switch turn, use that
         return turn >= self._planned_switch_turn
 
-    def _execute_defense_protocol(self, c: RobotController, bots: List[int], 
-                                   team: Team, turn: int) -> None:
-        """Protect valuable items when enemy has switched to our map.
-        
-        Strategy: Find idle bots and have them pick up any valuable items
-        on counters/cookers that enemy bots might try to trash.
-        """
-        # Find items on our map that need protection
-        vulnerable_items = []
-        
-        # Check counters for items
-        for counter_pos in self._counter_tiles:
-            tile = c.get_tile(team, counter_pos[0], counter_pos[1])
-            if tile and hasattr(tile, 'item') and tile.item is not None:
-                item = tile.item
-                value = 0
-                if isinstance(item, Plate):
-                    value = 2 + len(getattr(item, 'food', []) or []) * 10
-                elif isinstance(item, Food):
-                    value = getattr(item, 'buy_cost', 5)
-                if value > 0:
-                    vulnerable_items.append((counter_pos, value, 'counter'))
-        
-        # Check cookers for cooked food
-        for stove_pos in self._stove_tiles:
-            tile = c.get_tile(team, stove_pos[0], stove_pos[1])
-            if tile and hasattr(tile, 'item') and isinstance(tile.item, Pan):
-                pan = tile.item
-                if pan.food is not None and pan.progress >= GameConstants.COOK_PROGRESS:
-                    value = pan.food.buy_cost + 20  # Cooked food is valuable
-                    vulnerable_items.append((stove_pos, value, 'cooker'))
-        
-        if not vulnerable_items:
-            return
-        
-        # Sort by value (protect most valuable first)
-        vulnerable_items.sort(key=lambda x: -x[1])
-        
-        # Find idle bots that can help protect
-        for bid in bots:
-            t = self.bot_tasks[bid]
-            bs = c.get_bot_state(bid)
-            if not bs:
-                continue
-            
-            # Skip bots that are busy or holding something
-            if bs.get('holding'):
-                continue
-            if t.get('order_id') is not None and t.get('recipe') and t['step'] < len(t['recipe']):
-                # Bot is working on an order - only interrupt if item is very valuable
-                pass  # For now, don't interrupt
-            
-            # If bot has no task, assign protection duty
-            if not t.get('recipe') or t['step'] >= len(t.get('recipe', [])):
-                for item_pos, value, item_type in vulnerable_items:
-                    if item_pos in self._protected_items:
-                        continue
-                    
-                    # Create a recipe to pick up and hold the item
-                    if item_type == 'cooker':
-                        recipe = [('take_pan', item_pos)]
-                    else:
-                        recipe = [('pickup', item_pos)]
-                    
-                    t['recipe'] = recipe
-                    t['step'] = 0
-                    t['order_id'] = None  # No order, just protection
-                    t['stuck_count'] = 0
-                    t['last_progress'] = turn
-                    self._protected_items.add(item_pos)
-                    self._write_log(f"DEFENSE: Bot {bid} protecting item at {item_pos} (value={value})")
-                    break
-
-    def _execute_sabotage_actions(self, c: RobotController, bots: List[int]) -> bool:
+    def _run_task_stepute_sabotage(self, c: RobotController, bots: List[int]) -> bool:
         """Execute sabotage actions while on enemy map. Returns True if we're in sabotage mode."""
         switch_info = c.get_switch_info()
         turn = c.get_turn()
@@ -3053,19 +2970,6 @@ class BotPlayer:
             self._analyze_late_orders(orders)
             self._order_analysis_complete = True
 
-        # Sabotage prevention: detect if enemy has switched to our map
-        switch_info = c.get_switch_info()
-        if switch_info['enemy_team_switched'] and not self._enemy_switched:
-            self._enemy_switched = True
-            self._defense_mode = True
-            self._write_log(f"DEFENSE MODE ACTIVATED: Enemy switched to our map at turn {turn}")
-        
-        # Defense mode ends when switch window ends
-        if self._defense_mode and not switch_info['window_active']:
-            self._defense_mode = False
-            self._enemy_switched = False
-            self._write_log(f"DEFENSE MODE DEACTIVATED: Switch window ended at turn {turn}")
-
         for bid in bots:
             if bid not in self.bot_tasks:
                 self.bot_tasks[bid] = {
@@ -3119,7 +3023,7 @@ class BotPlayer:
                 self._switch_in_progress = True
         
         # If we're in sabotage mode, execute sabotage actions and skip normal processing
-        if self._execute_sabotage_actions(c, bots):
+        if self._run_task_stepute_sabotage(c, bots):
             return  # Don't do normal order processing while sabotaging
         
         # ============================================
@@ -3170,7 +3074,7 @@ class BotPlayer:
                         pass
                     else:
                         continue
-            if sc > 14 or no_progress > 33:
+            if sc > 15 or no_progress > 35:
                 oid = t.get('order_id')
                 if oid:
                     self.order_cooldowns[oid] = turn
@@ -3512,10 +3416,6 @@ class BotPlayer:
                             n_chopping_bots += 1
                         break
 
-        # DEFENSE MODE: When enemy has switched to our map, protect valuable items
-        if self._defense_mode:
-            self._execute_defense_protocol(c, bots, team, turn)
-
         # Execute all bots
         for bid in bots:
             self._run_task_step(c, bid)
@@ -3730,7 +3630,7 @@ class BotPlayer:
             if tleft < 10:
                 continue
             value = max(profit + penalty, penalty)
-            est_simple = 7 + len(ingredients) * 3 + n_cook * 21 + n_chop * 4
+            est_simple = 8 + len(ingredients) * 3 + n_cook * 22 + n_chop * 4
             efficiency = value / max(est_simple, 1)
             out.append({
                 'order': o, 'cost': cost, 'profit': profit,
@@ -3796,7 +3696,7 @@ class BotPlayer:
                 if available_money < cand['cost'] + 2:
                     continue
                 est = self._predict_split_completion(cand['order'])
-                if est > cand['tleft'] * 1.48:
+                if est > cand['tleft'] * 1.5:
                     continue
                 if turn + est > GameConstants.TOTAL_TURNS:
                     continue
