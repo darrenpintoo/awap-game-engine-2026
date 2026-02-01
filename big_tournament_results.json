@@ -1,0 +1,38 @@
+{
+  "Stealer": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0,
+    "points": 0
+  },
+  "Rush": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0,
+    "points": 0
+  },
+  "Turtle": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0,
+    "points": 0
+  },
+  "Planner": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0,
+    "points": 0
+  },
+  "IronChef": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0,
+    "points": 0
+  },
+  "HareshChamp": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0,
+    "points": 0
+  }
+}
