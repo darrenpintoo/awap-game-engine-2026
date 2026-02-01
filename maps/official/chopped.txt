@@ -32,7 +32,7 @@ start=110  duration=15  required=MEAT,NOODLES           reward=20 penalty=10
 start=120  duration=15  required=NOODLES,ONIONS           reward=20 penalty=10
 start=130  duration=15  required=ONIONS,ONIONS           reward=20 penalty=10
 start=140  duration=15  required=EGG,EGG           reward=20 penalty=10
-start=150  duration=15  required=ONIONS,EGG           reward=20 penalty=10
+start=150  duration=15  required=ONIONS,EGG           reward=200 penalty=10
 start=160  duration=15  required=EGG,ONIONS           reward=20 penalty=10
 start=170  duration=15  required=MEAT,EGG           reward=20 penalty=10
 start=180  duration=15  required=EGG,ONIONS           reward=20 penalty=10

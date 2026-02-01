@@ -12,7 +12,7 @@
 SWITCH: turn=250 duration=100
 
 ORDERS:
-sstart=0  duration=75  required=NOODLES,ONIONS           reward=231 penalty=3
+start=0  duration=75  required=NOODLES,ONIONS           reward=231 penalty=3
 start=17  duration=61  required=MEAT,NOODLES           reward=123 penalty=17
 start=38  duration=74  required=EGG           reward=38 penalty=5
 start=52  duration=72  required=ONIONS,MEAT           reward=387 penalty=36

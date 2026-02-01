@@ -74,3 +74,6 @@ tournament-dashboard/public/data.json
 
 # Jupyter
 .ipynb_checkpoints/
+
+# Custom bot files
+bots/eric/test.py
