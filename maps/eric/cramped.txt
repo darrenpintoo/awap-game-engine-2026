@@ -1,0 +1,19 @@
+#############
+#b.........b#
+#...$...U...#
+#...R...R...#
+#####...#####
+#...C.K.S...#
+#.....T.....#
+#############
+
+SWITCH: turn=250 duration=50
+
+ORDERS:
+start=0   duration=100  required=NOODLES,MEAT      reward=300  penalty=75
+start=50  duration=100  required=NOODLES,MEAT      reward=300  penalty=75
+start=100 duration=100  required=NOODLES,MEAT      reward=300  penalty=75
+start=150 duration=100  required=NOODLES,MEAT      reward=300  penalty=75
+start=200 duration=100  required=NOODLES,MEAT      reward=300  penalty=75
+start=250 duration=100  required=NOODLES,MEAT      reward=300  penalty=75
+start=300 duration=100  required=NOODLES,MEAT      reward=300  penalty=751

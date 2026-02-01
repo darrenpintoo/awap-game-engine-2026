@@ -104,7 +104,22 @@ start=0  duration=200  required=NOODLES,MEAT  reward=10000 penalty=3
 | `B` | BOX | ❌ | ✅ | ✅ | Stackable storage (multiple identical items) |
 | `b` | Bot Spawn | ✅ | ❌ | ❌ | Starting positions for bots |
 
-### 3.3 Important Spatial Rules
+### 3.3 Tile State Attributes
+
+Access via `controller.get_tile(team, x, y)`:
+
+| Tile | Attribute | Description |
+|------|-----------|-------------|
+| COOKER | `item` | Pan object (has `.food` attribute) |
+| COOKER | `cook_progress` | Int, ticks food has been cooking |
+| SINK | `num_dirty_plates` | Int, dirty plates in sink |
+| SINK | `curr_dirty_plate_progress` | Int, washing progress (0-1) |
+| SINKTABLE | `num_clean_plates` | Int, clean plates available |
+| COUNTER | `item` | Item on counter (Food/Plate/Pan or None) |
+| BOX | `item` | Item type stored |
+| BOX | `count` | Number of items in box |
+
+### 3.4 Important Spatial Rules
 
 - **Interaction Range**: Must be within Chebyshev distance 1 to interact
 - **Bots cannot stand on non-walkable tiles**
@@ -132,10 +147,10 @@ start=0  duration=200  required=NOODLES,MEAT  reward=10000 penalty=3
 
 ### 4.3 Equipment
 
-| Item | Cost | Description |
-|------|------|-------------|
-| PLATE | $10 | Value varies by store config. Required for plating/submitting. |
-| PAN | $10 | Value varies. Required for cooking. |
+| Item | Cost | Enum | Description |
+|------|------|------|-------------|
+| PLATE | $2 | `ShopCosts.PLATE` | Required for plating/submitting |
+| PAN | $4 | `ShopCosts.PAN` | Required for cooking |
 
 ### 4.4 Cooking System
 
@@ -173,11 +188,22 @@ controller.get_enemy_team() -> Team             # The opposing team
 # UPDATED: These require the team argument
 controller.get_map(team) -> Map                 # Deep copy of map for specified team
 controller.get_orders(team) -> List[Order]      # Active orders for specified team
-controller.get_team_bot_ids(team) -> List[int]  # Bot IDs for specified team
+controller.get_team_bot_ids(team) -> List[int]  # Bot IDs [0,1] for yours, [2,3] for enemy
 
 controller.get_team_money(team) -> int          # Team money
-controller.get_bot_state(bot_id) -> Dict        # Position, holding, etc.
 controller.get_tile(team, x, y) -> Tile         # Tile at position
+
+# Bot state returns dict:
+controller.get_bot_state(bot_id) -> {
+    'x': int,
+    'y': int, 
+    'holding': dict | None,  # See below
+    'team': Team
+}
+# holding dict structure (if not None):
+# {'type': 'Food', 'food_name': str, 'chopped': bool, 'cooked_stage': int}
+# {'type': 'Plate', 'dirty': bool, 'food': [...]}
+# {'type': 'Pan', 'food': dict | None}
 ```
 
 ### 5.2 Movement
@@ -273,7 +299,12 @@ A **sabotage mechanic** allowing teams to temporarily invade the enemy's kitchen
 ### 7.3 API
 
 ```python
-controller.get_switch_info() -> Dict
+controller.get_switch_info() -> {
+    'switch_turn': int,          # Turn when window opens
+    'switch_duration': int,      # How long window lasts
+    'has_switched': bool,        # Your team already switched?
+    'enemy_has_switched': bool   # Enemy already switched?
+}
 controller.can_switch_maps() -> bool
 controller.switch_maps() -> bool           # Does NOT consume action
 ```
