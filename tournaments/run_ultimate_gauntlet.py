@@ -32,8 +32,8 @@ def get_path(rel_path):
 
 # Configuration
 HERO_BOTS = {
+    "Hero_UltimateChampion": get_path("bots/dpinto/ultimate_champion_bot.py"),
     "Hero_BEST^3": get_path("bots/dpinto/BEST^3_defense_bot.py"),
-    "Hero_BEST^2": get_path("bots/hareshm/BEST^2-champion_bot.py"),
     "Hero_Sovereign": get_path("bots/hareshm/SOVEREIGN.py")
 }
 
@@ -47,16 +47,16 @@ MAPS_OFFICIAL = [
 ]
 
 MAPS_TEST = [
-    "maps/test/01_tiny_sprint.txt",
-    "maps/test/02_balanced_medium.txt",
-    "maps/test/03_grand_kitchen.txt",
-    "maps/test/04_varied_orders.txt",
-    "maps/test/05_chokepoint_chaos.txt",
-    "maps/test/06_resource_crunch.txt",
-    "maps/test/07_pressure_cooker.txt",
-    "maps/test/08_sabotage_alley.txt",
-    "maps/test/09_remote_pantry.txt",
-    "maps/test/10_burn_risk.txt"
+    "maps/test-maps/01_tiny_sprint.txt",
+    "maps/test-maps/02_balanced_medium.txt",
+    "maps/test-maps/03_grand_kitchen.txt",
+    "maps/test-maps/04_varied_orders.txt",
+    "maps/test-maps/05_chokepoint_chaos.txt",
+    "maps/test-maps/06_resource_crunch.txt",
+    "maps/test-maps/07_pressure_cooker.txt",
+    "maps/test-maps/08_sabotage_alley.txt",
+    "maps/test-maps/09_remote_pantry.txt",
+    "maps/test-maps/10_burn_risk.txt"
 ]
 
 # Output Path
@@ -71,7 +71,7 @@ def find_all_bots():
     all_files = glob.glob(search_pattern, recursive=True)
     
     challengers = {}
-    ignore_terms = ["__init__", "test", "generate", "helper", "util", "constants"]
+    ignore_terms = ["__init__", "generate", "helper", "util", "constants"]
     
     for f in all_files:
         if any(term in os.path.basename(f).lower() for term in ignore_terms): continue
