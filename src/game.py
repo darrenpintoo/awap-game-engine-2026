@@ -104,7 +104,7 @@ class Game:
             self.red_player = import_file(red_name, red_bot_path).BotPlayer(copy.deepcopy(self.game_state.red_map))
         except Exception as e:
             self.red_failed_init = True
-            #print(f"[INIT] Red bot failed: {e}")
+            print(f"[INIT] Red bot failed: {e}")
             traceback.print_exc()
 
         try:
@@ -112,7 +112,7 @@ class Game:
             self.blue_player = import_file(blue_name, blue_bot_path).BotPlayer(copy.deepcopy(self.game_state.blue_map))
         except Exception as e:
             self.blue_failed_init = True
-            #print(f"[INIT] Blue bot failed: {e}")
+            print(f"[INIT] Blue bot failed: {e}")
             traceback.print_exc()
 
         #generate the controllers
@@ -172,10 +172,10 @@ class Game:
         dt = time.time() - t0
 
         if th.is_alive():
-            #print(f"[TURN RUNNER] {team.name} timed out ({dt:.3f}s > {self.per_turn_timeout_s:.3f}s)")
+            print(f"[TURN RUNNER] {team.name} timed out ({dt:.3f}s > {self.per_turn_timeout_s:.3f}s)")
             return False
         if not ok:
-            #print(f"[TURN REUNNER] {team.name} crashed: {exc}")
+            print(f"[TURN REUNNER] {team.name} crashed: {exc}")
             traceback.print_exc()
             return False
         return True
@@ -194,7 +194,7 @@ class Game:
 
         #needs init
         if self.red_failed_init and self.blue_failed_init:
-            #print("[GAME] Both bots failed to initialize.")
+            print("[GAME] Both bots failed to initialize.")
             return None
 
         #render init
@@ -216,33 +216,33 @@ class Game:
 
             #if one side crashes, then the other side wins by default
             if not blue_ok and red_ok:
-                #print("[GAME] BLUE failed, RED wins")
+                print("[GAME] BLUE failed, RED wins")
                 winner = Team.RED
                 self.export_replay(winner)
                 return winner
             if not red_ok and blue_ok:
-                #print("[GAME] RED failed, BLUE wins")
+                print("[GAME] RED failed, BLUE wins")
                 winner = Team.BLUE
                 self.export_replay(winner)
                 return winner
             if not red_ok and not blue_ok:
-                #print("[GAME] Both failed, no winner")
+                print("[GAME] Both failed, no winner")
                 self.export_replay(None)
                 return None
 
         red_money = self.game_state.get_team_money(Team.RED)
         blue_money = self.game_state.get_team_money(Team.BLUE)
         
-        #print(f"[GAME OVER] money scores: RED=${red_money}, BLUE=${blue_money}")
+        print(f"[GAME OVER] money scores: RED=${red_money}, BLUE=${blue_money}")
 
         if red_money > blue_money:
-            #print(f"[RESULT] RED WINS by ${red_money - blue_money}!")
+            print(f"[RESULT] RED WINS by ${red_money - blue_money}!")
             winner = Team.RED
         elif blue_money > red_money:
-            #print(f"[RESULT] BLUE WINS by ${blue_money - red_money}!")
+            print(f"[RESULT] BLUE WINS by ${blue_money - red_money}!")
             winner = Team.BLUE
         else:
-            #print("[RESULT] DRAW")
+            print("[RESULT] DRAW")
             winner = None
 
         self.export_replay(winner)
@@ -261,7 +261,7 @@ class Game:
         }
         with open(self.replay_path, "w", encoding="utf-8") as f:
             json.dump(payload, f, indent=2)
-        #print(f"[REPLAY] wrote {self.replay_path}")
+        print(f"[REPLAY] wrote {self.replay_path}")
 
     def close(self):
         if self.renderer is not None:
