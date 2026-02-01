@@ -77,3 +77,6 @@ tournament-dashboard/public/data.json
 
 # Custom bot files
 bots/eric/test.py
+
+# Test Bots
+testbots/
