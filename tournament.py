@@ -1,185 +1,156 @@
-#!/usr/bin/env python3
-"""Round-robin tournament for all bots in bots/ folder"""
-
 import subprocess
-import sys
 import os
 import json
-from itertools import combinations
-from collections import defaultdict
+import itertools
+from concurrent.futures import ThreadPoolExecutor
 
-# All bots
+# Configuration
 BOTS = [
-    "bots/dpinto/planner_bot.py",
-    "bots/eric/Apex_Chef.py",
-    "bots/eric/StrategicKitchen.py",
+    "bots/duo_noodle_bot.py",
     "bots/eric/TrueUltimateChefBot.py",
     "bots/eric/UltimateChefBot.py",
+    "bots/eric/Apex_Chef.py",
     "bots/eric/iron_chef_bot.py",
+    "bots/eric/IronChefOptimized.py",
+    "bots/eric/StrategicKitchen.py",
+    "bots/dpinto/solo_bot.py",
+    "bots/dpinto/pair_bot.py",
+    "bots/dpinto/planner_bot.py",
+    "bots/dpinto/team_bot.py",
+    "bots/hareshm/optimal_bot.py",
+    "bots/hareshm/BEST - champion_bot.py"
 ]
 
-# All maps
 MAPS = [
-    "maps/eric/map2.txt",
     "maps/eric/map3_sprint.txt",
-    "maps/eric/map4_chaos.txt",
+    "maps/eric/throughput.txt",
     "maps/eric/map5_grind.txt",
+    "maps/eric/map2.txt",
     "maps/eric/map6_overload.txt",
-    "maps/haresh/map1.txt",
+    "maps/eric/map4_chaos.txt",
     "maps/haresh/map_challenge.txt",
+    "maps/haresh/map1.txt",
     "maps/haresh/map_compact.txt",
     "maps/dpinto/mega_warehouse.txt",
     "maps/dpinto/mega_maze.txt",
+    "maps/dpinto/easy_ramp.txt",
+    "maps/dpinto/multi_ingredient.txt",
+    "maps/dpinto/rush_orders.txt",
+    "maps/dpinto/multi_order.txt",
+    "maps/dpinto/time_pressure.txt",
+    "maps/dpinto/resource_war.txt",
+    "maps/dpinto/stress_test.txt",
+    "maps/dpinto/chaos_kitchen.txt"
 ]
 
 TURNS = 200
-TIMEOUT = 0
+MAX_WORKERS = 12  # Increased for faster execution
 
-def run_game(red_bot, blue_bot, map_file):
-    """Run a single game and return (red_score, blue_score, winner)"""
+def run_match(red_bot, blue_bot, map_path):
     cmd = [
-        sys.executable, "src/game.py",
+        "python3", "src/game.py",
         "--red", red_bot,
         "--blue", blue_bot,
-        "--map", map_file,
-        "--turns", str(TURNS),
-        "--timeout", str(TIMEOUT)
+        "--map", map_path,
+        "--turns", str(TURNS)
     ]
-    
-    env = os.environ.copy()
-    env["PYTHONPATH"] = env.get("PYTHONPATH", "") + ":src"
-    
     try:
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=120, env=env)
-        output = result.stdout + result.stderr
+        # Run and capture output
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
+        output = result.stdout
         
-        # Parse result
-        for line in output.split('\n'):
-            if "[GAME OVER]" in line:
-                # Parse: [GAME OVER] money scores: RED=$X, BLUE=$Y
-                parts = line.split('$')
-                red_score = int(parts[1].split(',')[0])
-                blue_score = int(parts[2].strip())
-                winner = "RED" if red_score > blue_score else ("BLUE" if blue_score > red_score else "TIE")
-                return red_score, blue_score, winner
-                
-        return 0, 0, "ERROR"
+        # Parse score from output: "money scores: RED=$568, BLUE=$1412"
+        scores_line = [line for line in output.split('\n') if "money scores:" in line]
+        if not scores_line:
+            return None
+            
+        line = scores_line[0]
+        # RED=$568, BLUE=$1412
+        parts = line.split("scores:")[1].split(",")
+        red_score = int(parts[0].split("=$")[1])
+        blue_score = int(parts[1].split("=$")[1])
+        
+        return {
+            "red": red_bot,
+            "blue": blue_bot,
+            "map": map_path,
+            "red_score": red_score,
+            "blue_score": blue_score,
+            "winner": "RED" if red_score > blue_score else ("BLUE" if blue_score > red_score else "DRAW")
+        }
     except Exception as e:
-        print(f"Error running game: {e}")
-        return 0, 0, "ERROR"
-
-def get_bot_name(path):
-    """Extract short name from bot path"""
-    return os.path.basename(path).replace(".py", "")
+        print(f"Error running match {red_bot} vs {blue_bot} on {map_path}: {e}")
+        return None
 
 def main():
-    print("=" * 60)
-    print("ROUND ROBIN TOURNAMENT")
-    print("=" * 60)
-    print(f"Bots: {len(BOTS)}")
-    print(f"Maps: {len(MAPS)}")
-    print(f"Total matches: {len(list(combinations(BOTS, 2))) * len(MAPS)}")
-    print("=" * 60)
+    # Filter non-existent files
+    existing_bots = [b for b in BOTS if os.path.exists(b)]
+    existing_maps = [m for m in MAPS if os.path.exists(m)]
     
-    # Track overall stats
-    wins = defaultdict(int)
-    losses = defaultdict(int)
-    ties = defaultdict(int)
-    total_score = defaultdict(int)
-    match_results = []
+    print(f"Starting tournament with {len(existing_bots)} bots and {len(existing_maps)} maps.")
     
-    # JSON structure for large maps or full results
-    full_results_json = {
-        "bots": [get_bot_name(b) for b in BOTS],
-        "maps": [os.path.basename(m) for m in MAPS],
-        "matches": []
+    # All pairs (A vs B) - including symmetric pairs if order matters (RED vs BLUE)
+    # For a true round robin, we should run each pair once, or twice (swapped colors)
+    # Let's run each unique pair once to save time.
+    matches = []
+    pairs = list(itertools.combinations(existing_bots, 2))
+    
+    total_tasks = len(pairs) * len(existing_maps)
+    print(f"Total matches to run: {total_tasks}")
+    
+    all_results = []
+    
+    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+        futures = []
+        for map_path in existing_maps:
+            for b1, b2 in pairs:
+                futures.append(executor.submit(run_match, b1, b2, map_path))
+        
+        count = 0
+        for future in futures:
+            res = future.result()
+            if res:
+                all_results.append(res)
+            count += 1
+            if count % 10 == 0:
+                print(f"Completed {count}/{total_tasks} matches...")
+
+    # Aggregating
+    summary = {}
+    for bot in existing_bots:
+        summary[bot] = {"wins": 0, "losses": 0, "draws": 0, "total_money": 0, "matches": 0}
+
+    for res in all_results:
+        summary[res["red"]]["total_money"] += res["red_score"]
+        summary[res["blue"]]["total_money"] += res["blue_score"]
+        summary[res["red"]]["matches"] += 1
+        summary[res["blue"]]["matches"] += 1
+        
+        if res["winner"] == "RED":
+            summary[res["red"]]["wins"] += 1
+            summary[res["blue"]]["losses"] += 1
+        elif res["winner"] == "BLUE":
+            summary[res["blue"]]["wins"] += 1
+            summary[res["red"]]["losses"] += 1
+        else:
+            summary[res["red"]]["draws"] += 1
+            summary[res["blue"]]["draws"] += 1
+
+    # Sorting
+    leaderboard = sorted(summary.items(), key=lambda x: (x[1]["wins"], x[1]["total_money"]), reverse=True)
+    
+    results_data = {
+        "leaderboard": leaderboard,
+        "matches": all_results
     }
-
-    try:
-        for map_file in MAPS:
-            map_name = os.path.basename(map_file)
-            print(f"\n--- Map: {map_name} ---")
-            
-            for red_bot, blue_bot in combinations(BOTS, 2):
-                red_name = get_bot_name(red_bot)
-                blue_name = get_bot_name(blue_bot)
-                
-                # Check if PlannerBot is involved (prioritize testing it)
-                if "planner_bot" not in red_name and "planner_bot" not in blue_name:
-                    # Skip non-planner matches for speed to answer user request faster?
-                    # User asked "run planner bot against every other bot".
-                    # But round robin is nicer. I'll keep it ALL for now but maybe speed it up?
-                    # Actually, let's just run them all.
-                    pass
-
-                print(f"  {red_name} vs {blue_name}...", end=" ", flush=True)
-                
-                red_score, blue_score, winner = run_game(red_bot, blue_bot, map_file)
-                
-                total_score[red_name] += red_score
-                total_score[blue_name] += blue_score
-                
-                if winner == "RED":
-                    wins[red_name] += 1
-                    losses[blue_name] += 1
-                    print(f"RED WINS ${red_score} vs ${blue_score}")
-                elif winner == "BLUE":
-                    wins[blue_name] += 1
-                    losses[red_name] += 1
-                    print(f"BLUE WINS ${blue_score} vs ${red_score}")
-                elif winner == "TIE":
-                    ties[red_name] += 1
-                    ties[blue_name] += 1
-                    print(f"TIE ${red_score}")
-                else:
-                    print(f"ERROR")
-                
-                match_data = {
-                    "map": map_name,
-                    "red": red_name,
-                    "blue": blue_name,
-                    "red_score": red_score,
-                    "blue_score": blue_score,
-                    "winner": winner
-                }
-                match_results.append(match_data)
-                full_results_json["matches"].append(match_data)
-                
-                # Write intermediate JSON
-                with open("tournament_results.json", "w") as f:
-                    json.dump(full_results_json, f, indent=2)
-
-    except KeyboardInterrupt:
-        print("\nTournament interrupted!")
     
-    # Print final standings
-    print("\n" + "=" * 60)
-    print("FINAL STANDINGS")
-    print("=" * 60)
-    
-    standings = []
-    for bot in BOTS:
-        name = get_bot_name(bot)
-        standings.append({
-            "name": name,
-            "wins": wins[name],
-            "losses": losses[name],
-            "ties": ties[name],
-            "score": total_score[name],
-            "win_rate": wins[name] / max(1, wins[name] + losses[name] + ties[name])
-        })
-    
-    standings.sort(key=lambda x: (-x["wins"], -x["score"]))
-    
-    print(f"{'Bot':<20} {'W':>4} {'L':>4} {'T':>4} {'WR%':>6} {'Total$':>10}")
-    print("-" * 50)
-    for s in standings:
-        print(f"{s['name']:<20} {s['wins']:>4} {s['losses']:>4} {s['ties']:>4} {s['win_rate']*100:>5.1f}% ${s['score']:>9}")
-    
-    print("\n" + "=" * 60)
-    if standings:
-        print(f"WINNER: {standings[0]['name']} with {standings[0]['wins']} wins!")
-    print("=" * 60)
+    with open("tournament_results.json", "w") as f:
+        json.dump(results_data, f, indent=4)
+        
+    print("\nLEADERBOARD:")
+    for i, (bot, stats) in enumerate(leaderboard):
+        win_rate = (stats["wins"] / stats["matches"]) * 100 if stats["matches"] > 0 else 0
+        print(f"{i+1}. {bot}: Wins={stats['wins']}, Matches={stats['matches']}, WinRate={win_rate:.1f}%, Total Money={stats['total_money']}")
 
 if __name__ == "__main__":
     main()
