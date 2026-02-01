@@ -1,7 +1,7 @@
 """
 TrueBot - Autonomous Kitchen Management System for AWAP 2026
 ============================================================
-
+"""
 
 import os
 from typing import Any, Dict, List, Optional, Set, Tuple
@@ -2857,7 +2857,8 @@ class BotPlayer:
             tile = c.get_tile(team, stove_pos[0], stove_pos[1])
             if tile and hasattr(tile, 'item') and isinstance(tile.item, Pan):
                 pan = tile.item
-                if pan.food is not None and pan.progress >= GameConstants.COOK_PROGRESS:
+                # cook_progress is on the tile, not the food; cooked_stage 1 = cooked
+                if pan.food is not None and getattr(pan.food, 'cooked_stage', 0) >= 1:
                     value = pan.food.buy_cost + 20  # Cooked food is valuable
                     vulnerable_items.append((stove_pos, value, 'cooker'))
         
