@@ -211,44 +211,45 @@ class BotPlayer:
     
     def _init_map(self, controller: RobotController, team: Team) -> None:
         """Cache map feature positions (NOT walkability)."""
+        # Clear existing lists to avoid duplicates on re-scan (Turn 101)
+        self.shops = []
+        self.cookers = []
+        self.counters = []
+        self.submits = []
+        self.trashes = []
+        self.sinks = []
+        self.sink_tables = []
+        
         m = controller.get_map(team)
         for x in range(m.width):
             for y in range(m.height):
-                tile = m.tiles[x][y]
+                tile = controller.get_tile(team, x, y)
+                if not tile: continue
                 pos = (x, y)
                 name = tile.tile_name
+                
                 if name == "SHOP":
                     self.shops.append(pos)
                 elif name == "COOKER":
                     self.cookers.append(pos)
-                elif name == "COUNTER":
+                elif name == "COUNTER" or name == "BOX":
                     self.counters.append(pos)
+                elif name == "SINKTABLE":
+                    self.sink_tables.append(pos)
                 elif name == "SUBMIT":
                     self.submits.append(pos)
                 elif name == "TRASH":
                     self.trashes.append(pos)
                 elif name == "SINK":
                     self.sinks.append(pos)
-                elif name == "SINKTABLE":
-                    self.sink_tables.append(pos)
-        self.initialized = True
-        
-        # Log detected map features
-        # Scan map for Boxes (which we treat as counters)
-        my_map = controller.get_map(team)
-        width = my_map.width
-        height = my_map.height
-        for x in range(width):
-            for y in range(height):
-                tile = controller.get_tile(team, x, y)
-                if tile and tile.tile_name == "BOX":
-                    self.counters.append((x, y))
+                
+                if name not in ["FLOOR", "WALL", "VOID"]:
+                    self._log(f"MAP DIAGNOSTIC: Tile at {pos} is '{name}'")
                     
+        self.initialized = True
         self._log(f"MAP INIT: counters={self.counters}")
         self._log(f"MAP INIT: cookers={self.cookers}")
         self._log(f"MAP INIT: shops={self.shops}")
-        self._log(f"MAP INIT: submits={self.submits}")
-        self._log(f"MAP INIT: trashes={self.trashes}")
         self._log(f"MAP INIT: sink_tables={self.sink_tables}")
     
     def _get_bot_pos(self, controller: RobotController, bot_id: int) -> Tuple[int, int]:
@@ -383,17 +384,43 @@ class BotPlayer:
     
     def _get_free_counter(self, controller: RobotController, team: Team, 
                           pos: Tuple[int, int], 
-                          exclude: Optional[Set[Tuple[int, int]]] = None) -> Optional[Tuple[int, int]]:
-        """Find nearest free counter."""
+                          exclude: Optional[Set[Tuple[int, int]]] = None,
+                          for_chopping: bool = False) -> Optional[Tuple[int, int]]:
+        """Find nearest free counter. If for_chopping=False, prioritizing sink_tables."""
         free = []
+        
+        # Check sink tables first if not for chopping (preserve true counters for chopping)
+        if not for_chopping:
+            for st in self.sink_tables:
+                if exclude and st in exclude:
+                    continue
+                tile = controller.get_tile(team, st[0], st[1])
+                if tile and getattr(tile, 'item', None) is None:
+                    free.append(st)
+            
+            # If we found a sink table, use it!
+            if free:
+                return self._get_nearest(pos, free)
+
+        # Check standard counters/boxes
         for c in self.counters:
             if exclude and c in exclude:
                 continue
             tile = controller.get_tile(team, c[0], c[1])
             if tile and getattr(tile, 'item', None) is None:
                 free.append(c)
+                    
         return self._get_nearest(pos, free)
     
+    def _count_free_staging_slots(self, controller: RobotController, team: Team) -> int:
+        """Count total free counters and sink tables."""
+        count = 0
+        for c in (self.counters + self.sink_tables):
+            tile = controller.get_tile(team, c[0], c[1])
+            if tile and getattr(tile, 'item', None) is None:
+                count += 1
+        return count
+
     def _get_available_cooker(self, controller: RobotController, team: Team,
                                pos: Tuple[int, int]) -> Optional[Tuple[int, int]]:
         """Find nearest cooker with empty pan."""
@@ -706,9 +733,15 @@ class BotPlayer:
                     self._move_toward(controller, self.active_bot_id, drop_tile, team)
                 return
             else:
-                self._log(f"  HANDOFF: No valid drop tile found, swapping anyway (item will be lost!)")
+                self._log(f"  HANDOFF: No valid drop tile found. WAITING.")
+                # LEAN STRATEGY: Do not swap anyway - that causes item loss/duplication.
+                # Just wait for a counter to open or for the blocking bot to move.
+                return True
         
-        self._swap_control()
+        # If not holding anything, or if handoff was rejected, we can swap to see if partner can do something
+        if holding is None:
+            self._swap_control()
+        return
     
     def _estimate_completion_turn(self, order: Dict, current_turn: int, 
                                     controller: RobotController, team: Team) -> int:
@@ -785,28 +818,77 @@ class BotPlayer:
                 continue
             
             # Need full processing - realistic estimates
-            if needs_chop and needs_cook:
-                # MEAT: move to shop + buy + move to counter + place + chop(6) + pickup
-                #       + move to cooker + place + wait for cook + take + move to plate + add
-                total_time += AVG_MOVE + 1  # Buy
-                total_time += AVG_MOVE + 1 + 6 + 1  # Place, chop, pickup
-                total_time += AVG_MOVE + 1  # Place in cooker
-                max_cook_time = max(max_cook_time, 20)
-                total_time += AVG_MOVE + 1 + AVG_MOVE + 1  # Take from pan + add to plate
-            elif needs_chop:
-                # ONIONS: buy + move + place + chop + pickup + move to plate + add
-                total_time += AVG_MOVE + 1  # Buy
-                total_time += AVG_MOVE + 1 + 6 + 1  # Place, chop, pickup
-                total_time += AVG_MOVE + 1  # Move to plate + add
-            elif needs_cook:
-                # EGG: buy + move to cooker + place + wait + take + move to plate + add
-                total_time += AVG_MOVE + 1  # Buy
-                total_time += AVG_MOVE + 1  # Place in cooker
-                max_cook_time = max(max_cook_time, 20)
-                total_time += AVG_MOVE + 1 + AVG_MOVE + 1  # Take + add
+        # Need full processing - realistic estimates
+        # Check if item exists in world (cooked/chopped)
+        # Scan cookers for cooked items
+        found_in_cooker = False
+        if needs_cook:
+            for c_pos in self.cookers:
+                tile = controller.get_tile(team, c_pos[0], c_pos[1])
+                if tile and hasattr(tile, 'item') and isinstance(tile.item, Pan):
+                     pan = tile.item
+                     if pan.food and pan.food.food_name == ing and pan.food.cooked_stage == 1:
+                         found_in_cooker = True
+                         break
+        
+        # Scan counters for chopped items (or raw if needed)
+        found_on_counter = False
+        for c_pos in self.counters:
+             tile = controller.get_tile(team, c_pos[0], c_pos[1])
+             if tile and hasattr(tile, 'item') and isinstance(tile.item, Food):
+                 f = tile.item
+                 if f.food_name == ing:
+                     if needs_chop and f.chopped:
+                         found_on_counter = True
+                         break
+                     if not needs_chop and not needs_cook: # Simple item
+                         found_on_counter = True
+                         break
+
+        if needs_chop and needs_cook:
+            if found_in_cooker:
+                 # Already cooked! Just pickup from pan
+                 total_time += AVG_MOVE + 1 + AVG_MOVE + 1
+            elif found_on_counter: # Chopped but not cooked
+                 # Move to counter + pickup + move to cooker + place + cook + ...
+                 ops = (AVG_MOVE + 1) + (AVG_MOVE + 1) + (AVG_MOVE + 1 + AVG_MOVE + 1)
+                 # Optimistic: helper handles the cooking wait or parallel steps
+                 if self.inactive_bot_id: ops *= 0.6
+                 total_time += ops
+                 max_cook_time = max(max_cook_time, 10)
             else:
-                # NOODLES, SAUCE: buy + move to plate + add
+                # Full prep
+                # Optimistic: parallel prep
+                ops = (AVG_MOVE + 1) + (AVG_MOVE + 1 + 6 + 1) + (AVG_MOVE + 1) + (AVG_MOVE + 1 + AVG_MOVE + 1)
+                if self.inactive_bot_id: ops *= 0.5 # High optimism for Meat!
+                total_time += ops
+                max_cook_time = max(max_cook_time, 10)
+        elif needs_chop:
+            if found_on_counter:
+                # Already chopped
                 total_time += AVG_MOVE + 1 + AVG_MOVE + 1
+            else:
+                # Full prep
+                ops = (AVG_MOVE + 1) + (AVG_MOVE + 1 + 6 + 1) + (AVG_MOVE + 1)
+                if self.inactive_bot_id: ops *= 0.7
+                total_time += ops
+        elif needs_cook:
+            if found_in_cooker:
+                 total_time += AVG_MOVE + 1 + AVG_MOVE + 1
+            else:
+                 # Full prep
+                ops = (AVG_MOVE + 1) + (AVG_MOVE + 1) + (AVG_MOVE + 1 + AVG_MOVE + 1)
+                if self.inactive_bot_id: ops *= 0.7
+                total_time += ops
+                max_cook_time = max(max_cook_time, 10)
+        else:
+            # NOODLES, SAUCE
+            if found_on_counter:
+                  total_time += AVG_MOVE + 1 + AVG_MOVE + 1
+            else:
+                  ops = AVG_MOVE + 1 + AVG_MOVE + 1
+                  if self.inactive_bot_id: ops *= 0.5 # Fast fetch
+                  total_time += ops
         
         # Pickup plate + move to submit + submit
         total_time += 1 + AVG_MOVE + 1
@@ -882,8 +964,9 @@ class BotPlayer:
             if expires <= current_turn:
                 continue
             
-            # Skip orders too far in the future (more than 100 turns away)
-            if starts_at > current_turn + 100:
+            # Economics: Skip orders that start after the typical game end (250)
+            # OR orders that start way too late to be finished.
+            if starts_at > 230:
                 continue
             
             completion_turn = self._estimate_completion_turn(order, current_turn, controller, team)
@@ -891,13 +974,18 @@ class BotPlayer:
             time_left = expires - current_turn
             difficulty = self._get_order_difficulty(order)
             
+
+
             if completion_turn < 99999:
                 # This order is completable - calculate priority score
                 # Lower score = better priority
                 
                 # Urgency: orders starting within 30 turns get priority
+                # Urgency: orders starting within 30 turns get priority
                 turns_until_start = max(0, starts_at - current_turn)
-                urgency_bonus = 0 if turns_until_start <= 0 else (1 if turns_until_start <= 30 else 1000)
+                # SNIPING FIX: Treat "starting soon" (<=30) exactly same as "started" (0)
+                # This allows us to pick easy future orders over hard current orders
+                urgency_bonus = 0 if turns_until_start <= 30 else 1000
                 
                 # Primary: difficulty (easier orders first)
                 # Secondary: completion time (faster orders first)
@@ -920,7 +1008,8 @@ class BotPlayer:
         # Otherwise, try the backup (might get lucky, or at least make progress)
         return backup
     
-    def _create_goal(self, order: Dict) -> Dict[str, Any]:
+
+    def _create_goal(self, order: Dict, controller: RobotController) -> Dict[str, Any]:
         """Create a new goal state for an order."""
         self.goal_counter += 1
         
@@ -930,7 +1019,49 @@ class BotPlayer:
         cook_only = []   # EGG: cook
         simple = []      # NOODLES, SAUCE: just add to plate
         
-        for ing in order['required']:
+        # Helper lists for scanning
+        missing_ingredients = list(order['required'])
+        stored_items = {}
+        cooking_items = {}
+        
+        # SCAN MAP first to find existing items
+        # 1. Check Cooked Items on Counters (Prepped by _do_preparation)
+        for c_pos in self.counters:
+            tile = controller.get_tile(self.team, c_pos[0], c_pos[1])
+            if tile and isinstance(getattr(tile, 'item', None), Food):
+                f = tile.item
+                # If we need this item and it's cooked (MEAT) or chopped (ONION) or simple
+                if f.food_name in missing_ingredients:
+                     # Check if it satisfies the requirement
+                     info = self.ingredient_info.get(f.food_name, {})
+                     needs_chop = info.get('chop', False)
+                     needs_cook = info.get('cook', False)
+                     
+                     is_ready = True
+                     if needs_cook and f.cooked_stage < 1: is_ready = False
+                     if needs_chop and not f.chopped: is_ready = False
+                     
+                     if is_ready:
+                         # Found it!
+                         if f.food_name not in stored_items: stored_items[f.food_name] = []
+                         stored_items[f.food_name].append(c_pos)
+                         # Remove one instance from missing
+                         missing_ingredients.remove(f.food_name)
+                         
+        # 2. Check Items in Cookers
+        for c_pos in self.cookers:
+            tile = controller.get_tile(self.team, c_pos[0], c_pos[1])
+            if tile and isinstance(getattr(tile, 'item', None), Pan):
+                pan = tile.item
+                if pan.food and pan.food.food_name in missing_ingredients:
+                     info = self.ingredient_info.get(pan.food.food_name, {})
+                     # If cooked or cooking, we can use it
+                     # Logic usually adds to cooking_items
+                     cooking_items[pan.food.food_name] = c_pos
+                     missing_ingredients.remove(pan.food.food_name)
+
+        # Now populate queues with REMAINDER
+        for ing in missing_ingredients:
             info = self.ingredient_info.get(ing, {})
             needs_chop = info.get('chop', False)
             needs_cook = info.get('cook', False)
@@ -958,8 +1089,8 @@ class BotPlayer:
             'cook_only_queue': cook_only,      # Just cook
             'simple_queue': simple,            # Just add to plate
             # Tracking
-            'stored_items': {},                # {ingredient_name: counter_pos}
-            'cooking_items': {},               # {ingredient_name: cooker_pos}
+            'stored_items': stored_items,      # {ingredient_name: counter_pos}
+            'cooking_items': cooking_items,    # {ingredient_name: cooker_pos}
             'plate_contents': [],              # Items already on plate
             'current_ingredient': None,
         }
@@ -1046,7 +1177,11 @@ class BotPlayer:
                 return False
             
             # Second: chop-only items (ONIONS)
-            if chop_only:
+            # SAFETY LOCK: Don't start chop_only on 1-counter maps if plate isn't ready
+            low_resource = (len(self.counters) <= 1)
+            plate_ready = (self.goal.get('plate_counter') is not None)
+            
+            if chop_only and (not low_resource or plate_ready):
                 ing = chop_only[0]
                 if ing in stored_items and stored_items[ing]:
                     counter = stored_items[ing].pop(0)
@@ -1100,17 +1235,44 @@ class BotPlayer:
             
             if holding:
                 # Wrong item - trash it
+                # Wrong item - trash it (or place it anywhere to free hands)
                 if self.trashes:
                     trash = self._get_nearest(bot_pos, self.trashes)
                     if trash:
-                        if self._is_blocked(controller, self.active_bot_id, trash, team):
-                            return True
-                        if self._move_toward(controller, self.active_bot_id, trash, team):
-                            controller.trash(self.active_bot_id, trash[0], trash[1])
+                        if self._chebyshev_dist(bot_pos, trash) <= 1:
+                             if controller.trash(self.active_bot_id, trash[0], trash[1]):
+                                 self._log(f"  BUY_INGREDIENT: Trashed unwanted {holding} at {trash}")
+                                 return False # Action taken
+                        else:
+                             if self._move_toward(controller, self.active_bot_id, trash, team):
+                                 return False # Moved
+                
+                # Fallback: if trash failed or unreachable, put it on any counter
+                self._log(f"  BUY_INGREDIENT: Could not trash {holding}, trying to place on counter")
+                counter = self._get_free_counter(controller, team, bot_pos)
+                if counter:
+                    if self._chebyshev_dist(bot_pos, counter) <= 1:
+                        if controller.place(self.active_bot_id, counter[0], counter[1]):
+                            self._log(f"  BUY_INGREDIENT: Placed unwanted {holding} at {counter}")
+                            return False
+                    else:
+                        self._move_toward(controller, self.active_bot_id, counter, team)
+                        return False
+                
                 return False
             
             if shop is None:
                 return True
+
+            # SYNC: Check if partner is holding this item!
+            if self.inactive_bot_id is not None:
+                inactive_bot = controller.get_bot_state(self.inactive_bot_id)
+                ib_hold = inactive_bot.get('holding')
+                if ib_hold and ib_hold.get('type') == 'Food' and ib_hold.get('food_name') == ing:
+                    self._log(f"  BUY_INGREDIENT: Partner is already holding {ing}! Swapping to them.")
+                    self._swap_control()
+                    return True
+
             if self._is_blocked(controller, self.active_bot_id, shop, team):
                 return True
             if self._move_toward(controller, self.active_bot_id, shop, team):
@@ -1142,7 +1304,7 @@ class BotPlayer:
                 if self.goal.get('plate_counter'):
                     exclude.add(self.goal['plate_counter'])
                 
-                counter = self._get_free_counter(controller, team, bot_pos, exclude)
+                counter = self._get_free_counter(controller, team, bot_pos, exclude, for_chopping=True)
                 if counter is None:
                     return True
                 
@@ -1519,6 +1681,14 @@ class BotPlayer:
                                 self._move_toward(controller, self.active_bot_id, trash, team)
                             return False
             
+            # SYNC: Check if inactive bot is already fetching/staging a plate
+            if self.inactive_bot_id is not None:
+                ib_state = controller.get_bot_state(self.inactive_bot_id)
+                ib_hold = ib_state.get('holding')
+                if ib_hold and ib_hold.get('type') == 'Plate':
+                    self._log(f"  ENSURE_PLATE: Inactive bot is already bringing a plate. Waiting.")
+                    return True
+
             # Try sink table first (need empty hands)
             if self.sink_tables:
                 for st in self.sink_tables:
@@ -1556,20 +1726,9 @@ class BotPlayer:
                     exclude.add(locs)
             counter = self._get_free_counter(controller, team, bot_pos, exclude)
             if counter is None:
-                self._log(f"  PLACE_PLATE: No free counter found, trashing plate")
-                # All counters are full - trash the plate and start fresh
-                if self.trashes:
-                    trash = self._get_nearest(bot_pos, self.trashes)
-                    if trash:
-                        if self._chebyshev_dist(bot_pos, trash) <= 1:
-                            if controller.trash(self.active_bot_id, trash[0], trash[1]):
-                                self._log(f"  PLACE_PLATE: Trashed plate at {trash}")
-                                self.goal['state'] = 'ENSURE_PLATE'
-                                return False
-                        else:
-                            self._move_toward(controller, self.active_bot_id, trash, team)
-                            return False
-                self._log(f"  PLACE_PLATE: No trash available")
+                self._log(f"  PLACE_PLATE: No free counter found. WAITING.")
+                # LEAN STRATEGY: Do not trash the plate! 
+                # Just wait for a counter to open up or for the support bot to move.
                 return True
             
             if self._is_blocked(controller, self.active_bot_id, counter, team):
@@ -1598,6 +1757,10 @@ class BotPlayer:
                 self.goal['state'] = 'ENSURE_PLATE'
                 return False
             
+            # SYNC: Update our knowledge of what's on the plate (in case Support bot added something)
+            real_contents = [f.food_name for f in plate_tile.item.food]
+            self.goal['plate_contents'] = real_contents
+            
             plate_contents = self.goal.get('plate_contents', [])
             required = order['required']
             
@@ -1613,6 +1776,8 @@ class BotPlayer:
             if not missing:
                 self.goal['state'] = 'PICKUP_PLATE'
                 return False
+            
+
             
             # If holding food that we need, add it
             if holding and holding.get('type') == 'Food':
@@ -1649,6 +1814,17 @@ class BotPlayer:
                 return False
             
             # Now holding is None - we can pick up or buy things
+
+            # SYNC: Check if inactive bot is holding something we need
+            # If so, WAIT for them to deliver it (don't go buy it yourself!)
+            if self.inactive_bot_id is not None:
+                inactive_bot = controller.get_bot_state(self.inactive_bot_id)
+                ib_holding = inactive_bot.get('holding')
+                if ib_holding and ib_holding.get('type') == 'Food':
+                    fname = ib_holding.get('food_name')
+                    if fname in missing:
+                        self._log(f"  ASSEMBLE: Inactive bot holding needed {fname}, waiting for delivery")
+                        return True # End turn (wait)
             
             # Check for stored items we can pick up
             # Check for stored items we can pick up
@@ -1832,37 +2008,17 @@ class BotPlayer:
                     self.completed_order_ids.add(order.get('order_id'))
                     self.goal = None
                 else:
-                    # Submit failed - check if there's a matching order we can submit
-                    current_orders = controller.get_orders(team)
-                    for o in current_orders:
-                        if o.get('is_active', False) and o.get('required') == order.get('required'):
-                            # Found a matching active order - try submitting for that one
-                            self._log(f"  SUBMIT: Trying matching order #{o.get('order_id')}")
-                            submit_result = controller.submit(self.active_bot_id, submit[0], submit[1])
-                            if submit_result:
-                                self._log(f"  ORDER COMPLETED! Submitted order #{o.get('order_id')}")
-                                self.completed_order_ids.add(o.get('order_id'))
-                                self.goal = None
-                                break
-                    if self.goal is not None:
-                        # Still couldn't submit - log failure
-                        holding_type = holding.get('type') if holding else None
-                        self._log(f"  SUBMIT FAILED: holding={holding_type}, order_required={order.get('required')}")
-                        
-                        # Enhanced Debugging for Submit Failures
-                        if holding and holding.get('type') == 'Plate':
-                            plate_contents = []
-                            for f in holding.get('food', []):
-                                plate_contents.append(f"{f.get('food_name')}(chop={f.get('chopped')},cook={f.get('cooked_stage')})")
-                            plate_contents.sort()
-                            self._log(f"    PLATE CONTENTS: {plate_contents}")
-                            
-                            required_details = []
-                            for r in order.get('required', []):
-                                info = self.ingredient_info.get(r, {})
-                                required_details.append(f"{r}(chop={info.get('chop')},cook={1 if info.get('cook') else 0})")
-                            required_details.sort()
-                            self._log(f"    ORDER REQUIRES: {required_details}")
+                    # Submit failed - log failure and consume turn
+                    holding_type = holding.get('type') if holding else None
+                    self._log(f"  SUBMIT FAILED for order #{order.get('order_id')}: holding={holding_type}, required={order.get('required')}")
+                    
+                    if holding and holding.get('type') == 'Plate':
+                        plate_contents = [f.get('food_name') for f in holding.get('food', [])]
+                        self._log(f"    PLATE CONTENTS: {plate_contents}")
+                        self._log(f"    ORDER REQUIRES: {order.get('required')}")
+                    
+                    # IMPORTANT: return True here because we used an action (submit)
+                    return True
             return False
         
         return False
@@ -1940,21 +2096,75 @@ class BotPlayer:
         bot = controller.get_bot_state(bot_id)
         bot_pos = (bot['x'], bot['y'])
         holding = bot.get('holding')
+        order = self.goal.get('order')
         
         # 1. If holding something useful, bring it close
         if holding:
             if holding.get('type') == 'Food':
                 food_name = holding.get('food_name')
                 # Check if needed
-                needed = False
+                needed_active = False
                 for q in ['chop_cook_queue', 'chop_only_queue', 'cook_only_queue', 'simple_queue']:
-                    if food_name in self.goal.get(q, []):
-                        needed = True
+                    q_list = self.goal.get(q, [])
+                    if food_name in q_list:
+                        # SYNC CHECK: Is active bot already holding this? 
+                        # Or is it already cooking/stored? 
+                        # (Queues usually handle storage/cooking, but not hands)
+                        active_bot = controller.get_bot_state(self.active_bot_id)
+                        ab_hold = active_bot.get('holding')
+                        if ab_hold and ab_hold.get('type') == 'Food' and ab_hold.get('food_name') == food_name:
+                             # Partner already has it - we don't need to add ours to plate
+                             continue
+                        
+                        needed_active = True
                         break
                 
-                if needed:
+                if needed_active:
+                    # Priority: Deliver directly to plate if it exists
+                    plate_counter = self.goal.get('plate_counter')
+                    if plate_counter:
+                        # Check if this item is actually needed on the PHYSICAL plate
+                        tile = controller.get_tile(team, plate_counter[0], plate_counter[1])
+                        on_plate = False
+                        if tile and isinstance(getattr(tile, 'item', None), Plate):
+                            plate = tile.item
+                            contents = [f.food_name for f in plate.food]
+                            # Simple check: does it already have what we are holding?
+                            # (Queues handle total counts, we just need to avoid duplicates)
+                            if food_name in contents:
+                                # Count required total vs on plate
+                                req_total = order.get('required', []).count(food_name)
+                                if contents.count(food_name) >= req_total:
+                                    on_plate = True
+                        
+                        if not on_plate and self._move_toward(controller, bot_id, plate_counter, team):
+                            # Try to add to plate
+                            if self._chebyshev_dist(bot_pos, plate_counter) <= 1:
+                                if controller.add_food_to_plate(bot_id, plate_counter[0], plate_counter[1]):
+                                    self._log(f"SUPPORT: Added {food_name} directly to plate at {plate_counter}")
+                                    # Update queues
+                                    for q in ['chop_cook_queue', 'chop_only_queue', 'cook_only_queue', 'simple_queue']:
+                                        queue = self.goal.get(q, [])
+                                        if food_name in queue:
+                                            queue.remove(food_name)
+                                    return
+                    
                     # Drop off at nearest free counter to Kitchen Center
+                    # SAFETY: On extremely cramped maps, check total storage slots (COUNTER + SINKTABLE)
+                    if (len(self.counters) + len(self.sink_tables)) <= 1:
+                        # Just hold it and wait
+                        return
+
                     kitchen = self._get_kitchen_center()
+                    
+                    # LEAN STRATEGY: "Leave-One-Free" rule for cramped maps.
+                    # If placing this would leave 0 free slots, and no plate is staged, WAIT.
+                    is_plate_on_counter = (self.goal.get('plate_counter') is not None)
+                    free_slots = self._count_free_staging_slots(controller, team)
+                    if free_slots <= 1 and not is_plate_on_counter:
+                         # Support bot should wait to ensure active bot can place plate
+                         return
+
                     exclude = set()
                     for locs in self.goal.get('stored_items', {}).values():
                         if isinstance(locs, list):
@@ -1979,8 +2189,21 @@ class BotPlayer:
                                     stored[food_name].append(counter)
                                 self.goal['stored_items'] = stored
                                 self._log(f"SUPPORT: Delivered {food_name} to {counter}")
-                else:
-                    # Holding garbage - trash it
+                                return
+            if holding.get('type') == 'Plate':
+                # STAGING: Place plate on counter/sinktable near kitchen if goal doesn't have one yet
+                plate_counter = self.goal.get('plate_counter') if self.goal else None
+                if plate_counter is None:
+                    kitchen = self._get_kitchen_center()
+                    counter = self._get_free_counter(controller, team, kitchen)
+                    if counter:
+                        if self._move_toward(controller, bot_id, counter, team):
+                            if controller.place(bot_id, counter[0], counter[1]):
+                                self._log(f"SUPPORT: Staged plate at {counter}")
+                                if self.goal: self.goal['plate_counter'] = counter
+                        return
+                    
+            # Holding garbage - trash it
                     if self.trashes:
                         trash = self._get_nearest(bot_pos, self.trashes)
                         if trash and self._move_toward(controller, bot_id, trash, team):
@@ -2000,9 +2223,65 @@ class BotPlayer:
             if ing == self.goal.get('current_ingredient'):
                 continue
             
-            # Check how many we already have stored
+            # Check if active bot is holding it
+            active_bot = controller.get_bot_state(self.active_bot_id)
+            ab_holding = active_bot.get('holding')
+            if ab_holding and ab_holding.get('type') == 'Food' and ab_holding.get('food_name') == ing:
+                continue
+
+            # Check if active bot is AT A SHOP (implies they are buying it)
+            ab_pos = (active_bot['x'], active_bot['y'])
+            for s in self.shops:
+                if self._chebyshev_dist(ab_pos, s) <= 1:
+                     # Active bot at shop - almost certainly buying something. 
+                     # To be safe, don't interfere.
+                     # (Refined: Only skip if it's a simple ingredient we typically buy)
+                     if ing in ['NOODLES', 'SAUCE']:  # Simple items only
+                         continue
+
+            # Check how many we already have stored/delivered
+            target_orders = [self.goal.get('order')] if self.goal else []
+            
+            # EXPAND HORIZON: Fetch for upcoming orders but never corrupt the plate
+            all_orders = controller.get_orders(team)
+            current_turn = controller.get_turn()
+            
+            # ECONOMY: Stop pre-fetching for later orders near the end of the game (total turns 250)
+            horizon_limit = 220 if current_turn > 200 else 235
+            
+            for o in all_orders:
+                starts_at = o.get('created_turn', 0)
+                # NEW: fetch for upcoming orders too
+                if (o.get('is_active', False) or (starts_at > 0 and starts_at < current_turn + 50)) and o not in target_orders:
+                    if starts_at > horizon_limit: continue # Don't fetch for impossible orders
+                    target_orders.append(o)
+                    if len(target_orders) >= 2: break # Max 2 orders ahead
+            
+            candidates = []
+            for o in target_orders:
+                if o: candidates.extend(o.get('required', []))
+                
+            plate_contents = self.goal.get('plate_contents', []) if self.goal else []
+            needed_count = candidates.count(ing) - plate_contents.count(ing)
+            
+            # ACCOUNT FOR HANDS: Don't buy if either bot is already holding it
+            already_holding = 0
+            for b_id in [self.active_bot_id, self.inactive_bot_id]:
+                if b_id is None: continue
+                b_state = controller.get_bot_state(b_id)
+                h = b_state.get('holding')
+                if h and h.get('type') == 'Food' and h.get('food_name') == ing:
+                    already_holding += 1
+            
+            needed_count -= already_holding
+
+            # SUPPORT BOT RESTRICTION: Only buy basic items (NOODLES, SAUCE)
+            # This prevents it from buying Meat and clogging counters/hands
+            is_simple = ing in ['NOODLES', 'SAUCE', 'EGG', 'ONIONS']
+            if not is_simple:
+                continue
+
             stored_list = self.goal.get('stored_items', {}).get(ing, [])
-            needed_count = candidates.count(ing)
             if len(stored_list) >= needed_count:
                 continue
                 
@@ -2021,20 +2300,92 @@ class BotPlayer:
                     if ft and controller.get_team_money(team) >= ft.buy_cost:
                         controller.buy(bot_id, ft, shop[0], shop[1])
                         self._log(f"SUPPORT: Bought {target_ing}")
+                return
 
+        # 3. If nothing to do, move to Shop to be ready
+        shop = self._get_nearest(bot_pos, self.shops)
+        if shop:
+            if self._chebyshev_dist(bot_pos, shop) > 1:
+                self._move_toward(controller, bot_id, shop, team)
+                self._log("SUPPORT: Idling - Moving to Shop")
+    
     def _do_preparation(self, controller: RobotController, team: Team) -> None:
         """Do useful preparation work when no orders are available."""
-
+        # LEAN STRATEGY: Disable speculative prep to prevent deadlocks on cramped maps
+        # Eric doesn't prep, neither should we.
+        return
         if self.active_bot_id is None:
             return
+            
+        # Only do prep if we have no active goal
+        if self.goal is not None:
+             return
         
         bot = controller.get_bot_state(self.active_bot_id)
         bot_pos = (bot['x'], bot['y'])
         holding = bot.get('holding')
         money = controller.get_team_money(team)
         
-        # If holding something, just put it down or trash it
+        # 1. Handle Holding Items
         if holding is not None:
+            # If holding useful food (Meat, Onion), process it or place on counter
+            if holding.get('type') == 'Food':
+                food_name = holding.get('food_name')
+                
+                # Logic for MEAT: Chop -> Cook
+                if food_name == 'MEAT':
+                     if holding.get('cooked_stage', 0) >= 1:
+                         # Already cooked! Store on counter for pickup
+                         counter = self._get_free_counter(controller, team, bot_pos)
+                         if counter:
+                             if self._chebyshev_dist(bot_pos, counter) <= 1:
+                                 if controller.place(self.active_bot_id, counter[0], counter[1]):
+                                     self._log(f"PREP: Stored COOKED MEAT at {counter}")
+                             else:
+                                 self._move_toward(controller, self.active_bot_id, counter, team)
+                             return
+                     
+                     if not holding.get('chopped'):
+                         # Go chop
+                         # Find work counter? Any empty counter works for chopping if we have knife?
+                         # Actually just 'place on counter' and it becomes chopped? No, need action?
+                         # AWAP engine: Place on counter -> use Chop action? Or just Place and it's done?
+                         # Usually: Place on counter -> wait (if auto-chop) or interact.
+                         # Assuming standard counters allow work.
+                         counter = self._get_free_counter(controller, team, bot_pos)
+                         if counter:
+                             if self._chebyshev_dist(bot_pos, counter) <= 1:
+                                 if controller.place(self.active_bot_id, counter[0], counter[1]):
+                                     # We assume placing it starts chopping/allows chopping?
+                                     # Actually, betterbot usually handles this in CHOP state by placing.
+                                     # Wait, does the map have specific Chopping Stations? or assume all counters?
+                                     # "C" is counter.
+                                     self._log(f"PREP: Placed MEAT for chopping at {counter}")
+                             else:
+                                 self._move_toward(controller, self.active_bot_id, counter, team)
+                             return
+                     else:
+                         # It is chopped - COOK IT
+                         cooker = self._get_available_cooker(controller, team, bot_pos)
+                         if cooker:
+                             if self._chebyshev_dist(bot_pos, cooker) <= 1:
+                                 controller.place(self.active_bot_id, cooker[0], cooker[1])
+                                 self._log(f"PREP: Placed Chopped MEAT in cooker at {cooker}")
+                             else:
+                                 self._move_toward(controller, self.active_bot_id, cooker, team)
+                             return
+
+                # Default: Place on counter
+                counter = self._get_free_counter(controller, team, bot_pos)
+                if counter:
+                    if self._chebyshev_dist(bot_pos, counter) <= 1:
+                        if controller.place(self.active_bot_id, counter[0], counter[1]):
+                            self._log(f"PREP: Stored speculative {food_name} at {counter}")
+                    else:
+                        self._move_toward(controller, self.active_bot_id, counter, team)
+                    return
+
+            # Else trash it
             if self.trashes:
                 trash = self._get_nearest(bot_pos, self.trashes)
                 if trash:
@@ -2042,20 +2393,63 @@ class BotPlayer:
                         controller.trash(self.active_bot_id, trash[0], trash[1])
             return
         
-        # Check if cooker has burnt/cooked food that should be removed
-        for cooker_pos in self.cookers:
-            tile = controller.get_tile(team, cooker_pos[0], cooker_pos[1])
+        # 2. Speculative Cooking (Meat)
+        # Check if meat is cooking
+        meat_cooking = False
+        for c_pos in self.cookers:
+            tile = controller.get_tile(team, c_pos[0], c_pos[1])
             if tile and isinstance(getattr(tile, 'item', None), Pan):
                 pan = tile.item
-                if pan.food is not None and pan.food.cooked_stage >= 1:
-                    # Food is done or burnt - take it out and trash it
-                    if self._move_toward(controller, self.active_bot_id, cooker_pos, team):
-                        if controller.take_from_pan(self.active_bot_id, cooker_pos[0], cooker_pos[1]):
-                            self._log(f"  PREP: Took cooked/burnt food from cooker")
-                    return
+                if pan and pan.food and pan.food.food_name == 'MEAT':
+                    meat_cooking = True
+                    break
         
-        # Don't do any more preparation - just wait for orders
-        # Buying ingredients speculatively wastes money
+        # Disable Prep only if truly no space (check counters AND sink tables)
+        if (len(self.counters) + len(self.sink_tables)) <= 1:
+             return
+             
+        # ECONOMY: Stop speculative prep near the end of the game
+        if controller.get_turn() > 220:
+             return
+
+        if not meat_cooking and money > 300:
+            # We want to cook meat.
+            # Strategy: Buy -> Chop -> Cook
+            meat_count = 0
+            target_meat = None
+            target_state = 'BUY' # BUY, CHOP, COOK
+            
+            # Count meats in hands
+            for b_id in [self.active_bot_id, self.inactive_bot_id]:
+                if b_id is None: continue
+                b_state = controller.get_bot_state(b_id)
+                h = b_state.get('holding')
+                if h and h.get('type') == 'Food' and h.get('food_name') == 'MEAT':
+                    meat_count += 1
+            
+            # Count meats on all staging surfaces
+            for c_pos in (self.counters + self.sink_tables):
+                 tile = controller.get_tile(team, c_pos[0], c_pos[1])
+                 if tile and isinstance(getattr(tile, 'item', None), Food):
+                     f = tile.item
+                     if f.food_name == 'MEAT':
+                         meat_count += 1
+                         if target_meat is None:
+                             target_meat = c_pos
+                             if f.chopped: target_state = 'COOK'
+                             else: target_state = 'CHOP'
+            
+            # If no meat found (or all cooked), and count < 2, buy more
+            # RESTORED BUFFER to 2 now that we have SINKTABLE for storage
+            if meat_count < 2:
+                shop = self._get_nearest(bot_pos, self.shops)
+                if shop:
+                    if self._move_toward(controller, self.active_bot_id, shop, team):
+                        ft = getattr(FoodType, 'MEAT', None)
+                        if ft:
+                            controller.buy(self.active_bot_id, ft, shop[0], shop[1])
+            return
+
     
     def play_turn(self, controller: RobotController) -> None:
         """Main entry point - called each turn."""
@@ -2080,6 +2474,16 @@ class BotPlayer:
         
         # Log state at start of turn
         self._log_state(controller, team)
+
+        # RE-SCAN MAP: Turn 101 (Map Switch happens at 100)
+        # This handles the layout change specified in game constants
+        if controller.get_turn() == 101:
+            self._log("ACTION: Map Switch Detected (Turn 101) - Re-scanning Map")
+            self._init_map(controller, team)
+        
+        goal_state = self.goal.get('state') if self.goal else "NO_GOAL"
+        goal_id = self.goal.get('order', {}).get('order_id') if self.goal else "-"
+        self._log(f"TRACE T{controller.get_turn()}: State={goal_state}, Order={goal_id}, Holding={controller.get_bot_state(self.active_bot_id).get('holding')}")
         
         if self._handle_handoff_pickup(controller, team):
             self._log("ACTION: Handling handoff pickup, ending turn")
@@ -2089,9 +2493,7 @@ class BotPlayer:
             self._log("ACTION: Handling inactive bot storage, ending turn")
             return
 
-        # Run Active Support if goal exists
-        if self.goal is not None and self.inactive_bot_id is not None:
-             self._do_active_support(controller, team)
+
 
         
         # Check if current goal's order has expired
@@ -2167,7 +2569,7 @@ class BotPlayer:
                 
                 if matching_order:
                     # Adopt this plate for the matching order
-                    self.goal = self._create_goal(matching_order)
+                    self.goal = self._create_goal(matching_order, controller)
                     self.goal['plate_counter'] = self.abandoned_plate
                     self.goal['plate_contents'] = plate_contents
                     # Remove already-on-plate items from queues
@@ -2176,6 +2578,28 @@ class BotPlayer:
                             queue = self.goal.get(queue_name, [])
                             if item in queue:
                                 queue.remove(item)
+                    
+                    # Safety checks for low-resource maps (like map5_grind, 1 counter)
+                    # If we have limited counters and NO plate on counter, do NOT work on 'simple' or 'chop_only' items.
+                    # Prioritize 'chop_cook' (uses cooker, frees counter) or Plating.
+                    low_resource_mode = (len(self.counters) <= 1)
+                    plate_ready = (self.goal.get('plate_counter') is not None)
+                    
+                    queues_to_check = ['chop_cook_queue', 'chop_only_queue', 'cook_only_queue', 'simple_queue']
+                    
+                    for q_name in queues_to_check:
+                        queue = self.goal.get(q_name, [])
+                        if not queue:
+                            continue
+                        
+                        # Check locks
+                        if low_resource_mode and not plate_ready:
+                            if q_name in ['simple_queue', 'chop_only_queue']:
+                                self._log(f"  INIT: Low resource mode, skipping {q_name} until plate is placed")
+                                # Clear the queue to effectively block it
+                                self.goal[q_name] = []
+                                continue
+                    
                     self.goal['state'] = 'ASSEMBLE'
                     self._log(f"  Adopted plate for order #{matching_order.get('order_id')}")
                     self.abandoned_plate = None
@@ -2216,10 +2640,14 @@ class BotPlayer:
                 self._do_preparation(controller, team)
                 return
             self._log(f"NEW ORDER SELECTED: #{order.get('order_id')} - {order.get('required')}, expires turn {order.get('expires_turn')}")
-            self.goal = self._create_goal(order)
+            self.goal = self._create_goal(order, controller)
         
         blocked = self._execute_goal(controller, team)
         
+        # Run Active Support AFTER goal execution so it reacts to state changes (e.g. Plate Placed) immediately
+        if self.goal is not None and self.inactive_bot_id is not None:
+             self._do_active_support(controller, team)
+
         if blocked:
             self._log(f"BLOCKED in state {self.goal.get('state') if self.goal else 'N/A'}")
             if self.inactive_bot_id is not None:

@@ -54,8 +54,9 @@ interface BotStats {
 
 // --- Constants ---
 // Static heroes list for display - will also detect any Hero_ prefixed bots dynamically
-const STATIC_HEROES = ["Hero_UltimateChampion", "Hero_BEST^3", "Hero_Sovereign", "Hero_BEST-Hydra", "Hero_BEST^2", "Hero_Relay"];
+const STATIC_HEROES = ["Hero_Test", "Hero_UltimateChampion", "Hero_BEST^3", "Hero_Sovereign", "Hero_BEST-Hydra", "Hero_BEST^2", "Hero_Relay"];
 const HERO_COLORS: Record<string, string> = {
+  "Hero_Test": "#ef4444",
   "Hero_UltimateChampion": "#3b82f6",
   "Hero_BEST^3": "#8b5cf6",
   "Hero_Sovereign": "#10b981",
@@ -126,7 +127,7 @@ function App() {
 
 
   const { playerStats, timeline, mapStats, globalStats, highScores } = useMemo(() => {
-    if (!data) return {
+    if (!data || !data.matches.length) return {
       playerStats: {} as Record<string, BotStats>,
       timeline: [] as any[],
       mapStats: {} as Record<string, any>,
@@ -139,81 +140,95 @@ function App() {
     const ms: Record<string, any> = {};
     const gs = { scores: [] as number[], durations: [] as number[], totalMoney: 0 };
 
-    const chronological = [...data.matches].sort((a, b) => a.timestamp - b.timestamp);
-    const sortedByScore = [...data.matches].sort((a, b) => Math.max(b.red_score, b.blue_score) - Math.max(a.red_score, a.blue_score));
+    // Sort once chronologically for the timeline
+    const chrono = [...data.matches].sort((a, b) => a.timestamp - b.timestamp);
 
-    chronological.forEach((m, idx) => {
-      // Timeline - track cumulative win rate for heroes
-      if (idx % 25 === 0 && idx > 0) {
+    // Sampling interval for timeline to prevent chart lag (max ~100 points)
+    const sampleRate = Math.max(1, Math.floor(chrono.length / 100));
+
+    chrono.forEach((m, idx) => {
+      // Player / Map Stats (Single pass)
+      [
+        { name: m.red_name, score: m.red_score, oppName: m.blue_name, oppScore: m.blue_score, isRed: true },
+        { name: m.blue_name, score: m.blue_score, oppName: m.red_name, oppScore: m.red_score, isRed: false }
+      ].forEach(({ name, score, oppName, oppScore }) => {
+        // Player Stats
+        if (!s[name]) s[name] = { w: 0, l: 0, d: 0, e: 0, total: 0, score: 0, scoreDiff: 0, scores: [], opponents: {}, maps: {} };
+        const st = s[name];
+        st.total++;
+        st.score += score;
+        st.scoreDiff += (score - oppScore);
+        // Only keep last 100 scores for histogram to save memory/time
+        if (st.scores.length < 100) st.scores.push(score);
+
+        const result = m.winner === name ? 'W' : (m.winner === 'DRAW' ? 'D' : (['ERROR', 'TIMEOUT'].includes(m.winner) ? 'E' : 'L'));
+        if (result === 'W') st.w++;
+        else if (result === 'D') st.d++;
+        else if (result === 'E') st.e++;
+        else st.l++;
+
+        // Opponent Stats
+        if (!st.opponents[oppName]) st.opponents[oppName] = { w: 0, l: 0, total: 0, scoreDiff: 0 };
+        st.opponents[oppName].total++;
+        st.opponents[oppName].scoreDiff += (score - oppScore);
+        if (result === 'W') st.opponents[oppName].w++;
+        else if (result === 'L') st.opponents[oppName].l++;
+
+        // Map Stats per Bot
+        if (!st.maps[m.map_name]) st.maps[m.map_name] = { w: 0, l: 0, d: 0, total: 0, score: 0, scoreDiff: 0 };
+        const mst = st.maps[m.map_name];
+        mst.total++;
+        mst.score += score;
+        mst.scoreDiff += (score - oppScore);
+        if (result === 'W') mst.w++;
+        else if (result === 'D') mst.d++;
+        else if (result === 'L') mst.l++;
+
+        // Map Global Stats
+        if (!ms[m.map_name]) ms[m.map_name] = { score: 0, count: 0, botPerformances: {} };
+        const mms = ms[m.map_name];
+        mms.count++;
+        mms.score += score;
+        if (!mms.botPerformances[name]) mms.botPerformances[name] = { score: 0, count: 0, wins: 0 };
+        mms.botPerformances[name].score += score;
+        mms.botPerformances[name].count++;
+        if (m.winner === name) mms.botPerformances[name].wins++;
+      });
+
+      // Global Stats
+      if (idx % 10 === 0) { // Sample scores for general distribution
+        gs.scores.push(m.red_score);
+        gs.scores.push(m.blue_score);
+      }
+      gs.durations.push(m.duration);
+      gs.totalMoney += (m.red_score + m.blue_score);
+
+      // Timeline Sampling
+      if (idx % sampleRate === 0) {
         const snap: any = { name: idx };
         STATIC_HEROES.forEach((h: string) => {
           const hst = s[h];
-          // Calculate win rate excluding errors
           const validGames = hst ? (hst.total - hst.e) : 0;
           snap[cleanName(h)] = validGames > 0 ? ((hst.w / validGames) * 100) : 0;
         });
         tl.push(snap);
       }
-
-      // Metadata
-      gs.durations.push(m.duration);
-      gs.scores.push(m.red_score);
-      gs.scores.push(m.blue_score);
-      gs.totalMoney += (m.red_score + m.blue_score);
-
-      // Map Tracking
-      if (!ms[m.map_name]) ms[m.map_name] = { score: 0, count: 0, matches: [], botPerformances: {} };
-      ms[m.map_name].count++;
-      ms[m.map_name].score += (m.red_score + m.blue_score);
-      ms[m.map_name].matches.push(m);
-
-      [m.red_name, m.blue_name].forEach(p => {
-        const score = p === m.red_name ? m.red_score : m.blue_score;
-        if (!ms[m.map_name].botPerformances[p]) ms[m.map_name].botPerformances[p] = { score: 0, count: 0, wins: 0 };
-        ms[m.map_name].botPerformances[p].score += score;
-        ms[m.map_name].botPerformances[p].count++;
-        if (m.winner === p) ms[m.map_name].botPerformances[p].wins++;
-      });
-
-      // Player Stats
-      [m.red_name, m.blue_name].forEach(p => {
-        if (!s[p]) s[p] = { w: 0, l: 0, d: 0, e: 0, total: 0, score: 0, scoreDiff: 0, scores: [], opponents: {}, maps: {} };
-        const isMe = p === m.red_name;
-        const opp = isMe ? m.blue_name : m.red_name;
-        const score = isMe ? m.red_score : m.blue_score;
-        const oppScore = isMe ? m.blue_score : m.red_score;
-        const result = m.winner === p ? 'W' : (m.winner === 'DRAW' ? 'D' : (['ERROR', 'TIMEOUT'].includes(m.winner) ? 'E' : 'L'));
-
-        s[p].total++;
-        s[p].score += score;
-        s[p].scores.push(score);
-        s[p].scoreDiff += (score - oppScore);
-
-        if (!s[p].opponents[opp]) s[p].opponents[opp] = { w: 0, l: 0, total: 0, scoreDiff: 0 };
-        s[p].opponents[opp].total++;
-        s[p].opponents[opp].scoreDiff += (score - oppScore);
-
-        if (!s[p].maps[m.map_name]) s[p].maps[m.map_name] = { w: 0, l: 0, d: 0, total: 0, score: 0, scoreDiff: 0 };
-        s[p].maps[m.map_name].total++;
-        s[p].maps[m.map_name].score += score;
-        s[p].maps[m.map_name].scoreDiff += (score - oppScore);
-
-        if (result === 'W') { s[p].w++; s[p].opponents[opp].w++; s[p].maps[m.map_name].w++; }
-        else if (result === 'D') { s[p].d++; s[p].maps[m.map_name].d++; }
-        else if (result === 'E') { s[p].e++; }
-        else { s[p].l++; s[p].opponents[opp].l++; s[p].maps[m.map_name].l++; }
-      });
     });
 
+    // Nemesis/Victim calc
     Object.keys(s).forEach(p => {
-      const oppArr = Object.entries(s[p].opponents);
-      if (oppArr.length > 0) {
-        s[p].nemesis = oppArr.sort((a, b) => a[1].scoreDiff - b[1].scoreDiff)[0][0];
-        s[p].victim = oppArr.sort((a, b) => b[1].scoreDiff - a[1].scoreDiff)[0][0];
+      const opps = Object.entries(s[p].opponents);
+      if (opps.length > 0) {
+        s[p].nemesis = opps.reduce((a, b) => b[1].scoreDiff < a[1].scoreDiff ? b : a)[0];
+        s[p].victim = opps.reduce((a, b) => b[1].scoreDiff > a[1].scoreDiff ? b : a)[0];
       }
     });
 
-    return { playerStats: s, timeline: tl, mapStats: ms, globalStats: gs, highScores: sortedByScore.slice(0, 50) };
+    const hs = [...data.matches]
+      .sort((a, b) => Math.max(b.red_score, b.blue_score) - Math.max(a.red_score, a.blue_score))
+      .slice(0, 50);
+
+    return { playerStats: s, timeline: tl, mapStats: ms, globalStats: gs, highScores: hs };
   }, [data]);
 
   const filteredMatches = useMemo(() => {
