@@ -1,0 +1,4764 @@
+{
+    "leaderboard": [
+        [
+            "BEST-champion_bot.py",
+            {
+                "wins": 140,
+                "losses": 25,
+                "draws": 391,
+                "total_money": 944496,
+                "matches": 556
+            }
+        ],
+        [
+            "v09_no_sabotage.py",
+            {
+                "wins": 3,
+                "losses": 2,
+                "draws": 15,
+                "total_money": 34882,
+                "matches": 20
+            }
+        ],
+        [
+            "v4_no_sabotage.py",
+            {
+                "wins": 2,
+                "losses": 4,
+                "draws": 14,
+                "total_money": 34882,
+                "matches": 20
+            }
+        ],
+        [
+            "v18_no_recycling.py",
+            {
+                "wins": 2,
+                "losses": 7,
+                "draws": 11,
+                "total_money": 34682,
+                "matches": 20
+            }
+        ],
+        [
+            "v7_no_recycling.py",
+            {
+                "wins": 2,
+                "losses": 6,
+                "draws": 12,
+                "total_money": 34682,
+                "matches": 20
+            }
+        ],
+        [
+            "v04_high_value_focus.py",
+            {
+                "wins": 2,
+                "losses": 6,
+                "draws": 12,
+                "total_money": 34670,
+                "matches": 20
+            }
+        ],
+        [
+            "v8_box_lover.py",
+            {
+                "wins": 2,
+                "losses": 4,
+                "draws": 14,
+                "total_money": 34560,
+                "matches": 20
+            }
+        ],
+        [
+            "v17_box_hoarder.py",
+            {
+                "wins": 2,
+                "losses": 4,
+                "draws": 14,
+                "total_money": 34554,
+                "matches": 20
+            }
+        ],
+        [
+            "v14_helper_cooks.py",
+            {
+                "wins": 2,
+                "losses": 6,
+                "draws": 12,
+                "total_money": 34200,
+                "matches": 20
+            }
+        ],
+        [
+            "v5_high_defense.py",
+            {
+                "wins": 1,
+                "losses": 4,
+                "draws": 15,
+                "total_money": 34556,
+                "matches": 20
+            }
+        ],
+        [
+            "v06_late_sabotage.py",
+            {
+                "wins": 1,
+                "losses": 4,
+                "draws": 15,
+                "total_money": 34556,
+                "matches": 20
+            }
+        ],
+        [
+            "v12_lazy_defense.py",
+            {
+                "wins": 1,
+                "losses": 4,
+                "draws": 15,
+                "total_money": 34556,
+                "matches": 20
+            }
+        ],
+        [
+            "v08_desperate_only.py",
+            {
+                "wins": 1,
+                "losses": 5,
+                "draws": 14,
+                "total_money": 34556,
+                "matches": 20
+            }
+        ],
+        [
+            "v3_aggressive_sabotage.py",
+            {
+                "wins": 1,
+                "losses": 5,
+                "draws": 14,
+                "total_money": 34556,
+                "matches": 20
+            }
+        ],
+        [
+            "v19_fast_replan.py",
+            {
+                "wins": 1,
+                "losses": 5,
+                "draws": 14,
+                "total_money": 34556,
+                "matches": 20
+            }
+        ],
+        [
+            "v15_helper_tight_trigger.py",
+            {
+                "wins": 1,
+                "losses": 6,
+                "draws": 13,
+                "total_money": 34552,
+                "matches": 20
+            }
+        ],
+        [
+            "v2_efficient.py",
+            {
+                "wins": 1,
+                "losses": 5,
+                "draws": 14,
+                "total_money": 34474,
+                "matches": 20
+            }
+        ],
+        [
+            "v03_simple_order_focus.py",
+            {
+                "wins": 0,
+                "losses": 5,
+                "draws": 15,
+                "total_money": 34556,
+                "matches": 20
+            }
+        ],
+        [
+            "v11_paranoid_defense.py",
+            {
+                "wins": 0,
+                "losses": 5,
+                "draws": 15,
+                "total_money": 34552,
+                "matches": 20
+            }
+        ],
+        [
+            "v9_simple_bonus.py",
+            {
+                "wins": 0,
+                "losses": 5,
+                "draws": 15,
+                "total_money": 34552,
+                "matches": 20
+            }
+        ],
+        [
+            "v02_efficient_score.py",
+            {
+                "wins": 0,
+                "losses": 5,
+                "draws": 15,
+                "total_money": 34552,
+                "matches": 20
+            }
+        ],
+        [
+            "v05_early_sabotage.py",
+            {
+                "wins": 0,
+                "losses": 5,
+                "draws": 15,
+                "total_money": 34536,
+                "matches": 20
+            }
+        ],
+        [
+            "v07_aggressive_gap.py",
+            {
+                "wins": 0,
+                "losses": 6,
+                "draws": 14,
+                "total_money": 34476,
+                "matches": 20
+            }
+        ],
+        [
+            "v10_always_sabotage.py",
+            {
+                "wins": 0,
+                "losses": 6,
+                "draws": 14,
+                "total_money": 34474,
+                "matches": 20
+            }
+        ],
+        [
+            "v6_early_switch.py",
+            {
+                "wins": 0,
+                "losses": 5,
+                "draws": 15,
+                "total_money": 34474,
+                "matches": 20
+            }
+        ],
+        [
+            "v13_active_hiding.py",
+            {
+                "wins": 0,
+                "losses": 5,
+                "draws": 15,
+                "total_money": 34474,
+                "matches": 20
+            }
+        ],
+        [
+            "v01_greedy_score.py",
+            {
+                "wins": 0,
+                "losses": 4,
+                "draws": 12,
+                "total_money": 30810,
+                "matches": 16
+            }
+        ],
+        [
+            "v1_greedy.py",
+            {
+                "wins": 0,
+                "losses": 4,
+                "draws": 12,
+                "total_money": 30810,
+                "matches": 16
+            }
+        ],
+        [
+            "v16_helper_loose_trigger.py",
+            {
+                "wins": 0,
+                "losses": 4,
+                "draws": 12,
+                "total_money": 10812,
+                "matches": 16
+            }
+        ],
+        [
+            "v10_coordinated_max.py",
+            {
+                "wins": 0,
+                "losses": 4,
+                "draws": 4,
+                "total_money": 2654,
+                "matches": 8
+            }
+        ],
+        [
+            "v20_hybrid_stable.py",
+            {
+                "wins": 0,
+                "losses": 0,
+                "draws": 0,
+                "total_money": 0,
+                "matches": 0
+            }
+        ]
+    ],
+    "matches": [
+        {
+            "red": "v11_paranoid_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v11_paranoid_defense.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v11_paranoid_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v11_paranoid_defense.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v11_paranoid_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v11_paranoid_defense.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "v11_paranoid_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v11_paranoid_defense.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v11_paranoid_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v11_paranoid_defense.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v11_paranoid_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v11_paranoid_defense.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "v11_paranoid_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v11_paranoid_defense.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v11_paranoid_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v11_paranoid_defense.py",
+            "map": "multi_order.txt",
+            "red_score": 994,
+            "blue_score": 992,
+            "winner": "RED"
+        },
+        {
+            "red": "v11_paranoid_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v11_paranoid_defense.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v11_paranoid_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v11_paranoid_defense.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v15_helper_tight_trigger.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v15_helper_tight_trigger.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v15_helper_tight_trigger.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v15_helper_tight_trigger.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v15_helper_tight_trigger.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v15_helper_tight_trigger.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "v15_helper_tight_trigger.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v15_helper_tight_trigger.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v15_helper_tight_trigger.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v15_helper_tight_trigger.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v15_helper_tight_trigger.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v15_helper_tight_trigger.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "v15_helper_tight_trigger.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 959,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v15_helper_tight_trigger.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v15_helper_tight_trigger.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 996,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v15_helper_tight_trigger.py",
+            "map": "multi_order.txt",
+            "red_score": 914,
+            "blue_score": 992,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v15_helper_tight_trigger.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v15_helper_tight_trigger.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v15_helper_tight_trigger.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v15_helper_tight_trigger.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v5_high_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v5_high_defense.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v5_high_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v5_high_defense.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v5_high_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v5_high_defense.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "v5_high_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v5_high_defense.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v5_high_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v5_high_defense.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v5_high_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v5_high_defense.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "v5_high_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v5_high_defense.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v5_high_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 996,
+            "blue_score": 992,
+            "winner": "RED"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v5_high_defense.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v5_high_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v5_high_defense.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v5_high_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v5_high_defense.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v9_simple_bonus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v9_simple_bonus.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v9_simple_bonus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v9_simple_bonus.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v9_simple_bonus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v9_simple_bonus.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "v9_simple_bonus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v9_simple_bonus.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v9_simple_bonus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v9_simple_bonus.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v9_simple_bonus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v9_simple_bonus.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "v9_simple_bonus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v9_simple_bonus.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v9_simple_bonus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v9_simple_bonus.py",
+            "map": "multi_order.txt",
+            "red_score": 996,
+            "blue_score": 992,
+            "winner": "RED"
+        },
+        {
+            "red": "v9_simple_bonus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v9_simple_bonus.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v9_simple_bonus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v9_simple_bonus.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v10_coordinated_max.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v10_coordinated_max.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "v10_coordinated_max.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v10_coordinated_max.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v10_coordinated_max.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v10_coordinated_max.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "v10_coordinated_max.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v10_coordinated_max.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v10_always_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v10_always_sabotage.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v10_always_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v10_always_sabotage.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v10_always_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v10_always_sabotage.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "v10_always_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v10_always_sabotage.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v10_always_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v10_always_sabotage.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v10_always_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v10_always_sabotage.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "v10_always_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v10_always_sabotage.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v10_always_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 914,
+            "blue_score": 992,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v10_always_sabotage.py",
+            "map": "multi_order.txt",
+            "red_score": 996,
+            "blue_score": 992,
+            "winner": "RED"
+        },
+        {
+            "red": "v10_always_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v10_always_sabotage.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v10_always_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v10_always_sabotage.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v03_simple_order_focus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v03_simple_order_focus.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v03_simple_order_focus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v03_simple_order_focus.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v03_simple_order_focus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v03_simple_order_focus.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "v03_simple_order_focus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v03_simple_order_focus.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v03_simple_order_focus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v03_simple_order_focus.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v03_simple_order_focus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v03_simple_order_focus.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "v03_simple_order_focus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v03_simple_order_focus.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v03_simple_order_focus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 996,
+            "blue_score": 996,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v03_simple_order_focus.py",
+            "map": "multi_order.txt",
+            "red_score": 996,
+            "blue_score": 992,
+            "winner": "RED"
+        },
+        {
+            "red": "v03_simple_order_focus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v03_simple_order_focus.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v03_simple_order_focus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v03_simple_order_focus.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v14_helper_cooks.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v14_helper_cooks.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v14_helper_cooks.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v14_helper_cooks.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v14_helper_cooks.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 468,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v14_helper_cooks.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 468,
+            "winner": "RED"
+        },
+        {
+            "red": "v14_helper_cooks.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v14_helper_cooks.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v14_helper_cooks.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v14_helper_cooks.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v14_helper_cooks.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v14_helper_cooks.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "v14_helper_cooks.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v14_helper_cooks.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v14_helper_cooks.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 996,
+            "blue_score": 992,
+            "winner": "RED"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v14_helper_cooks.py",
+            "map": "multi_order.txt",
+            "red_score": 914,
+            "blue_score": 996,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v14_helper_cooks.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1087,
+            "blue_score": -1007,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v14_helper_cooks.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1087,
+            "winner": "RED"
+        },
+        {
+            "red": "v14_helper_cooks.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v14_helper_cooks.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v01_greedy_score.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v01_greedy_score.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v01_greedy_score.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v01_greedy_score.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v01_greedy_score.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v01_greedy_score.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "v01_greedy_score.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v01_greedy_score.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v01_greedy_score.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v01_greedy_score.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v01_greedy_score.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v01_greedy_score.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "v01_greedy_score.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v01_greedy_score.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v01_greedy_score.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v01_greedy_score.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v02_efficient_score.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v02_efficient_score.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v02_efficient_score.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v02_efficient_score.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v02_efficient_score.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v02_efficient_score.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "v02_efficient_score.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v02_efficient_score.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v02_efficient_score.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v02_efficient_score.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v02_efficient_score.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v02_efficient_score.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "v02_efficient_score.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v02_efficient_score.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v02_efficient_score.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 996,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v02_efficient_score.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v02_efficient_score.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v02_efficient_score.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v02_efficient_score.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v02_efficient_score.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v06_late_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v06_late_sabotage.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v06_late_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v06_late_sabotage.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v06_late_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v06_late_sabotage.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "v06_late_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v06_late_sabotage.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v06_late_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v06_late_sabotage.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v06_late_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v06_late_sabotage.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "v06_late_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v06_late_sabotage.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v06_late_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 996,
+            "blue_score": 992,
+            "winner": "RED"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v06_late_sabotage.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v06_late_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v06_late_sabotage.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v06_late_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v06_late_sabotage.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v8_box_lover.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v8_box_lover.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v8_box_lover.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v8_box_lover.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v8_box_lover.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v8_box_lover.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "v8_box_lover.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v8_box_lover.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v8_box_lover.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v8_box_lover.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v8_box_lover.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v8_box_lover.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "v8_box_lover.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v8_box_lover.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v8_box_lover.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 996,
+            "blue_score": 992,
+            "winner": "RED"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v8_box_lover.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 996,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v8_box_lover.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v8_box_lover.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v8_box_lover.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v8_box_lover.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v16_helper_loose_trigger.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v16_helper_loose_trigger.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v16_helper_loose_trigger.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v16_helper_loose_trigger.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v16_helper_loose_trigger.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v16_helper_loose_trigger.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "v16_helper_loose_trigger.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v16_helper_loose_trigger.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v16_helper_loose_trigger.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v16_helper_loose_trigger.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v16_helper_loose_trigger.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v16_helper_loose_trigger.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "v16_helper_loose_trigger.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v16_helper_loose_trigger.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v16_helper_loose_trigger.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v16_helper_loose_trigger.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v07_aggressive_gap.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v07_aggressive_gap.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v07_aggressive_gap.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v07_aggressive_gap.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v07_aggressive_gap.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v07_aggressive_gap.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "v07_aggressive_gap.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v07_aggressive_gap.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v07_aggressive_gap.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v07_aggressive_gap.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v07_aggressive_gap.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v07_aggressive_gap.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "v07_aggressive_gap.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v07_aggressive_gap.py",
+            "map": "easy_ramp.txt",
+            "red_score": 959,
+            "blue_score": 879,
+            "winner": "RED"
+        },
+        {
+            "red": "v07_aggressive_gap.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v07_aggressive_gap.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 916,
+            "winner": "RED"
+        },
+        {
+            "red": "v07_aggressive_gap.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v07_aggressive_gap.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v07_aggressive_gap.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v07_aggressive_gap.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v12_lazy_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v12_lazy_defense.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v12_lazy_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v12_lazy_defense.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v12_lazy_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v12_lazy_defense.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "v12_lazy_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v12_lazy_defense.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v12_lazy_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v12_lazy_defense.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v12_lazy_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v12_lazy_defense.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "v12_lazy_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v12_lazy_defense.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v12_lazy_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 996,
+            "blue_score": 994,
+            "winner": "RED"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v12_lazy_defense.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v12_lazy_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v12_lazy_defense.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v12_lazy_defense.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v12_lazy_defense.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 764,
+            "blue_score": 766,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 764,
+            "winner": "RED"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 628,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 628,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 808,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 808,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 946,
+            "blue_score": 879,
+            "winner": "RED"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 946,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 996,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "multi_order.txt",
+            "red_score": 996,
+            "blue_score": 992,
+            "winner": "RED"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v2_efficient.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v2_efficient.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v2_efficient.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v2_efficient.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v2_efficient.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v2_efficient.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "v2_efficient.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v2_efficient.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v2_efficient.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v2_efficient.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v2_efficient.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v2_efficient.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "v2_efficient.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v2_efficient.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v2_efficient.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 914,
+            "winner": "RED"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v2_efficient.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 914,
+            "winner": "RED"
+        },
+        {
+            "red": "v2_efficient.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v2_efficient.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v2_efficient.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v2_efficient.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 764,
+            "blue_score": 766,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 764,
+            "winner": "RED"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 946,
+            "blue_score": 879,
+            "winner": "RED"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 946,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "multi_order.txt",
+            "red_score": 996,
+            "blue_score": 992,
+            "winner": "RED"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v08_desperate_only.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v08_desperate_only.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v08_desperate_only.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v08_desperate_only.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v08_desperate_only.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v08_desperate_only.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "v08_desperate_only.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v08_desperate_only.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v08_desperate_only.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v08_desperate_only.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v08_desperate_only.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v08_desperate_only.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "v08_desperate_only.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v08_desperate_only.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v08_desperate_only.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 994,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v08_desperate_only.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 996,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v08_desperate_only.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v08_desperate_only.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v08_desperate_only.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v08_desperate_only.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v05_early_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v05_early_sabotage.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v05_early_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v05_early_sabotage.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v05_early_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v05_early_sabotage.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "v05_early_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v05_early_sabotage.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v05_early_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v05_early_sabotage.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v05_early_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v05_early_sabotage.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "v05_early_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v05_early_sabotage.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v05_early_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 976,
+            "blue_score": 996,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v05_early_sabotage.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v05_early_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v05_early_sabotage.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v05_early_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v05_early_sabotage.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v6_early_switch.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v6_early_switch.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v6_early_switch.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v6_early_switch.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v6_early_switch.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v6_early_switch.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "v6_early_switch.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v6_early_switch.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v6_early_switch.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v6_early_switch.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v6_early_switch.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v6_early_switch.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "v6_early_switch.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v6_early_switch.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v6_early_switch.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 914,
+            "blue_score": 976,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v6_early_switch.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v6_early_switch.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v6_early_switch.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v6_early_switch.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v6_early_switch.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v04_high_value_focus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v04_high_value_focus.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v04_high_value_focus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v04_high_value_focus.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v04_high_value_focus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v04_high_value_focus.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "v04_high_value_focus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v04_high_value_focus.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v04_high_value_focus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v04_high_value_focus.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v04_high_value_focus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v04_high_value_focus.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "v04_high_value_focus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 1001,
+            "blue_score": 879,
+            "winner": "RED"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v04_high_value_focus.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 1001,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v04_high_value_focus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 929,
+            "blue_score": 994,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v04_high_value_focus.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 929,
+            "winner": "RED"
+        },
+        {
+            "red": "v04_high_value_focus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v04_high_value_focus.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v04_high_value_focus.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v04_high_value_focus.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v7_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v7_no_recycling.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v7_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 764,
+            "blue_score": 766,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v7_no_recycling.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 764,
+            "winner": "RED"
+        },
+        {
+            "red": "v7_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v7_no_recycling.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "v7_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v7_no_recycling.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v7_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v7_no_recycling.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v7_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v7_no_recycling.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "v7_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 946,
+            "blue_score": 879,
+            "winner": "RED"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v7_no_recycling.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 946,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v7_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v7_no_recycling.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v7_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v7_no_recycling.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v7_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v7_no_recycling.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v1_greedy.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v1_greedy.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v1_greedy.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v1_greedy.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v1_greedy.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v1_greedy.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "v1_greedy.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v1_greedy.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v1_greedy.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v1_greedy.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v1_greedy.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v1_greedy.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "v1_greedy.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v1_greedy.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v1_greedy.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v1_greedy.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v3_aggressive_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v3_aggressive_sabotage.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v3_aggressive_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v3_aggressive_sabotage.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v3_aggressive_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v3_aggressive_sabotage.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "v3_aggressive_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v3_aggressive_sabotage.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v3_aggressive_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v3_aggressive_sabotage.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v3_aggressive_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v3_aggressive_sabotage.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "v3_aggressive_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v3_aggressive_sabotage.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v3_aggressive_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 996,
+            "blue_score": 992,
+            "winner": "RED"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v3_aggressive_sabotage.py",
+            "map": "multi_order.txt",
+            "red_score": 996,
+            "blue_score": 992,
+            "winner": "RED"
+        },
+        {
+            "red": "v3_aggressive_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v3_aggressive_sabotage.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v3_aggressive_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v3_aggressive_sabotage.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 764,
+            "blue_score": 766,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 764,
+            "winner": "RED"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 628,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 628,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 808,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 808,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 946,
+            "blue_score": 879,
+            "winner": "RED"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 946,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 914,
+            "winner": "RED"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v17_box_hoarder.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v17_box_hoarder.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v17_box_hoarder.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v17_box_hoarder.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v17_box_hoarder.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v17_box_hoarder.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "v17_box_hoarder.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v17_box_hoarder.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v17_box_hoarder.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v17_box_hoarder.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v17_box_hoarder.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v17_box_hoarder.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "v17_box_hoarder.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v17_box_hoarder.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v17_box_hoarder.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 914,
+            "winner": "RED"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v17_box_hoarder.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 994,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v17_box_hoarder.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v17_box_hoarder.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v17_box_hoarder.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v17_box_hoarder.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v19_fast_replan.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v19_fast_replan.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v19_fast_replan.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v19_fast_replan.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v19_fast_replan.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v19_fast_replan.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "v19_fast_replan.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v19_fast_replan.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v19_fast_replan.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v19_fast_replan.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v19_fast_replan.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v19_fast_replan.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "v19_fast_replan.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v19_fast_replan.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v19_fast_replan.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 996,
+            "blue_score": 992,
+            "winner": "RED"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v19_fast_replan.py",
+            "map": "multi_order.txt",
+            "red_score": 996,
+            "blue_score": 992,
+            "winner": "RED"
+        },
+        {
+            "red": "v19_fast_replan.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v19_fast_replan.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v19_fast_replan.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v19_fast_replan.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v13_active_hiding.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v13_active_hiding.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v13_active_hiding.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v13_active_hiding.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 766,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v13_active_hiding.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v13_active_hiding.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "v13_active_hiding.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v13_active_hiding.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v13_active_hiding.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v13_active_hiding.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v13_active_hiding.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v13_active_hiding.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "v13_active_hiding.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v13_active_hiding.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 879,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v13_active_hiding.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v13_active_hiding.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 914,
+            "winner": "RED"
+        },
+        {
+            "red": "v13_active_hiding.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v13_active_hiding.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v13_active_hiding.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v13_active_hiding.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        }
+    ]
+}

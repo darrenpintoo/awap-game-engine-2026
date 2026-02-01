@@ -1,0 +1,2466 @@
+{
+    "leaderboard": [
+        [
+            "BEST-champion_bot.py",
+            {
+                "wins": 28,
+                "losses": 12,
+                "draws": 60,
+                "total_money": 173604,
+                "matches": 100
+            }
+        ],
+        [
+            "ultimate_champion_bot.py",
+            {
+                "wins": 22,
+                "losses": 4,
+                "draws": 74,
+                "total_money": 174410,
+                "matches": 100
+            }
+        ],
+        [
+            "v09_no_sabotage.py",
+            {
+                "wins": 22,
+                "losses": 4,
+                "draws": 74,
+                "total_money": 174410,
+                "matches": 100
+            }
+        ],
+        [
+            "v4_no_sabotage.py",
+            {
+                "wins": 22,
+                "losses": 4,
+                "draws": 74,
+                "total_money": 174410,
+                "matches": 100
+            }
+        ],
+        [
+            "v18_no_recycling.py",
+            {
+                "wins": 18,
+                "losses": 22,
+                "draws": 60,
+                "total_money": 173410,
+                "matches": 100
+            }
+        ],
+        [
+            "IronChefOptimized.py",
+            {
+                "wins": 12,
+                "losses": 78,
+                "draws": 10,
+                "total_money": 72550,
+                "matches": 100
+            }
+        ]
+    ],
+    "matches": [
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "IronChefOptimized.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1412,
+            "winner": "RED"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "IronChefOptimized.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1412,
+            "winner": "RED"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1412,
+            "blue_score": 1534,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1412,
+            "blue_score": 1534,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map5_grind.txt",
+            "red_score": 1412,
+            "blue_score": 1534,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map5_grind.txt",
+            "red_score": 1412,
+            "blue_score": 1534,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map5_grind.txt",
+            "red_score": 1412,
+            "blue_score": 1534,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "IronChefOptimized.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1412,
+            "winner": "RED"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "IronChefOptimized.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1412,
+            "winner": "RED"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "IronChefOptimized.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1412,
+            "winner": "RED"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map5_grind.txt",
+            "red_score": 1534,
+            "blue_score": 1534,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 764,
+            "blue_score": 766,
+            "winner": "BLUE"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "IronChefOptimized.py",
+            "map": "map6_overload.txt",
+            "red_score": 764,
+            "blue_score": 590,
+            "winner": "RED"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map6_overload.txt",
+            "red_score": 764,
+            "blue_score": 764,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map6_overload.txt",
+            "red_score": 764,
+            "blue_score": 764,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map6_overload.txt",
+            "red_score": 764,
+            "blue_score": 764,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 764,
+            "winner": "RED"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "IronChefOptimized.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 590,
+            "winner": "RED"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 764,
+            "winner": "RED"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 764,
+            "winner": "RED"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map6_overload.txt",
+            "red_score": 766,
+            "blue_score": 764,
+            "winner": "RED"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 590,
+            "blue_score": 764,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 590,
+            "blue_score": 766,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map6_overload.txt",
+            "red_score": 590,
+            "blue_score": 764,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map6_overload.txt",
+            "red_score": 590,
+            "blue_score": 764,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map6_overload.txt",
+            "red_score": 590,
+            "blue_score": 764,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 764,
+            "blue_score": 764,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 764,
+            "blue_score": 766,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "IronChefOptimized.py",
+            "map": "map6_overload.txt",
+            "red_score": 764,
+            "blue_score": 590,
+            "winner": "RED"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map6_overload.txt",
+            "red_score": 764,
+            "blue_score": 764,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map6_overload.txt",
+            "red_score": 764,
+            "blue_score": 764,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 764,
+            "blue_score": 764,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 764,
+            "blue_score": 766,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "IronChefOptimized.py",
+            "map": "map6_overload.txt",
+            "red_score": 764,
+            "blue_score": 590,
+            "winner": "RED"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map6_overload.txt",
+            "red_score": 764,
+            "blue_score": 764,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map6_overload.txt",
+            "red_score": 764,
+            "blue_score": 764,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 764,
+            "blue_score": 764,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map6_overload.txt",
+            "red_score": 764,
+            "blue_score": 766,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "IronChefOptimized.py",
+            "map": "map6_overload.txt",
+            "red_score": 764,
+            "blue_score": 590,
+            "winner": "RED"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map6_overload.txt",
+            "red_score": 764,
+            "blue_score": 764,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map6_overload.txt",
+            "red_score": 764,
+            "blue_score": 764,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 628,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "IronChefOptimized.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 618,
+            "winner": "RED"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 628,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 628,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 628,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "IronChefOptimized.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 618,
+            "winner": "RED"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 628,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 628,
+            "winner": "DRAW"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 618,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 618,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map4_chaos.txt",
+            "red_score": 618,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map4_chaos.txt",
+            "red_score": 618,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map4_chaos.txt",
+            "red_score": 618,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 628,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 628,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "IronChefOptimized.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 618,
+            "winner": "RED"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 628,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "IronChefOptimized.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 618,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map4_chaos.txt",
+            "red_score": 568,
+            "blue_score": 628,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 628,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 628,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "IronChefOptimized.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 618,
+            "winner": "RED"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 628,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map4_chaos.txt",
+            "red_score": 628,
+            "blue_score": 568,
+            "winner": "RED"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "IronChefOptimized.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "IronChefOptimized.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "IronChefOptimized.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "IronChefOptimized.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "IronChefOptimized.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map3_sprint.txt",
+            "red_score": 900,
+            "blue_score": 900,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "IronChefOptimized.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 920,
+            "winner": "RED"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "IronChefOptimized.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 920,
+            "winner": "RED"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 920,
+            "blue_score": 998,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 920,
+            "blue_score": 998,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "throughput.txt",
+            "red_score": 920,
+            "blue_score": 998,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v18_no_recycling.py",
+            "map": "throughput.txt",
+            "red_score": 920,
+            "blue_score": 998,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "throughput.txt",
+            "red_score": 920,
+            "blue_score": 998,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "IronChefOptimized.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 920,
+            "winner": "RED"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "v18_no_recycling.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "IronChefOptimized.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 920,
+            "winner": "RED"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "IronChefOptimized.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 920,
+            "winner": "RED"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "v18_no_recycling.py",
+            "map": "throughput.txt",
+            "red_score": 998,
+            "blue_score": 998,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 808,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "IronChefOptimized.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 728,
+            "winner": "RED"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 808,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 808,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 808,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "IronChefOptimized.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 728,
+            "winner": "RED"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 808,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 808,
+            "winner": "DRAW"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 728,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 728,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 728,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v18_no_recycling.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 728,
+            "blue_score": 768,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 728,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 808,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 808,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "IronChefOptimized.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 728,
+            "winner": "RED"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "v18_no_recycling.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 808,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "IronChefOptimized.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 728,
+            "winner": "RED"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 768,
+            "blue_score": 808,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 808,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 808,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "IronChefOptimized.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 728,
+            "winner": "RED"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 808,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "v18_no_recycling.py",
+            "map": "mega_warehouse.txt",
+            "red_score": 808,
+            "blue_score": 768,
+            "winner": "RED"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 946,
+            "blue_score": 879,
+            "winner": "RED"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "IronChefOptimized.py",
+            "map": "easy_ramp.txt",
+            "red_score": 946,
+            "blue_score": 833,
+            "winner": "RED"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "easy_ramp.txt",
+            "red_score": 946,
+            "blue_score": 946,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "easy_ramp.txt",
+            "red_score": 946,
+            "blue_score": 946,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "easy_ramp.txt",
+            "red_score": 946,
+            "blue_score": 946,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 946,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "IronChefOptimized.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 833,
+            "winner": "RED"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 946,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 946,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "easy_ramp.txt",
+            "red_score": 879,
+            "blue_score": 946,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 833,
+            "blue_score": 946,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 833,
+            "blue_score": 879,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "easy_ramp.txt",
+            "red_score": 833,
+            "blue_score": 946,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v18_no_recycling.py",
+            "map": "easy_ramp.txt",
+            "red_score": 833,
+            "blue_score": 946,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "easy_ramp.txt",
+            "red_score": 833,
+            "blue_score": 946,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 946,
+            "blue_score": 946,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 946,
+            "blue_score": 879,
+            "winner": "RED"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "IronChefOptimized.py",
+            "map": "easy_ramp.txt",
+            "red_score": 946,
+            "blue_score": 833,
+            "winner": "RED"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "v18_no_recycling.py",
+            "map": "easy_ramp.txt",
+            "red_score": 946,
+            "blue_score": 946,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "easy_ramp.txt",
+            "red_score": 946,
+            "blue_score": 946,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 946,
+            "blue_score": 946,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 946,
+            "blue_score": 879,
+            "winner": "RED"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "IronChefOptimized.py",
+            "map": "easy_ramp.txt",
+            "red_score": 946,
+            "blue_score": 833,
+            "winner": "RED"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "easy_ramp.txt",
+            "red_score": 946,
+            "blue_score": 946,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "easy_ramp.txt",
+            "red_score": 946,
+            "blue_score": 946,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 946,
+            "blue_score": 946,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "easy_ramp.txt",
+            "red_score": 946,
+            "blue_score": 879,
+            "winner": "RED"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "IronChefOptimized.py",
+            "map": "easy_ramp.txt",
+            "red_score": 946,
+            "blue_score": 833,
+            "winner": "RED"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "easy_ramp.txt",
+            "red_score": 946,
+            "blue_score": 946,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "v18_no_recycling.py",
+            "map": "easy_ramp.txt",
+            "red_score": 946,
+            "blue_score": 946,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "IronChefOptimized.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 835,
+            "winner": "RED"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "IronChefOptimized.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 835,
+            "winner": "RED"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "multi_order.txt",
+            "red_score": 914,
+            "blue_score": 992,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 835,
+            "blue_score": 992,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 835,
+            "blue_score": 992,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "multi_order.txt",
+            "red_score": 835,
+            "blue_score": 992,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v18_no_recycling.py",
+            "map": "multi_order.txt",
+            "red_score": 835,
+            "blue_score": 992,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "multi_order.txt",
+            "red_score": 835,
+            "blue_score": 992,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "IronChefOptimized.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 835,
+            "winner": "RED"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "v18_no_recycling.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 914,
+            "winner": "RED"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "IronChefOptimized.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 835,
+            "winner": "RED"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "IronChefOptimized.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 835,
+            "winner": "RED"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "v18_no_recycling.py",
+            "map": "multi_order.txt",
+            "red_score": 992,
+            "blue_score": 992,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "IronChefOptimized.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -421,
+            "winner": "BLUE"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "IronChefOptimized.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -421,
+            "winner": "BLUE"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -421,
+            "blue_score": -1007,
+            "winner": "RED"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -421,
+            "blue_score": -1007,
+            "winner": "RED"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "resource_war.txt",
+            "red_score": -421,
+            "blue_score": -1007,
+            "winner": "RED"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v18_no_recycling.py",
+            "map": "resource_war.txt",
+            "red_score": -421,
+            "blue_score": -1007,
+            "winner": "RED"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "resource_war.txt",
+            "red_score": -421,
+            "blue_score": -1007,
+            "winner": "RED"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "IronChefOptimized.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -421,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "v18_no_recycling.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "IronChefOptimized.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -421,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "IronChefOptimized.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -421,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "v18_no_recycling.py",
+            "map": "resource_war.txt",
+            "red_score": -1007,
+            "blue_score": -1007,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "IronChefOptimized.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 840,
+            "winner": "RED"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "ultimate_champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "IronChefOptimized.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 840,
+            "winner": "RED"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "BEST-champion_bot.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 840,
+            "blue_score": 10878,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 840,
+            "blue_score": 10878,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map_compact.txt",
+            "red_score": 840,
+            "blue_score": 10878,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map_compact.txt",
+            "red_score": 840,
+            "blue_score": 10878,
+            "winner": "BLUE"
+        },
+        {
+            "red": "IronChefOptimized.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map_compact.txt",
+            "red_score": 840,
+            "blue_score": 10878,
+            "winner": "BLUE"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "IronChefOptimized.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 840,
+            "winner": "RED"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v09_no_sabotage.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "IronChefOptimized.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 840,
+            "winner": "RED"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v18_no_recycling.py",
+            "blue": "v4_no_sabotage.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "ultimate_champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "BEST-champion_bot.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "IronChefOptimized.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 840,
+            "winner": "RED"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "v09_no_sabotage.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        },
+        {
+            "red": "v4_no_sabotage.py",
+            "blue": "v18_no_recycling.py",
+            "map": "map_compact.txt",
+            "red_score": 10878,
+            "blue_score": 10878,
+            "winner": "DRAW"
+        }
+    ]
+}
