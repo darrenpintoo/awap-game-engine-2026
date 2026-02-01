@@ -1,0 +1,16 @@
+################
+#b.C...R...T..$#
+#..............#
+#..............#
+#######.########
+#..............#
+#..............#
+#K.C...S...U.B.#
+################
+
+SWITCH: turn=150 duration=50
+
+ORDERS:
+start=0 duration=120 required=ONIONS,ONIONS reward=40
+start=10 duration=120 required=MEAT,SAUCE reward=100
+start=20 duration=120 required=ONIONS,MEAT,SAUCE reward=120

@@ -1,0 +1,15 @@
+################
+#K.C.......S..$#
+#..............#
+#......##......#
+#......##......#
+#......##......#
+#..............#
+#R..C......U.T.#
+################
+
+SWITCH: turn=200 duration=50
+
+ORDERS:
+start=0 duration=150 required=ONIONS,MEAT reward=80
+start=30 duration=150 required=SAUCE,NOODLES reward=60

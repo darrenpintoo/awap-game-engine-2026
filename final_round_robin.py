@@ -1,40 +1,49 @@
 
 import os
 import subprocess
-import itertools
 import json
-from concurrent.futures import ThreadPoolExecutor
+import time
+import multiprocessing
+from concurrent.futures import ProcessPoolExecutor, as_completed
+from collections import defaultdict
 
-BASE_DIR = "/Users/darrenpinto/Documents/Hackathons/AWAP2026/awap-game-engine-2026-public"
-BOT_DIR = os.path.join(BASE_DIR, "bots/dpinto/champion_variants")
-HARESH_BOT = os.path.join(BASE_DIR, "bots/hareshm/BEST-champion_bot.py")
-ULTIMATE_BOT = os.path.join(BASE_DIR, "bots/dpinto/ultimate_champion_bot.py")
-IRON_CHEF = os.path.join(BASE_DIR, "bots/eric/IronChefOptimized.py")
+# --- CONFIGURATION ---
+BASE_DIR = os.getcwd()
 
-# Include top variants for robustness check
-VARIANTS_TO_TEST = [
-    os.path.join(BOT_DIR, "v09_no_sabotage.py"),
-    os.path.join(BOT_DIR, "v18_no_recycling.py"),
-    os.path.join(BOT_DIR, "v4_no_sabotage.py")
+# Bots to include (Active & Relevant)
+BOTS = [
+    "bots/dpinto/ultimate_champion_bot.py",
+    "bots/dpinto/champion_sabotage_optimized.py",
+    "bots/hareshm/BEST-champion_bot.py",
+    "bots/eric/IronChefOptimized.py",
+    "bots/eric/TrueUltimateChefBot.py",
+    "bots/eric/UltimateChefBot.py",
+    "bots/eric/Apex_Chef.py",
+    "bots/eric/StrategicKitchen.py",
+    "bots/hareshm/optimal_bot.py",
+    "bots/duo_noodle_bot.py",
+    "bots/eric/iron_chef_bot.py"
 ]
 
+# Reduced Map Set for Speed & Relevance
 MAPS = [
-    os.path.join(BASE_DIR, "maps/eric/map5_grind.txt"),
-    os.path.join(BASE_DIR, "maps/eric/map6_overload.txt"),
-    os.path.join(BASE_DIR, "maps/eric/map4_chaos.txt"),
-    os.path.join(BASE_DIR, "maps/eric/map3_sprint.txt"),
-    os.path.join(BASE_DIR, "maps/eric/throughput.txt"),
-    os.path.join(BASE_DIR, "maps/dpinto/mega_warehouse.txt"),
-    os.path.join(BASE_DIR, "maps/dpinto/easy_ramp.txt"),
-    os.path.join(BASE_DIR, "maps/dpinto/multi_order.txt"),
-    os.path.join(BASE_DIR, "maps/dpinto/resource_war.txt"),
-    os.path.join(BASE_DIR, "maps/haresh/map_compact.txt")
+    "maps/eric/map5_grind.txt",      # Standard competitive
+    "maps/eric/map6_overload.txt",   # Complex competitive
+    "maps/eric/throughput.txt",      # Open speed test
+    "maps/dpinto/choke_point.txt",   # New Edge Case: Congestion
+    "maps/dpinto/starvation.txt",    # New Edge Case: Resource Scarcity
+    "maps/dpinto/split_kitchen.txt"  # New Edge Case: Coordination
 ]
 
-TURNS = 200
-MAX_WORKERS = 8
+TURNS = 150 # Reduced for speed (Still enough to show strategy difference)
+TIMEOUT = 20 # Strict timeout
 
-def run_match(red_bot, blue_bot, map_path):
+# --- EXECUTION ---
+
+def run_single_match(args):
+    """Run a single match and return the result"""
+    red_bot, blue_bot, map_path = args
+    
     cmd = [
         "python3", "src/game.py",
         "--red", red_bot,
@@ -42,102 +51,148 @@ def run_match(red_bot, blue_bot, map_path):
         "--map", map_path,
         "--turns", str(TURNS)
     ]
+    
+    start_time = time.time()
     try:
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
-        output = result.stdout
+        # Capture stdout/stderr but don't print
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=TIMEOUT)
+        duration = time.time() - start_time
         
-        scores_line = [line for line in output.split('\n') if "money scores:" in line]
-        if not scores_line: return None
+        output = result.stdout
+        error_out = result.stderr
+        
+        # Parse output for score
+        game_over_line = None
+        for line in output.splitlines():
+            if "[GAME OVER]" in line:
+                game_over_line = line
+                break
+                
+        if not game_over_line:
+            return {
+                "red": red_bot, "blue": blue_bot, "map": map_path,
+                "error": "No result line found", 
+                "output": output[-500:], # Last 500 chars 
+                "stderr": error_out[-500:]
+            }
             
-        line = scores_line[0]
-        parts = line.split("scores:")[1].split(",")
+        # Extract scores: "[GAME OVER] money scores: RED=$123, BLUE=$456"
+        parts = game_over_line.split("scores:")[1].split(",")
         red_score = int(parts[0].split("=$")[1])
         blue_score = int(parts[1].split("=$")[1])
         
+        winner = "DRAW"
+        if red_score > blue_score: winner = red_bot
+        elif blue_score > red_score: winner = blue_bot
+        
         return {
-            "red": os.path.basename(red_bot),
-            "blue": os.path.basename(blue_bot),
-            "map": os.path.basename(map_path),
-            "red_score": red_score,
-            "blue_score": blue_score,
-            "winner": "RED" if red_score > blue_score else ("BLUE" if blue_score > red_score else "DRAW")
+            "red": red_bot, "blue": blue_bot, "map": map_path,
+            "red_score": red_score, "blue_score": blue_score,
+            "winner": winner,
+            "duration": duration
+        }
+        
+    except subprocess.TimeoutExpired:
+        return {
+            "red": red_bot, "blue": blue_bot, "map": map_path,
+            "error": "Timeout", "red_score": 0, "blue_score": 0
         }
     except Exception as e:
-        print(f"Error: {e}")
-        return None
+        return {
+            "red": red_bot, "blue": blue_bot, "map": map_path,
+            "error": str(e), "red_score": 0, "blue_score": 0
+        }
 
 def main():
-    competitors = [ULTIMATE_BOT, HARESH_BOT, IRON_CHEF] + VARIANTS_TO_TEST
-    competitors = [c for c in competitors if os.path.exists(c)]
-    
-    print(f"Starting Final Complete Round-Robin with {len(competitors)} bots on {len(MAPS)} maps.")
+    print(f"🏆 STARTING OPTIMIZED TOURNAMENT (v3 Fast) 🏆")
+    print(f"Bots: {len(BOTS)}")
+    print(f"Maps: {len(MAPS)}")
     
     matches = []
-    # Full round robin: every pair plays on every map
-    # Since side matters (Red/Blue), we test both permutations A vs B and B vs A
-    # Calculate all permutations of length 2
-    pairs = list(itertools.permutations(competitors, 2))
+    pairs = []
+    for i in range(len(BOTS)):
+        for j in range(len(BOTS)):
+            if i == j: continue
+            pairs.append((BOTS[i], BOTS[j]))
+            
+    for p in pairs:
+        for m in MAPS:
+            matches.append((p[0], p[1], m))
+            
+    total_matches = len(matches)
+    workers = min(multiprocessing.cpu_count(), 12) 
     
-    total_tasks = len(pairs) * len(MAPS)
-    print(f"Total matches to run: {total_tasks}")
-    
-    all_results = []
-    
-    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        futures = []
-        for map_path in MAPS:
-            if not os.path.exists(map_path):
-                print(f"Warning: Map {map_path} not found")
-                continue
-            for b1, b2 in pairs:
-                futures.append(executor.submit(run_match, b1, b2, map_path))
-        
-        count = 0
-        for future in futures:
-            res = future.result()
-            if res:
-                all_results.append(res)
-            count += 1
-            if count % 10 == 0:
-                print(f"Completed {count}/{total_tasks}...")
+    print(f"Total Matches Scheduled: {total_matches}")
+    print(f"Estimated Time (@0.5s/match): {total_matches * 0.5 / workers / 60:.1f} minutes")
+    print(f"Using {workers} workers with strict {TIMEOUT}s timeout...")
 
-    # Aggregating
-    summary = {}
-    for bot in competitors:
-        name = os.path.basename(bot)
-        summary[name] = {"wins": 0, "losses": 0, "draws": 0, "total_money": 0, "matches": 0}
+    results = []
+    start_global = time.time()
+    error_count = 0
+    
+    with ProcessPoolExecutor(max_workers=workers) as executor:
+        futures = [executor.submit(run_single_match, m) for m in matches]
+        completed = 0
+        for f in as_completed(futures):
+            res = f.result()
+            results.append(res)
+            completed += 1
+            if "error" in res: error_count += 1
+            
+            if completed % 50 == 0:
+                elapsed = time.time() - start_global
+                rate = completed/elapsed if elapsed>0 else 0
+                remaining = (total_matches - completed)/rate if rate>0 else 0
+                print(f"Progress: {completed}/{total_matches} ({completed/total_matches*100:.1f}%) - Errors: {error_count} - ETA: {remaining/60:.1f} min")
 
-    for res in all_results:
-        summary[res["red"]]["total_money"] += res["red_score"]
-        summary[res["blue"]]["total_money"] += res["blue_score"]
-        summary[res["red"]]["matches"] += 1
-        summary[res["blue"]]["matches"] += 1
+    end_global = time.time()
+    print(f"\nTournament Complete in {(end_global - start_global)/60:.1f} minutes!")
+    print(f"Total Errors: {error_count}")
+
+    # --- ANALYSIS ---
+    leaderboard = defaultdict(lambda: {"wins": 0, "losses": 0, "draws": 0, "score": 0, "matches": 0})
+    
+    for r in results:
+        if "error" in r: continue
+            
+        r_bot = os.path.basename(r["red"])
+        b_bot = os.path.basename(r["blue"])
         
-        if res["winner"] == "RED":
-            summary[res["red"]]["wins"] += 1
-            summary[res["blue"]]["losses"] += 1
-        elif res["winner"] == "BLUE":
-            summary[res["blue"]]["wins"] += 1
-            summary[res["red"]]["losses"] += 1
+        leaderboard[r_bot]["matches"] += 1
+        leaderboard[b_bot]["matches"] += 1
+        
+        leaderboard[r_bot]["score"] += r["red_score"]
+        leaderboard[b_bot]["score"] += r["blue_score"]
+        
+        winner = r["winner"]
+        if winner == r["red"]:
+            leaderboard[r_bot]["wins"] += 1
+            leaderboard[b_bot]["losses"] += 1
+        elif winner == r["blue"]:
+            leaderboard[b_bot]["wins"] += 1
+            leaderboard[r_bot]["losses"] += 1
         else:
-            summary[res["red"]]["draws"] += 1
-            summary[res["blue"]]["draws"] += 1
+            leaderboard[r_bot]["draws"] += 1
+            leaderboard[b_bot]["draws"] += 1
+            
+    # Print Results
+    print("\n" + "="*90)
+    print("FINAL LEADERBOARD")
+    print("="*90)
+    print(f"{'Bot Name':<35} | {'Wins':<5} | {'Loss':<5} | {'Draw':<5} | {'Win %':<6} | {'Avg Score':<10}")
+    print("-" * 90)
+    
+    sorted_bots = sorted(leaderboard.items(), key=lambda x: (x[1]['wins'], x[1]['score']), reverse=True)
+    
+    for name, stats in sorted_bots:
+        matches = stats['matches']
+        if matches == 0: continue
+        win_rate = (stats['wins'] / matches) * 100
+        avg_score = stats['score'] / matches
+        print(f"{name:<35} | {stats['wins']:<5} | {stats['losses']:<5} | {stats['draws']:<5} | {win_rate:6.1f}% | ${avg_score:<9.1f}")
 
-    # Sorting
-    leaderboard = sorted(summary.items(), key=lambda x: (x[1]["wins"], x[1]["total_money"]), reverse=True)
-    
-    results_data = {
-        "leaderboard": leaderboard,
-        "matches": all_results
-    }
-    
     with open("final_tournament_results.json", "w") as f:
-        json.dump(results_data, f, indent=4)
-        
-    print("\nFINAL LEADERBOARD:")
-    for i, (bot, stats) in enumerate(leaderboard):
-        win_rate = (stats["wins"] / stats["matches"]) * 100 if stats["matches"] > 0 else 0
-        print(f"{i+1}. {bot}: Wins={stats['wins']}, Matches={stats['matches']}, WinRate={win_rate:.1f}%, Total Money=${stats['total_money']}")
+        json.dump(results, f, indent=2)
 
 if __name__ == "__main__":
     main()

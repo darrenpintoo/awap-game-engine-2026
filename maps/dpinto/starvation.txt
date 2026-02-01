@@ -1,0 +1,14 @@
+##########
+#K.C.S.R.#
+#........#
+#........#
+#........#
+#U...T...#
+#$.......#
+##########
+
+SWITCH: turn=100 duration=50
+
+ORDERS:
+start=0 duration=100 required=SAUCE reward=20
+start=20 duration=100 required=NOODLES reward=20
