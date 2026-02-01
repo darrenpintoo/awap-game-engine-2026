@@ -123,7 +123,11 @@ class RobotController:
 
     def get_bot_state(self, bot_id: int) -> Optional[Dict[str, Any]]:
         '''returns a dictionary of bot state as a dictionary; note holding provides a dictionary too'''
-        b = self.__safe_get_bot(bot_id)
+        try:
+            b = self.__game_state.get_bot(bot_id)
+        except Exception:
+            self.__warn(f"Invalid bot_id {bot_id}")
+            return None
 
         if b is None:
             return None
@@ -133,7 +137,7 @@ class RobotController:
             "team": b.team.name,
             "x": b.x,
             "y": b.y,
-            "team_money": self.__game_state.get_team_money(self.__team),
+            "team_money": self.__game_state.get_team_money(b.team),
             "holding": self.item_to_public_dict(b.holding),
             "map_team": getattr(b, "map_team", b.team).name,
         }
