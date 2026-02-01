@@ -54,13 +54,14 @@ interface BotStats {
 
 // --- Constants ---
 // Static heroes list for display - will also detect any Hero_ prefixed bots dynamically
-const STATIC_HEROES = ["Hero_UltimateChampion", "Hero_BEST^3", "Hero_Sovereign", "Hero_BEST-Hydra", "Hero_BEST^2"];
+const STATIC_HEROES = ["Hero_UltimateChampion", "Hero_BEST^3", "Hero_Sovereign", "Hero_BEST-Hydra", "Hero_BEST^2", "Hero_Relay"];
 const HERO_COLORS: Record<string, string> = {
   "Hero_UltimateChampion": "#3b82f6",
   "Hero_BEST^3": "#8b5cf6",
   "Hero_Sovereign": "#10b981",
   "Hero_BEST-Hydra": "#f59e0b",
   "Hero_BEST^2": "#ec4899",
+  "Hero_Relay": "#06b6d4",
 };
 
 // --- Utils ---
